@@ -2,10 +2,10 @@ import { Typography } from "@material-tailwind/react";
 
 const skills = {
   "Développement Web": [
-    "React/Next.js",
-    "Node.js",
-    "TypeScript",
-    "MongoDB",
+    "React/Next.js/Remix.js/Expo.js",
+    "Node.js/Express.js/Nest.js",
+    "JavaScript/TypeScript",
+    "SQL/MongoDB",
     "PostgreSQL",
     "REST APIs"
   ],

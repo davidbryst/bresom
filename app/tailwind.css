@@ -11,6 +11,17 @@
   }
 }
 
+@keyframes change {
+  0%, 100% {
+    transform: translateX(0) translateY(0);
+  }
+  5%, 95% {
+    transform: translateX(0) translateY(-100%);
+  }
+  50% {
+    transform: translateX(0) translateY(-100%);
+  }
+}
 @keyframes wave {
   0%, 100% {
     transform: translateX(0) translateY(0);
@@ -29,6 +40,15 @@
   }
 }
 
+.animate-change {
+  transform: translateX(0) translateY(-50%);
+}
+.animate-base {
+  transform: translateX(0) translateY(-50%);
+}
+.animate-change1 {
+  transform: translateX(0) translateY(0);
+}
 .animate-wave-slow {
   animation: wave 15s ease-in-out infinite;
 }
