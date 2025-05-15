@@ -11,7 +11,7 @@ import type { LinksFunction } from "@remix-run/node";
 import "./tailwind.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import BackgroundParticles from "./components/BackgroundParticles";
+// import BackgroundParticles from "./components/BackgroundParticles";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -35,7 +35,7 @@ export function Layout() {
         <Meta />
         <Links />
       </head>
-      <body className="min-h-screen bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-[#0a0a1b] via-[#0f0f2d] to-[#0a0a1b] overflow-x-hidden">
+      <body className="min-h-screen duration-700 overflow-x-hidden animate-gradient bg-gradient-1">
       {/* <body className="min-h-screen bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-[#0a0a1b] via-[#0f0f2d] to-[#0a0a1b] overflow-x-hidden"> */}
         {/* Grille de fond */}
         <div className="fixed inset-0">

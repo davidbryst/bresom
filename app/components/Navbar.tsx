@@ -20,7 +20,7 @@ export default function Navbar() {
           <Link to="/work" className="text-white/80 hover:text-white transition-colors">
             Mes experience professionnelle
           </Link>
-          <Link to="/work" className="text-white/80 hover:text-white transition-colors">
+          <Link to="#Skills" className="text-white/80 hover:text-white transition-colors">
             Mes compétences
           </Link>
           <Link to="/work" className="text-white/80 hover:text-white transition-colors">

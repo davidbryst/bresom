@@ -10,36 +10,6 @@
     animation-delay: 4s;
   }
 }
-
-@keyframes change {
-  0%, 100% {
-    transform: translateX(0) translateY(0);
-  }
-  5%, 95% {
-    transform: translateX(0) translateY(-100%);
-  }
-  50% {
-    transform: translateX(0) translateY(-100%);
-  }
-}
-@keyframes wave {
-  0%, 100% {
-    transform: translateX(0) translateY(0);
-  }
-  50% {
-    transform: translateX(-25px) translateY(15px);
-  }
-}
-
-@keyframes wave-reverse {
-  0%, 100% {
-    transform: translateX(0) translateY(0);
-  }
-  50% {
-    transform: translateX(25px) translateY(-15px);
-  }
-}
-
 .animate-change {
   transform: translateX(0) translateY(-50%);
 }
@@ -49,20 +19,51 @@
 .animate-change1 {
   transform: translateX(0) translateY(0);
 }
-.animate-wave-slow {
-  animation: wave 15s ease-in-out infinite;
+/* @keyframes gradientCycle {
+  0%, 100% {
+    background-image: radial-gradient(ellipse at top left, #0a0a1b, #1e1e3f, #0a0a1b);
+  }
+  33% {
+    background-image: radial-gradient(ellipse at top left, #0a0a1b, #302d92, #0a0a1b);
+  }
+  66% {
+    background-image: radial-gradient(ellipse at top left, #0a0a1b, #6d28d9, #0a0a1b);
+  }
 }
 
-.animate-wave-slower {
-  animation: wave 20s ease-in-out infinite;
+.animate-gradient {
+  animation: gradientCycle 15s ease-in-out infinite;
+  background-size: 200% 200%;
+} */
+
+@keyframes gradientShift {
+  0% {
+    background-position: 350% 350%;
+    /* transform: rotate(0deg); */
+  }
+  25% {
+    background-position: 400% 350%;
+    /* transform: rotate(180deg); */
+  }
+  50% {
+    background-position: 400% 400%;
+    /* transform: rotate(180deg); */
+  }
+  75% {
+    background-position: 350% 400%;
+    /* transform: rotate(180deg); */
+  }
+  100% {
+    background-position: 350% 350%;
+    /* transform: rotate(360deg); */
+  }
 }
 
-.animate-wave-slowest {
-  animation: wave 25s ease-in-out infinite;
-}
-
-.animate-wave-reverse {
-  animation: wave-reverse 20s ease-in-out infinite;
+.animate-gradient {
+  background: linear-gradient(135deg, #0a0a1b, #091841, #0a0a1b, #450572, #0a0a1b,  #480fa5, #0a0a1b, #5f0030, #0a0a1b);
+  /* background: linear-gradient(135deg, #0a0a1b, #1e3a8a, #6a0dad, #302d92, #6d28d9, #0a0a1b, #830041); */
+  background-size: 400% 400%;
+  animation: gradientShift 40s ease-in-out infinite;
 }
 
 @layer base {

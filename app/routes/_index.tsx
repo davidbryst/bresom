@@ -1,10 +1,11 @@
 import type { MetaFunction } from "@remix-run/node";
 import Hero from "../../app/components/Hero";
 import Skills from "../../app/components/Skills";
+import Dos from "../../app/components/Dos";
 import Projects from "../../app/components/Projects";
 import Contact from "../../app/components/Contact";
-import Navbar from "../../app/components/Navbar";
-import Footer from "../../app/components/Footer";
+// import Navbar from "../../app/components/Navbar";
+// import Footer from "../../app/components/Footer";
 
 export const meta: MetaFunction = () => {
   return [
@@ -31,6 +32,7 @@ export default function Home() {
       {/* Contenu principal avec effet glassmorphisme */}
       <div className="relative z-10 pt-10">
         <Hero />
+        <Dos />
         <Skills />
         <Projects />
         <Contact />
