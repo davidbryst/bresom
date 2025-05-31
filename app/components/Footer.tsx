@@ -8,7 +8,7 @@ export default function Footer() {
           {/* Logo et Description */}
           <div>
             <Typography className="text-white text-xl font-semibold mb-4">
-              SZ.
+              david.abraham
             </Typography>
             <Typography className="text-white/70">
               Transformant des idées en réalité à travers le design et la technologie.
@@ -27,7 +27,7 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="/work" className="text-white/70 hover:text-white transition-colors">
+                <a href="#Projects" className="text-white/70 hover:text-white transition-colors">
                   Projets
                 </a>
               </li>
@@ -37,7 +37,7 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="/contact" className="text-white/70 hover:text-white transition-colors">
+                <a href="#Contact" className="text-white/70 hover:text-white transition-colors">
                   Contact
                 </a>
               </li>
@@ -51,17 +51,19 @@ export default function Footer() {
             </Typography>
             <ul className="space-y-2">
               <li className="text-white/70">
-                <a href="mailto:votre.email@example.com" className="hover:text-white transition-colors">
-                  votre.email@example.com
+                <a href="mailto:sh.david.abraham@gmail.com" className="hover:text-white transition-colors">
+                  sh.david.abraham@gmail.com
                 </a>
               </li>
               <li className="text-white/70">
-                <a href="tel:+336XXXXXXXX" className="hover:text-white transition-colors">
-                  +33 6 XX XX XX XX
+                <a href="tel:+2250140544197" className="hover:text-white transition-colors">
+                  (+225) 01 40 54 41 97 | (+225) 07 12 41 01 34
                 </a>
               </li>
               <li className="text-white/70">
-                Paris, France
+                <a href="https://goo.gl/maps/yourlocation" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                  Abidjan, Cocody Riviera 2
+                </a>
               </li>
             </ul>
             <div className="flex gap-4 mt-6">
@@ -87,7 +89,7 @@ export default function Footer() {
         {/* Copyright */}
         <div className="mt-12 pt-8 border-t border-white/10 text-center">
           <Typography className="text-white/70">
-            © 2024 Tous droits réservés. Développé avec ❤️ en utilisant Remix & Tailwind CSS.
+            © 2025 Tous les droits reservés .
           </Typography>
         </div>
       </div>

@@ -6,7 +6,7 @@ export default function Navbar() {
       <div className="max-w-6xl mx-auto px-4 flex items-center justify-between py-4">
         {/* Logo */}
         <Link to="/" className="text-white text-xl font-semibold relative z-10">
-          BRESOM.17
+          david.abraham
         </Link>
         {/* <Link to="/" className="text-white text-xl font-semibold relative z-10">
           DAVID.ABRAHAM
@@ -17,14 +17,20 @@ export default function Navbar() {
           <Link to="/" className="text-white/80 hover:text-white transition-colors">
             Accueil 
           </Link>
-          <Link to="/work" className="text-white/80 hover:text-white transition-colors">
-            Mes experience professionnelle
+          <Link to="#Dos" className="text-white/80 hover:text-white transition-colors">
+            Mes Activitées
+          </Link>
+          <Link to="#Skills" className="text-white/80 hover:text-white transition-colors">
+            Mes experiences professionnelles
           </Link>
           <Link to="#Skills" className="text-white/80 hover:text-white transition-colors">
             Mes compétences
           </Link>
-          <Link to="/work" className="text-white/80 hover:text-white transition-colors">
+          <Link to="#Projects" className="text-white/80 hover:text-white transition-colors">
             Mes projets 
+          </Link>
+          <Link to="#Contact" className="text-white/80 hover:text-white transition-colors">
+            Contact 
           </Link>
           <Link to="/blog" className="text-white/80 hover:text-white transition-colors">
             Blog

@@ -1,5 +1,5 @@
-import { Typography } from "@material-tailwind/react"; // ou ton propre composant typographique
-import { Code, Paintbrush, Users } from "lucide-react"; // Exemple avec lucide-react
+import { Typography } from "@material-tailwind/react";
+import { Code, Paintbrush, Smartphone } from "lucide-react"; // Added Smartphone icon
 
 export const dos = [
   {
@@ -8,15 +8,20 @@ export const dos = [
     icon: Code,
   },
   {
-    titre: "Design UI/UX",
-    description: "Conception d’interfaces intuitives et esthétiques.",
-    icon: Paintbrush,
+    titre: "Développement Mobile",
+    description: "Création d'applications mobiles natives et cross-platform.",
+    icon: Smartphone,
   },
   {
-    titre: "Travail en équipe",
-    description: "Collaboration agile avec les clients et les développeurs.",
-    icon: Users,
+    titre: "Design UI/UX",
+    description: "Conception d'interfaces intuitives et esthétiques.",
+    icon: Paintbrush,
   },
+  // {
+  //   titre: "Travail en équipe",
+  //   description: "Collaboration agile avec les clients et les développeurs.",
+  //   icon: Users,
+  // },
 ];
 
 export default function Dos() {
@@ -33,7 +38,7 @@ export default function Dos() {
               className="group relative overflow-hidden rounded-xl backdrop-blur-md border border-white/10 hover:border-white/20 transition-all duration-300"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div className="relative p-6 bg-white/5">
+              <div className="relative p-6 bg+++-white/5">
                 <div className="flex items-center justify-center mb-4">
                   <da.icon className="w-10 h-10 text-white group-hover:scale-110 transition-transform duration-300" />
                 </div>

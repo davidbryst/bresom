@@ -2,7 +2,7 @@ import { Button, Typography, Input, Textarea } from "@material-tailwind/react";
 
 export default function Contact() {
   return (
-    <section className="py-20 px-4">
+    <section id="Contact" className="py-20 px-4">
       <div className="max-w-4xl mx-auto">
         <Typography variant="h2" className="text-3xl md:text-4xl font-bold text-center mb-12 text-white">
           Contactez-moi
@@ -15,15 +15,15 @@ export default function Contact() {
             <div className="space-y-4">
               <div>
                 <Typography className="font-medium text-white">Email</Typography>
-                <Typography className="text-white/80">votre.email@example.com</Typography>
+                <Typography className="text-white/80">sh.david.abraham@gmail.com</Typography>
               </div>
               <div>
                 <Typography className="font-medium text-white">Téléphone</Typography>
-                <Typography className="text-white/80">+33 6 XX XX XX XX</Typography>
+                <Typography className="text-white/80">(+225) 01 40 54 41 97 | (+225) 07 12 41 01 34</Typography>
               </div>
               <div>
                 <Typography className="font-medium text-white">Localisation</Typography>
-                <Typography className="text-white/80">Paris, France</Typography>
+                <Typography className="text-white/80">Abidjan, cocody riviera 2</Typography>
               </div>
             </div>
           </div>

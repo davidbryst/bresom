@@ -6,7 +6,7 @@ export default function Hero() {
   setInterval(() => {
     textRef[0].current?.classList.toggle("animate-change");
     textRef[1].current?.classList.toggle("animate-change1");
-  }, 3000);
+  }, 5000);
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
       
@@ -26,18 +26,18 @@ export default function Hero() {
           <div className="h-10 transition-all duration-[5s] overflow-hidden ">
             <div ref={textRef[0]} className="flex flex-col gap-0 transition-all duration-[2s] ">
               <Typography className="text-center text-white text-2xl md:text-3xl font-semibold">
-                Graphiste
+                Graphisme & Design
               </Typography>
               <Typography className="text-center text-white text-2xl md:text-3xl font-semibold">
-                Développeur Web & Mobile
+                Développement Web & Mobile
               </Typography>
             </div>
           </div>
-          <div className="h-0.5 my-2 bg-slate-50 rounded-full" ></div>
+          <div className="h-0.5 my-2 bg-withe rounded-full" ></div>
           <Typography className="h-6 transition-all duration-[5s] overflow-hidden text-white/70 mb-8 max-w-2xl mx-auto ">
             <div ref={textRef[1]} className="flex flex-col gap-0 transition-all duration-[2s] animate-base ">
               <span  className="text-center ">Spécialisé dans la création de sites web et applications interactives.</span>
-              <span  className="text-center ">Spécialisé dans le design.</span>
+              <span  className="text-center ">Spécialisé dans le design de sites web et applications interactives.</span>
             </div>
           </Typography>
         </div>
