@@ -40,7 +40,7 @@ export default function Dos() {
               <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div className="relative p-6 bg+++-white/5">
                 <div className="flex items-center justify-center mb-4">
-                  <da.icon className="w-10 h-10 text-white group-hover:scale-110 transition-transform duration-300" />
+                  {/* <da.icon className="w-10 h-10 text-white group-hover:scale-110 transition-transform duration-300" /> */}
                 </div>
                 <Typography variant="h3" className="text-xl font-semibold mb-2 text-white text-center">
                   {da.titre}
