@@ -45,29 +45,26 @@ export default function Contact() {
           Contactez-moi
         </Typography>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
-          <div className="p-4 sm:p-6 rounded-xl border bg-white/90 text-gray-800 border-gray-200 dark:bg-black/20 dark:text-white dark:border-white/10">
+          <div className="p-4 sm:p-6 rounded-xl border bg-black/20 text-white border-white/10">
             <Typography variant="h3" className="text-lg sm:text-xl font-semibold mb-4 text-white">
               Informations de contact
             </Typography>
             <div className="space-y-3 sm:space-y-4">
               <div>
-                <Typography className="font-medium text-gray-900 dark:text-white text-sm sm:text-base">Email</Typography>
-                <Typography className="text-gray-700 dark:text-white/80 text-sm sm:text-base break-all">sh.david.abraham@gmail.com</Typography>
+                <Typography className="font-medium text-white text-sm sm:text-base">Email</Typography>
+                <Typography className="text-white/80 text-sm sm:text-base break-all">sh.david.abraham@gmail.com</Typography>
               </div>
               <div>
-                <Typography className="font-medium text-gray-900 dark:text-white text-sm sm:text-base">Téléphone</Typography>
-                <Typography className="text-gray-700 dark:text-white/80 text-sm sm:text-base">
-                  (+225) 01 40 54 41 97<br />
-                  (+225) 07 12 41 01 34
-                </Typography>
+                <Typography className="font-medium text-white text-sm sm:text-base">Téléphone</Typography>
+                <Typography className="text-white/80 text-sm sm:text-base">+33 6 12 34 56 78</Typography>
               </div>
               <div>
-                <Typography className="font-medium text-gray-900 dark:text-white text-sm sm:text-base">Localisation</Typography>
-                <Typography className="text-gray-700 dark:text-white/80 text-sm sm:text-base">Abidjan, cocody riviera 2</Typography>
+                <Typography className="font-medium text-white text-sm sm:text-base">Localisation</Typography>
+                <Typography className="text-white/80 text-sm sm:text-base">Paris, France</Typography>
               </div>
             </div>
           </div>
-          <Form method="post" onSubmit={(e) => e.preventDefault()} className="space-y-4 backdrop-blur-md p-4 sm:p-6 rounded-xl border bg-white/70 text-gray-800 border-gray-200 dark:bg-black/20 dark:text-white dark:border-white/10" aria-label="Formulaire de contact">
+          <Form method="post" onSubmit={(e) => e.preventDefault()} className="space-y-4 p-4 sm:p-6 rounded-xl border bg-black/20 text-white border-white/10" aria-label="Formulaire de contact">
             <input type="hidden" name="formId" value="contact" />
             <div>
               <label htmlFor="contact-name" className="block mb-2 text-sm text-gray-700 dark:text-white/80">Nom</label>

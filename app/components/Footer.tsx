@@ -2,7 +2,7 @@ import { Typography } from "@material-tailwind/react";
 
 export default function Footer() {
   return (
-    <footer className="py-8 sm:py-12 px-4 sm:px-6 lg:px-8 border-t bg-gradient-to-b from-gray-100 to-transparent border-gray-200 text-gray-800 dark:from-white/5 dark:border-white/10 dark:text-white">
+    <footer className="py-8 sm:py-12 px-4 sm:px-6 lg:px-8 border-t bg-black/20 border-white/10 text-white">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {/* Logo et Description */}

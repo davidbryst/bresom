@@ -13,7 +13,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav aria-label="Navigation principale" className="fixed w-full top-0 z-50 border-b supports-[backdrop-filter]:bg-white/60 bg-white/90 border-gray-200 text-gray-800 dark:supports-[backdrop-filter]:bg-white/20 dark:bg-white/20 dark:border-white/10 dark:text-white">
+    <nav aria-label="Navigation principale" className="fixed w-full top-0 z-50 border-b bg-black/20 border-white/10 text-white">
       <div className="max-w-6xl mx-auto px-4 flex items-center justify-between py-4">
         {/* Logo */}
         <Link to="/" className="text-gray-900 dark:text-white text-lg sm:text-xl font-semibold relative z-10">

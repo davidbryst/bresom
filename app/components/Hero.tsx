@@ -62,7 +62,7 @@ export default function Hero() {
           <Button 
             size="lg" 
             aria-label="Télécharger le CV"
-            className="flex items-center gap-2 mx-auto transition-all duration-300 border-2 border-black/10 bg-black/0 text-black hover:border-black/30 hover:bg-black/10 dark:hover:border-white/30 dark:border-white/10 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4"
+            className="flex items-center gap-2 mx-auto transition-all duration-300 border-2 border-white/10 bg-white/10 text-white hover:border-white/30 hover:bg-white/20 text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4"
           >
             Resume <span className="text-lg sm:text-xl">↗</span>
           </Button>

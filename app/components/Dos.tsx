@@ -29,10 +29,10 @@ export default function Dos() {
   const items = dos.map((da, index) => (
     <div 
       key={index} 
-      className="group relative overflow-hidden rounded-xl border transition-all duration-300 border-gray-200 hover:border-gray-300 dark:border-white/10 dark:hover:border-white/20"
+      className="group relative overflow-hidden rounded-xl border transition-all duration-300 border-white/10 hover:border-white/20"
     >
       <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-      <div className="relative p-4 sm:p-6 bg-white/90 text-gray-800 dark:bg-black/40 dark:text-white">
+      <div className="relative p-4 sm:p-6 bg-black/40 text-white">
         <div className="flex items-center justify-center mb-3 sm:mb-4" aria-hidden="true">
           <da.icon className="w-8 h-8 sm:w-10 sm:h-10 text-white group-hover:scale-110 transition-transform duration-300" />
         </div>
