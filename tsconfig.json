@@ -2,6 +2,7 @@
   "include": [
     "**/*.ts",
     "**/*.tsx",
+    "**/*.d.ts",
     "**/.server/**/*.ts",
     "**/.server/**/*.tsx",
     "**/.client/**/*.ts",
@@ -27,6 +28,7 @@
     },
 
     // Vite takes care of building everything, not tsc.
-    "noEmit": true
+  "noEmit": true,
+  "allowSyntheticDefaultImports": true
   }
 }

@@ -4,14 +4,18 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  LiveReload,
 } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/node";
 
 import "./tailwind.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-// import BackgroundParticles from "./components/BackgroundParticles";
+import ThemeToggle from "./components/ThemeToggle";
+// import LiquidChromeBackground from "./components/LiquidChromeBackground";
+import ShaderPrismBackground from "./components/ShaderPrismBackground";
+import { useEffect, useState } from "react";
+import Loading from "./components/Loading";
+import BackgroundParticles from "./components/BackgroundParticles";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -27,6 +31,12 @@ export const links: LinksFunction = () => [
 ];
 
 export function Layout() {
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+  }, []);
   return (
     <html lang="fr" className="h-full scroll-smooth">
       <head>
@@ -35,25 +45,27 @@ export function Layout() {
         <Meta />
         <Links />
       </head>
-      <body className="min-h-screen duration-700 overflow-x-hidden animate-gradient bg-gradient-1">
+      {/* <body className="min-h-screen duration-700 overflow-x-hidden bg-gradient-1 bg-gradient-custom-light dark:bg-gradient-custom-dark animate-gradient"> */}
+      <body className="min-h-screen duration-700 overflow-x-hidden bg-gradient-1">
       {/* <body className="min-h-screen bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-[#0a0a1b] via-[#0f0f2d] to-[#0a0a1b] overflow-x-hidden"> */}
-        {/* Grille de fond */}
+        {/* Arrière-plan Shader (GLSL) */}
         <div className="fixed inset-0">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:2rem_2rem]"></div>
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff15_1px,transparent_1px),linear-gradient(to_bottom,#ffffff15_1px,transparent_1px)] bg-[size:8rem_8rem]"></div>
         </div>
 
-        {/* Particules et formes */}
-        {/* <BackgroundParticles /> */}
+        {/* <ShaderPrismBackground /> */}
+        <BackgroundParticles />
 
         <div className="relative">
-          <Navbar />
-          <Outlet />
-          <Footer />
+              <Navbar />
+              <Outlet />
+              <Footer />
+              <ThemeToggle />
+            {isLoading && <Loading />}
         </div>
         <ScrollRestoration />
         <Scripts />
-        <LiveReload />
       </body>
     </html>
   );

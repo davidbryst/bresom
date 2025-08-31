@@ -2,14 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-  .animation-delay-2000 {
-    animation-delay: 2s;
-  }
-  .animation-delay-4000 {
-    animation-delay: 4s;
-  }
+/* Animations existantes */
+.animation-delay-2000 {
+  animation-delay: 2s;
 }
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
 .animate-change {
   transform: translateX(0) translateY(-50%);
 }
@@ -19,7 +19,93 @@
 .animate-change1 {
   transform: translateX(0) translateY(0);
 }
-/* @keyframes gradientCycle {
+
+/* Styles personnalisés pour la responsivité */
+@layer utilities {
+  /* Amélioration de la lisibilité sur mobile */
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  /* Optimisation des espacements pour mobile */
+  .mobile-padding {
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+  
+  /* Hauteur minimale responsive */
+  .min-h-responsive {
+    @apply min-h-[50vh] sm:min-h-[60vh] lg:min-h-[70vh];
+  }
+  
+  /* Grille responsive améliorée */
+  .grid-responsive {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8;
+  }
+  
+  /* Texte responsive */
+  .text-responsive {
+    @apply text-sm sm:text-base lg:text-lg;
+  }
+  
+  /* Titre responsive */
+  .title-responsive {
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl;
+  }
+  
+  /* Espacement responsive */
+  .spacing-responsive {
+    @apply py-12 sm:py-16 lg:py-20;
+  }
+}
+
+/* Animations personnalisées */
+@layer components {
+  .animate-fadein {
+    animation: fadeIn 0.6s ease-in-out;
+  }
+  
+  .animate-slideup {
+    animation: slideUp 0.8s ease-out;
+  }
+  
+  .animate-scale {
+    animation: scale 0.3s ease-in-out;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale {
+  from {
+    transform: scale(0.95);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* Animations de gradient existantes */
+@keyframes gradientCycle {
   0%, 100% {
     background-image: radial-gradient(ellipse at top left, #0a0a1b, #1e1e3f, #0a0a1b);
   }
@@ -34,41 +120,151 @@
 .animate-gradient {
   animation: gradientCycle 15s ease-in-out infinite;
   background-size: 200% 200%;
-} */
+}
 
 @keyframes gradientShift {
   0% {
     background-position: 350% 350%;
-    /* transform: rotate(0deg); */
   }
   25% {
     background-position: 400% 350%;
-    /* transform: rotate(180deg); */
   }
   50% {
     background-position: 400% 400%;
-    /* transform: rotate(180deg); */
   }
   75% {
     background-position: 350% 400%;
-    /* transform: rotate(180deg); */
   }
   100% {
     background-position: 350% 350%;
-    /* transform: rotate(360deg); */
   }
 }
 
 .animate-gradient {
-  background: linear-gradient(135deg, #0a0a1b, #091841, #0a0a1b, #450572, #0a0a1b,  #480fa5, #0a0a1b, #5f0030, #0a0a1b);
-  /* background: linear-gradient(135deg, #0a0a1b, #1e3a8a, #6a0dad, #302d92, #6d28d9, #0a0a1b, #830041); */
   background-size: 400% 400%;
   animation: gradientShift 40s ease-in-out infinite;
 }
 
+/* Effet chrome liquide */
+@keyframes blobMove1 {
+  0% { transform: translate(0px, 0px) scale(1); }
+  25% { transform: translate(40px, -20px) scale(1.05); }
+  50% { transform: translate(20px, 30px) scale(0.98); }
+  75% { transform: translate(-30px, 10px) scale(1.03); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+@keyframes blobMove2 {
+  0% { transform: translate(0px, 0px) scale(1); }
+  20% { transform: translate(-30px, 20px) scale(1.02); }
+  50% { transform: translate(25px, -25px) scale(1.06); }
+  80% { transform: translate(10px, 35px) scale(0.97); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+@keyframes blobMove3 {
+  0% { transform: translate(0px, 0px) scale(1); }
+  30% { transform: translate(20px, 25px) scale(1.04); }
+  60% { transform: translate(-35px, -15px) scale(0.99); }
+  90% { transform: translate(15px, -30px) scale(1.05); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+.animate-blob-1 { animation: blobMove1 26s ease-in-out infinite; }
+.animate-blob-2 { animation: blobMove2 32s ease-in-out infinite; }
+.animate-blob-3 { animation: blobMove3 38s ease-in-out infinite; }
+
+.close-button{display:none !important}
+
+/* Utilitaires 3D pour le carrousel */
+.preserve-3d { transform-style: preserve-3d; }
+.backface-hidden { backface-visibility: hidden; }
+
+/* Améliorations pour l'accessibilité mobile */
 @layer base {
   html,
   body {
-    @apply bg-gray-950;
+    @apply text-base leading-relaxed;
+  }
+  
+  /* Optimisation du touch sur mobile */
+  button, a {
+    @apply touch-manipulation;
+  }
+  
+  /* Optimisation des images */
+  img {
+    @apply max-w-full h-auto;
+  }
+}
+
+/* Styles pour les composants spécifiques */
+@layer components {
+  /* Carte responsive */
+  .card-responsive {
+    @apply p-4 sm:p-6 lg:p-8 rounded-xl backdrop-blur-md border transition-all duration-300;
+  }
+  
+  /* Bouton responsive */
+  .button-responsive {
+    @apply px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base font-medium rounded-lg transition-all duration-300;
+  }
+  
+  /* Navigation mobile */
+  .mobile-nav {
+    @apply fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-200 dark:border-white/10;
+  }
+  
+  /* Menu hamburger */
+  .hamburger-menu {
+    @apply md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/10 transition-colors;
+  }
+  
+  /* Grille de projets responsive */
+  .projects-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8;
+  }
+  
+  /* Formulaire responsive */
+  .form-responsive {
+    @apply space-y-4 p-4 sm:p-6 rounded-xl backdrop-blur-md border;
+  }
+  
+  /* Input responsive */
+  .input-responsive {
+    @apply w-full bg-white/40 border-gray-300 text-gray-900 placeholder-gray-500 focus:border-gray-500 dark:bg-white/10 dark:border-white/10 dark:text-white dark:placeholder-white/50 dark:focus:border-white/30 text-sm sm:text-base;
+  }
+}
+
+/* Optimisations pour les écrans très petits */
+@media (max-width: 480px) {
+  .mobile-optimized {
+    @apply text-sm px-3 py-2;
+  }
+  
+  .mobile-grid {
+    @apply grid-cols-1 gap-3;
+  }
+}
+
+/* Optimisations pour les tablettes */
+@media (min-width: 481px) and (max-width: 768px) {
+  .tablet-optimized {
+    @apply text-base px-4 py-3;
+  }
+  
+  .tablet-grid {
+    @apply grid-cols-2 gap-4;
+  }
+}
+
+/* Optimisations pour les grands écrans */
+@media (min-width: 1024px) {
+  .desktop-optimized {
+    @apply text-lg px-6 py-4;
+  }
+  
+  .desktop-grid {
+    @apply grid-cols-3 gap-8;
   }
 }
