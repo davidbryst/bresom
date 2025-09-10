@@ -4,13 +4,17 @@ import React from "react";
 import { Document, Page, Text, View, StyleSheet, renderToStream, Image } from "@react-pdf/renderer";
 import { aboutData, contactData, experiencesData, heroData, projectsData, skillsData } from "../data/cvContent";
 
-// Palette moderne
-const ACCENT = "#0ea5e9"; // Sky 500
-const ACCENT_LIGHT = "#e0f2fe"; // Sky 100
+// Palette moderne et sophistiquée
+const ACCENT = "#3b82f6"; // Blue 500 - plus moderne et professionnel
+const ACCENT_LIGHT = "#dbeafe"; // Blue 100
+const ACCENT_DARK = "#1e40af"; // Blue 800
+const TEXT_PRIMARY = "#111827"; // Gray 900 - texte principal plus sombre
 const TEXT_MUTED = "#6b7280"; // Gray 500
+const TEXT_LIGHT = "#9ca3af"; // Gray 400
 const SURFACE = "#ffffff";
-const SIDEBAR_BG = "#111827"; // Gray 900
-const SIDEBAR_TEXT = "#e5e7eb"; // Gray 200
+const SIDEBAR_BG = "#0f172a"; // Slate 900 - plus moderne
+const SIDEBAR_TEXT = "#f1f5f9"; // Slate 100
+const SIDEBAR_ACCENT = "#64748b"; // Slate 500
 
 const styles = StyleSheet.create({
   page: {
@@ -19,90 +23,221 @@ const styles = StyleSheet.create({
     fontFamily: "Helvetica",
     backgroundColor: SURFACE,
     padding: 0,
+    lineHeight: 1.4,
   },
   sidebar: {
-    width: 180,
+    width: 190,
     backgroundColor: SIDEBAR_BG,
-    paddingTop: 24,
-    paddingBottom: 24,
-    paddingLeft: 16,
-    paddingRight: 16,
+    paddingTop: 32,
+    paddingBottom: 32,
+    paddingLeft: 20,
+    paddingRight: 20,
     alignItems: "center",
     justifyContent: "flex-start",
   },
   verticalText: { display: "none" },
   profileImage: {
-    width: 110,
-    height: 110,
-    borderRadius: 55,
-    marginBottom: 16,
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    marginBottom: 20,
     objectFit: "cover",
+    border: `3px solid ${ACCENT}`,
   },
-  sideName: { color: SIDEBAR_TEXT, fontSize: 16, fontWeight: 700, textAlign: "center" },
-  sideRole: { color: ACCENT_LIGHT, fontSize: 10, textAlign: "center", marginBottom: 12 },
-  sideSection: { width: "100%", marginTop: 10 },
-  sideSectionTitle: { color: ACCENT_LIGHT, fontSize: 10, letterSpacing: 1, textTransform: "uppercase", marginBottom: 6 },
-  sideItem: { color: SIDEBAR_TEXT, fontSize: 10, marginBottom: 4 },
-  sideMuted: { color: "#9ca3af", fontSize: 10 },
-  interestsRow: { flexDirection: "row", flexWrap: "wrap" },
-  interestIcon: { color: SIDEBAR_TEXT, fontSize: 12, marginRight: 8, marginBottom: 6 },
+  sideName: { 
+    color: SIDEBAR_TEXT, 
+    fontSize: 18, 
+    fontWeight: 700, 
+    textAlign: "center",
+    letterSpacing: 0.5,
+    marginBottom: 4,
+  },
+  sideRole: { 
+    color: ACCENT, 
+    fontSize: 11, 
+    textAlign: "center", 
+    marginBottom: 20,
+    fontWeight: 500,
+  },
+  sideSection: { width: "100%", marginTop: 16 },
+  sideSectionTitle: { 
+    color: ACCENT, 
+    fontSize: 11, 
+    letterSpacing: 1.2, 
+    textTransform: "uppercase", 
+    marginBottom: 10,
+    fontWeight: 600,
+  },
+  sideItem: { 
+    color: SIDEBAR_TEXT, 
+    fontSize: 10, 
+    marginBottom: 6,
+    lineHeight: 1.3,
+  },
+  sideMuted: { color: SIDEBAR_ACCENT, fontSize: 10 },
+  interestsRow: { flexDirection: "row", flexWrap: "wrap", justifyContent: "center" },
+  interestIcon: { 
+    color: SIDEBAR_TEXT, 
+    fontSize: 16, 
+    marginRight: 12, 
+    marginBottom: 8,
+    textAlign: "center",
+  },
   main: {
     flex: 1,
-    padding: 32,
+    padding: 36,
     justifyContent: "flex-start",
   },
-  header: { fontSize: 22, fontWeight: 700, marginBottom: 4 },
-  subHeader: { fontSize: 11, color: TEXT_MUTED, marginBottom: 10 },
-  sectionHeader: { flexDirection: "row", alignItems: "center", marginTop: 10, marginBottom: 6 },
-  sectionBar: { width: 16, height: 2, backgroundColor: ACCENT, marginRight: 6, borderRadius: 2 },
-  sectionTitle: { fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.5 },
-  bullet: { marginBottom: 3, lineHeight: 1.3 },
-  small: { color: TEXT_MUTED, lineHeight: 1.2 },
+  header: { 
+    fontSize: 24, 
+    fontWeight: 700, 
+    marginBottom: 6,
+    color: TEXT_PRIMARY,
+    letterSpacing: 0.3,
+  },
+  subHeader: { 
+    fontSize: 12, 
+    color: TEXT_MUTED, 
+    marginBottom: 12,
+    fontWeight: 400,
+  },
+  sectionHeader: { 
+    flexDirection: "row", 
+    alignItems: "center", 
+    marginTop: 14, 
+    marginBottom: 10 
+  },
+  sectionBar: { 
+    width: 20, 
+    height: 3, 
+    backgroundColor: ACCENT, 
+    marginRight: 8, 
+    borderRadius: 2 
+  },
+  sectionTitle: { 
+    fontSize: 12, 
+    fontWeight: 700, 
+    textTransform: "uppercase", 
+    letterSpacing: 0.8,
+    color: TEXT_PRIMARY,
+  },
+  bullet: { 
+    marginBottom: 5, 
+    lineHeight: 1.4,
+    color: TEXT_PRIMARY,
+    fontSize: 10,
+  },
+  small: { 
+    color: TEXT_MUTED, 
+    lineHeight: 1.3,
+    fontSize: 9,
+    marginBottom: 3,
+  },
   row: { flexDirection: "row" },
-  colLeft: { width: 240, paddingRight: 16 },
-  colRight: { flex: 1, paddingLeft: 16 },
-  divider: { height: 1, backgroundColor: "#e5e7eb", marginVertical: 8 },
+  colLeft: { width: 250, paddingRight: 20 },
+  colRight: { flex: 1, paddingLeft: 20 },
+  divider: { 
+    height: 1, 
+    backgroundColor: "#e5e7eb", 
+    marginVertical: 12,
+    opacity: 0.7,
+  },
   barContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 4,
+    marginBottom: 6,
   },
   barLabel: {
-  width: 90,
-  fontSize: 10,
-    color: "#333",
+    width: 90,
+    fontSize: 10,
+    color: TEXT_PRIMARY,
   },
   bar: {
-  height: 6,
+    height: 8,
     borderRadius: 4,
     backgroundColor: ACCENT,
     marginLeft: 8,
   },
   barBg: {
-  width: 140,
-  height: 6,
+    width: 140,
+    height: 8,
     borderRadius: 4,
     backgroundColor: "#e5e7eb",
     marginLeft: 8,
   },
   iconRow: {
     flexDirection: "row",
-    marginTop: 8,
-    marginBottom: 8,
+    marginTop: 10,
+    marginBottom: 10,
   },
   icon: {
-    width: 12,
-    height: 12,
-    marginRight: 8,
+    width: 14,
+    height: 14,
+    marginRight: 10,
   },
-  chipRow: { flexDirection: "row", flexWrap: "wrap", marginTop: 6, marginBottom: 6 },
-  chip: { fontSize: 9, color: "#0369a1", backgroundColor: ACCENT_LIGHT, paddingVertical: 2, paddingHorizontal: 6, borderRadius: 10, marginRight: 4, marginBottom: 4 },
-  experienceCard: { borderLeftColor: ACCENT, borderLeftWidth: 2, paddingLeft: 8, marginBottom: 8 },
-  skillGrid: { flexDirection: "row", flexWrap: "wrap", justifyContent: "space-between", marginTop: 4 },
-  skillCard: { width: "48%", borderColor: "#e5e7eb", borderWidth: 1, borderRadius: 6, padding: 8, marginBottom: 8 },
-  skillAbbrev: { fontSize: 20, fontWeight: 700, color: ACCENT, marginBottom: 4 },
-  skillName: { fontSize: 10, color: "#111827" },
-  skillRule: { width: 40, height: 2, backgroundColor: ACCENT, borderRadius: 2, marginTop: 6 },
+  chipRow: { 
+    flexDirection: "row", 
+    flexWrap: "wrap", 
+    marginTop: 8, 
+    marginBottom: 8 
+  },
+  chip: { 
+    fontSize: 9, 
+    color: ACCENT_DARK, 
+    backgroundColor: ACCENT_LIGHT, 
+    paddingVertical: 3, 
+    paddingHorizontal: 8, 
+    borderRadius: 12, 
+    marginRight: 6, 
+    marginBottom: 6,
+    fontWeight: 500,
+  },
+  experienceCard: { 
+    borderLeftColor: ACCENT, 
+    borderLeftWidth: 3, 
+    paddingLeft: 12, 
+    marginBottom: 12,
+    backgroundColor: "#fafafa",
+    paddingTop: 8,
+    paddingBottom: 8,
+    paddingRight: 8,
+    borderRadius: 4,
+  },
+  skillGrid: { 
+    flexDirection: "row", 
+    flexWrap: "wrap", 
+    justifyContent: "space-between", 
+    marginTop: 8 
+  },
+  skillCard: { 
+    width: "48%", 
+    borderColor: "#e5e7eb", 
+    borderWidth: 1, 
+    borderRadius: 8, 
+    padding: 12, 
+    marginBottom: 10,
+    backgroundColor: "#fafafa",
+    alignItems: "center",
+  },
+  skillIcon: { 
+    fontSize: 24, 
+    color: ACCENT, 
+    marginBottom: 6,
+    textAlign: "center",
+  },
+  skillName: { 
+    fontSize: 10, 
+    color: TEXT_PRIMARY,
+    textAlign: "center",
+    fontWeight: 500,
+  },
+  skillRule: { 
+    width: 50, 
+    height: 3, 
+    backgroundColor: ACCENT, 
+    borderRadius: 2, 
+    marginTop: 8 
+  },
 });
 
 function CVDocument({ imageUrl }: { imageUrl?: string }) {
@@ -122,12 +257,29 @@ function CVDocument({ imageUrl }: { imageUrl?: string }) {
   };
 
   // Derive 4-6 skills from skillsData if available, else fallback
+  const skillIcons = {
+    "Adobe XD": "🎨",
+    "Figma": "📐",
+    "Photoshop": "🖼️",
+    "Illustrator": "✏️",
+    "React": "⚛️",
+    "TypeScript": "📘",
+    "Node.js": "🟢",
+    "Laravel": "🔶",
+    "Spring Boot": "🍃",
+    "Angular": "🅰️",
+  };
+
   const derivedSkills = (skillsData && skillsData.length
     ? skillsData
         .flatMap((g) => g.buckets.flatMap((b) => b.items.map((i) => i.name)))
         .slice(0, 6)
     : ["Adobe XD", "Figma", "Photoshop", "Illustrator", "React", "TypeScript"]).map(
-    (name, idx) => ({ label: name, value: 0.9 - (idx % 5) * 0.1 })
+    (name, idx) => ({ 
+      label: name, 
+      value: 0.9 - (idx % 5) * 0.1,
+      icon: skillIcons[name] || "🛠️"
+    })
   );
 
   const profileSummary = summarize(aboutData.description);
@@ -156,18 +308,18 @@ function CVDocument({ imageUrl }: { imageUrl?: string }) {
           {/* Contact */}
           <View style={styles.sideSection}>
             <Text style={styles.sideSectionTitle}>Contact</Text>
-            <Text style={styles.sideItem}>✉ {contactData.email}</Text>
-            <Text style={styles.sideItem}>☎ {contactData.phone}</Text>
+            <Text style={styles.sideItem}>📧 {contactData.email}</Text>
+            <Text style={styles.sideItem}>📱 {contactData.phone}</Text>
             <Text style={styles.sideItem}>📍 {contactData.location}</Text>
           </View>
 
-          {/* Interests */}
+          {/* Interests with better spacing */}
           <View style={styles.sideSection}>
-            <Text style={styles.sideSectionTitle}>Intérêts</Text>
+            <Text style={styles.sideSectionTitle}>Centres d'Intérêt</Text>
             <View style={styles.interestsRow}>
-              <Text style={styles.interestIcon}>🎧</Text>
+              <Text style={styles.interestIcon}>🎵</Text>
               <Text style={styles.interestIcon}>🎮</Text>
-              <Text style={styles.interestIcon}>📷</Text>
+              <Text style={styles.interestIcon}>📸</Text>
               <Text style={styles.interestIcon}>✈️</Text>
             </View>
           </View>
@@ -175,32 +327,39 @@ function CVDocument({ imageUrl }: { imageUrl?: string }) {
 
         {/* Main content */}
         <View style={styles.main}>
-          {/* Main starts directly with sections (header moved to sidebar) */}
+          {/* Profile Section with enhanced styling */}
           <View style={styles.sectionHeader}>
             <View style={styles.sectionBar} />
-            <Text style={styles.sectionTitle}>Profil</Text>
+            <Text style={styles.sectionTitle}>Profil Professionnel</Text>
           </View>
-          <Text style={{ lineHeight: 1.3, marginBottom: 6 }}>{profileSummary}</Text>
+          <Text style={{ lineHeight: 1.4, marginBottom: 8, fontSize: 11, color: TEXT_PRIMARY }}>
+            {profileSummary}
+          </Text>
           <View style={styles.divider} />
 
           <View style={styles.row}>
-            {/* Left column */}
+            {/* Left column - Enhanced with better spacing */}
             <View style={styles.colLeft}>
-              {aboutData.points?.slice(0, 2).map((p) => (
-                <Text key={p} style={styles.bullet}>• {p}</Text>
-              ))}
-              <Text style={styles.small}>Expérience: {aboutData.experience}</Text>
-              <Text style={styles.small}>Stack: {aboutData.stack}</Text>
-              <Text style={styles.small}>Valeurs: {aboutData.values}</Text>
+              <View style={{ marginBottom: 12 }}>
+                {aboutData.points?.slice(0, 2).map((p) => (
+                  <Text key={p} style={styles.bullet}>• {p}</Text>
+                ))}
+              </View>
+              
+              <View style={{ marginBottom: 14 }}>
+                <Text style={[styles.small, { fontWeight: 600, color: TEXT_MUTED }]}>Expérience: {aboutData.experience}</Text>
+                <Text style={[styles.small, { fontWeight: 600, color: TEXT_MUTED }]}>Stack: {aboutData.stack}</Text>
+                <Text style={[styles.small, { fontWeight: 600, color: TEXT_MUTED }]}>Valeurs: {aboutData.values}</Text>
+              </View>
 
               <View style={styles.sectionHeader}>
                 <View style={styles.sectionBar} />
-                <Text style={styles.sectionTitle}>Compétences</Text>
+                <Text style={styles.sectionTitle}>Compétences Clés</Text>
               </View>
               <View style={styles.skillGrid}>
                 {derivedSkills.slice(0, 4).map((s) => (
                   <View key={`card-${s.label}`} style={styles.skillCard}>
-                    <Text style={styles.skillAbbrev}>{s.label.split(" ")[0].slice(0,2)}</Text>
+                    <Text style={styles.skillIcon}>{s.icon}</Text>
                     <Text style={styles.skillName}>{s.label}</Text>
                     <View style={styles.skillRule} />
                   </View>
@@ -209,26 +368,33 @@ function CVDocument({ imageUrl }: { imageUrl?: string }) {
 
               <View style={styles.sectionHeader}>
                 <View style={styles.sectionBar} />
-                <Text style={styles.sectionTitle}>Projets</Text>
+                <Text style={styles.sectionTitle}>Projets Sélectionnés</Text>
               </View>
               {projectsData.slice(0, maxProjects).map((p) => (
-                <Text key={p.title} style={styles.bullet}>• {p.title} — {p.description}</Text>
+                <View key={p.title} style={{ marginBottom: 8 }}>
+                  <Text style={[styles.bullet, { fontWeight: 600 }]}>• {p.title}</Text>
+                  <Text style={[styles.small, { marginLeft: 8, fontStyle: "italic" }]}>{p.description}</Text>
+                </View>
               ))}
             </View>
 
-            {/* Right column */}
+            {/* Right column - Enhanced experience cards */}
             <View style={styles.colRight}>
               <View style={styles.sectionHeader}>
                 <View style={styles.sectionBar} />
-                <Text style={styles.sectionTitle}>Expériences</Text>
+                <Text style={styles.sectionTitle}>Expérience Professionnelle</Text>
               </View>
               {experiencesData.slice(0, maxExperiences).map((exp) => (
                 <View key={`${exp.company}-${exp.date}`} style={styles.experienceCard}>
-                  <Text style={{ fontWeight: 700 }}>{exp.company}</Text>
-                  <Text>{exp.position}</Text>
-                  <Text style={styles.small}>{exp.date}</Text>
+                  <Text style={{ fontWeight: 700, fontSize: 11, color: TEXT_PRIMARY, marginBottom: 2 }}>
+                    {exp.company}
+                  </Text>
+                  <Text style={{ fontWeight: 500, fontSize: 10, color: ACCENT, marginBottom: 2 }}>
+                    {exp.position}
+                  </Text>
+                  <Text style={[styles.small, { fontWeight: 500, marginBottom: 6 }]}>{exp.date}</Text>
                   {exp.responsibilities.slice(0, maxRespPerExp).map((r) => (
-                    <Text key={r} style={styles.bullet}>• {r}</Text>
+                    <Text key={r} style={[styles.bullet, { fontSize: 10 }]}>• {r}</Text>
                   ))}
                 </View>
               ))}
