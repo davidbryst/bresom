@@ -13,7 +13,8 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@material-tailwind/react": "^3.0.0-beta.24",
+    "@material-tailwind/react": "2.1.10",
+    "@react-pdf/renderer": "^3.4.5",
     "@remix-run/node": "^2.16.5",
     "@remix-run/react": "^2.16.5",
     "@remix-run/serve": "^2.16.5",
@@ -31,8 +32,8 @@
   },
   "devDependencies": {
     "@remix-run/dev": "^2.16.5",
-    "@types/react": "^18.2.20",
-    "@types/react-dom": "^18.2.7",
+    "@types/react": "19.1.12",
+    "@types/react-dom": "19.1.9",
     "@typescript-eslint/eslint-plugin": "^6.7.4",
     "@typescript-eslint/parser": "^6.7.4",
     "autoprefixer": "^10.4.19",
@@ -43,7 +44,7 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "postcss": "^8.4.38",
-    "tailwindcss": "^3.4.4",
+    "tailwindcss": "3.4.13",
     "typescript": "^5.1.6",
     "vite": "^6.0.0",
     "vite-tsconfig-paths": "^4.2.1"

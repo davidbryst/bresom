@@ -1,125 +1,170 @@
 import { Button, Typography, Input, Textarea } from "@material-tailwind/react";
-import { Form, useActionData, useNavigation } from "@remix-run/react";
-import { useState } from "react";
+import { ActionFunctionArgs } from "@remix-run/node";
+import { Form, json, useActionData, useNavigation } from "@remix-run/react";
 import { Resend } from "resend";
+import { contactData, contactConfig } from "../data/content";
+
+type ActionData =
+  | { ok: true }
+  | { ok: false; error: string };
+
+export async function action({ request }: ActionFunctionArgs) {
+  const formData = await request.formData();
+  const name = String(formData.get("name") || "");
+  const email = String(formData.get("email") || "");
+  const message = String(formData.get("message") || "");
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (
+    !name ||
+    !email ||
+    !message ||
+    name === "" ||
+    email === "" ||
+    message === "" ||
+    !emailRegex.test(email)
+  ) {
+    return json(
+      {
+        ok: false,
+        error: "Veuillez remplir tous les champs avec une adresse email valide.",
+      } satisfies ActionData,
+      { status: 400 }
+    );
+  }
+
+  try {
+    const resend = new Resend(contactConfig.resendApiKey);
+    // const resend = new Resend(process.env.RESEND_API_KEY);
+    const { data: resendData, error: resendError } = await resend.emails.send({
+      from: contactConfig.from,
+      to: contactConfig.email,
+      subject: contactConfig.subject,
+      html: `
+        <p><strong>Nom:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Message:</strong> ${message}</p>
+      `,
+    });
+
+    if (resendError) {
+        console.log(resendError);
+        
+      return json(
+        { ok: false, error: "Erreur lors de l'envoi de l'email " + resendError.message } satisfies ActionData,
+        { status: 500 }
+      );
+    }
+
+    return json(
+      { ok: true } satisfies ActionData
+    );
+  } catch (error: any) {
+    return json(
+      { ok: false, error: "Une erreur est survenue lors de l'envoi du message." } satisfies ActionData,
+      { status: 500 }
+    );
+  }
+}
+
 
 export default function Contact() {
-  const submit = () => async () => {
-    // e.preventDefault();
-    // const formData = new FormData(e.target as HTMLFormElement);
-    // const data = Object.fromEntries(formData);
-    // console.log(data);
-    try {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!formData.name || !formData.email || !formData.message || 
-          formData.name === "" || formData.email === "" || formData.message === "" || 
-          !emailRegex.test(formData.email)) {
-        setActionData({ ok: false, error: "Veuillez remplir tous les champs avec une adresse email valide." });
-        return;
-      }
-      const resend = new Resend(process.env.RESEND_API_KEY);
-      const { data: resendData, error: resendError } = await resend.emails.send({
-        from: "onboarding@resend.dev",
-        to: "pro.mailer.sender@gmail.com",
-        subject: "Contact Form Submission",
-        html: `
-          <p><strong>Name:</strong> ${formData.name}</p>
-          <p><strong>Email:</strong> ${formData.email}</p>
-          <p><strong>Message:</strong> ${formData.message}</p>
-        `
-      });
-      setActionData({ ok: true, message: "Email sent successfully" });
-    } catch (error) {
-      setActionData({ ok: false, error: error as string });
-    };
-  };
-  // const actionData = useActionData<{ ok?: boolean; error?: string; message?: string }>();
-  const [actionData, setActionData] = useState<{ ok?: boolean; error?: string; message?: string }>({});
-  const [formData, setFormData] = useState<{ name?: string; email?: string; message?: string }>({});
+  const actionData = useActionData<ActionData>();
   const navigation = useNavigation();
-  const isSubmitting = navigation.state !== "idle";
+  const isLoading = navigation.state === "submitting" || navigation.state === "loading";
   return (
     <section id="Contact" aria-labelledby="contact-title" className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 relative">
       <div className="max-w-4xl mx-auto">
-        <Typography id="contact-title" variant="h2" className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 sm:mb-12 text-white">
+        <h2 id="contact-title" className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 sm:mb-12 text-white">
           Contactez-moi
-        </Typography>
+        </h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
-          <div className="p-4 sm:p-6 rounded-xl border bg-black/20 text-white border-white/10">
-            <Typography variant="h3" className="text-lg sm:text-xl font-semibold mb-4 text-white">
+          <div className="p-4 sm:p-6 cardGlass">
+            <h3 className="text-lg sm:text-xl font-semibold mb-4 text-white">
               Informations de contact
-            </Typography>
+            </h3>
             <div className="space-y-3 sm:space-y-4">
               <div>
-                <Typography className="font-medium text-white text-sm sm:text-base">Email</Typography>
-                <Typography className="text-white/80 text-sm sm:text-base break-all">sh.david.abraham@gmail.com</Typography>
+                <span className="font-medium text-white text-sm sm:text-base">Email</span>
+                <div className="text-white/80 text-sm sm:text-base break-all">{contactData.email}</div>
               </div>
               <div>
-                <Typography className="font-medium text-white text-sm sm:text-base">Téléphone</Typography>
-                <Typography className="text-white/80 text-sm sm:text-base">+33 6 12 34 56 78</Typography>
+                <span className="font-medium text-white text-sm sm:text-base">Téléphone</span>
+                <div className="text-white/80 text-sm sm:text-base">{contactData.phone}</div>
               </div>
               <div>
-                <Typography className="font-medium text-white text-sm sm:text-base">Localisation</Typography>
-                <Typography className="text-white/80 text-sm sm:text-base">Paris, France</Typography>
+                <span className="font-medium text-white text-sm sm:text-base">Localisation</span>
+                <div className="text-white/80 text-sm sm:text-base">{contactData.location}</div>
               </div>
             </div>
           </div>
-          <Form method="post" onSubmit={(e) => e.preventDefault()} className="space-y-4 p-4 sm:p-6 rounded-xl border bg-black/20 text-white border-white/10" aria-label="Formulaire de contact">
+          <Form method="post" className="space-y-4 p-4 sm:p-6 cardGlass" aria-label="Formulaire de contact">
             <input type="hidden" name="formId" value="contact" />
             <div>
-              <label htmlFor="contact-name" className="block mb-2 text-sm text-gray-700 dark:text-white/80">Nom</label>
-              <Input
+              <label htmlFor="name" className="block mb-2 text-sm text-gray-700 dark:text-white/80">Nom</label>
+              <input
+                id="name"
                 name="name"
                 type="text"
                 placeholder="Nom"
                 required
-                value={formData.name}
-                id="contact-name"
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full bg-white/40 border-gray-300 text-gray-900 placeholder-gray-500 focus:border-gray-500 dark:bg-white/10 dark:border-white/10 dark:text-white dark:placeholder-white/50 dark:focus:border-white/30 text-sm sm:text-base"
+                disabled={isLoading}
+                className="w-full cardGlass !shadow-none  px-2 py-2 !bg-white/5 !placeholder-white/80 focus:!outline-white focus:!border-white text-sm sm:text-base"
               />
             </div>
             <div>
-              <label htmlFor="contact-email" className="block mb-2 text-sm text-gray-700 dark:text-white/80">Email</label>
-              <Input
+              <label htmlFor="email" className="block mb-2 text-sm text-gray-700 dark:text-white/80">Email</label>
+              <input
                 name="email"
                 type="email"
                 placeholder="Email"
                 required
-                value={formData.email}
-                id="contact-email"
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full bg-white/40 border-gray-300 text-gray-900 placeholder-gray-500 focus:border-gray-500 dark:bg-white/10 dark:border-white/10 dark:text-white dark:placeholder-white/50 dark:focus:border-white/30 text-sm sm:text-base"
+                disabled={isLoading}
+                id="email"
+                className="w-full cardGlass !shadow-none  px-2 py-2 !bg-white/5 !placeholder-white/80 focus:!outline-white focus:!border-white text-sm sm:text-base"
               />
             </div>
             <div>
-              <label htmlFor="contact-message" className="block mb-2 text-sm text-gray-700 dark:text-white/80">Message</label>
-              <Textarea
+              <label htmlFor="message" className="block mb-2 text-sm text-gray-700 dark:text-white/80">Message</label>
+              <textarea
                 name="message"
                 placeholder="Message"
                 required
-                id="contact-message"
-                value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                className="w-full bg-white/40 border-gray-300 text-gray-900 placeholder-gray-500 focus:border-gray-500 dark:bg-white/10 dark:border-white/10 dark:text-white dark:placeholder-white/50 dark:focus:border-white/30 text-sm sm:text-base"
+                disabled={isLoading}
+                id="message"
+                className="w-full cardGlass h-96 !shadow-none  px-2 py-2 !bg-white/5 !placeholder-white/80 focus:!outline-white focus:!border-white text-sm sm:text-base"
                 rows={4}
               />
             </div>
-            {actionData?.error && (
-              <div className="text-red-600 dark:text-red-400 text-sm">{actionData?.error}</div>
+
+            {actionData?.ok && (
+              <div className="mb-6 rounded-lg border border-green-200/40 bg-green-400/20 p-3 text-green-50/90">
+                Message envoyé. Merci, nous vous répondrons au plus vite.
+              </div>
             )}
-            {actionData?.ok && actionData?.message && (
-              <div className="text-green-700 dark:text-green-400 text-sm">{actionData?.message}</div>
+            {actionData && !actionData.ok && "error" in actionData && (
+              <div className="mb-6 rounded-lg border border-red-200/40 bg-red-400/20 p-3 text-red-50/90">
+                {actionData.error}
+              </div>
             )}
-            <Button
-              size="lg"
+            <button
               type="submit"
-              disabled={isSubmitting}
-              onClick={submit()}
-              className="w-full backdrop-blur-sm transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed bg-gray-900 text-white hover:bg-gray-800 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 text-sm sm:text-base py-3 sm:py-4"
+              disabled={isLoading}
+              className="w-full cardGlass hover:border-white/60 transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed  text-sm sm:text-base py-3 sm:py-4"
             >
-              {isSubmitting ? "Envoi en cours..." : "Envoyer le message"}
-            </Button>
+              {isLoading ? (
+                <span>
+                  <svg className="inline mr-2 h-4 w-4 animate-spin text-gray-900" viewBox="0 0 24 24" fill="none">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                  </svg>
+                  Envoi...
+                </span>
+              ) : (
+                "Envoyer"
+              )}
+            </button>
           </Form>
         </div>
       </div>

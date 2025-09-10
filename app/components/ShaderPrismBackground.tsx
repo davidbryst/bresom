@@ -1,3 +1,4 @@
+/// <reference path="../types/shader-art.d.ts" />
 import { useEffect, useState } from "react";
 
 export default function ShaderPrismBackground() {

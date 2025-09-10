@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
-import { mtConfig } from "@material-tailwind/react";
+import withMT from "@material-tailwind/react/utils/withMT";
 
-export default {
+export default withMT({
   darkMode: "class",
   content: [
     "./app/**/*.{js,jsx,ts,tsx}",
@@ -27,5 +27,5 @@ export default {
       },
     },
   },
-  plugins: [mtConfig],
-} satisfies Config;
+  plugins: [],
+}) satisfies Config;

@@ -6,149 +6,7 @@ import { Brain, Code, Palette, Smartphone } from "lucide-react";
 import { useState } from "react";
 import BackgroundGlobe from "./BackgroundGlobe";
 import { log } from "three/tsl";
-
-
-
-type SkillItem = {
-  name: string;
-  level: number; // 0 - 100
-  tags?: string[];
-  years?: number;
-  summary?: string;
-};
-
-type SkillBucket = {
-  title: "Technologies" | "Logiciels" | "Concepts" | "Serverless";
-  items: SkillItem[];
-};
-
-type DomainGroup = {
-  category: string;
-  icon: React.ComponentType<{ className?: string }>;
-  description: string;
-  buckets: SkillBucket[];
-};
-
-const domainGroups: DomainGroup[] = [
-  {
-    category: "Développement Web",
-    icon: Code,
-    description: "Front‑end et back‑end modernes, bonnes pratiques, performance et accessibilité.",
-    buckets: [
-      {
-        title: "Technologies",
-        items: [
-          { name: "React / Next.js / Remix / Angular", level: 90, years: 3, tags: ["TypeScript ", "SSR", "JavaScript"], summary: "Apps SPA/SSR, gestion état, routing, formulaires et fetching." },
-          // { name: "Flutter Web (dart)", level: 90, years: 3, tags: ["Dart", "Flutter Web"], summary: "Apps SPA/SSR, gestion état, routing, formulaires et fetching." },
-          { name: "Node.js / Express / Nest", level: 86, years: 3, tags: ["REST", "OAuth", "JWT"], summary: "APIs REST sécurisées, middleware, services, validation, ORM." },
-          { name: "Spring Boot", level: 86, years: 3, tags: ["JAVA", "Spring Security", "JWT"], summary: "APIs REST sécurisées, middleware, services, validation, ORM." },
-          { name: "Laravel", level: 92, years: 4, tags: ["php", "livewire", "inertia", "inertia-laravel"], summary: "Typage strict, génériques, utilitaires, DX et outillage." },
-          { name: "Tailwind CSS", level: 90, years: 3, tags: ["Design tokens", "Utility‑first"], summary: "Design system utilitaire, composants composables, theming." },
-          { name: "SQL / PostgreSQL", level: 82, years: 3, tags: ["Schemas", "Joins"], summary: "Modélisation relationnelle, requêtes complexes, migrations." },
-          { name: "MongoDB", level: 78, years: 2, tags: ["Indexes", "Aggregation"], summary: "Modèles documents, pipelines d’agrégation, indexation." },
-        ],
-      },
-      {
-        title: "Logiciels",
-        items: [
-          { name: "Git / GitHub", level: 90, years: 5, tags: ["Flow", "PRs"], summary: "Flux Git, PRs, review, branches, résolution de conflits." },
-          { name: "Postman", level: 85, years: 3, tags: ["Collections", "Tests"], summary: "Scripts de tests, environnements, mock server, partage." },
-        ],
-      },
-    ],
-  },
-  {
-    category: "Design",
-    icon: Palette,
-    description: "Conception orientée utilisateur, systèmes de design et prototypage rapide.",
-    buckets: [
-      {
-        title: "Concepts",
-        items: [
-          { name: "UI/UX Design", level: 84, years: 3, tags: ["Wireframes", "Prototypage"], summary: "Parcours, architecture d’info, feedbacks, heuristiques." },
-          { name: "Material UI / System", level: 80, years: 2, tags: ["Components", "Theming"], summary: "Bibliothèques UI cohérentes, thèmes, accessibilité." },
-          // { name: "Framer Motion", level: 75, years: 1, tags: ["UX Animations"], summary: "Animations douces, transitions contextuelles, micro‑interactions." },
-          { name: "Responsive Design", level: 91, years: 4, tags: ["Mobile‑first"], summary: "Grilles fluides, breakpoints, images adaptatives." },
-          { name: "Accessibilité", level: 78, years: 2, tags: ["Contrastes", "Clavier"], summary: "Navigation clavier, labels, rôles, zones dynamiques." },
-        ],
-      },
-      // {
-      //   title: "Technologies",
-      //   items: [
-      //     // { name: "Tailwind CSS", level: 90, years: 3, tags: ["Design tokens", "Utility‑first"], summary: "Design system utilitaire, composants composables, theming." },
-      //   ],
-      // },
-      {
-        title: "Logiciels",
-        items: [
-          { name: "Figma", level: 90, years: 3, tags: ["Auto‑layout", "Design System"], summary: "Librairies de composants, prototypage, handoff dev." },
-          { name: "Adobe XD", level: 72, years: 2 },
-          { name: "Photoshop", level: 76, years: 4 },
-          { name: "Illustrator", level: 70, years: 3 },
-          { name: "Blender", level: 70, years: 3 },
-        ],
-      },
-    ],
-  },
-  {
-    category: "Mobile",
-    icon: Smartphone,
-    description: "Applications multi‑plateformes performantes avec une base de code partagée.",
-    buckets: [
-      {
-        title: "Technologies",
-        items: [
-          { name: "React Native / Expo", level: 82, years: 2, tags: ["Expo", "RN CLI"], summary: "UI native, navigation, accès capteurs, packaging." },
-          { name: "Flutter Mobile ",  level: 66, years: 1, tags: ["Dart", "RN CLI"], summary: "Widgets, état et déploiement multiplateforme." },
-          { name: "SQLite / AsyncStorage", level: 70, years: 2, summary: "Persistance locale, synchronisation, migrations." },
-          
-        ],
-      },
-      {
-        title: "Logiciels",
-        items: [
-          { name: "Android Studio", level: 75, years: 2 },
-          { name: "Xcode", level: 68, years: 1 },
-          { name: "Expo Go", level: 80, years: 2 },
-        ],
-      },
-      // {
-      //   title: "Concepts",
-      //   items: [
-      //     { name: "Cross‑platform", level: 85, years: 2, summary: "Partage de code, abstraction, composants réutilisables." },
-      //     { name: "Performance", level: 78, years: 2, tags: ["Profiling", "Memo"], summary: "Optimisations UI/state, profils, FPS stable." },
-      //     { name: "Offline‑first", level: 72, years: 2, tags: ["Cache", "Sync"], summary: "Stratégies de cache, sync réseau, résilience." },
-      //     { name: "Notifications push", level: 68, years: 1, summary: "Permissions, tokens, routing in‑app." },
-      //   ],
-      // },
-    ],
-  },
-  {
-    category: "Autres",
-    icon: Brain,
-    description: "Applications multi‑plateformes performantes avec une base de code partagée.",
-    buckets: [
-      {
-        title: "Serverless",
-        items: [
-          { name: "Cloudflare Workers", level: 76, years: 2, tags: ["Edge", "KV"], summary: "Exécution à l’edge, KV storage, latence minimale, caching." },
-          { name: "AWS Lambda", level: 78, years: 2, tags: ["API GW", "S3"], summary: "APIs serverless, triggers S3/cron, intégrations managées." },
-          { name: "Supabase", level: 82, years: 2, tags: ["Auth", "DB", "Storage"], summary: "Postgres managé, Auth, stockage, Realtime, edge functions." },
-          { name: "Firebase", level: 80, years: 3, tags: ["Auth", "Firestore"], summary: "Auth, Firestore, hosting et functions pour MVP rapides." },
-        ],
-      },
-      // {
-      //   title: "Concepts",
-      //   items: [
-      //     { name: "Cross‑platform", level: 85, years: 2, summary: "Partage de code, abstraction, composants réutilisables." },
-      //     { name: "Performance", level: 78, years: 2, tags: ["Profiling", "Memo"], summary: "Optimisations UI/state, profils, FPS stable." },
-      //     { name: "Offline‑first", level: 72, years: 2, tags: ["Cache", "Sync"], summary: "Stratégies de cache, sync réseau, résilience." },
-      //     { name: "Notifications push", level: 68, years: 1, summary: "Permissions, tokens, routing in‑app." },
-      //   ],
-      // },
-    ],
-  },
-];
+import { skillsData, SkillItem, SkillBucket, DomainGroup } from "../data/content";
 
 type SkillListItemProps = {
   item: SkillItem;
@@ -208,9 +66,9 @@ function SkillBucketSection({ bucket, ariaScope }: SkillBucketSectionProps) {
   return (
     <div className="flex-1">
       <div className="flex items-center justify-between mb-2">
-        <Typography className="text-white/80 text-xs sm:text-sm font-semibold">
+        <span className="text-white/80 text-xs sm:text-sm font-semibold">
           {bucket.title}
-        </Typography>
+        </span>
       </div>
       <ul className="flex flex-warp flex-col gap-3 sm:gap-4" aria-label={`${bucket.title} — ${ariaScope}`}>
       {/* <ul className="grid grid-cols-1 sm:grid-cols-2  grid-rows-1 sm:grid-rows-2 gap-4" aria-label={`${bucket.title} — ${ariaScope}`}> */}
@@ -231,18 +89,18 @@ function SkillBucketSection({ bucket, ariaScope }: SkillBucketSectionProps) {
 function Skills() {
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const ActiveIcon = domainGroups[activeIndex].icon;
+  const ActiveIcon = skillsData[activeIndex].icon;
 
   return (
     <section id="Skills" aria-labelledby="skills-title" className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* <BackgroundGlobe /> */}
       <div className="max-w-6xl mx-auto flex flex-col">
-        <Typography id="projects-title" variant="h2" className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 sm:mb-12 text-white">
+        <h2 id="skills-title" className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 sm:mb-12 text-white">
           Mes compétences
-        </Typography>
+        </h2>
         {/* Switch/One horizontal en haut */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 mb-6 sm:mb-8 select-none">
-          {domainGroups.map((group, index) => (
+          {skillsData.map((group, index) => (
             <button
               key={index}
               onClick={() => setActiveIndex(index)}
@@ -264,17 +122,17 @@ function Skills() {
                 <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-black/30 border border-white/10 flex items-center justify-center">
                   <ActiveIcon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                 </div>
-                <Typography variant="h3" className="text-lg sm:text-xl font-semibold text-white">
-                  {domainGroups[activeIndex].category}
-                </Typography>
+                <h3 className="text-lg sm:text-xl font-semibold text-white">
+                  {skillsData[activeIndex].category}
+                </h3>
               </div>
               <p className="text-white/60 text-sm mb-4 sm:mb-6 leading-relaxed">
-                {domainGroups[activeIndex].description}
+                {skillsData[activeIndex].description}
               </p>
               <div className="space-y-4 sm:space-y-6">
                 <div className="flex flex-col lg:flex-row h-max gap-4">
-                  {domainGroups[activeIndex].buckets.map((bucket) => (
-                    <SkillBucketSection key={bucket.title} bucket={bucket} ariaScope={domainGroups[activeIndex].category} />
+                  {skillsData[activeIndex].buckets.map((bucket) => (
+                    <SkillBucketSection key={bucket.title} bucket={bucket} ariaScope={skillsData[activeIndex].category} />
                   ))}
                 </div>
               </div>

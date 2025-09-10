@@ -1,3 +1,4 @@
+/// <reference path="../types/shader-art.d.ts" />
 import { useEffect } from "react";
 
 export default function EffectBackground() {

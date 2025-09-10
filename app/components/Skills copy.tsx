@@ -1,4 +1,3 @@
-import { Typography } from "@material-tailwind/react";
 import { Code, Palette, Smartphone } from "lucide-react";
 
 type SkillItem = {
@@ -132,9 +131,9 @@ export default function Skills() {
   return (
     <section id="Skills" aria-labelledby="skills-title" className="py-20 px-4">
       <div className="max-w-6xl mx-auto">
-        <Typography id="skills-title" variant="h2" className="text-3xl md:text-4xl font-bold text-center mb-12 text-white">
+        <h2 id="skills-title" className="text-3xl md:text-4xl font-bold text-center mb-12 text-white">
           Mes Compétences
-        </Typography>
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {domainGroups.map((group) => (
             <div
@@ -147,9 +146,9 @@ export default function Skills() {
                   <div className="w-10 h-10 rounded-lg bg-white/10 border border-white/10 flex items-center justify-center">
                     <group.icon className="w-5 h-5 text-white" />
                   </div>
-                  <Typography variant="h3" className="text-xl font-semibold text-white">
+                  <h3 className="text-xl font-semibold text-white">
                     {group.category}
-                  </Typography>
+                  </h3>
                 </div>
                 <p className="text-white/60 text-sm mb-5">
                   {group.description}
@@ -158,9 +157,9 @@ export default function Skills() {
                   {group.buckets.map((bucket) => (
                     <div key={bucket.title}>
                       <div className="flex items-center justify-between mb-2">
-                        <Typography className="text-white/80 text-sm font-semibold">
+                        <span className="text-white/80 text-sm font-semibold">
                           {bucket.title}
-                        </Typography>
+                        </span>
                       </div>
                       <ul className="space-y-4" aria-label={`${bucket.title} — ${group.category}`}>
                         {[...bucket.items]
