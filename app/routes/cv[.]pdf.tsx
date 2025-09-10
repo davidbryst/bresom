@@ -1,6 +1,5 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import React from "react";
 import { Document, Page, Text, View, StyleSheet, renderToStream, Image } from "@react-pdf/renderer";
 import { aboutData, contactData, experiencesData, heroData, projectsData, skillsData } from "../data/cvContent";
 
@@ -10,7 +9,6 @@ const ACCENT_LIGHT = "#dbeafe"; // Blue 100
 const ACCENT_DARK = "#1e40af"; // Blue 800
 const TEXT_PRIMARY = "#111827"; // Gray 900 - texte principal plus sombre
 const TEXT_MUTED = "#6b7280"; // Gray 500
-const TEXT_LIGHT = "#9ca3af"; // Gray 400
 const SURFACE = "#ffffff";
 const SIDEBAR_BG = "#0f172a"; // Slate 900 - plus moderne
 const SIDEBAR_TEXT = "#f1f5f9"; // Slate 100
@@ -42,7 +40,8 @@ const styles = StyleSheet.create({
     borderRadius: 60,
     marginBottom: 20,
     objectFit: "cover",
-    border: `3px solid ${ACCENT}`,
+    border: `4px solid ${ACCENT}`,
+    boxShadow: `0 4px 20px rgba(59, 130, 246, 0.3)`,
   },
   sideName: { 
     color: SIDEBAR_TEXT, 
@@ -194,14 +193,20 @@ const styles = StyleSheet.create({
   },
   experienceCard: { 
     borderLeftColor: ACCENT, 
-    borderLeftWidth: 3, 
+    borderLeftWidth: 4, 
     paddingLeft: 12, 
     marginBottom: 12,
-    backgroundColor: "#fafafa",
-    paddingTop: 8,
-    paddingBottom: 8,
-    paddingRight: 8,
-    borderRadius: 4,
+    backgroundColor: "#f8fafc",
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingRight: 10,
+    borderRadius: 6,
+    borderTopColor: "#e2e8f0",
+    borderTopWidth: 1,
+    borderRightColor: "#e2e8f0",
+    borderRightWidth: 1,
+    borderBottomColor: "#e2e8f0",
+    borderBottomWidth: 1,
   },
   skillGrid: { 
     flexDirection: "row", 
@@ -211,13 +216,15 @@ const styles = StyleSheet.create({
   },
   skillCard: { 
     width: "48%", 
-    borderColor: "#e5e7eb", 
+    borderColor: "#cbd5e1", 
     borderWidth: 1, 
-    borderRadius: 8, 
+    borderRadius: 10, 
     padding: 12, 
     marginBottom: 10,
-    backgroundColor: "#fafafa",
+    backgroundColor: "#f8fafc",
     alignItems: "center",
+    borderTopColor: "#e2e8f0",
+    borderTopWidth: 1,
   },
   skillIcon: { 
     fontSize: 24, 
@@ -283,13 +290,6 @@ function CVDocument({ imageUrl }: { imageUrl?: string }) {
   );
 
   const profileSummary = summarize(aboutData.description);
-  const initials = heroData.name
-    .split(" ")
-    .filter(Boolean)
-    .map((n) => n[0])
-    .slice(0, 2)
-    .join("")
-    .toUpperCase();
 
   return (
     <Document>
@@ -315,7 +315,7 @@ function CVDocument({ imageUrl }: { imageUrl?: string }) {
 
           {/* Interests with better spacing */}
           <View style={styles.sideSection}>
-            <Text style={styles.sideSectionTitle}>Centres d'Intérêt</Text>
+            <Text style={styles.sideSectionTitle}>Centres d&apos;Intérêt</Text>
             <View style={styles.interestsRow}>
               <Text style={styles.interestIcon}>🎵</Text>
               <Text style={styles.interestIcon}>🎮</Text>
@@ -327,6 +327,15 @@ function CVDocument({ imageUrl }: { imageUrl?: string }) {
 
         {/* Main content */}
         <View style={styles.main}>
+          {/* Subtle header decoration */}
+          <View style={{ 
+            height: 3, 
+            backgroundColor: ACCENT, 
+            marginBottom: 20,
+            borderRadius: 2,
+            width: 100,
+          }} />
+          
           {/* Profile Section with enhanced styling */}
           <View style={styles.sectionHeader}>
             <View style={styles.sectionBar} />
@@ -371,8 +380,15 @@ function CVDocument({ imageUrl }: { imageUrl?: string }) {
                 <Text style={styles.sectionTitle}>Projets Sélectionnés</Text>
               </View>
               {projectsData.slice(0, maxProjects).map((p) => (
-                <View key={p.title} style={{ marginBottom: 8 }}>
-                  <Text style={[styles.bullet, { fontWeight: 600 }]}>• {p.title}</Text>
+                <View key={p.title} style={{ 
+                  marginBottom: 8,
+                  backgroundColor: "#f8fafc",
+                  padding: 8,
+                  borderRadius: 6,
+                  borderLeftColor: ACCENT,
+                  borderLeftWidth: 2,
+                }}>
+                  <Text style={[styles.bullet, { fontWeight: 600, fontSize: 10 }]}>• {p.title}</Text>
                   <Text style={[styles.small, { marginLeft: 8, fontStyle: "italic" }]}>{p.description}</Text>
                 </View>
               ))}
@@ -421,8 +437,9 @@ export async function loader({ request }: LoaderFunctionArgs) {
         "Cache-Control": "no-store",
       },
     });
-  } catch (e: any) {
-    return json({ error: e?.message || "PDF generation failed" }, { status: 500 });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "PDF generation failed";
+    return json({ error: message }, { status: 500 });
   }
 }
 
