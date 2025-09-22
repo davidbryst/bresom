@@ -662,8 +662,9 @@ export async function loader({ request }: LoaderFunctionArgs) {
         "Cache-Control": "no-store",
       },
     });
-  } catch (e: any) {
-    return json({ error: e?.message || "PDF generation failed" }, { status: 500 });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "PDF generation failed";
+    return json({ error: message }, { status: 500 });
   }
 }
 
