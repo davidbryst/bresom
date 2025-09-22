@@ -8,6 +8,13 @@ export interface ExperienceItem {
   responsibilities: string[];
 }
 
+export interface FormationItem {
+  ecole: string;
+  diplome: string;
+  date: string;
+  desc?: string;
+}
+
 export interface Project {
   title: string;
   description: string;

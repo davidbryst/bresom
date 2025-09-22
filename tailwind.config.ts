@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
 import withMT from "@material-tailwind/react/utils/withMT";
 
-export default withMT({
+const config: Config = {
   darkMode: "class",
   content: [
     "./app/**/*.{js,jsx,ts,tsx}",
@@ -11,6 +11,7 @@ export default withMT({
     extend: {
       fontFamily: {
         sans: [
+          "Poppins",
           "Inter",
           "ui-sans-serif",
           "system-ui",
@@ -28,4 +29,6 @@ export default withMT({
     },
   },
   plugins: [],
-}) satisfies Config;
+};
+
+export default withMT(config);

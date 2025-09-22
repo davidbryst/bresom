@@ -59,11 +59,14 @@ export default function Navbar() {
           <Link to="#Experiences" className="text-white/90 hover:text-white transition-colors text-sm lg:text-base">
             Expériences 
           </Link>
-          {/* <Link to="#Skills" className="text-white/90 hover:text-white transition-colors text-sm lg:text-base">
-            Mes compétences
-          </Link> */}
           <Link to="#Projects" className="text-white/90 hover:text-white transition-colors text-sm lg:text-base">
             Projets 
+          </Link>
+          <Link to="/cv-web" className="text-white/90 hover:text-white transition-colors text-sm lg:text-base">
+            CV Web
+          </Link>
+          <Link to="/cv.pdf" target="_blank" className="text-white/90 hover:text-white transition-colors text-sm lg:text-base">
+            CV PDF
           </Link>
           <Link to="#Contact" className="text-white/90 hover:text-white transition-colors text-sm lg:text-base">
             Contacts
@@ -90,18 +93,26 @@ export default function Navbar() {
               Mes expériences professionnelles
             </Link>
             <Link 
-              to="#Skills" 
-              onClick={closeMenu}
-              className="block text-gray-700 hover:text-gray-900 transition-colors py-2"
-            >
-              Mes compétences
-            </Link>
-            <Link 
               to="#Projects" 
               onClick={closeMenu}
               className="block text-gray-700 hover:text-gray-900 transition-colors py-2"
             >
               Mes projets 
+            </Link>
+            <Link 
+              to="/cv-web" 
+              onClick={closeMenu}
+              className="block text-gray-700 hover:text-gray-900 transition-colors py-2"
+            >
+              CV Web
+            </Link>
+            <Link 
+              to="/cv.pdf" 
+              onClick={closeMenu}
+              target="_blank"
+              className="block text-gray-700 hover:text-gray-900 transition-colors py-2"
+            >
+              CV PDF
             </Link>
             <Link 
               to="#Contact" 
