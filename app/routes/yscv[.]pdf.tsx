@@ -38,7 +38,7 @@ const cv_data = {
         }
     ],
     "experiences": [
-        {
+      {
             "poste": "Hôtesse événementiel",
             "lieu": "Abidjan",
             "periode": "Septembre 2024",
@@ -441,12 +441,12 @@ function CVDocument({ imageUrl, faAvailable }: { imageUrl: string; faAvailable: 
               </Text>
             </View>
             {/* Professional Experience */}
-            <View style={{marginBottom: 18}}>
+            <View style={{marginBottom: 6}}>
               <View style={styles.sectionHeader}>
                 <Text style={styles.sectionTitle}>EXPÉRIENCE PROFESSIONNELLE</Text>
               </View>
               {cv_data.experiences.map((exp, index) => (
-                <View key={index} style={{marginBottom: 12}}>
+                <View key={index} style={{marginBottom: 6}}>
                   <Text style={[styles.experienceTitle, {fontSize: 10, fontWeight: 700, color: "#2c2c2c"}]}>
                     {exp.poste.toUpperCase()} | <Text style={{color: "#F4A460", fontWeight: 400}}>{exp.lieu || "Stage"}</Text>
                   </Text>
@@ -461,12 +461,12 @@ function CVDocument({ imageUrl, faAvailable }: { imageUrl: string; faAvailable: 
             </View>
 
             {/* Education */}
-            <View style={{marginBottom: 18}}>
+            <View style={{marginBottom: 6}}>
               <View style={styles.sectionHeader}>
                 <Text style={styles.sectionTitle}>FORMATION</Text>
               </View>
               {cv_data.formation.map((formation, index) => (
-                <View key={index} style={{marginBottom: 12}}>
+                <View key={index} style={{marginBottom: 6}}>
                   <Text style={[styles.experienceTitle, {fontSize: 10, fontWeight: 700, color: "#2c2c2c"}]}>
                     {formation.diplome.toUpperCase()} {formation.specialite ? `| ${formation.specialite}` : ""}
                   </Text>
@@ -486,7 +486,7 @@ function CVDocument({ imageUrl, faAvailable }: { imageUrl: string; faAvailable: 
             </View>
 
             {/* Certificats */}
-            <View style={{marginBottom: 18}}>
+            <View style={{marginBottom: 6}}>
               <View style={styles.sectionHeader}>
                 <Text style={styles.sectionTitle}>CERTIFICATS</Text>
               </View>
