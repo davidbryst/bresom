@@ -39,6 +39,12 @@ const cv_data = {
     ],
     "experiences": [
         {
+            "poste": "Hôtesse événementiel",
+            "lieu": "Abidjan",
+            "periode": "Septembre 2024",
+            "details": "Réception et accueil chaleureux des invités, orientation vers les différents espaces de l’événement."
+        },
+        {
             "poste": "Agent enquêteur",
             "lieu": "Abidjan",
             "periode": "Juillet 2023 - Août 2023",
