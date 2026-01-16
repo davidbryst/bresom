@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+}
+.animate-change {
+  transform: translateX(0) translateY(-50%);
+}
+.animate-base {
+  transform: translateX(0) translateY(-50%);
+}
+.animate-change1 {
+  transform: translateX(0) translateY(0);
+}
+/* @keyframes gradientCycle {
+  0%, 100% {
+    background-image: radial-gradient(ellipse at top left, #0a0a1b, #1e1e3f, #0a0a1b);
+  }
+  33% {
+    background-image: radial-gradient(ellipse at top left, #0a0a1b, #302d92, #0a0a1b);
+  }
+  66% {
+    background-image: radial-gradient(ellipse at top left, #0a0a1b, #6d28d9, #0a0a1b);
+  }
+}
+
+.animate-gradient {
+  animation: gradientCycle 15s ease-in-out infinite;
+  background-size: 200% 200%;
+} */
+
+@keyframes gradientShift {
+  0% {
+    background-position: 350% 350%;
+    /* transform: rotate(0deg); */
+  }
+  25% {
+    background-position: 400% 350%;
+    /* transform: rotate(180deg); */
+  }
+  50% {
+    background-position: 400% 400%;
+    /* transform: rotate(180deg); */
+  }
+  75% {
+    background-position: 350% 400%;
+    /* transform: rotate(180deg); */
+  }
+  100% {
+    background-position: 350% 350%;
+    /* transform: rotate(360deg); */
+  }
+}
+
+.animate-gradient {
+  background: linear-gradient(135deg, #0a0a1b, #091841, #0a0a1b, #450572, #0a0a1b,  #480fa5, #0a0a1b, #5f0030, #0a0a1b);
+  /* background: linear-gradient(135deg, #0a0a1b, #1e3a8a, #6a0dad, #302d92, #6d28d9, #0a0a1b, #830041); */
+  background-size: 400% 400%;
+  animation: gradientShift 40s ease-in-out infinite;
+}
+
+@layer base {
+  html,
+  body {
+    @apply bg-gray-950;
+  }
+}
