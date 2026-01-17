@@ -651,8 +651,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
     fontsRegistered = true;
   }
   // Use public/profile.jpg if exists; otherwise undefined
-  const imageUrl = `${base}/profile.jpg`;
-  const gg = `${base}/gg.png`;
+  const imageUrl = `${base}/cvasset/profile.jpg`;
+  const gg = `${base}/cvasset/gg.png`;
   const stream = await renderToStream(<CVDocument imageUrl={imageUrl} gg={gg} faAvailable={faAvailable} />);
     return new Response(stream as unknown as ReadableStream, {
       status: 200,

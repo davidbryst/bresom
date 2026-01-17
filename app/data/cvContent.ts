@@ -38,8 +38,8 @@ export const aboutData: AboutInfo = {
 
 export const contactData: ContactInfo = {
   email: "sh.david.abraham@gmail.com",
-  phone: "+225 01 40 54 41 97 / +225 07 12 41 01 34",
-  location: "Côte d'Ivoire, Abidjan, Cocody, Riviera 2",
+  phone: "+225 01 40 54 41 97 / +225 07 12 41 01 34 / +225 05 64 63 82 82",
+  location: "CIV, Abidjan, Cocody, Riviera 2",
 };
 
 // Correction du type de dosData
