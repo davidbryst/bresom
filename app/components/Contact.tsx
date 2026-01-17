@@ -1,8 +1,14 @@
-import { motion, useInView, type Variants } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useFetcher } from "@remix-run/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { contactData } from "~/data/content";
 import { Mail, Phone, MapPin, Send, Loader2, CheckCircle } from "lucide-react";
+
+// Register plugins
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 interface ContactResponse {
   success?: boolean;
@@ -10,8 +16,12 @@ interface ContactResponse {
 }
 
 export default function Contact() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const sectionRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const leftColRef = useRef<HTMLDivElement>(null);
+  const formRef = useRef<HTMLDivElement>(null);
+  const successRef = useRef<HTMLDivElement>(null);
+
   const fetcher = useFetcher<ContactResponse>();
   const [formData, setFormData] = useState({
     name: "",
@@ -29,76 +39,331 @@ export default function Contact() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
-    },
-  };
-
   const contactInfo = [
-    { icon: Mail, label: "Email", value: contactData.email, href: `mailto:${contactData.email}` },
-    { icon: Phone, label: "Téléphone", value: contactData.phone, href: `tel:${contactData.phone.split(" / ")[0]}` },
-    { icon: MapPin, label: "Localisation", value: contactData.location, href: "#" },
+    {
+      icon: Mail,
+      label: "Email",
+      value: contactData.email,
+      href: `mailto:${contactData.email}`,
+    },
+    {
+      icon: Phone,
+      label: "Téléphone",
+      value: contactData.phone,
+      href: `tel:${contactData.phone.split(" / ")[0]}`,
+    },
+    {
+      icon: MapPin,
+      label: "Localisation",
+      value: contactData.location,
+      href: "#",
+    },
   ];
+
+  useEffect(() => {
+    if (typeof window === "undefined" || !sectionRef.current) return;
+
+    const ctx = gsap.context(() => {
+      // Header animation
+      if (headerRef.current) {
+        const badge = headerRef.current.querySelector(".header-badge");
+        const title = headerRef.current.querySelector(".header-title");
+        const desc = headerRef.current.querySelector(".header-desc");
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: headerRef.current,
+            start: "top 80%",
+            toggleActions: "play none none none",
+          },
+        });
+
+        tl.fromTo(
+          badge,
+          { opacity: 0, y: 20, scale: 0.9 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "back.out(1.7)" }
+        )
+          .fromTo(
+            title,
+            { opacity: 0, y: 40, clipPath: "inset(100% 0% 0% 0%)" },
+            {
+              opacity: 1,
+              y: 0,
+              clipPath: "inset(0% 0% 0% 0%)",
+              duration: 0.7,
+              ease: "power3.out",
+            },
+            "-=0.3"
+          )
+          .fromTo(
+            desc,
+            { opacity: 0, y: 20 },
+            { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
+            "-=0.4"
+          );
+      }
+
+      // Left column animation (image + contact cards)
+      if (leftColRef.current) {
+        const image = leftColRef.current.querySelector(".contact-image");
+        const cards = leftColRef.current.querySelectorAll(".contact-card");
+        const note = leftColRef.current.querySelector(".contact-note");
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: leftColRef.current,
+            start: "top 75%",
+            toggleActions: "play none none none",
+          },
+        });
+
+        if (image) {
+          tl.fromTo(
+            image,
+            { opacity: 0, x: -50, scale: 0.95 },
+            { opacity: 1, x: 0, scale: 1, duration: 0.8, ease: "power3.out" }
+          );
+        }
+
+        tl.fromTo(
+          cards,
+          { opacity: 0, x: -30, scale: 0.95 },
+          {
+            opacity: 1,
+            x: 0,
+            scale: 1,
+            duration: 0.5,
+            stagger: 0.1,
+            ease: "power2.out",
+          },
+          "-=0.4"
+        ).fromTo(
+          note,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
+          "-=0.2"
+        );
+
+        // Hover animations for contact cards
+        cards.forEach((card) => {
+          card.addEventListener("mouseenter", () => {
+            gsap.to(card, {
+              x: 10,
+              borderColor: "#7C3AED",
+              backgroundColor: "rgba(26, 26, 35, 1)",
+              boxShadow: "0 10px 40px -10px rgba(124, 58, 237, 0.2)",
+              duration: 0.3,
+              ease: "power2.out",
+            });
+
+            const icon = card.querySelector(".card-icon");
+            gsap.to(icon, {
+              scale: 1.1,
+              rotate: 5,
+              duration: 0.3,
+            });
+          });
+
+          card.addEventListener("mouseleave", () => {
+            gsap.to(card, {
+              x: 0,
+              borderColor: "rgba(255, 255, 255, 0.1)",
+              backgroundColor: "rgba(26, 26, 35, 0.5)",
+              boxShadow: "none",
+              duration: 0.3,
+              ease: "power2.out",
+            });
+
+            const icon = card.querySelector(".card-icon");
+            gsap.to(icon, {
+              scale: 1,
+              rotate: 0,
+              duration: 0.3,
+            });
+          });
+        });
+      }
+
+      // Form animation
+      if (formRef.current) {
+        const formContainer = formRef.current.querySelector(".form-container");
+        const inputs = formRef.current.querySelectorAll(".form-field");
+        const button = formRef.current.querySelector(".submit-btn");
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: formRef.current,
+            start: "top 75%",
+            toggleActions: "play none none none",
+          },
+        });
+
+        tl.fromTo(
+          formContainer,
+          { opacity: 0, x: 50, scale: 0.95 },
+          { opacity: 1, x: 0, scale: 1, duration: 0.8, ease: "power3.out" }
+        )
+          .fromTo(
+            inputs,
+            { opacity: 0, y: 30 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.5,
+              stagger: 0.1,
+              ease: "power2.out",
+            },
+            "-=0.4"
+          )
+          .fromTo(
+            button,
+            { opacity: 0, y: 20, scale: 0.95 },
+            { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "back.out(1.7)" },
+            "-=0.2"
+          );
+
+        // Input focus animations
+        inputs.forEach((input) => {
+          const inputEl = input.querySelector("input, textarea");
+          const label = input.querySelector("label");
+
+          if (inputEl) {
+            inputEl.addEventListener("focus", () => {
+              gsap.to(input, {
+                borderColor: "#7C3AED",
+                boxShadow: "0 0 0 4px rgba(124, 58, 237, 0.1)",
+                duration: 0.3,
+              });
+              if (label) {
+                gsap.to(label, {
+                  color: "#7C3AED",
+                  duration: 0.3,
+                });
+              }
+            });
+
+            inputEl.addEventListener("blur", () => {
+              gsap.to(input, {
+                borderColor: "rgba(255, 255, 255, 0.1)",
+                boxShadow: "none",
+                duration: 0.3,
+              });
+              if (label) {
+                gsap.to(label, {
+                  color: "#8B8B9B",
+                  duration: 0.3,
+                });
+              }
+            });
+          }
+        });
+
+        // Submit button hover
+        if (button) {
+          button.addEventListener("mouseenter", () => {
+            gsap.to(button, {
+              scale: 1.02,
+              boxShadow: "0 0 40px rgba(124, 58, 237, 0.5)",
+              duration: 0.3,
+              ease: "power2.out",
+            });
+          });
+
+          button.addEventListener("mouseleave", () => {
+            gsap.to(button, {
+              scale: 1,
+              boxShadow: "0 0 20px rgba(124, 58, 237, 0.3)",
+              duration: 0.3,
+              ease: "power2.out",
+            });
+          });
+
+          button.addEventListener("mousedown", () => {
+            gsap.to(button, {
+              scale: 0.98,
+              duration: 0.1,
+            });
+          });
+
+          button.addEventListener("mouseup", () => {
+            gsap.to(button, {
+              scale: 1.02,
+              duration: 0.1,
+            });
+          });
+        }
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  // Success animation
+  useEffect(() => {
+    if (isSuccess && successRef.current) {
+      const icon = successRef.current.querySelector(".success-icon");
+      const title = successRef.current.querySelector(".success-title");
+      const text = successRef.current.querySelector(".success-text");
+
+      gsap.fromTo(
+        successRef.current,
+        { opacity: 0, scale: 0.9 },
+        { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.7)" }
+      );
+
+      gsap.fromTo(
+        icon,
+        { scale: 0, rotate: -180 },
+        { scale: 1, rotate: 0, duration: 0.6, ease: "back.out(2)", delay: 0.2 }
+      );
+
+      gsap.fromTo(
+        [title, text],
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, delay: 0.4 }
+      );
+    }
+  }, [isSuccess]);
 
   return (
     <section
       id="contact"
-      ref={ref}
+      ref={sectionRef}
       className="py-24 md:py-32 bg-dark-deep relative overflow-hidden"
     >
       {/* Background effects */}
       <div className="absolute inset-0 bg-gradient-glow opacity-30 pointer-events-none" />
       <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-dark-surface to-transparent pointer-events-none" />
 
+      {/* Animated background orbs */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-violet-primary/5 rounded-full blur-[100px] animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-violet-accent/5 rounded-full blur-[80px] animate-pulse" style={{ animationDelay: "1s" }} />
+      </div>
+
       <div className="container mx-auto px-6 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <span className="text-violet-accent font-semibold text-sm tracking-wider uppercase mb-4 block">
+        {/* Header */}
+        <div ref={headerRef} className="text-center mb-16">
+          <span className="header-badge inline-block text-violet-accent font-semibold text-sm tracking-wider uppercase mb-4 px-4 py-2 bg-violet-primary/10 rounded-full border border-violet-primary/20">
             Contact
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-light-primary mb-4">
+          <h2 className="header-title text-3xl md:text-4xl lg:text-5xl font-bold text-light-primary mb-4 overflow-hidden">
             Travaillons{" "}
             <span className="text-transparent bg-clip-text bg-gradient-violet">
               Ensemble
             </span>
           </h2>
-          <p className="text-light-secondary max-w-2xl mx-auto">
-            Vous avez un projet en tête ? N'hésitez pas à me contacter pour en discuter.
+          <p className="header-desc text-light-secondary max-w-2xl mx-auto">
+            Vous avez un projet en tête ? N'hésitez pas à me contacter pour en
+            discuter.
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid lg:grid-cols-5 gap-12">
           {/* Contact Info & Image */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-            className="lg:col-span-2 space-y-8"
-          >
+          <div ref={leftColRef} className="lg:col-span-2 space-y-8">
             {/* Image */}
-            <motion.div
-              variants={itemVariants}
-              className="relative hidden lg:block"
-            >
+            <div className="contact-image relative hidden lg:block">
               <div className="relative bg-dark-card p-2 rounded-2xl shadow-premium border border-dark-border overflow-hidden">
                 <img
                   src="/profile/face-identiter.jpg"
@@ -107,19 +372,17 @@ export default function Contact() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-dark-card/80 to-transparent pointer-events-none rounded-xl" />
               </div>
-            </motion.div>
+            </div>
 
             {/* Contact cards */}
             <div className="space-y-4">
               {contactInfo.map((info, index) => (
-                <motion.a
+                <a
                   key={index}
                   href={info.href}
-                  variants={itemVariants}
-                  whileHover={{ x: 8, borderColor: "#7C3AED" }}
-                  className="flex items-center gap-4 p-4 bg-dark-surface rounded-xl border border-dark-border hover:bg-dark-card transition-all duration-300 block"
+                  className="contact-card flex items-center gap-4 p-4 bg-dark-surface/50 rounded-xl border border-dark-border transition-all duration-300 block"
                 >
-                  <div className="w-12 h-12 bg-gradient-violet rounded-xl flex items-center justify-center shadow-glow-violet flex-shrink-0">
+                  <div className="card-icon w-12 h-12 bg-gradient-violet rounded-xl flex items-center justify-center shadow-glow-violet flex-shrink-0">
                     <info.icon className="w-5 h-5 text-white" />
                   </div>
                   <div className="min-w-0">
@@ -128,56 +391,48 @@ export default function Contact() {
                       {info.value}
                     </p>
                   </div>
-                </motion.a>
+                </a>
               ))}
             </div>
 
             {/* Reassurance message */}
-            <motion.div
-              variants={itemVariants}
-              className="p-4 bg-dark-card/50 rounded-xl border border-dark-border"
-            >
+            <div className="contact-note p-4 bg-dark-card/50 rounded-xl border border-dark-border">
               <p className="text-light-secondary text-sm">
-                Je réponds généralement sous <span className="text-violet-accent font-semibold">24-48 heures</span>.
-                Pour les projets urgents, privilégiez le téléphone.
+                Je réponds généralement sous{" "}
+                <span className="text-violet-accent font-semibold">
+                  24-48 heures
+                </span>
+                . Pour les projets urgents, privilégiez le téléphone.
               </p>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
 
           {/* Contact Form */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-            className="lg:col-span-3"
-          >
-            <motion.div
-              variants={itemVariants}
-              className="bg-dark-surface p-8 rounded-2xl border border-dark-border shadow-premium"
-            >
+          <div ref={formRef} className="lg:col-span-3">
+            <div className="form-container bg-dark-surface p-8 rounded-2xl border border-dark-border shadow-premium">
               {isSuccess ? (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="text-center py-12"
-                >
-                  <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div ref={successRef} className="text-center py-12">
+                  <div className="success-icon w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
                     <CheckCircle className="w-8 h-8 text-green-500" />
                   </div>
-                  <h3 className="text-xl font-bold text-light-primary mb-2">
+                  <h3 className="success-title text-xl font-bold text-light-primary mb-2">
                     Message envoyé !
                   </h3>
-                  <p className="text-light-secondary">
+                  <p className="success-text text-light-secondary">
                     Merci pour votre message. Je vous répondrai rapidement.
                   </p>
-                </motion.div>
+                </div>
               ) : (
-                <fetcher.Form method="post" action="/api/contact" className="space-y-6">
+                <fetcher.Form
+                  method="post"
+                  action="/api/contact"
+                  className="space-y-6"
+                >
                   <div className="grid sm:grid-cols-2 gap-6">
-                    <motion.div variants={itemVariants}>
+                    <div className="form-field">
                       <label
                         htmlFor="name"
-                        className="block text-light-secondary text-sm mb-2"
+                        className="block text-light-secondary text-sm mb-2 transition-colors duration-300"
                       >
                         Nom complet
                       </label>
@@ -188,15 +443,15 @@ export default function Contact() {
                         value={formData.name}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 bg-dark-card border border-dark-border rounded-xl text-light-primary placeholder-light-muted focus:outline-none focus:border-violet-accent focus:ring-2 focus:ring-violet-accent/20 transition-all duration-300"
+                        className="w-full px-4 py-3 bg-dark-card border border-dark-border rounded-xl text-light-primary placeholder-light-muted focus:outline-none transition-all duration-300"
                         placeholder="John Doe"
                       />
-                    </motion.div>
+                    </div>
 
-                    <motion.div variants={itemVariants}>
+                    <div className="form-field">
                       <label
                         htmlFor="email"
-                        className="block text-light-secondary text-sm mb-2"
+                        className="block text-light-secondary text-sm mb-2 transition-colors duration-300"
                       >
                         Email
                       </label>
@@ -207,16 +462,16 @@ export default function Contact() {
                         value={formData.email}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 bg-dark-card border border-dark-border rounded-xl text-light-primary placeholder-light-muted focus:outline-none focus:border-violet-accent focus:ring-2 focus:ring-violet-accent/20 transition-all duration-300"
+                        className="w-full px-4 py-3 bg-dark-card border border-dark-border rounded-xl text-light-primary placeholder-light-muted focus:outline-none transition-all duration-300"
                         placeholder="john@example.com"
                       />
-                    </motion.div>
+                    </div>
                   </div>
 
-                  <motion.div variants={itemVariants}>
+                  <div className="form-field">
                     <label
                       htmlFor="subject"
-                      className="block text-light-secondary text-sm mb-2"
+                      className="block text-light-secondary text-sm mb-2 transition-colors duration-300"
                     >
                       Sujet
                     </label>
@@ -227,15 +482,15 @@ export default function Contact() {
                       value={formData.subject}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 bg-dark-card border border-dark-border rounded-xl text-light-primary placeholder-light-muted focus:outline-none focus:border-violet-accent focus:ring-2 focus:ring-violet-accent/20 transition-all duration-300"
+                      className="w-full px-4 py-3 bg-dark-card border border-dark-border rounded-xl text-light-primary placeholder-light-muted focus:outline-none transition-all duration-300"
                       placeholder="Projet de site web"
                     />
-                  </motion.div>
+                  </div>
 
-                  <motion.div variants={itemVariants}>
+                  <div className="form-field">
                     <label
                       htmlFor="message"
-                      className="block text-light-secondary text-sm mb-2"
+                      className="block text-light-secondary text-sm mb-2 transition-colors duration-300"
                     >
                       Message
                     </label>
@@ -246,21 +501,15 @@ export default function Contact() {
                       onChange={handleChange}
                       required
                       rows={5}
-                      className="w-full px-4 py-3 bg-dark-card border border-dark-border rounded-xl text-light-primary placeholder-light-muted focus:outline-none focus:border-violet-accent focus:ring-2 focus:ring-violet-accent/20 transition-all duration-300 resize-none"
+                      className="w-full px-4 py-3 bg-dark-card border border-dark-border rounded-xl text-light-primary placeholder-light-muted focus:outline-none transition-all duration-300 resize-none"
                       placeholder="Décrivez votre projet ou votre demande..."
                     />
-                  </motion.div>
+                  </div>
 
-                  <motion.button
-                    variants={itemVariants}
-                    whileHover={{
-                      scale: 1.02,
-                      boxShadow: "0 0 30px rgba(124, 58, 237, 0.5)",
-                    }}
-                    whileTap={{ scale: 0.98 }}
+                  <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-4 bg-gradient-violet text-white font-semibold rounded-xl shadow-glow-violet flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
+                    className="submit-btn w-full py-4 bg-gradient-violet text-white font-semibold rounded-xl shadow-glow-violet flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
                   >
                     {isSubmitting ? (
                       <>
@@ -273,11 +522,11 @@ export default function Contact() {
                         Envoyer le message
                       </>
                     )}
-                  </motion.button>
+                  </button>
                 </fetcher.Form>
               )}
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

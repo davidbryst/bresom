@@ -1,7 +1,17 @@
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/node";
+import { useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SmoothScrollProvider } from "~/components/SmoothScroll";
 
 import "./tailwind.css";
+import "./styles/animations.css";
+
+// Enregistrer les plugins GSAP
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -11,6 +21,23 @@ export const links: LinksFunction = () => [
     href: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap",
   },
 ];
+
+function GSAPProvider({ children }: { children: React.ReactNode }) {
+  useEffect(() => {
+    // Configure GSAP defaults for premium feel
+    gsap.defaults({
+      ease: "power3.out",
+      duration: 0.8,
+    });
+
+    // Refresh ScrollTrigger on navigation
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, []);
+
+  return <SmoothScrollProvider>{children}</SmoothScrollProvider>;
+}
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -23,7 +50,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body className="bg-dark-deep text-light-primary antialiased">
-        {children}
+        <GSAPProvider>
+          {children}
+        </GSAPProvider>
         <ScrollRestoration />
         <Scripts />
       </body>

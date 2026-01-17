@@ -28,7 +28,8 @@ export default function About() {
       // Animation de l'image avec parallax et rotation 3D
       if (imageRef.current) {
         // Decorative elements animation
-        const decorElements = imageRef.current.querySelectorAll(".decor-element");
+        const decorElements =
+          imageRef.current.querySelectorAll(".decor-element");
         gsap.fromTo(
           decorElements,
           { opacity: 0, scale: 0.5 },
@@ -275,11 +276,14 @@ export default function About() {
               <div className="decor-element absolute -bottom-4 -right-4 w-32 h-32 bg-violet-primary/10 rounded-2xl blur-xl" />
 
               <div className="image-wrapper relative bg-dark-card p-2 rounded-2xl shadow-premium border border-dark-border overflow-hidden">
-                <img
-                  src="/profile/face-identiter.jpg"
-                  alt="David Abraham - About"
-                  className="w-72 h-80 md:w-80 md:h-96 object-cover rounded-xl"
-                />
+                <div className="relative rounded-2xl overflow-hidden">
+                  {/* <div className="image-wrapper relative bg-dark-card p-2 rounded-2xl shadow-premium border border-dark-border overflow-hidden"> */}
+                  <img
+                    src="/profile/face-identiter.jpg"
+                    alt="David Abraham - About"
+                    className="w-72 h-80 md:w-80 md:h-96 object-cover rounded-xl"
+                  />
+                </div>
               </div>
             </div>
           </div>
