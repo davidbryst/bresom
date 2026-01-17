@@ -3,19 +3,27 @@ import type { LinksFunction } from "@remix-run/node";
 
 import "./tailwind.css";
 
-export const links: LinksFunction = () => [];
+export const links: LinksFunction = () => [
+  { rel: "preconnect", href: "https://fonts.googleapis.com" },
+  { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+  {
+    rel: "stylesheet",
+    href: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap",
+  },
+];
 
-export function Layout() {
+export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr">
+    <html lang="fr" className="scroll-smooth">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#0B0B0F" />
         <Meta />
         <Links />
       </head>
-      <body>
-        <Outlet />
+      <body className="bg-dark-deep text-light-primary antialiased">
+        {children}
         <ScrollRestoration />
         <Scripts />
       </body>
@@ -25,4 +33,33 @@ export function Layout() {
 
 export default function App() {
   return <Outlet />;
+}
+
+export function ErrorBoundary() {
+  return (
+    <html lang="fr">
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Erreur | David Abraham</title>
+        <Meta />
+        <Links />
+      </head>
+      <body className="bg-dark-deep text-light-primary antialiased min-h-screen flex items-center justify-center">
+        <div className="text-center px-6">
+          <h1 className="text-6xl font-bold text-violet-accent mb-4">Oops!</h1>
+          <p className="text-xl text-light-secondary mb-8">
+            Une erreur est survenue. Veuillez réessayer.
+          </p>
+          <a
+            href="/"
+            className="inline-block px-8 py-4 bg-gradient-violet text-white font-semibold rounded-xl shadow-glow-violet hover:scale-105 transition-transform"
+          >
+            Retour à l'accueil
+          </a>
+        </div>
+        <Scripts />
+      </body>
+    </html>
+  );
 }
