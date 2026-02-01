@@ -127,6 +127,9 @@ const config: Config = {
           },
         },
       },
+      transitionTimingFunction: {
+        "smooth-out": "cubic-bezier(0, 0, 0, 1)",
+      },
       boxShadow: {
         premium: "0 25px 50px -12px rgba(0, 0, 0, 0.5)",
         "glow-violet": "0 0 30px rgba(124, 58, 237, 0.4)",

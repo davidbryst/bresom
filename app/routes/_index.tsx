@@ -9,16 +9,7 @@ import Projects from "~/components/Projects";
 import Experience from "~/components/Experience";
 import Contact from "~/components/Contact";
 import Footer from "~/components/Footer";
-import GradualBlur from "~/components/GradualBlur";
 import ScrollVelocity from "~/components/ScrollVelocity";
-import LogoLoop from "~/components/LogoLoop";
-
-import {
-  SiReact,
-  SiNextdotjs,
-  SiTypescript,
-  SiTailwindcss,
-} from "react-icons/si";
 
 export const meta: MetaFunction = () => {
   return [
@@ -46,21 +37,6 @@ export const meta: MetaFunction = () => {
     { name: "twitter:card", content: "summary_large_image" },
   ];
 };
-
-const techLogos = [
-  { node: <SiReact />, title: "React", href: "https://react.dev" },
-  { node: <SiNextdotjs />, title: "Next.js", href: "https://nextjs.org" },
-  {
-    node: <SiTypescript />,
-    title: "TypeScript",
-    href: "https://www.typescriptlang.org",
-  },
-  {
-    node: <SiTailwindcss />,
-    title: "Tailwind CSS",
-    href: "https://tailwindcss.com",
-  },
-];
 
 export default function Home() {
   return (
