@@ -13,7 +13,7 @@ gsap.registerPlugin(ScrollTrigger);
 export function createClipPathReveal(
   element: HTMLElement,
   direction: "ltr" | "rtl" | "ttb" | "btt" = "ltr",
-  duration: number = 0.8
+  duration: number = 0.8,
 ) {
   const clipPaths = {
     ltr: {
@@ -49,7 +49,7 @@ export function createClipPathReveal(
         start: "top 75%",
         once: true,
       },
-    }
+    },
   );
 }
 
@@ -58,7 +58,7 @@ export function createClipPathReveal(
  */
 export function createZoomBlurReveal(
   element: HTMLElement,
-  duration: number = 0.8
+  duration: number = 0.8,
 ) {
   return gsap.fromTo(
     element,
@@ -78,7 +78,7 @@ export function createZoomBlurReveal(
         start: "top 75%",
         once: true,
       },
-    }
+    },
   );
 }
 
@@ -88,7 +88,7 @@ export function createZoomBlurReveal(
 export function createRotationReveal(
   element: HTMLElement,
   rotationDegrees: number = 45,
-  duration: number = 0.8
+  duration: number = 0.8,
 ) {
   return gsap.fromTo(
     element,
@@ -107,7 +107,7 @@ export function createRotationReveal(
         start: "top 75%",
         once: true,
       },
-    }
+    },
   );
 }
 
@@ -117,7 +117,7 @@ export function createRotationReveal(
 export function createSkewFadeReveal(
   element: HTMLElement,
   skewAngle: number = 10,
-  duration: number = 0.8
+  duration: number = 0.8,
 ) {
   return gsap.fromTo(
     element,
@@ -137,7 +137,7 @@ export function createSkewFadeReveal(
         start: "top 75%",
         once: true,
       },
-    }
+    },
   );
 }
 
@@ -147,7 +147,7 @@ export function createSkewFadeReveal(
 export function createSplitTextReveal(
   element: HTMLElement,
   splitBy: "word" | "char" | "line" = "word",
-  stagger: number = 0.05
+  stagger: number = 0.05,
 ) {
   const text = element.innerText;
   const splits: string[] = [];
@@ -185,7 +185,7 @@ export function createSplitTextReveal(
         start: "top 75%",
         once: true,
       },
-    }
+    },
   );
 }
 
@@ -195,7 +195,7 @@ export function createSplitTextReveal(
 export function createColorTransition(
   element: HTMLElement,
   colors: string[],
-  duration: number = 3
+  duration: number = 3,
 ) {
   const tl = gsap.timeline({ repeat: -1 });
 
@@ -208,7 +208,7 @@ export function createColorTransition(
         duration,
         ease: "power2.inOut",
       },
-      0
+      0,
     );
   });
 
@@ -221,7 +221,7 @@ export function createColorTransition(
 export function createPinAnimation(
   element: HTMLElement,
   animationFunction: (tl: gsap.core.Timeline) => void,
-  duration: number = 3
+  duration: number = 3,
 ) {
   const tl = gsap.timeline({
     scrollTrigger: {
@@ -246,7 +246,7 @@ export function createPinAnimation(
 export function createFlipCard(
   frontElement: HTMLElement,
   backElement: HTMLElement,
-  duration: number = 0.6
+  duration: number = 0.6,
 ) {
   let isFlipped = false;
 
@@ -294,25 +294,22 @@ export function createMorphSVG(
   pathElement: SVGPathElement,
   pathVariants: string[],
   morphDuration: number = 2,
-  holdDuration: number = 0.5
+  holdDuration: number = 0.5,
 ) {
   let currentIndex = 0;
 
   const morph = () => {
     const nextIndex = (currentIndex + 1) % pathVariants.length;
 
-    gsap.to(
-      pathElement,
-      {
-        attr: { d: pathVariants[nextIndex] },
-        duration: morphDuration,
-        ease: "power2.inOut",
-        onComplete: () => {
-          currentIndex = nextIndex;
-          setTimeout(morph, holdDuration * 1000);
-        },
-      }
-    );
+    gsap.to(pathElement, {
+      attr: { d: pathVariants[nextIndex] },
+      duration: morphDuration,
+      ease: "power2.inOut",
+      onComplete: () => {
+        currentIndex = nextIndex;
+        setTimeout(morph, holdDuration * 1000);
+      },
+    });
   };
 
   morph();
@@ -323,7 +320,7 @@ export function createMorphSVG(
  */
 export function createVelocityAnimation(
   element: HTMLElement,
-  maxVelocity: number = 5
+  maxVelocity: number = 5,
 ) {
   let velocity = 0;
   let lastScrollY = 0;

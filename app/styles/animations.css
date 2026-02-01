@@ -41,7 +41,8 @@ html {
 
 /* Floating animation utility */
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0px);
   }
   50% {
@@ -55,7 +56,8 @@ html {
 
 /* Pulse animation */
 @keyframes pulse-glow {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
     box-shadow: 0 0 20px rgba(124, 58, 237, 0.5);
   }
@@ -127,7 +129,8 @@ html {
 
 /* Bounce animation */
 @keyframes bounce-custom {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -141,7 +144,8 @@ html {
 
 /* Scale animation */
 @keyframes scale-pulse {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
   }
   50% {
@@ -169,7 +173,8 @@ html {
 
 /* Skew animation */
 @keyframes skew {
-  0%, 100% {
+  0%,
+  100% {
     transform: skewX(0deg);
   }
   50% {

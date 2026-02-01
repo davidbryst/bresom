@@ -5,6 +5,7 @@ Ce projet utilise GSAP (GreenSock Animation Platform) pour créer des animations
 ## Composants Principaux
 
 ### 1. AnimatedSection
+
 Composant wrapper pour ajouter des animations au scroll
 
 ```tsx
@@ -21,12 +22,14 @@ export function MyComponent() {
 ```
 
 **Props:**
+
 - `animationType`: "slideUp" | "fadeIn" | "cascade" | "parallax" | "none"
 - `staggerChildren`: boolean - Active l'animation décalée des enfants
 - `delay`: number - Délai avant le début de l'animation
 - `className`: string - Classes CSS supplémentaires
 
 ### 2. ScrollReveal
+
 Révélation au scroll avec directions variables
 
 ```tsx
@@ -34,12 +37,13 @@ import { ScrollReveal } from "~/components/ScrollEffects";
 
 <ScrollReveal direction="up" distance={50} duration={0.8}>
   <div>Contenu révélé</div>
-</ScrollReveal>
+</ScrollReveal>;
 ```
 
 **Directions:** "up" | "down" | "left" | "right"
 
 ### 3. Parallax
+
 Effet parallax au scroll
 
 ```tsx
@@ -47,32 +51,36 @@ import { Parallax } from "~/components/ScrollEffects";
 
 <Parallax speed={-0.5} offset={0}>
   <img src="image.jpg" alt="Parallax" />
-</Parallax>
+</Parallax>;
 ```
 
 **Props:**
+
 - `speed`: number (-1 à 1) - Vitesse du parallax
 - `offset`: number - Décalage supplémentaire
 
 ### 4. SplitText
+
 Anime le texte mot par mot
 
 ```tsx
 import { SplitText } from "~/components/ScrollEffects";
 
-<SplitText text="Voici du texte animé" staggerDelay={0.05} />
+<SplitText text="Voici du texte animé" staggerDelay={0.05} />;
 ```
 
 ### 5. NumberCounter
+
 Anime les compteurs de nombres
 
 ```tsx
 import { NumberCounter } from "~/components/ScrollEffects";
 
-<NumberCounter from={0} to={100} duration={2} suffix="%" />
+<NumberCounter from={0} to={100} duration={2} suffix="%" />;
 ```
 
 ### 6. StaggerContainer
+
 Conteneur pour animer les enfants en cascade
 
 ```tsx
@@ -82,12 +90,13 @@ import { StaggerContainer } from "~/components/AnimatedSection";
   <div>Item 1</div>
   <div>Item 2</div>
   <div>Item 3</div>
-</StaggerContainer>
+</StaggerContainer>;
 ```
 
 ## Hooks Personnalisés
 
 ### useScrollAnimation
+
 Hook pour créer des animations au scroll
 
 ```tsx
@@ -102,6 +111,7 @@ return <div ref={ref}>Contenu animé</div>;
 ```
 
 ### useScrollReveal
+
 Hook pour les révélations au scroll
 
 ```tsx
@@ -119,6 +129,7 @@ return <div ref={ref}>Révélé au scroll</div>;
 ```
 
 ### useHoverAnimation
+
 Hook pour les animations au hover
 
 ```tsx
@@ -135,6 +146,7 @@ return <div ref={ref}>Survolez moi</div>;
 ```
 
 ### useStaggerAnimation
+
 Hook pour l'animation en cascade
 
 ```tsx
@@ -156,6 +168,7 @@ return (
 ```
 
 ### useParallaxAnimation
+
 Hook pour le parallax
 
 ```tsx
@@ -170,39 +183,46 @@ return <div ref={ref}>Parallax effect</div>;
 ## Composants Avancés
 
 ### MouseFollower
+
 Curseur de souris personnalisé
 
 ```tsx
 import { MouseFollower } from "~/components/ScrollAdvanced";
 
-<MouseFollower size={20} color="rgba(124, 58, 237, 0.8)" />
+<MouseFollower size={20} color="rgba(124, 58, 237, 0.8)" />;
 ```
 
 ### ScrollProgressBar
+
 Barre de progression du scroll
 
 ```tsx
 import { ScrollProgressBar } from "~/components/ScrollAdvanced";
 
-<ScrollProgressBar height={3} color="linear-gradient(90deg, #7C3AED, #EC4899)" />
+<ScrollProgressBar
+  height={3}
+  color="linear-gradient(90deg, #7C3AED, #EC4899)"
+/>;
 ```
 
 ### ScrollingText
+
 Texte qui défile horizontalement
 
 ```tsx
 import { ScrollingText } from "~/components/ScrollAdvanced";
 
-<ScrollingText text="Texte qui défile • " duration={20} />
+<ScrollingText text="Texte qui défile • " duration={20} />;
 ```
 
 ### FloatingElements
+
 Éléments qui flottent
 
 ```tsx
 import { FloatingElements } from "~/components/ScrollAdvanced";
 
-<FloatingElements count={5} />
+<FloatingElements count={5} />;
 ```
 
 ## Classes CSS Utilitaires
@@ -241,27 +261,29 @@ Le projet inclut également des classes CSS prêtes à l'emploi:
 ## Bonnes Pratiques
 
 ### 1. Performance
+
 - Utilisez `will-change` sur les éléments animés
 - Limitez le nombre d'animations simultanées
 - Préférez les animations sur `transform` et `opacity`
 
 ```tsx
-<div className="will-animate animate-float">
-  Contenu
-</div>
+<div className="will-animate animate-float">Contenu</div>
 ```
 
 ### 2. Accessibilité
+
 - Respectez `prefers-reduced-motion`
 - Fournissez des alternatives non-animées
 - Les animations reduites sont automatiquement gérées par CSS
 
 ### 3. Responsive
+
 - Testez les animations sur mobile
 - Ajustez les durées pour les petits écrans
 - Utilisez des breakpoints media queries
 
 ### 4. Organisation
+
 - Regroupez les animations liées
 - Utilisez des timelines pour les séquences complexes
 - Commentez les configurations d'animation
@@ -270,9 +292,19 @@ Le projet inclut également des classes CSS prêtes à l'emploi:
 
 ```tsx
 import { useRef } from "react";
-import { AnimatedSection, StaggerContainer } from "~/components/AnimatedSection";
-import { ScrollReveal, Parallax, NumberCounter } from "~/components/ScrollEffects";
-import { useHoverAnimation, useStaggerAnimation } from "~/hooks/useScrollAnimations";
+import {
+  AnimatedSection,
+  StaggerContainer,
+} from "~/components/AnimatedSection";
+import {
+  ScrollReveal,
+  Parallax,
+  NumberCounter,
+} from "~/components/ScrollEffects";
+import {
+  useHoverAnimation,
+  useStaggerAnimation,
+} from "~/hooks/useScrollAnimations";
 
 export function HomePage() {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -297,9 +329,7 @@ export function HomePage() {
 
       {/* Section avec révélation */}
       <ScrollReveal direction="left" distance={100}>
-        <div ref={cardRef}>
-          Carte interactive
-        </div>
+        <div ref={cardRef}>Carte interactive</div>
       </ScrollReveal>
 
       {/* Section avec compteur */}

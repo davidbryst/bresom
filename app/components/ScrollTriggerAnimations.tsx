@@ -38,20 +38,20 @@ export function RevealOnScroll() {
           scrub: 0.5,
           markers: false,
         },
-      }
+      },
     );
   }, []);
 
   return (
-      <div
-        ref={ref}
-        className="p-12 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-xl border border-purple-600/30"
-      >
-        <h2 className="text-3xl font-bold mb-4">Reveal Animation</h2>
-        <p className="text-gray-400">
-          Cet élément se révèle progressivement au scroll avec un effet de blur
-        </p>
-      </div>
+    <div
+      ref={ref}
+      className="p-12 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-xl border border-purple-600/30"
+    >
+      <h2 className="text-3xl font-bold mb-4">Reveal Animation</h2>
+      <p className="text-gray-400">
+        Cet élément se révèle progressivement au scroll avec un effet de blur
+      </p>
+    </div>
   );
 }
 
@@ -118,7 +118,7 @@ export function StaggerAnimation() {
           start: "top 80%",
           once: true,
         },
-      }
+      },
     );
   }, []);
 
@@ -220,7 +220,7 @@ export function ProgressBar() {
             start: "top 80%",
             once: true,
           },
-        }
+        },
       );
     });
   }, []);
@@ -232,9 +232,7 @@ export function ProgressBar() {
         <div key={i}>
           <div className="flex justify-between mb-2">
             <label className="font-semibold">{skill}</label>
-            <span className="text-purple-400">
-              {(i + 1) * 25}%
-            </span>
+            <span className="text-purple-400">{(i + 1) * 25}%</span>
           </div>
           <div className="w-full h-3 bg-dark-surface rounded-full overflow-hidden border border-purple-600/20">
             <div
@@ -309,7 +307,7 @@ export function ClipPathReveal() {
           start: "top 80%",
           once: true,
         },
-      }
+      },
     );
   }, []);
 
@@ -350,15 +348,12 @@ export function RotateScale() {
           start: "top 80%",
           once: true,
         },
-      }
+      },
     );
   }, []);
 
   return (
-    <div
-      ref={ref}
-      className="flex justify-center items-center h-40"
-    >
+    <div ref={ref} className="flex justify-center items-center h-40">
       <div className="w-32 h-32 bg-gradient-to-br from-purple-600 to-pink-600 rounded-full shadow-xl" />
     </div>
   );
@@ -392,7 +387,7 @@ export function TextAnimation() {
           start: "top 80%",
           once: true,
         },
-      }
+      },
     );
   }, []);
 
@@ -428,26 +423,26 @@ export function TimelineAnimation() {
     tl.fromTo(
       ".timeline-item-1",
       { opacity: 0, x: -100 },
-      { opacity: 1, x: 0, duration: 0.8, ease: "power3.out" }
+      { opacity: 1, x: 0, duration: 0.8, ease: "power3.out" },
     )
       .fromTo(
         ".timeline-item-2",
         { opacity: 0, x: 100 },
         { opacity: 1, x: 0, duration: 0.8, ease: "power3.out" },
-        "-=0.4"
+        "-=0.4",
       )
       .fromTo(
         ".timeline-item-3",
         { opacity: 0, y: 50 },
         { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
-        "-=0.4"
+        "-=0.4",
       );
   }, []);
 
   return (
     <div ref={ref} className="space-y-6">
       <h2 className="text-3xl font-bold mb-8">Timeline Animation</h2>
-      
+
       <div className="timeline-item-1 p-6 bg-dark-surface border border-purple-600/30 rounded-lg">
         <h3 className="font-bold text-purple-400">Step 1</h3>
         <p className="text-gray-400 text-sm">Premier élément animé</p>

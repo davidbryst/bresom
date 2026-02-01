@@ -4,31 +4,36 @@ BREAKING CHANGE: Modifications dans root.tsx pour intégrer GSAP globalement
 
 ## Description
 
-Amélioration complète de l'expérience utilisateur du site avec l'intégration 
-de GSAP (GreenSock Animation Platform) pour des animations fluides et 
+Amélioration complète de l'expérience utilisateur du site avec l'intégration
+de GSAP (GreenSock Animation Platform) pour des animations fluides et
 modernes au scroll.
 
 ## Changements
 
 ### ✨ Nouveaux Composants (4)
+
 - AnimatedSection.tsx - Wrapper pour animer sections au scroll
 - ScrollEffects.tsx - Reveal, Parallax, SplitText, NumberCounter, PinSection
 - ScrollAdvanced.tsx - MouseFollower, ScrollProgressBar, ScrollingText, etc.
 - AnimationsDemo.tsx - Démonstration interactive
 
 ### 🎯 Nouveaux Hooks (2)
+
 - useScrollAnimation.tsx - Animations scroll basiques
 - useScrollAnimations.ts - 10+ hooks avancés (Reveal, Parallax, Hover, etc.)
 
 ### 🛠️ Nouveaux Utilitaires (2)
+
 - scrollAnimations.ts - 10 fonctions d'animation réutilisables
 - animationPatterns.ts - 10 patterns d'animation avancés
 
 ### ⚙️ Configuration
+
 - gsapConfig.ts - Configuration centralisée GSAP
 - animations.css - 70+ classes CSS utilitaires
 
 ### 📚 Documentation (5)
+
 - ANIMATIONS_GUIDE.md - Guide complet d'utilisation
 - ANIMATIONS_SUMMARY.md - Résumé des changements
 - QUICK_START.md - Démarrage rapide
@@ -36,10 +41,12 @@ modernes au scroll.
 - README_ANIMATIONS.md - Vue d'ensemble
 
 ### 🧪 Exemples
+
 - AnimationIntegrationExamples.tsx - 13 exemples d'intégration
 - verify-animations.sh - Script de vérification
 
 ### 📝 Fichiers Modifiés
+
 - app/root.tsx - Ajout GSAPProvider et import animations.css
 
 ## Statistiques
@@ -55,23 +62,27 @@ modernes au scroll.
 ## Améliorations
 
 ### Performance ⚡
+
 - GPU-accelerated animations (transform, opacity)
 - Lazy loading (once: true)
 - Automatic cleanup (no memory leaks)
 - ScrollTrigger optimisé
 
 ### Accessibilité ♿
+
 - Respects prefers-reduced-motion
 - Alternatives non-animées
 - Contenu accessible sans animations
 
 ### Flexibilité 🎨
+
 - 50+ types d'animations disponibles
 - Facilement combinables
 - Configurable globalement
 - Extensible
 
 ### Maintenance 📦
+
 - Code organisé et bien structuré
 - Composants réutilisables
 - Hooks isolés et testables
@@ -80,6 +91,7 @@ modernes au scroll.
 ## Types d'Animations
 
 ### Au Scroll
+
 - Reveal progressive (up, down, left, right)
 - Entrées cascadées avec stagger
 - Parallax effects
@@ -87,12 +99,14 @@ modernes au scroll.
 - Morphing shapes
 
 ### Au Hover
+
 - Scale animations
 - Y offset (lift effect)
 - Rotation, Skew
 - 3D transforms
 
 ### Avancés
+
 - Compteurs animés
 - Barre de progression
 - Texte qui défile
@@ -103,15 +117,17 @@ modernes au scroll.
 ## Utilisation
 
 ### Simple
+
 ```tsx
 import { AnimatedSection } from "~/components/AnimatedSection";
 
 <AnimatedSection animationType="slideUp">
   <h2>Contenu animé</h2>
-</AnimatedSection>
+</AnimatedSection>;
 ```
 
 ### Avec Hooks
+
 ```tsx
 import { useHoverAnimation } from "~/hooks/useScrollAnimations";
 
@@ -121,10 +137,9 @@ return <div ref={ref}>Survolez moi</div>;
 ```
 
 ### Avec CSS
+
 ```tsx
-<div className="animate-slide-up animate-delay-200">
-  Animation simple
-</div>
+<div className="animate-slide-up animate-delay-200">Animation simple</div>
 ```
 
 ## Documentation
@@ -140,7 +155,7 @@ Les animations sont optionnelles et peuvent être intégrées graduellement.
 
 ## Notes
 
-- Tous les fichiers PDF (*.pdf) sont exclus comme demandé
+- Tous les fichiers PDF (\*.pdf) sont exclus comme demandé
 - GSAP est déjà installé dans le projet
 - ScrollTrigger plugin est enregistré automatiquement
 - Animations respectent prefers-reduced-motion

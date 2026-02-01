@@ -51,7 +51,7 @@ export function AnimatedSection({
               start: "top 75%",
               once: true,
             },
-          }
+          },
         );
         break;
 
@@ -69,7 +69,7 @@ export function AnimatedSection({
               start: "top 80%",
               once: true,
             },
-          }
+          },
         );
         break;
 
@@ -96,7 +96,7 @@ export function AnimatedSection({
                 start: "top 75%",
                 once: true,
               },
-            }
+            },
           );
         } else {
           gsap.fromTo(
@@ -116,7 +116,7 @@ export function AnimatedSection({
                 start: "top 75%",
                 once: true,
               },
-            }
+            },
           );
         }
         break;
@@ -124,7 +124,9 @@ export function AnimatedSection({
       case "parallax":
         gsap.to(section, {
           y: (index, target) => {
-            return (gsap.getProperty(target, "--parallax-speed") as number) || -50;
+            return (
+              (gsap.getProperty(target, "--parallax-speed") as number) || -50
+            );
           },
           ease: "none",
           scrollTrigger: {
@@ -187,7 +189,7 @@ export function StaggerContainer({
           start: "top 75%",
           once: true,
         },
-      }
+      },
     );
   }, [staggerDelay, itemSelector]);
 

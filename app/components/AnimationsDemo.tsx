@@ -1,7 +1,17 @@
 import { useRef } from "react";
-import { AnimatedSection, StaggerContainer } from "~/components/AnimatedSection";
-import { ScrollReveal, Parallax, NumberCounter } from "~/components/ScrollEffects";
-import { useHoverAnimation, useStaggerAnimation } from "~/hooks/useScrollAnimations";
+import {
+  AnimatedSection,
+  StaggerContainer,
+} from "~/components/AnimatedSection";
+import {
+  ScrollReveal,
+  Parallax,
+  NumberCounter,
+} from "~/components/ScrollEffects";
+import {
+  useHoverAnimation,
+  useStaggerAnimation,
+} from "~/hooks/useScrollAnimations";
 
 /**
  * Composant de démonstration pour les animations GSAP
@@ -36,9 +46,7 @@ export function AnimationsDemo() {
       {/* Section 2: Cascade Animation */}
       <AnimatedSection animationType="cascade" staggerChildren={true}>
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold mb-4">
-            Animation en Cascade
-          </h2>
+          <h2 className="text-4xl font-bold mb-4">Animation en Cascade</h2>
           <p className="text-gray-400">
             Les éléments apparaissent un par un avec un délai
           </p>
@@ -65,9 +73,7 @@ export function AnimationsDemo() {
       {/* Section 3: Scroll Reveal */}
       <section>
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold mb-4">
-            Révélations au Scroll
-          </h2>
+          <h2 className="text-4xl font-bold mb-4">Révélations au Scroll</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -112,9 +118,7 @@ export function AnimationsDemo() {
       {/* Section 4: Compteurs Animés */}
       <AnimatedSection animationType="slideUp">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold mb-4">
-            Statistiques Animées
-          </h2>
+          <h2 className="text-4xl font-bold mb-4">Statistiques Animées</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
@@ -145,9 +149,7 @@ export function AnimationsDemo() {
       {/* Section 5: Parallax Effect */}
       <section>
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold mb-4">
-            Effet Parallax
-          </h2>
+          <h2 className="text-4xl font-bold mb-4">Effet Parallax</h2>
         </div>
 
         <Parallax speed={-0.2}>
@@ -192,9 +194,7 @@ export function AnimationsDemo() {
       {/* Section 7: Hover Effects */}
       <AnimatedSection animationType="slideUp">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold mb-4">
-            Hover Effects
-          </h2>
+          <h2 className="text-4xl font-bold mb-4">Hover Effects</h2>
           <p className="text-gray-400">
             Survolez les cartes pour voir l'animation
           </p>

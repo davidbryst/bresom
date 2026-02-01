@@ -4,11 +4,34 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { contactData } from "~/data/content";
 import { Mail, Phone, MapPin, Send, Loader2, CheckCircle } from "lucide-react";
+import { easings } from "~/hooks/useGSAP";
+import CircularText from "./CircularText";
 
 // Register plugins
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
+
+const contactInfo = [
+  {
+    icon: Mail,
+    label: "Email",
+    value: contactData.email,
+    href: `mailto:${contactData.email}`,
+  },
+  {
+    icon: Phone,
+    label: "Téléphone",
+    value: contactData.phone,
+    href: `tel:${contactData.phone.split(" / ")[0]}`,
+  },
+  {
+    icon: MapPin,
+    label: "Localisation",
+    value: contactData.location,
+    href: "#",
+  },
+];
 
 interface ContactResponse {
   success?: boolean;
@@ -34,31 +57,10 @@ export default function Contact() {
   const isSuccess = fetcher.data?.success;
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
-  const contactInfo = [
-    {
-      icon: Mail,
-      label: "Email",
-      value: contactData.email,
-      href: `mailto:${contactData.email}`,
-    },
-    {
-      icon: Phone,
-      label: "Téléphone",
-      value: contactData.phone,
-      href: `tel:${contactData.phone.split(" / ")[0]}`,
-    },
-    {
-      icon: MapPin,
-      label: "Localisation",
-      value: contactData.location,
-      href: "#",
-    },
-  ];
 
   useEffect(() => {
     if (typeof window === "undefined" || !sectionRef.current) return;
@@ -73,15 +75,15 @@ export default function Contact() {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: headerRef.current,
-            start: "top 80%",
-            toggleActions: "play none none none",
+            start: "top 75%",
+            toggleActions: "play none none reverse",
           },
         });
 
         tl.fromTo(
           badge,
           { opacity: 0, y: 20, scale: 0.9 },
-          { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "back.out(1.7)" }
+          { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: easings.elastic },
         )
           .fromTo(
             title,
@@ -91,15 +93,21 @@ export default function Contact() {
               y: 0,
               clipPath: "inset(0% 0% 0% 0%)",
               duration: 0.7,
-              ease: "power3.out",
+              ease: easings.elastic,
             },
-            "-=0.3"
+            "-=0.3",
           )
           .fromTo(
             desc,
-            { opacity: 0, y: 20 },
-            { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
-            "-=0.4"
+            { opacity: 0, y: 20, filter: "blur(8px)" },
+            {
+              opacity: 1,
+              y: 0,
+              filter: "blur(0px)",
+              duration: 0.5,
+              ease: easings.elastic,
+            },
+            "-=0.4",
           );
       }
 
@@ -113,7 +121,7 @@ export default function Contact() {
           scrollTrigger: {
             trigger: leftColRef.current,
             start: "top 75%",
-            toggleActions: "play none none none",
+            toggleActions: "play none none reverse",
           },
         });
 
@@ -121,7 +129,13 @@ export default function Contact() {
           tl.fromTo(
             image,
             { opacity: 0, x: -50, scale: 0.95 },
-            { opacity: 1, x: 0, scale: 1, duration: 0.8, ease: "power3.out" }
+            {
+              opacity: 1,
+              x: 0,
+              scale: 1,
+              duration: 0.8,
+              ease: easings.elastic,
+            },
           );
         }
 
@@ -134,14 +148,14 @@ export default function Contact() {
             scale: 1,
             duration: 0.5,
             stagger: 0.1,
-            ease: "power2.out",
+            ease: easings.elastic,
           },
-          "-=0.4"
+          "-=0.4",
         ).fromTo(
           note,
           { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
-          "-=0.2"
+          { opacity: 1, y: 0, duration: 0.5, ease: easings.elastic },
+          "-=0.2",
         );
 
         // Hover animations for contact cards
@@ -152,15 +166,16 @@ export default function Contact() {
               borderColor: "#7C3AED",
               backgroundColor: "rgba(26, 26, 35, 1)",
               boxShadow: "0 10px 40px -10px rgba(124, 58, 237, 0.2)",
-              duration: 0.3,
-              ease: "power2.out",
+              duration: 0.5,
+              ease: easings.elastic,
             });
 
             const icon = card.querySelector(".card-icon");
             gsap.to(icon, {
               scale: 1.1,
               rotate: 5,
-              duration: 0.3,
+              ease: easings.elastic,
+              duration: 0.5,
             });
           });
 
@@ -170,15 +185,16 @@ export default function Contact() {
               borderColor: "rgba(255, 255, 255, 0.1)",
               backgroundColor: "rgba(26, 26, 35, 0.5)",
               boxShadow: "none",
-              duration: 0.3,
-              ease: "power2.out",
+              duration: 0.5,
+              ease: easings.elastic,
             });
 
             const icon = card.querySelector(".card-icon");
             gsap.to(icon, {
               scale: 1,
               rotate: 0,
-              duration: 0.3,
+              ease: easings.elastic,
+              duration: 0.5,
             });
           });
         });
@@ -194,14 +210,14 @@ export default function Contact() {
           scrollTrigger: {
             trigger: formRef.current,
             start: "top 75%",
-            toggleActions: "play none none none",
+            toggleActions: "play none none reverse",
           },
         });
 
         tl.fromTo(
           formContainer,
           { opacity: 0, x: 50, scale: 0.95 },
-          { opacity: 1, x: 0, scale: 1, duration: 0.8, ease: "power3.out" }
+          { opacity: 1, x: 0, scale: 1, duration: 0.8, ease: easings.elastic },
         )
           .fromTo(
             inputs,
@@ -211,15 +227,21 @@ export default function Contact() {
               y: 0,
               duration: 0.5,
               stagger: 0.1,
-              ease: "power2.out",
+              ease: easings.elastic,
             },
-            "-=0.4"
+            "-=0.4",
           )
           .fromTo(
             button,
             { opacity: 0, y: 20, scale: 0.95 },
-            { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "back.out(1.7)" },
-            "-=0.2"
+            {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              duration: 0.5,
+              ease: easings.elastic,
+            },
+            "-=0.2",
           );
 
         // Input focus animations
@@ -229,7 +251,7 @@ export default function Contact() {
 
           if (inputEl) {
             inputEl.addEventListener("focus", () => {
-              gsap.to(input, {
+              gsap.to(inputEl, {
                 borderColor: "#7C3AED",
                 boxShadow: "0 0 0 4px rgba(124, 58, 237, 0.1)",
                 duration: 0.3,
@@ -243,7 +265,7 @@ export default function Contact() {
             });
 
             inputEl.addEventListener("blur", () => {
-              gsap.to(input, {
+              gsap.to(inputEl, {
                 borderColor: "rgba(255, 255, 255, 0.1)",
                 boxShadow: "none",
                 duration: 0.3,
@@ -265,7 +287,7 @@ export default function Contact() {
               scale: 1.02,
               boxShadow: "0 0 40px rgba(124, 58, 237, 0.5)",
               duration: 0.3,
-              ease: "power2.out",
+              ease: easings.elastic,
             });
           });
 
@@ -274,7 +296,7 @@ export default function Contact() {
               scale: 1,
               boxShadow: "0 0 20px rgba(124, 58, 237, 0.3)",
               duration: 0.3,
-              ease: "power2.out",
+              ease: easings.elastic,
             });
           });
 
@@ -282,6 +304,7 @@ export default function Contact() {
             gsap.to(button, {
               scale: 0.98,
               duration: 0.1,
+              ease: easings.elastic,
             });
           });
 
@@ -289,6 +312,7 @@ export default function Contact() {
             gsap.to(button, {
               scale: 1.02,
               duration: 0.1,
+              ease: easings.elastic,
             });
           });
         }
@@ -308,19 +332,19 @@ export default function Contact() {
       gsap.fromTo(
         successRef.current,
         { opacity: 0, scale: 0.9 },
-        { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.7)" }
+        { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.7)" },
       );
 
       gsap.fromTo(
         icon,
         { scale: 0, rotate: -180 },
-        { scale: 1, rotate: 0, duration: 0.6, ease: "back.out(2)", delay: 0.2 }
+        { scale: 1, rotate: 0, duration: 0.6, ease: "back.out(2)", delay: 0.2 },
       );
 
       gsap.fromTo(
         [title, text],
         { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, delay: 0.4 }
+        { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, delay: 0.4 },
       );
     }
   }, [isSuccess]);
@@ -338,10 +362,13 @@ export default function Contact() {
       {/* Animated background orbs */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-violet-primary/5 rounded-full blur-[100px] animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-violet-accent/5 rounded-full blur-[80px] animate-pulse" style={{ animationDelay: "1s" }} />
+        <div
+          className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-violet-accent/5 rounded-full blur-[80px] animate-pulse"
+          style={{ animationDelay: "1s" }}
+        />
       </div>
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="max-w-7xl 2xl:max-w-[1400px] 3xl:max-w-[1700px] 4xl:max-w-[2100px] mx-auto px-5 sm:px-6 relative z-10">
         {/* Header */}
         <div ref={headerRef} className="text-center mb-16">
           <span className="header-badge inline-block text-violet-accent font-semibold text-sm tracking-wider uppercase mb-4 px-4 py-2 bg-violet-primary/10 rounded-full border border-violet-primary/20">
@@ -359,11 +386,11 @@ export default function Contact() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-12">
+        <div className="grid lg:grid-cols-5 gap-6 sm:gap-8 lg:gap-8">
           {/* Contact Info & Image */}
-          <div ref={leftColRef} className="lg:col-span-2 space-y-8">
+          <div ref={leftColRef} className="lg:col-span-2 space-y-6">
             {/* Image */}
-            <div className="contact-image relative hidden lg:block">
+            <div className="contact-image relative lg:block">
               <div className="relative bg-dark-card p-2 rounded-2xl shadow-premium border border-dark-border overflow-hidden">
                 <img
                   src="/profile/face-identiter.jpg"
@@ -371,6 +398,13 @@ export default function Contact() {
                   className="w-full aspect-[4/3] object-cover rounded-xl"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-dark-card/80 to-transparent pointer-events-none rounded-xl" />
+
+                <CircularText
+                  text="DOCKER✦POSTGRES✦GSAP✦MOTION✦PRISMA✦"
+                  onHover="slowDown"
+                  spinDuration={20}
+                  className="!absolute !left-6 !top-6  sm:!left-12 sm:!top-16 lg:!left-6 lg:!top-6 !text-violet-primary !inset-0 custom-class w-72 sm:w-[27rem] lg:w-80 2xl:w-[23rem]"
+                />
               </div>
             </div>
 
@@ -380,14 +414,14 @@ export default function Contact() {
                 <a
                   key={index}
                   href={info.href}
-                  className="contact-card flex items-center gap-4 p-4 bg-dark-surface/50 rounded-xl border border-dark-border transition-all duration-300 block"
+                  className="contact-card flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-dark-surface/50 rounded-xl border border-dark-border transition-all duration-300 "
                 >
-                  <div className="card-icon w-12 h-12 bg-gradient-violet rounded-xl flex items-center justify-center shadow-glow-violet flex-shrink-0">
+                  <div className="card-icon w-10 h-10 sm:w-12 sm:h-12 bg-gradient-violet rounded-lg sm:rounded-xl flex items-center justify-center shadow-glow-violet flex-shrink-0">
                     <info.icon className="w-5 h-5 text-white" />
                   </div>
                   <div className="min-w-0">
                     <p className="text-light-muted text-sm">{info.label}</p>
-                    <p className="text-light-primary font-medium text-sm truncate">
+                    <p className="text-light-primary font-medium text-xs sm:text-sm truncate">
                       {info.value}
                     </p>
                   </div>
@@ -409,7 +443,7 @@ export default function Contact() {
 
           {/* Contact Form */}
           <div ref={formRef} className="lg:col-span-3">
-            <div className="form-container bg-dark-surface p-8 rounded-2xl border border-dark-border shadow-premium">
+            <div className="form-container bg-dark-surface p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl border border-dark-border shadow-premium">
               {isSuccess ? (
                 <div ref={successRef} className="text-center py-12">
                   <div className="success-icon w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -428,7 +462,7 @@ export default function Contact() {
                   action="/api/contact"
                   className="space-y-6"
                 >
-                  <div className="grid sm:grid-cols-2 gap-6">
+                  <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
                     <div className="form-field">
                       <label
                         htmlFor="name"

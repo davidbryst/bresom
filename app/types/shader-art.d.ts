@@ -1,3 +1,5 @@
+import type * as React from "react";
+
 declare module "https://esm.sh/shader-art" {
   export const ShaderArt: any;
 }
@@ -6,7 +8,6 @@ declare module "https://esm.sh/@shader-art/plugin-uniform" {
   export const UniformPlugin: any;
 }
 
-export {};
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -18,5 +19,3 @@ declare global {
 }
 
 export {};
-
-

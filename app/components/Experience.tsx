@@ -3,6 +3,8 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { experiencesData, type ExperienceItem } from "~/data/content";
 import { Briefcase, Calendar, ChevronRight } from "lucide-react";
+import { easings } from "~/hooks/useGSAP";
+import CircularText from "./CircularText";
 
 // Register plugins
 if (typeof window !== "undefined") {
@@ -30,27 +32,27 @@ export default function Experience() {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: headerRef.current,
-            start: "top 80%",
-            toggleActions: "play none none none",
+            start: "top 75%",
+            toggleActions: "play none none reverse",
           },
         });
 
         tl.fromTo(
           badge,
           { opacity: 0, y: 20, scale: 0.9 },
-          { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "back.out(1.7)" }
+          { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: easings.elastic },
         )
           .fromTo(
             title,
             { opacity: 0, y: 40 },
-            { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" },
-            "-=0.3"
+            { opacity: 1, y: 0, duration: 0.7, ease: easings.elastic },
+            "-=0.3",
           )
           .fromTo(
             desc,
             { opacity: 0, y: 20 },
-            { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
-            "-=0.4"
+            { opacity: 1, y: 0, duration: 0.5, ease: easings.elastic },
+            "-=0.4",
           );
       }
 
@@ -69,7 +71,7 @@ export default function Experience() {
               end: "bottom 70%",
               scrub: 1,
             },
-          }
+          },
         );
       }
 
@@ -84,8 +86,8 @@ export default function Experience() {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: card,
-            start: "top 75%",
-            toggleActions: "play none none none",
+            start: "top 95%",
+            toggleActions: "play none none reverse",
           },
         });
 
@@ -97,8 +99,8 @@ export default function Experience() {
             scale: 1,
             opacity: 1,
             duration: 0.5,
-            ease: "back.out(2)",
-          }
+            ease: easings.elastic,
+          },
         );
 
         // Card slide in from left
@@ -113,10 +115,10 @@ export default function Experience() {
             opacity: 1,
             x: 0,
             rotateY: 0,
-            duration: 0.7,
-            ease: "power3.out",
+            duration: 0.2,
+            ease: easings.elastic,
           },
-          "-=0.3"
+          "-=0.3",
         );
 
         // Responsibilities stagger
@@ -131,9 +133,9 @@ export default function Experience() {
             x: 0,
             duration: 0.4,
             stagger: 0.1,
-            ease: "power2.out",
+            ease: easings.elastic,
           },
-          "-=0.3"
+          "-=0.3",
         );
 
         // Card hover effects
@@ -143,7 +145,7 @@ export default function Experience() {
             boxShadow: "0 25px 50px -12px rgba(124, 58, 237, 0.2)",
             borderColor: "rgba(124, 58, 237, 0.3)",
             duration: 0.4,
-            ease: "power2.out",
+            ease: easings.elastic,
           });
 
           gsap.to(dot, {
@@ -159,7 +161,7 @@ export default function Experience() {
             boxShadow: "none",
             borderColor: "rgba(255, 255, 255, 0.1)",
             duration: 0.4,
-            ease: "power2.out",
+            ease: easings.elastic,
           });
 
           gsap.to(dot, {
@@ -181,32 +183,44 @@ export default function Experience() {
           scrollTrigger: {
             trigger: imageRef.current,
             start: "top 70%",
-            toggleActions: "play none none none",
+            toggleActions: "play none none reverse",
           },
         });
 
         tl.fromTo(
           decorBorder,
           { opacity: 0, scale: 0.8, rotate: -10 },
-          { opacity: 1, scale: 1, rotate: 0, duration: 0.8, ease: "power3.out" }
+          {
+            opacity: 1,
+            scale: 1,
+            rotate: 0,
+            duration: 0.8,
+            ease: easings.elastic,
+          },
         )
           .fromTo(
             decorGlow,
             { opacity: 0, scale: 0.5 },
-            { opacity: 1, scale: 1, duration: 0.8, ease: "power2.out" },
-            "-=0.6"
+            { opacity: 1, scale: 1, duration: 0.8, ease: easings.elastic },
+            "-=0.6",
           )
           .fromTo(
             imgContainer,
             { opacity: 0, x: 60, scale: 0.9 },
-            { opacity: 1, x: 0, scale: 1, duration: 0.8, ease: "power3.out" },
-            "-=0.5"
+            {
+              opacity: 1,
+              x: 0,
+              scale: 1,
+              duration: 0.8,
+              ease: easings.elastic,
+            },
+            "-=0.5",
           )
           .fromTo(
             badge,
             { opacity: 0, y: 30 },
-            { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
-            "-=0.3"
+            { opacity: 1, y: 0, duration: 0.5, ease: easings.elastic },
+            "-=0.3",
           );
 
         // Continuous floating animation for image
@@ -239,7 +253,7 @@ export default function Experience() {
     <section
       id="experience"
       ref={sectionRef}
-      className="py-24 md:py-32 bg-dark-surface relative overflow-hidden"
+      className="pt-24sm:py-24 md:py-32 bg-dark-surface relative overflow-hidden"
     >
       {/* Background decoration */}
       <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-dark-deep to-transparent pointer-events-none" />
@@ -249,7 +263,7 @@ export default function Experience() {
         <div className="absolute inset-0 bg-[linear-gradient(90deg,#7C3AED_1px,transparent_1px),linear-gradient(180deg,#7C3AED_1px,transparent_1px)] bg-[size:80px_80px]" />
       </div>
 
-      <div className="container mx-auto px-6">
+      <div className="max-w-7xl 2xl:max-w-[1400px] 3xl:max-w-[1700px] 4xl:max-w-[2100px] mx-auto px-6">
         {/* Header */}
         <div ref={headerRef} className="text-center mb-16">
           <span className="header-badge inline-block text-violet-accent font-semibold text-sm tracking-wider uppercase mb-4 px-4 py-2 bg-violet-primary/10 rounded-full border border-violet-primary/20">
@@ -266,13 +280,13 @@ export default function Experience() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-12 items-start">
+        <div className="grid lg:grid-cols-5 gap-6 sm:gap-8 lg:gap-12 items-start">
           {/* Timeline */}
           <div ref={timelineRef} className="lg:col-span-3 relative">
             {/* Vertical line */}
             <div
               ref={lineRef}
-              className="absolute left-6 md:left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-violet-primary via-violet-accent to-dark-border origin-top"
+              className="absolute left-3 sm:left-6 md:left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-violet-primary via-violet-accent to-dark-border origin-top"
             />
 
             <div className="space-y-8">
@@ -282,17 +296,17 @@ export default function Experience() {
                   ref={(el) => {
                     cardsRef.current[index] = el;
                   }}
-                  className="relative pl-16 md:pl-20"
+                  className="relative pl-11 sm:pl-16 md:pl-20"
                   style={{ perspective: "1000px" }}
                 >
                   {/* Timeline dot */}
-                  <div className="timeline-dot absolute left-3 md:left-5 top-2 w-6 h-6 md:w-7 md:h-7 bg-gradient-violet rounded-full flex items-center justify-center shadow-glow-violet z-10">
+                  <div className="timeline-dot absolute left-[0.05rem] sm:left-3 md:left-5 top-2 w-6 h-6 md:w-7 md:h-7 bg-gradient-violet rounded-full flex items-center justify-center shadow-glow-violet z-10">
                     <Briefcase className="w-3 h-3 md:w-3.5 md:h-3.5 text-white" />
                   </div>
 
                   {/* Content card */}
                   <div
-                    className="exp-card bg-dark-card p-6 rounded-2xl border border-dark-border transition-all duration-300"
+                    className="exp-card bg-dark-card p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl border border-dark-border transition-all duration-300"
                     style={{ transformStyle: "preserve-3d" }}
                   >
                     {/* Date badge */}
@@ -302,10 +316,12 @@ export default function Experience() {
                     </div>
 
                     {/* Company & Position */}
-                    <h3 className="text-xl font-bold text-light-primary mb-1 transition-colors duration-300">
+                    <h3 className="text-base sm:text-lg md:text-xl font-bold text-light-primary mb-1 transition-colors duration-300">
                       {exp.company}
                     </h3>
-                    <p className="text-light-secondary mb-4">{exp.position}</p>
+                    <p className="text-sm sm:text-base text-light-secondary mb-3 sm:mb-4">
+                      {exp.position}
+                    </p>
 
                     {/* Responsibilities */}
                     <ul className="space-y-2">
@@ -318,7 +334,7 @@ export default function Experience() {
                             <ChevronRight className="w-4 h-4 text-violet-accent mt-0.5 flex-shrink-0" />
                             <span>{resp}</span>
                           </li>
-                        )
+                        ),
                       )}
                     </ul>
                   </div>
@@ -330,11 +346,11 @@ export default function Experience() {
           {/* Side Image */}
           <div
             ref={imageRef}
-            className="lg:col-span-2 hidden lg:block sticky top-32"
+            className="lg:col-span-2 lg:block sticky top-32 mt-20 sm:mt-28 lg:mt-0 mx-4 sm:mx-12 md:mx-0"
           >
             <div className="relative">
               {/* Decorative elements */}
-              <div className="decor-border absolute -top-6 -right-6 w-32 h-32 border-2 border-violet-primary/20 rounded-2xl" />
+              <div className="decor-border absolute -top-6 -right-6 w-32 h-32 border-4 border-violet-primary/70 rounded-2xl" />
               <div className="decor-glow absolute -bottom-6 -left-6 w-40 h-40 bg-violet-primary/10 rounded-2xl blur-2xl" />
 
               {/* Image card */}
@@ -347,7 +363,12 @@ export default function Experience() {
                   alt="David Abraham - Ambition"
                   className="w-full aspect-[3/4] object-cover rounded-2xl"
                 />
-
+                <CircularText
+                  text="TAILWIND✦NEST✦MONGO✦FLUTTER✦BLENDER✦"
+                  onHover="slowDown"
+                  spinDuration={20}
+                  className="!absolute !left-12 !top-6 sm:!left-12 sm:!top-16 md:!left-12 md:!top-20 lg:!left-12 lg:!top-8 2xl:!left-12 2xl:!top-12 !text-violet-primary !inset-0 custom-class w-72 md:w-[29rem] lg:w-80 2xl:w-[23rem]"
+                />
                 {/* Badge */}
                 <div className="img-badge absolute bottom-6 left-6 right-6 bg-dark-surface/90 backdrop-blur-sm p-4 rounded-xl border border-dark-border">
                   <p className="text-light-primary font-semibold text-sm">

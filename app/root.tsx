@@ -1,9 +1,19 @@
-import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "@remix-run/react";
+import {
+  Links,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+} from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/node";
 import { useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { SmoothScrollProvider } from "~/components/SmoothScroll";
+import {
+  SmoothScrollProvider,
+  ScrollProgress,
+  SectionNav,
+} from "~/components/SmoothScroll";
 
 import "./tailwind.css";
 import "./styles/animations.css";
@@ -15,11 +25,26 @@ if (typeof window !== "undefined") {
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
-  { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+  {
+    rel: "preconnect",
+    href: "https://fonts.gstatic.com",
+    crossOrigin: "anonymous",
+  },
   {
     rel: "stylesheet",
     href: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap",
   },
+];
+
+// Main sections for navigation
+const mainSections = [
+  { id: "hero", label: "Accueil" },
+  { id: "about", label: "À propos" },
+  { id: "services", label: "Services" },
+  { id: "skills", label: "Compétences" },
+  { id: "projects", label: "Projets" },
+  { id: "experience", label: "Expérience" },
+  { id: "contact", label: "Contact" },
 ];
 
 function GSAPProvider({ children }: { children: React.ReactNode }) {
@@ -36,7 +61,15 @@ function GSAPProvider({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
-  return <SmoothScrollProvider>{children}</SmoothScrollProvider>;
+  return (
+    <SmoothScrollProvider>
+      {/* Global scroll progress indicator */}
+      {/* <ScrollProgress /> */}
+      {/* Section navigation dots */}
+      {/* <SectionNav sections={mainSections} /> */}
+      {children}
+    </SmoothScrollProvider>
+  );
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -50,9 +83,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body className="bg-dark-deep text-light-primary antialiased">
-        <GSAPProvider>
-          {children}
-        </GSAPProvider>
+        <GSAPProvider>{children}</GSAPProvider>
         <ScrollRestoration />
         <Scripts />
       </body>

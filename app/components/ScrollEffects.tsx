@@ -64,7 +64,7 @@ export function ScrollReveal({
           start: `top ${100 - threshold * 100}%`,
           once,
         },
-      }
+      },
     );
   }, [direction, distance, duration, delay, once, threshold]);
 
@@ -159,7 +159,7 @@ export function SplitText({
           start: "top 80%",
           once: true,
         },
-      }
+      },
     );
   }, [text, staggerDelay]);
 
@@ -200,8 +200,7 @@ export function NumberCounter({
       ease: "power2.out",
       onUpdate: () => {
         if (ref.current) {
-          ref.current.innerText =
-            prefix + Math.round(obj.value) + suffix;
+          ref.current.innerText = prefix + Math.round(obj.value) + suffix;
         }
       },
       scrollTrigger: {

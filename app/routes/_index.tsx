@@ -9,6 +9,16 @@ import Projects from "~/components/Projects";
 import Experience from "~/components/Experience";
 import Contact from "~/components/Contact";
 import Footer from "~/components/Footer";
+import GradualBlur from "~/components/GradualBlur";
+import ScrollVelocity from "~/components/ScrollVelocity";
+import LogoLoop from "~/components/LogoLoop";
+
+import {
+  SiReact,
+  SiNextdotjs,
+  SiTypescript,
+  SiTailwindcss,
+} from "react-icons/si";
 
 export const meta: MetaFunction = () => {
   return [
@@ -18,13 +28,39 @@ export const meta: MetaFunction = () => {
       content:
         "Portfolio de David Abraham - Développeur Web & Mobile Full Stack et Designer UI/UX. Création de sites web et applications performantes, modernes et accessibles.",
     },
-    { name: "keywords", content: "développeur, full stack, react, ui/ux, design, web, mobile, abidjan" },
-    { property: "og:title", content: "David Abraham | Développeur Full Stack & Designer UI/UX" },
-    { property: "og:description", content: "Portfolio de David Abraham - Développeur Web & Mobile Full Stack et Designer UI/UX." },
+    {
+      name: "keywords",
+      content:
+        "développeur, full stack, react, ui/ux, design, web, mobile, abidjan",
+    },
+    {
+      property: "og:title",
+      content: "David Abraham | Développeur Full Stack & Designer UI/UX",
+    },
+    {
+      property: "og:description",
+      content:
+        "Portfolio de David Abraham - Développeur Web & Mobile Full Stack et Designer UI/UX.",
+    },
     { property: "og:type", content: "website" },
     { name: "twitter:card", content: "summary_large_image" },
   ];
 };
+
+const techLogos = [
+  { node: <SiReact />, title: "React", href: "https://react.dev" },
+  { node: <SiNextdotjs />, title: "Next.js", href: "https://nextjs.org" },
+  {
+    node: <SiTypescript />,
+    title: "TypeScript",
+    href: "https://www.typescriptlang.org",
+  },
+  {
+    node: <SiTailwindcss />,
+    title: "Tailwind CSS",
+    href: "https://tailwindcss.com",
+  },
+];
 
 export default function Home() {
   return (
@@ -42,7 +78,23 @@ export default function Home() {
         <main>
           <Hero />
           <About />
+          <div className="py-12 bg-[#000] z-40">
+            <ScrollVelocity
+              texts={["REMIX ✦", "TYPESCRIPT ✦", "SUPABASE ✦", "FIGMA ✦"]}
+              velocity={50}
+              numCopies={8}
+              className="custom-scroll-text text-violet-primary sm:text-6xl"
+            />
+          </div>
           <Services />
+          <div className="py-12 bg-[#000] z-40">
+            <ScrollVelocity
+              texts={["REMIX ✦", "TYPESCRIPT ✦", "SUPABASE ✦", "FIGMA ✦"]}
+              velocity={50}
+              numCopies={8}
+              className="custom-scroll-text text-violet-primary sm:text-6xl"
+            />
+          </div>
           <Skills />
           <Projects />
           <Experience />

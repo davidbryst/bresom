@@ -1,6 +1,6 @@
 /**
  * EXEMPLES D'INTÉGRATION DANS LES COMPOSANTS EXISTANTS
- * 
+ *
  * Ce fichier montre comment intégrer les nouvelles animations GSAP
  * dans les composants actuels du site.
  */

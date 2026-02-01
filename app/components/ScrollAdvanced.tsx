@@ -85,19 +85,18 @@ export function ScrollProgressBar({
 
     gsap.to(progressRef.current, {
       scaleX: () => {
-        const scrollTop =
-          window.scrollY ||
-          document.documentElement.scrollTop;
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
         const docHeight =
-          document.documentElement.scrollHeight -
-          window.innerHeight;
+          document.documentElement.scrollHeight - window.innerHeight;
         return docHeight > 0 ? scrollTop / docHeight : 0;
       },
       ease: "none",
       scrollTrigger: {
         onUpdate: (self) => {
           if (progressRef.current) {
-            progressRef.current.style.transform = `scaleX(${self.getVelocity() > 0 ? self.progress : 0})`;
+            progressRef.current.style.transform = `scaleX(${
+              self.getVelocity() > 0 ? self.progress : 0
+            })`;
           }
         },
       },
@@ -106,13 +105,10 @@ export function ScrollProgressBar({
     // Simpler approach with scroll listener
     const handleScroll = () => {
       if (!progressRef.current) return;
-      const scrollTop =
-        window.scrollY || document.documentElement.scrollTop;
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
       const docHeight =
-        document.documentElement.scrollHeight -
-        window.innerHeight;
-      const scrollPercent =
-        docHeight > 0 ? scrollTop / docHeight : 0;
+        document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = docHeight > 0 ? scrollTop / docHeight : 0;
       progressRef.current.style.transform = `scaleX(${scrollPercent})`;
     };
 
@@ -174,10 +170,7 @@ export function ScrollingText({
       ref={containerRef}
       className={`overflow-hidden whitespace-nowrap ${className}`}
     >
-      <div
-        ref={textRef}
-        className="inline-block"
-      >
+      <div ref={textRef} className="inline-block">
         {text} • {text} • {text} •{" "}
       </div>
     </div>
@@ -201,9 +194,7 @@ export function FloatingElements({
   useEffect(() => {
     if (!containerRef.current) return;
 
-    const elements = containerRef.current.querySelectorAll(
-      ".floating-element"
-    );
+    const elements = containerRef.current.querySelectorAll(".floating-element");
 
     elements.forEach((element, index) => {
       const randomX = Math.random() * 100 - 50;
@@ -251,17 +242,15 @@ interface TextGlitchProps {
 /**
  * Effet de glitch sur le texte
  */
-export function TextGlitch({
-  text,
-  className = "",
-}: TextGlitchProps) {
+export function TextGlitch({ text, className = "" }: TextGlitchProps) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!ref.current) return;
 
     const glitchAnimation = () => {
-      gsap.timeline()
+      gsap
+        .timeline()
         .to(ref.current, { x: 2, duration: 0.1 }, 0)
         .to(ref.current, { x: -2, duration: 0.1 }, 0.1)
         .to(ref.current, { x: 0, duration: 0.1 }, 0.2);

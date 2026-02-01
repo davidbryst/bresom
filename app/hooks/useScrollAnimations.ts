@@ -39,7 +39,7 @@ export function useScrollTimeline(deps: any[] = []) {
 export function useMorphAnimation(
   ref: React.RefObject<SVGPathElement>,
   pathVariants: string[],
-  duration: number = 2
+  duration: number = 2,
 ) {
   useEffect(() => {
     if (!ref.current) return;
@@ -70,7 +70,7 @@ export function useMorphAnimation(
 export function useGradientAnimation(
   ref: React.RefObject<HTMLElement>,
   colors: string[],
-  duration: number = 4
+  duration: number = 4,
 ) {
   useEffect(() => {
     if (!ref.current) return;
@@ -108,7 +108,7 @@ export function useScrollReveal(
     delay?: number;
     once?: boolean;
     start?: string;
-  } = {}
+  } = {},
 ) {
   const {
     direction = "up",
@@ -150,7 +150,7 @@ export function useScrollReveal(
           start,
           once,
         },
-      }
+      },
     );
   }, [ref, direction, distance, duration, delay, once, start]);
 }
@@ -165,7 +165,7 @@ export function useHoverAnimation(
     y?: number;
     rotation?: number;
     duration?: number;
-  } = {}
+  } = {},
 ) {
   const {
     scale = 1.05,
@@ -224,7 +224,7 @@ export function useStaggerAnimation(
     stagger?: number;
     start?: string;
     once?: boolean;
-  } = {}
+  } = {},
 ) {
   const {
     selector = "> *",
@@ -258,7 +258,7 @@ export function useStaggerAnimation(
           start,
           once,
         },
-      }
+      },
     );
   }, [ref, selector, duration, stagger, start, once]);
 }
@@ -268,7 +268,7 @@ export function useStaggerAnimation(
  */
 export function useParallaxAnimation(
   ref: React.RefObject<HTMLElement>,
-  speed: number = -0.5
+  speed: number = -0.5,
 ) {
   useEffect(() => {
     if (!ref.current) return;
@@ -293,7 +293,7 @@ export function useParallaxAnimation(
 export function useClipPathAnimation(
   ref: React.RefObject<HTMLElement>,
   paths: string[],
-  duration: number = 1
+  duration: number = 1,
 ) {
   useEffect(() => {
     if (!ref.current) return;
@@ -324,7 +324,7 @@ export function useClipPathAnimation(
 export function useTypewriterAnimation(
   ref: React.RefObject<HTMLElement>,
   text: string,
-  speed: number = 50
+  speed: number = 50,
 ) {
   useEffect(() => {
     if (!ref.current) return;
@@ -334,13 +334,9 @@ export function useTypewriterAnimation(
 
     const typeCharacter = () => {
       if (index < text.length) {
-        ref.current!.textContent +=
-          text.charAt(index);
+        ref.current!.textContent += text.charAt(index);
         index++;
-        timeoutId = setTimeout(
-          typeCharacter,
-          speed
-        );
+        timeoutId = setTimeout(typeCharacter, speed);
       }
     };
 

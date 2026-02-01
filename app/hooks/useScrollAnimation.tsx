@@ -14,7 +14,7 @@ interface ScrollAnimationOptions {
 
 export function useScrollAnimation(
   ref: React.RefObject<HTMLElement>,
-  options: ScrollAnimationOptions = {}
+  options: ScrollAnimationOptions = {},
 ) {
   const {
     trigger,
@@ -51,7 +51,7 @@ export function useScrollAnimation(
               markers,
               once: true,
             },
-          }
+          },
         );
       }
     });
@@ -62,7 +62,7 @@ export function useScrollAnimation(
 
 export function useParallaxScroll(
   ref: React.RefObject<HTMLElement>,
-  speed: number = -0.5
+  speed: number = -0.5,
 ) {
   useEffect(() => {
     const element = ref.current;
@@ -87,7 +87,7 @@ export function useParallaxScroll(
 
 export function useFadeInOnScroll(
   ref: React.RefObject<HTMLElement>,
-  duration: number = 0.8
+  duration: number = 0.8,
 ) {
   useEffect(() => {
     const element = ref.current;
@@ -106,7 +106,7 @@ export function useFadeInOnScroll(
             start: "top 85%",
             once: true,
           },
-        }
+        },
       );
     });
 
@@ -117,7 +117,7 @@ export function useFadeInOnScroll(
 export function useStaggerAnimation(
   ref: React.RefObject<HTMLElement>,
   selector: string = "> *",
-  stagger: number = 0.1
+  stagger: number = 0.1,
 ) {
   useEffect(() => {
     const element = ref.current;
@@ -138,7 +138,7 @@ export function useStaggerAnimation(
             start: "top 80%",
             once: true,
           },
-        }
+        },
       );
     }, element);
 

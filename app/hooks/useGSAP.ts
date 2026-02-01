@@ -1,10 +1,11 @@
 import { useRef, useEffect, RefObject } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
 // Enregistrer les plugins GSAP
 if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
+  gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 }
 
 // Configuration par défaut des easings premium
@@ -292,4 +293,4 @@ export function createScaleAnimation(
 }
 
 // Export du gsap pour utilisation directe
-export { gsap, ScrollTrigger };
+export { gsap, ScrollTrigger, ScrollToPlugin };

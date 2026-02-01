@@ -11,6 +11,7 @@ L'expérience utilisateur du site a été considérablement améliorée avec l'i
 ### 1. **Composants Réutilisables**
 
 #### `AnimatedSection.tsx`
+
 - Wrapper pour animer les sections au scroll
 - Types d'animations: slideUp, fadeIn, cascade, parallax
 - Support des enfants staggerés
@@ -22,6 +23,7 @@ L'expérience utilisateur du site a été considérablement améliorée avec l'i
 ```
 
 #### `ScrollEffects.tsx`
+
 - **ScrollReveal**: Révélation avec directions (up, down, left, right)
 - **Parallax**: Effet parallax configurable
 - **SplitText**: Animation de texte mot par mot
@@ -29,6 +31,7 @@ L'expérience utilisateur du site a été considérablement améliorée avec l'i
 - **PinSection**: Sections fixées au scroll
 
 #### `ScrollAdvanced.tsx`
+
 - **MouseFollower**: Curseur de souris personnalisé qui suit
 - **ScrollProgressBar**: Barre de progression du scroll
 - **ScrollingText**: Texte qui défile horizontalement
@@ -38,10 +41,12 @@ L'expérience utilisateur du site a été considérablement améliorée avec l'i
 ### 2. **Hooks Personnalisés**
 
 #### `hooks/useGSAP.ts` (existant, maintenant complété)
+
 - `useScrollAnimation`: Animations au scroll basiques
 - Configuration des easings premium
 
 #### `hooks/useScrollAnimations.ts` (nouveau)
+
 - `useScrollReveal`: Révélation au scroll
 - `useParallaxAnimation`: Parallax au scroll
 - `useHoverAnimation`: Animations au hover
@@ -54,7 +59,9 @@ L'expérience utilisateur du site a été considérablement améliorée avec l'i
 ### 3. **Utilitaires Avancés**
 
 #### `utils/scrollAnimations.ts`
+
 Fonctions utilitaires pour:
+
 - Animation de sections
 - Hover effects sur cards
 - Barre de progression
@@ -65,7 +72,9 @@ Fonctions utilitaires pour:
 - Transformations
 
 #### `utils/animationPatterns.ts`
+
 10 patterns d'animation avancés:
+
 1. Clip-path reveal
 2. Zoom avec blur
 3. Rotation reveal
@@ -78,6 +87,7 @@ Fonctions utilitaires pour:
 10. Animations basées sur la vélocité
 
 #### `config/gsapConfig.ts`
+
 - Configuration centralisée des paramètres GSAP
 - Durées, délais, stagger presets
 - Easing functions
@@ -86,7 +96,9 @@ Fonctions utilitaires pour:
 ### 4. **Styles CSS**
 
 #### `styles/animations.css` (nouveau)
+
 70+ classes CSS utilitaires pour:
+
 - Animations simples (float, pulse, bounce, etc.)
 - Animations d'entrée (blur-in, slide, fade, zoom, flip)
 - Gradient animé
@@ -97,6 +109,7 @@ Fonctions utilitaires pour:
 ### 5. **Composant de Démonstration**
 
 #### `AnimationsDemo.tsx`
+
 - Démonstration interactive de tous les types d'animations
 - 7 sections montrant différents effets
 - Code réutilisable et documenté
@@ -104,6 +117,7 @@ Fonctions utilitaires pour:
 ### 6. **Documentation**
 
 #### `ANIMATIONS_GUIDE.md`
+
 - Guide complet d'utilisation (500+ lignes)
 - Exemples pour chaque composant
 - Bonnes pratiques de performance
@@ -115,31 +129,37 @@ Fonctions utilitaires pour:
 ## 🎯 Améliorations de l'Expérience Utilisateur
 
 ### Avant
+
 - Scroll statique sans animations
 - Transitions abruptes entre les sections
 - Absence de feedback visuel au scroll
 - Experience peu immersive
 
 ### Après
+
 ✅ **Animations fluides au scroll**
+
 - Révélation progressive des sections
 - Entrées cascadées des éléments
 - Parallax sur images et backgrounds
 - Transitions douces et naturelles
 
 ✅ **Interactions améliorées**
+
 - Hover effects modernes
 - Feedback visuel sur les actions
 - Animations de compteurs
 - Morphing et transformations
 
 ✅ **Performance optimisée**
+
 - Utilise `transform` et `opacity`
 - GPU-accelerated animations
 - Déchargement automatique des animations
 - Respect de `prefers-reduced-motion`
 
 ✅ **Accessibilité**
+
 - Respect des préférences utilisateur
 - Alternatives non-animées
 - Texte alternatif préservé
@@ -177,15 +197,17 @@ Documentation/
 ## 🚀 Comment utiliser
 
 ### Utilisation simple
+
 ```tsx
 import { AnimatedSection } from "~/components/AnimatedSection";
 
 <AnimatedSection animationType="slideUp">
   <h2>Mon contenu</h2>
-</AnimatedSection>
+</AnimatedSection>;
 ```
 
 ### Avec hooks
+
 ```tsx
 import { useScrollReveal } from "~/hooks/useScrollAnimations";
 
@@ -196,10 +218,9 @@ return <div ref={ref}>Contenu révélé</div>;
 ```
 
 ### Avec classes CSS
+
 ```tsx
-<div className="animate-slide-up animate-delay-200">
-  Contenu animé
-</div>
+<div className="animate-slide-up animate-delay-200">Contenu animé</div>
 ```
 
 ---
@@ -213,7 +234,7 @@ export const GSAP_CONFIG = {
   durations: { fast: 0.3, normal: 0.6, slow: 1 },
   stagger: { small: 0.05, normal: 0.1, large: 0.2 },
   eases: { smooth: "power2.out", bounce: "back.out(1.7)" },
-  parallax: { slow: -0.3, normal: -0.5, fast: -0.7 }
+  parallax: { slow: -0.3, normal: -0.5, fast: -0.7 },
 };
 ```
 
@@ -234,6 +255,7 @@ export const GSAP_CONFIG = {
 ## 📝 Fichiers modifiés/créés
 
 **Nouveaux fichiers:**
+
 - ✅ `app/components/AnimatedSection.tsx`
 - ✅ `app/components/ScrollEffects.tsx`
 - ✅ `app/components/ScrollAdvanced.tsx`
@@ -247,6 +269,7 @@ export const GSAP_CONFIG = {
 - ✅ `ANIMATIONS_GUIDE.md`
 
 **Fichiers modifiés:**
+
 - ✅ `app/root.tsx` - Ajout du GSAPProvider et import des styles d'animation
 
 ---
@@ -273,12 +296,13 @@ export const GSAP_CONFIG = {
 ## 🎨 Exemple d'intégration complète
 
 Pour voir tous les composants en action, consultez:
+
 - `app/components/AnimationsDemo.tsx` - Démonstration interactive
 - `ANIMATIONS_GUIDE.md` - Guide d'utilisation détaillé
 
 ---
 
 **Statut**: ✅ Complété et prêt à l'emploi
-**Sauf**: Fichiers PDF (*.pdf) comme demandé
+**Sauf**: Fichiers PDF (\*.pdf) comme demandé
 
 Toutes les animations sont fluides, performantes et respectent l'accessibilité! 🚀

@@ -1,41 +1,28 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useCallback } from "react";
 import { gsap, ScrollTrigger, easings } from "~/hooks/useGSAP";
 import { heroData } from "~/data/content";
+import TypingEffect from "./TypingEffect";
+
+import AnimatedBackground, { GlowingParticles } from "./AnimatedBackground";
+import Magnet from "./Magnet";
+import CircularText from "./CircularText";
+import { Download } from "lucide-react";
 
 const roles = heroData.primaryLines;
 
 export default function Hero() {
-  const [roleIndex, setRoleIndex] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const greetingRef = useRef<HTMLParagraphElement>(null);
-  const roleRef = useRef<HTMLSpanElement>(null);
+  const roleContainerRef = useRef<HTMLDivElement>(null);
   const imageContainerRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
   const scrollIndicatorRef = useRef<HTMLDivElement>(null);
-  const particlesRef = useRef<HTMLDivElement>(null);
-  const glowRef = useRef<HTMLDivElement>(null);
-
-  // Animation des rôles en boucle
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setRoleIndex((prev) => (prev + 1) % roles.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
-
-  // Animation du changement de rôle
-  useEffect(() => {
-    if (!roleRef.current) return;
-
-    gsap.fromTo(
-      roleRef.current,
-      { yPercent: 100, opacity: 0 },
-      { yPercent: 0, opacity: 1, duration: 0.5, ease: easings.spring }
-    );
-  }, [roleIndex]);
+  const glowOrb1Ref = useRef<HTMLDivElement>(null);
+  const glowOrb2Ref = useRef<HTMLDivElement>(null);
+  const glowOrb3Ref = useRef<HTMLDivElement>(null);
 
   // Animations principales au chargement
   useEffect(() => {
@@ -47,30 +34,45 @@ export default function Hero() {
       // Timeline principale
       const tl = gsap.timeline({ defaults: { ease: easings.spring } });
 
-      // Animation du glow background
-      if (glowRef.current) {
-        gsap.to(glowRef.current, {
-          scale: 1.2,
+      // Animated glow orbs
+      if (glowOrb1Ref.current) {
+        gsap.to(glowOrb1Ref.current, {
+          x: 150,
+          y: -80,
+          scale: 1.3,
           opacity: 0.6,
-          duration: 4,
+          duration: 8,
           repeat: -1,
           yoyo: true,
           ease: "sine.inOut",
         });
       }
 
-      // Animation des particules
-      if (particlesRef.current) {
-        const particles = particlesRef.current.querySelectorAll(".particle");
-        particles.forEach((particle, i) => {
-          gsap.to(particle, {
-            y: "-100vh",
-            opacity: 0,
-            duration: 8 + Math.random() * 4,
-            repeat: -1,
-            delay: i * 1.5,
-            ease: "none",
-          });
+      if (glowOrb2Ref.current) {
+        gsap.to(glowOrb2Ref.current, {
+          x: -100,
+          y: 100,
+          scale: 0.8,
+          opacity: 0.4,
+          duration: 10,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+          delay: 2,
+        });
+      }
+
+      if (glowOrb3Ref.current) {
+        gsap.to(glowOrb3Ref.current, {
+          x: 80,
+          y: 60,
+          scale: 1.1,
+          opacity: 0.5,
+          duration: 12,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+          delay: 4,
         });
       }
 
@@ -80,7 +82,7 @@ export default function Hero() {
           greetingRef.current,
           { opacity: 0, y: 30, filter: "blur(10px)" },
           { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.8 },
-          0.2
+          0.2,
         );
       }
 
@@ -103,7 +105,7 @@ export default function Hero() {
             stagger: 0.15,
             ease: easings.spring,
           },
-          0.4
+          0.4,
         );
       }
 
@@ -113,17 +115,17 @@ export default function Hero() {
           subtitleRef.current,
           { opacity: 0, y: 20 },
           { opacity: 1, y: 0, duration: 0.6 },
-          0.8
+          0.8,
         );
       }
 
-      // Animation du rôle container
-      if (roleRef.current) {
+      // Animation du rôle container (typing effect will handle the text)
+      if (roleContainerRef.current) {
         tl.fromTo(
-          roleRef.current.parentElement,
+          roleContainerRef.current,
           { opacity: 0, y: 20 },
           { opacity: 1, y: 0, duration: 0.6 },
-          1
+          1,
         );
       }
 
@@ -134,7 +136,7 @@ export default function Hero() {
           buttons,
           { opacity: 0, y: 30, scale: 0.9 },
           { opacity: 1, y: 0, scale: 1, duration: 0.6, stagger: 0.15 },
-          1.2
+          1.2,
         );
       }
 
@@ -144,7 +146,7 @@ export default function Hero() {
           imageContainerRef.current,
           { opacity: 0, scale: 0.8, rotateY: -15 },
           { opacity: 1, scale: 1, rotateY: 0, duration: 1 },
-          0.6
+          0.6,
         );
 
         // Floating animation continue
@@ -155,6 +157,19 @@ export default function Hero() {
           yoyo: true,
           ease: "sine.inOut",
         });
+
+        // Glow pulse behind image
+        const imageGlow = imageRef.current.querySelector(".image-glow");
+        if (imageGlow) {
+          gsap.to(imageGlow, {
+            scale: 1.2,
+            opacity: 0.4,
+            duration: 2,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+          });
+        }
       }
 
       // Animation du scroll indicator
@@ -163,7 +178,7 @@ export default function Hero() {
           scrollIndicatorRef.current,
           { opacity: 0 },
           { opacity: 1, duration: 0.5 },
-          1.5
+          1.5,
         );
 
         gsap.to(scrollIndicatorRef.current.querySelector(".scroll-dot"), {
@@ -198,6 +213,19 @@ export default function Hero() {
               duration: 0.1,
             });
           }
+          // Parallax on glow orbs
+          if (glowOrb1Ref.current) {
+            gsap.to(glowOrb1Ref.current, {
+              y: progress * -150,
+              duration: 0.1,
+            });
+          }
+          if (glowOrb2Ref.current) {
+            gsap.to(glowOrb2Ref.current, {
+              y: progress * -100,
+              duration: 0.1,
+            });
+          }
         },
       });
     }, sectionRef);
@@ -206,7 +234,7 @@ export default function Hero() {
   }, []);
 
   // Magnetic effect pour les boutons
-  const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
     const button = e.currentTarget;
     const rect = button.getBoundingClientRect();
     const x = e.clientX - rect.left - rect.width / 2;
@@ -218,64 +246,89 @@ export default function Hero() {
       duration: 0.3,
       ease: easings.smooth,
     });
-  };
+  }, []);
 
-  const handleMouseLeave = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleMouseLeave = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
     gsap.to(e.currentTarget, {
       x: 0,
       y: 0,
       duration: 0.5,
       ease: easings.elastic,
     });
-  };
+  }, []);
 
   return (
     <section
       id="hero"
       ref={sectionRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-dark-deep"
+      className="relative h-screen flex items-center justify-center overflow-hidden bg-dark-deep"
     >
-      {/* Background glow effect */}
-      <div
-        ref={glowRef}
-        className="absolute inset-0 bg-gradient-glow opacity-50"
-      />
+      {/* Animated Background with Glow Effects */}
 
-      {/* Floating particles */}
-      <div
-        ref={particlesRef}
-        className="absolute inset-0 overflow-hidden pointer-events-none"
-      >
-        {[...Array(12)].map((_, i) => (
-          <div
-            key={i}
-            className="particle absolute w-2 h-2 bg-violet-accent/30 rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              bottom: "-20px",
-              opacity: 0.6,
-            }}
-          />
-        ))}
+      <AnimatedBackground variant="combined" intensity="medium" />
+
+      {/* Additional Glow Orbs with custom animations */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Main glow orb - top left */}
+        <div
+          ref={glowOrb1Ref}
+          className="absolute -top-20 -left-20 w-[500px] h-[500px] rounded-full opacity-40"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(124, 58, 237, 0.5) 0%, rgba(124, 58, 237, 0.2) 40%, transparent 70%)",
+            filter: "blur(60px)",
+          }}
+        />
+
+        {/* Secondary glow orb - bottom right */}
+        <div
+          ref={glowOrb2Ref}
+          className="absolute -bottom-32 -right-32 w-[600px] h-[600px] rounded-full opacity-30"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(139, 92, 246, 0.4) 0%, rgba(139, 92, 246, 0.15) 40%, transparent 70%)",
+            filter: "blur(80px)",
+          }}
+        />
+
+        {/* Accent glow orb - center */}
+        <div
+          ref={glowOrb3Ref}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full opacity-20"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(167, 139, 250, 0.5) 0%, transparent 60%)",
+            filter: "blur(50px)",
+          }}
+        />
       </div>
 
-      <div className="container mx-auto px-6 py-20 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      {/* Glowing Particles */}
+      <GlowingParticles count={15} />
+
+      {/* Grid overlay for extra depth */}
+      <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,#7C3AED_1px,transparent_1px),linear-gradient(180deg,#7C3AED_1px,transparent_1px)] bg-[size:100px_100px]" />
+      </div>
+
+      <div className="max-w-7xl 2xl:max-w-[1400px] 3xl:max-w-[1700px] 4xl:max-w-[2100px] mx-auto px-6 py-20 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-9 items-center">
           {/* Text Content */}
-          <div className="text-center lg:text-left">
+          {/* <div className="text-center lg:text-left"> */}
+          <div className="text-left lg:text-left">
             <p
               ref={greetingRef}
-              className="text-light-secondary text-lg md:text-xl mb-4"
+              className="text-light-secondary sm:text-lg md:text-xl sm:mb-4"
             >
               {heroData.greeting}
             </p>
 
             <h1
               ref={titleRef}
-              className="text-4xl md:text-6xl lg:text-7xl font-bold text-light-primary mb-6 perspective-1000"
+              className="text-4xl md:text-6xl lg:text-7xl font-bold text-light-primary mb-2 sm:mb-6 perspective-1000"
             >
               {heroData.name.split(" ").map((word, i) => (
-                <span key={i} className="title-word inline-block mr-4">
+                <span key={i} className="title-word inline-block mr-2 sm:mr-4">
                   {i === 1 ? (
                     <span className="text-transparent bg-clip-text bg-gradient-violet">
                       {word}
@@ -289,29 +342,42 @@ export default function Hero() {
 
             <p
               ref={subtitleRef}
-              className="text-light-secondary text-lg md:text-xl mb-2"
+              className="text-light-secondary sm:text-lg md:text-xl sm:mb-2"
             >
               {heroData.subtitle}
             </p>
 
-            <div className="h-12 md:h-14 mb-8 overflow-hidden">
-              <span
-                ref={roleRef}
-                className="block text-2xl md:text-4xl font-semibold text-transparent bg-clip-text bg-gradient-violet"
-              >
-                {roles[roleIndex]}
-              </span>
+            {/* Typing Effect for Roles */}
+            <div ref={roleContainerRef} className="h-12 md:h-14 mb-8">
+              <TypingEffect
+                texts={roles}
+                typingSpeed={80}
+                deletingSpeed={40}
+                pauseDuration={2500}
+                className="text-2xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-violet"
+                loop={true}
+              />
             </div>
 
             <div
               ref={ctaRef}
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+              className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start text-center"
             >
+              <a
+                href="/cv.pdf"
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
+                download
+                className="title-btn inline-flex items-center justify-center gap-2 px-6 py-3 sm:px-8 sm:py-4 bg-gradient-violet text-white font-semibold rounded-xl shadow-glow-violet hover:scale-105 transition-all duration-300 text-sm sm:text-base"
+              >
+                <Download className="w-5 h-5" />
+                Télécharger mon CV
+              </a>
               <a
                 href="#projects"
                 onMouseMove={handleMouseMove}
                 onMouseLeave={handleMouseLeave}
-                className="hero-cta px-8 py-4 bg-gradient-violet text-white font-semibold rounded-xl shadow-glow-violet transition-all duration-300 hover:shadow-[0_0_40px_rgba(124,58,237,0.6)]"
+                className="hidden hero-cta px-8 py-4 bg-gradient-violet text-white font-semibold rounded-xl shadow-glow-violet transition-all duration-300 hover:shadow-[0_0_40px_rgba(124,58,237,0.6)]"
               >
                 Voir mes projets
               </a>
@@ -319,7 +385,7 @@ export default function Hero() {
                 href="#contact"
                 onMouseMove={handleMouseMove}
                 onMouseLeave={handleMouseLeave}
-                className="hero-cta px-8 py-4 border-2 border-dark-border text-light-primary font-semibold rounded-xl hover:bg-dark-surface hover:border-violet-primary/50 transition-all duration-300"
+                className="hero-cta px-5 py-2.5 sm:px-7 sm:py-3 bg-violet-primary/20 border-2 border-violet-primary text-light-primary font-semibold rounded-xl hover:bg-violet-primary/30 transition-all duration-300 text-sm sm:text-base"
               >
                 Me contacter
               </a>
@@ -332,8 +398,15 @@ export default function Hero() {
             className="relative flex justify-center lg:justify-end"
           >
             <div ref={imageRef} className="relative">
-              {/* Glow behind image */}
-              <div className="absolute -inset-4 bg-violet-accent/20 blur-3xl rounded-full animate-pulse" />
+              {/* Animated glow behind image */}
+              <div
+                className="image-glow absolute -inset-8 rounded-full opacity-30"
+                style={{
+                  background:
+                    "radial-gradient(circle, rgba(124, 58, 237, 0.6) 0%, rgba(124, 58, 237, 0.2) 50%, transparent 70%)",
+                  filter: "blur(40px)",
+                }}
+              />
 
               {/* Image card */}
               <div className="relative bg-dark-card p-3 rounded-3xl shadow-premium border border-dark-border overflow-hidden group">
@@ -348,12 +421,21 @@ export default function Hero() {
                 <img
                   src="/profile/face-identiter-large.jpg"
                   alt="David Abraham"
-                  className="w-72 h-80 md:w-80 md:h-96 object-cover rounded-2xl transition-transform duration-700 group-hover:scale-105"
+                  className="w-72 h-72 md:w-80 md:h-80 lg:w-[22rem] lg:h-[26rem] object-cover object-top  rounded-2xl transition-transform duration-700 group-hover:scale-105"
+                />
+                <CircularText
+                  text="REACT✦REMIX✦COMPONENTS✦PATTERNS✦UI/UX✦TEMPLATES✦"
+                  onHover="slowDown"
+                  spinDuration={20}
+                  className="!absolute !left-8 !top-16 lg:!left-12 lg:!top-24  !text-violet-primary  !inset-0 custom-class w-[25em]"
                 />
 
-                {/* Status badge */}
-                <div className="absolute bottom-6 left-6 bg-dark-surface/90 backdrop-blur-sm px-4 py-2 rounded-full border border-dark-border flex items-center gap-2">
-                  <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                {/* Status badge with glow */}
+                <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 bg-dark-surface/90 backdrop-blur-sm px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border border-dark-border flex items-center gap-2 shadow-lg">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                  </span>
                   <span className="text-light-secondary text-sm">
                     Disponible
                   </span>
@@ -367,10 +449,10 @@ export default function Hero() {
       {/* Scroll indicator */}
       <div
         ref={scrollIndicatorRef}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 bg-dark-deep/70 p-1.5 sm:p-2 rounded-full"
       >
-        <div className="w-6 h-10 border-2 border-dark-border rounded-full flex justify-center pt-2">
-          <div className="scroll-dot w-1.5 h-1.5 bg-violet-accent rounded-full" />
+        <div className="w-6 h-10 border-2 border-[#7C3AED] rounded-full flex justify-center pt-2 backdrop-blur-sm bg-dark-surface/20">
+          <div className="scroll-dot w-1.5 h-1.5 bg-violet-accent rounded-full shadow-[0_0_10px_rgba(124,58,237,0.8)]" />
         </div>
       </div>
     </section>

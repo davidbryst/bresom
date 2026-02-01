@@ -37,7 +37,7 @@ export default function Navbar() {
       gsap.fromTo(
         navRef.current,
         { y: -100, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }
+        { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
       );
 
       // Logo animation
@@ -45,7 +45,7 @@ export default function Navbar() {
         gsap.fromTo(
           logoRef.current,
           { opacity: 0, x: -20 },
-          { opacity: 1, x: 0, duration: 0.6, delay: 0.3, ease: "power2.out" }
+          { opacity: 1, x: 0, duration: 0.6, delay: 0.3, ease: "power2.out" },
         );
       }
 
@@ -62,7 +62,7 @@ export default function Navbar() {
             stagger: 0.08,
             delay: 0.4,
             ease: "power2.out",
-          }
+          },
         );
       }
 
@@ -77,7 +77,7 @@ export default function Navbar() {
             duration: 0.5,
             delay: 0.8,
             ease: "back.out(1.7)",
-          }
+          },
         );
       }
     }, navRef);
@@ -125,7 +125,7 @@ export default function Navbar() {
           stagger: 0.08,
           delay: 0.2,
           ease: "power2.out",
-        }
+        },
       );
     } else {
       gsap.to(mobileMenuRef.current.querySelector(".mobile-panel"), {
@@ -225,7 +225,7 @@ export default function Navbar() {
             </a>
 
             {/* Desktop Navigation */}
-            <div ref={linksRef} className="hidden md:flex items-center gap-1">
+            <div ref={linksRef} className="hidden lg:flex items-center gap-1">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
@@ -245,7 +245,7 @@ export default function Navbar() {
               href="#contact"
               onMouseEnter={handleCtaHover}
               onMouseLeave={handleCtaLeave}
-              className="hidden md:block px-5 py-2.5 bg-gradient-violet text-white text-sm font-semibold rounded-lg shadow-glow-violet transition-all duration-300"
+              className="hidden lg:block px-5 py-2.5 bg-gradient-violet text-white text-sm font-semibold rounded-lg shadow-glow-violet transition-all duration-300"
             >
               Discutons
             </a>
@@ -253,7 +253,7 @@ export default function Navbar() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 text-light-primary transition-transform active:scale-90"
+              className="lg:hidden p-2 text-light-primary transition-transform active:scale-90"
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -265,7 +265,7 @@ export default function Navbar() {
       {/* Mobile Menu */}
       <div
         ref={mobileMenuRef}
-        className="fixed inset-0 z-40 md:hidden opacity-0 pointer-events-none"
+        className="fixed inset-0 z-40 lg:hidden opacity-0 pointer-events-none"
       >
         <div
           className="absolute inset-0 bg-dark-deep/80 backdrop-blur-lg"

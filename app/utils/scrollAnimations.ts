@@ -6,7 +6,7 @@ gsap.registerPlugin(ScrollTrigger);
 // Animation fluide pour les sections au scroll
 export function animateSectionEntrance(
   element: HTMLElement,
-  staggerChildren: boolean = false
+  staggerChildren: boolean = false,
 ) {
   const tl = gsap.timeline({
     scrollTrigger: {
@@ -33,7 +33,7 @@ export function animateSectionEntrance(
         duration: 0.7,
         stagger: 0.15,
         ease: "power3.out",
-      }
+      },
     );
   } else {
     tl.fromTo(
@@ -47,7 +47,7 @@ export function animateSectionEntrance(
         y: 0,
         duration: 0.8,
         ease: "power3.out",
-      }
+      },
     );
   }
 
@@ -76,7 +76,10 @@ export function animateCardHoverReverse(card: HTMLElement) {
 }
 
 // Animation de texte avec clip-path
-export function animateTextReveal(element: HTMLElement, stagger: number = 0.05) {
+export function animateTextReveal(
+  element: HTMLElement,
+  stagger: number = 0.05,
+) {
   const words = element.innerText
     .split(" ")
     .map((word) => `<span class="reveal-word">${word}</span>`)
@@ -97,7 +100,7 @@ export function animateTextReveal(element: HTMLElement, stagger: number = 0.05) 
       duration: 0.5,
       stagger,
       ease: "power2.out",
-    }
+    },
   );
 }
 
@@ -105,7 +108,7 @@ export function animateTextReveal(element: HTMLElement, stagger: number = 0.05) 
 export function animateProgressBar(
   barElement: HTMLElement,
   targetWidth: number,
-  duration: number = 1.5
+  duration: number = 1.5,
 ) {
   return gsap.fromTo(
     barElement,
@@ -119,7 +122,7 @@ export function animateProgressBar(
         start: "top 80%",
         once: true,
       },
-    }
+    },
   );
 }
 
@@ -141,7 +144,7 @@ export function animateFloatingElements(elements: HTMLElement[]) {
 export function animateCounter(
   element: HTMLElement,
   endValue: number,
-  duration: number = 2
+  duration: number = 2,
 ) {
   const obj = { value: 0 };
 
@@ -163,7 +166,7 @@ export function animateCounter(
 // Animation de scroll parallax
 export function animateParallaxElement(
   element: HTMLElement,
-  speed: number = -0.5
+  speed: number = -0.5,
 ) {
   return gsap.to(element, {
     y: () => window.innerHeight * speed,
@@ -181,7 +184,7 @@ export function animateParallaxElement(
 // Animation de rotation/tilt au hover
 export function animateTiltOnHover(
   element: HTMLElement,
-  maxRotation: number = 5
+  maxRotation: number = 5,
 ) {
   element.addEventListener("mousemove", (e: MouseEvent) => {
     const rect = element.getBoundingClientRect();
@@ -219,7 +222,7 @@ export function animateCascadeEntrance(
   container: HTMLElement,
   childSelector: string = "> *",
   duration: number = 0.6,
-  staggerDelay: number = 0.12
+  staggerDelay: number = 0.12,
 ) {
   const children = container.querySelectorAll(childSelector);
 
@@ -242,7 +245,7 @@ export function animateCascadeEntrance(
         start: "top 75%",
         once: true,
       },
-    }
+    },
   );
 }
 

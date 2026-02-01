@@ -80,7 +80,11 @@ export function initializeGSAP() {
 
   // Activer les métadonnées en développement
   if (process.env.NODE_ENV === "development") {
-    gsap.set(".gsap-debug", { fontSize: 12, background: "#000", color: "#0f0" });
+    gsap.set(".gsap-debug", {
+      fontSize: 12,
+      background: "#000",
+      color: "#0f0",
+    });
   }
 }
 
