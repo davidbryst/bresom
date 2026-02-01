@@ -14,7 +14,8 @@
       "Bash(npx tsc:*)",
       "Bash(ls \"C:\\\\Users\\\\david\\\\.projet\\\\bresom\\\\app\\\\components\"\" 2>/dev/null || dir /b \"C:Usersdavid.projetbresomappcomponents\"\")",
       "Bash(npm view:*)",
-      "Bash(npx vite-bundle-visualizer)"
+      "Bash(npx vite-bundle-visualizer)",
+      "Bash(git rm:*)"
     ]
   }
 }
