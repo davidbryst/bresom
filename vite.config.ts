@@ -23,6 +23,9 @@ export default defineConfig({
     }),
     tsconfigPaths(),
   ],
+  ssr: {
+    noExternal: ["gsap"],
+  },
   build: {
     chunkSizeWarningLimit: 1000,
     rollupOptions: {
