@@ -17,8 +17,8 @@ export const advancedEasings = {
   expoInOut: "expo.inOut",
   circ: "circ.out",
   spring: "power4.out",
-  // Custom cubic bezier approximations
-  premium: "cubic-bezier(0.22, 1, 0.36, 1)",
+  // Custom premium easing (GSAP compatible)
+  premium: "power3.out",
   snappy: "power3.out",
   gentle: "sine.out",
 };
@@ -365,13 +365,14 @@ export function useScrollParallax<T extends HTMLElement>(
   direction: "vertical" | "horizontal" = "vertical"
 ) {
   const ref = useRef<T>(null);
+  const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
 
   useEffect(() => {
     if (!ref.current || typeof window === "undefined") return;
 
     const property = direction === "vertical" ? "yPercent" : "xPercent";
 
-    gsap.to(ref.current, {
+    const animation = gsap.to(ref.current, {
       [property]: -100 * speed,
       ease: "none",
       scrollTrigger: {
@@ -382,10 +383,11 @@ export function useScrollParallax<T extends HTMLElement>(
       },
     });
 
+    scrollTriggerRef.current = animation.scrollTrigger as ScrollTrigger;
+
     return () => {
-      ScrollTrigger.getAll().forEach((st) => {
-        if (st.trigger === ref.current) st.kill();
-      });
+      scrollTriggerRef.current?.kill();
+      animation.kill();
     };
   }, [speed, direction]);
 
@@ -398,11 +400,12 @@ export function useScrollScale<T extends HTMLElement>(
   toScale: number = 1
 ) {
   const ref = useRef<T>(null);
+  const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
 
   useEffect(() => {
     if (!ref.current || typeof window === "undefined") return;
 
-    gsap.fromTo(
+    const animation = gsap.fromTo(
       ref.current,
       { scale: fromScale, opacity: 0 },
       {
@@ -418,10 +421,11 @@ export function useScrollScale<T extends HTMLElement>(
       }
     );
 
+    scrollTriggerRef.current = animation.scrollTrigger as ScrollTrigger;
+
     return () => {
-      ScrollTrigger.getAll().forEach((st) => {
-        if (st.trigger === ref.current) st.kill();
-      });
+      scrollTriggerRef.current?.kill();
+      animation.kill();
     };
   }, [fromScale, toScale]);
 
@@ -431,11 +435,12 @@ export function useScrollScale<T extends HTMLElement>(
 // Rotate on scroll
 export function useScrollRotate<T extends HTMLElement>(degrees: number = 360) {
   const ref = useRef<T>(null);
+  const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
 
   useEffect(() => {
     if (!ref.current || typeof window === "undefined") return;
 
-    gsap.to(ref.current, {
+    const animation = gsap.to(ref.current, {
       rotation: degrees,
       ease: "none",
       scrollTrigger: {
@@ -446,10 +451,11 @@ export function useScrollRotate<T extends HTMLElement>(degrees: number = 360) {
       },
     });
 
+    scrollTriggerRef.current = animation.scrollTrigger as ScrollTrigger;
+
     return () => {
-      ScrollTrigger.getAll().forEach((st) => {
-        if (st.trigger === ref.current) st.kill();
-      });
+      scrollTriggerRef.current?.kill();
+      animation.kill();
     };
   }, [degrees]);
 
@@ -468,6 +474,7 @@ export function useStaggerChildren<T extends HTMLElement>(
   }
 ) {
   const ref = useRef<T>(null);
+  const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
 
   useEffect(() => {
     if (!ref.current || typeof window === "undefined") return;
@@ -494,8 +501,10 @@ export function useStaggerChildren<T extends HTMLElement>(
       from: "start",
     };
 
+    let animation: gsap.core.Tween;
+
     if (options?.scrollTrigger !== false) {
-      gsap.fromTo(children, fromVars, {
+      animation = gsap.fromTo(children, fromVars, {
         ...toVars,
         stagger,
         scrollTrigger: {
@@ -504,14 +513,14 @@ export function useStaggerChildren<T extends HTMLElement>(
           toggleActions: "play none none none",
         },
       });
+      scrollTriggerRef.current = animation.scrollTrigger as ScrollTrigger;
     } else {
-      gsap.fromTo(children, fromVars, { ...toVars, stagger });
+      animation = gsap.fromTo(children, fromVars, { ...toVars, stagger });
     }
 
     return () => {
-      ScrollTrigger.getAll().forEach((st) => {
-        if (st.trigger === ref.current) st.kill();
-      });
+      scrollTriggerRef.current?.kill();
+      animation.kill();
     };
   }, [childSelector, options]);
 
@@ -565,6 +574,7 @@ export function useMagneticHover<T extends HTMLElement>(strength: number = 0.3) 
 export function useHorizontalScroll<T extends HTMLElement>() {
   const containerRef = useRef<T>(null);
   const sectionRef = useRef<HTMLElement>(null);
+  const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
 
   useEffect(() => {
     if (!containerRef.current || !sectionRef.current || typeof window === "undefined") return;
@@ -574,7 +584,7 @@ export function useHorizontalScroll<T extends HTMLElement>() {
 
     const totalWidth = container.scrollWidth - window.innerWidth;
 
-    gsap.to(container, {
+    const animation = gsap.to(container, {
       x: -totalWidth,
       ease: "none",
       scrollTrigger: {
@@ -587,10 +597,11 @@ export function useHorizontalScroll<T extends HTMLElement>() {
       },
     });
 
+    scrollTriggerRef.current = animation.scrollTrigger as ScrollTrigger;
+
     return () => {
-      ScrollTrigger.getAll().forEach((st) => {
-        if (st.trigger === section) st.kill();
-      });
+      scrollTriggerRef.current?.kill();
+      animation.kill();
     };
   }, []);
 
@@ -609,6 +620,8 @@ export function useCounter<T extends HTMLElement>(
   }
 ) {
   const ref = useRef<T>(null);
+  const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
+  const animationRef = useRef<gsap.core.Tween | null>(null);
 
   useEffect(() => {
     if (!ref.current || typeof window === "undefined") return;
@@ -627,27 +640,25 @@ export function useCounter<T extends HTMLElement>(
       },
     };
 
+    const counter = { value: 0 };
+
     if (options?.scrollTrigger !== false) {
-      gsap.fromTo(
-        { value: 0 },
-        { value: 0 },
-        {
-          ...animationConfig,
-          scrollTrigger: {
-            trigger: element,
-            start: options?.start || "top 80%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
+      animationRef.current = gsap.to(counter, {
+        ...animationConfig,
+        scrollTrigger: {
+          trigger: element,
+          start: options?.start || "top 80%",
+          toggleActions: "play none none none",
+        },
+      });
+      scrollTriggerRef.current = animationRef.current.scrollTrigger as ScrollTrigger;
     } else {
-      gsap.fromTo({ value: 0 }, { value: 0 }, animationConfig);
+      animationRef.current = gsap.to(counter, animationConfig);
     }
 
     return () => {
-      ScrollTrigger.getAll().forEach((st) => {
-        if (st.trigger === element) st.kill();
-      });
+      scrollTriggerRef.current?.kill();
+      animationRef.current?.kill();
     };
   }, [endValue, options]);
 
@@ -695,13 +706,15 @@ export function useFloating<T extends HTMLElement>(
 // Progress bar animation
 export function useProgressBar<T extends HTMLElement>(targetWidth: string | number) {
   const ref = useRef<T>(null);
+  const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
+  const animationRef = useRef<gsap.core.Tween | null>(null);
 
   useEffect(() => {
     if (!ref.current || typeof window === "undefined") return;
 
     const element = ref.current;
 
-    gsap.fromTo(
+    animationRef.current = gsap.fromTo(
       element,
       { width: 0 },
       {
@@ -716,10 +729,11 @@ export function useProgressBar<T extends HTMLElement>(targetWidth: string | numb
       }
     );
 
+    scrollTriggerRef.current = animationRef.current.scrollTrigger as ScrollTrigger;
+
     return () => {
-      ScrollTrigger.getAll().forEach((st) => {
-        if (st.trigger === element) st.kill();
-      });
+      scrollTriggerRef.current?.kill();
+      animationRef.current?.kill();
     };
   }, [targetWidth]);
 

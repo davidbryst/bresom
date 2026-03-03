@@ -1,5 +1,6 @@
 import { useRef, useEffect, useCallback } from "react";
 import { gsap, ScrollTrigger, easings } from "~/hooks/useGSAP";
+import { GSAP_CONFIG, createMasterRhythm } from "~/config/gsapConfig";
 import { heroData } from "~/data/content";
 import TypingEffect from "./TypingEffect";
 
@@ -34,46 +35,58 @@ export default function Hero() {
       // Timeline principale
       const tl = gsap.timeline({ defaults: { ease: easings.spring } });
 
-      // Animated glow orbs
-      if (glowOrb1Ref.current) {
-        gsap.to(glowOrb1Ref.current, {
-          x: 150,
-          y: -80,
-          scale: 1.3,
-          opacity: 0.6,
-          duration: 8,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-        });
-      }
+      // Synchronized breathing effect for glow orbs using master rhythm
+      const orbsArray = [glowOrb1Ref.current, glowOrb2Ref.current, glowOrb3Ref.current].filter(Boolean);
 
-      if (glowOrb2Ref.current) {
-        gsap.to(glowOrb2Ref.current, {
-          x: -100,
-          y: 100,
-          scale: 0.8,
-          opacity: 0.4,
-          duration: 10,
-          repeat: -1,
-          yoyo: true,
+      if (orbsArray.length > 0) {
+        // Master rhythm - all orbs breathe together
+        const masterTl = gsap.timeline({ repeat: -1, yoyo: true });
+        masterTl.to(orbsArray, {
+          scale: 1.15,
+          opacity: 0.7,
+          duration: GSAP_CONFIG.masterRhythm.breathDuration,
           ease: "sine.inOut",
-          delay: 2,
+          stagger: {
+            each: 0.3,
+            from: "center"
+          }
         });
-      }
 
-      if (glowOrb3Ref.current) {
-        gsap.to(glowOrb3Ref.current, {
-          x: 80,
-          y: 60,
-          scale: 1.1,
-          opacity: 0.5,
-          duration: 12,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-          delay: 4,
-        });
+        // Individual movements for depth (subtle)
+        if (glowOrb1Ref.current) {
+          gsap.to(glowOrb1Ref.current, {
+            x: 80,
+            y: -50,
+            duration: GSAP_CONFIG.masterRhythm.waveDuration,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+          });
+        }
+
+        if (glowOrb2Ref.current) {
+          gsap.to(glowOrb2Ref.current, {
+            x: -60,
+            y: 70,
+            duration: GSAP_CONFIG.masterRhythm.waveDuration + 2,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+            delay: 1,
+          });
+        }
+
+        if (glowOrb3Ref.current) {
+          gsap.to(glowOrb3Ref.current, {
+            x: 40,
+            y: 40,
+            duration: GSAP_CONFIG.masterRhythm.waveDuration + 4,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+            delay: 2,
+          });
+        }
       }
 
       // Animation du greeting
@@ -86,24 +99,29 @@ export default function Hero() {
         );
       }
 
-      // Animation du titre avec split text
+      // Animation du titre avec split text - Enhanced 3D
       if (titleRef.current) {
         const words = titleRef.current.querySelectorAll(".title-word");
         tl.fromTo(
           words,
           {
             opacity: 0,
-            y: 80,
+            y: 100,
             rotateX: -90,
+            rotateY: -15,
+            scale: 0.9,
             transformOrigin: "center bottom",
+            transformPerspective: GSAP_CONFIG.transform3D.perspective,
           },
           {
             opacity: 1,
             y: 0,
             rotateX: 0,
-            duration: 1,
-            stagger: 0.15,
-            ease: easings.spring,
+            rotateY: 0,
+            scale: 1,
+            duration: GSAP_CONFIG.durations.slow,
+            stagger: GSAP_CONFIG.stagger.medium,
+            ease: GSAP_CONFIG.eases.smooth4,
           },
           0.4,
         );
@@ -233,18 +251,28 @@ export default function Hero() {
     return () => ctx.revert();
   }, []);
 
-  // Magnetic effect pour les boutons
+  // Enhanced magnetic effect for buttons with rotation
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
     const button = e.currentTarget;
     const rect = button.getBoundingClientRect();
     const x = e.clientX - rect.left - rect.width / 2;
     const y = e.clientY - rect.top - rect.height / 2;
 
+    // Calculate angle for rotation
+    const angle = Math.atan2(y, x) * (180 / Math.PI);
+    const distance = Math.sqrt(x * x + y * y);
+
+    // Enhanced magnetic config
+    const magneticStrength = GSAP_CONFIG.magnetic.strong.strength;
+
     gsap.to(button, {
-      x: x * 0.3,
-      y: y * 0.3,
-      duration: 0.3,
-      ease: easings.smooth,
+      x: x * magneticStrength,
+      y: y * magneticStrength,
+      rotation: angle * 0.05, // Subtle rotation based on angle
+      scale: 1.05,
+      boxShadow: `0 0 ${Math.min(distance / 2, 30)}px rgba(124, 58, 237, 0.6)`,
+      duration: GSAP_CONFIG.magnetic.strong.duration,
+      ease: GSAP_CONFIG.magnetic.strong.ease,
     });
   }, []);
 
@@ -252,8 +280,11 @@ export default function Hero() {
     gsap.to(e.currentTarget, {
       x: 0,
       y: 0,
-      duration: 0.5,
-      ease: easings.elastic,
+      rotation: 0,
+      scale: 1,
+      boxShadow: "0 0 20px rgba(124, 58, 237, 0.5)",
+      duration: 0.6,
+      ease: GSAP_CONFIG.eases.elastic,
     });
   }, []);
 
@@ -272,7 +303,7 @@ export default function Hero() {
         {/* Main glow orb - top left */}
         <div
           ref={glowOrb1Ref}
-          className="absolute -top-20 -left-20 w-[500px] h-[500px] rounded-full opacity-40"
+          className="absolute -top-20 -left-20 w-[500px] h-[500px] rounded-full opacity-40 will-change-transform"
           style={{
             background:
               "radial-gradient(circle, rgba(124, 58, 237, 0.5) 0%, rgba(124, 58, 237, 0.2) 40%, transparent 70%)",
@@ -283,7 +314,7 @@ export default function Hero() {
         {/* Secondary glow orb - bottom right */}
         <div
           ref={glowOrb2Ref}
-          className="absolute -bottom-32 -right-32 w-[600px] h-[600px] rounded-full opacity-30"
+          className="absolute -bottom-32 -right-32 w-[600px] h-[600px] rounded-full opacity-30 will-change-transform"
           style={{
             background:
               "radial-gradient(circle, rgba(139, 92, 246, 0.4) 0%, rgba(139, 92, 246, 0.15) 40%, transparent 70%)",
@@ -294,7 +325,7 @@ export default function Hero() {
         {/* Accent glow orb - center */}
         <div
           ref={glowOrb3Ref}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full opacity-20"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full opacity-20 will-change-transform"
           style={{
             background:
               "radial-gradient(circle, rgba(167, 139, 250, 0.5) 0%, transparent 60%)",
@@ -409,19 +440,22 @@ export default function Hero() {
               />
 
               {/* Image card */}
-              <div className="relative bg-dark-card p-3 rounded-3xl shadow-premium border border-dark-border overflow-hidden group">
+              <div className="relative bg-dark-card p-3 rounded-3xl shadow-premium border border-dark-border overflow-hidden group will-animate">
                 {/* Violet overlay */}
                 <div className="absolute inset-0 bg-gradient-to-br from-violet-primary/10 to-transparent pointer-events-none z-10 rounded-3xl transition-opacity duration-500 group-hover:opacity-50" />
 
-                {/* Shine effect on hover */}
+                {/* Enhanced shine effect on hover */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-20">
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-violet-accent/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                 </div>
+
+                {/* Additional shimmer pass on load */}
+                <div className="absolute inset-0 pointer-events-none z-20 animate-shimmer opacity-40" />
 
                 <img
                   src="/profile/face-identiter-large.jpg"
                   alt="David Abraham"
-                  className="w-72 h-72 md:w-80 md:h-80 lg:w-[22rem] lg:h-[26rem] object-cover object-top  rounded-2xl transition-transform duration-700 group-hover:scale-105"
+                  className="w-72 h-72 md:w-80 md:h-80 lg:w-[22rem] lg:h-[26rem] object-cover object-top rounded-2xl transition-all duration-700 group-hover:scale-105 group-hover:saturate-110 will-change-transform"
                 />
                 <CircularText
                   text="REACT✦REMIX✦COMPONENTS✦PATTERNS✦UI/UX✦TEMPLATES✦"

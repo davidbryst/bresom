@@ -52,28 +52,65 @@ export default function Home() {
 
         {/* Main content */}
         <main>
+          {/* 1. HOOK - Première impression */}
           <Hero />
+
+          {/* Separator */}
+          <div className="py-8 bg-[#000] z-40">
+            <ScrollVelocity
+              texts={["QUI SUIS-JE ✦", "MON HISTOIRE ✦", "À PROPOS ✦", "DÉCOUVREZ ✦"]}
+              velocity={50}
+              numCopies={8}
+              className="custom-scroll-text text-violet-primary sm:text-6xl"
+            />
+          </div>
+
+          {/* 2. CONNEXION - Qui je suis (connexion personnelle immédiate) */}
           <About />
-          <div className="py-12 bg-[#000] z-40">
+
+          {/* Separator */}
+          <div className="py-8 bg-[#000] z-40">
             <ScrollVelocity
-              texts={["REMIX ✦", "TYPESCRIPT ✦", "SUPABASE ✦", "FIGMA ✦"]}
+              texts={["PROJETS ✦", "RÉALISATIONS ✦", "PORTFOLIO ✦", "TRAVAUX ✦"]}
               velocity={50}
               numCopies={8}
               className="custom-scroll-text text-violet-primary sm:text-6xl"
             />
           </div>
-          <Services />
-          <div className="py-12 bg-[#000] z-40">
-            <ScrollVelocity
-              texts={["REMIX ✦", "TYPESCRIPT ✦", "SUPABASE ✦", "FIGMA ✦"]}
-              velocity={50}
-              numCopies={8}
-              className="custom-scroll-text text-violet-primary sm:text-6xl"
-            />
-          </div>
-          <Skills />
+
+          {/* 3. PREUVE - Portfolio concret (avec CTA intégré) */}
           <Projects />
+
+          {/* 4. VALEUR - Ce que je peux faire pour VOUS */}
+          <Services />
+
+          {/* Separator */}
+          <div className="py-8 bg-[#000] z-40">
+            <ScrollVelocity
+              texts={["REMIX ✦", "TYPESCRIPT ✦", "SUPABASE ✦", "FIGMA ✦"]}
+              velocity={50}
+              numCopies={8}
+              className="custom-scroll-text text-violet-primary sm:text-6xl"
+            />
+          </div>
+
+          {/* 5. COMPÉTENCES - Expertise technique (avec CTA intégré) */}
+          <Skills />
+
+          {/* 6. AUTORITÉ - Parcours professionnel */}
           <Experience />
+
+          {/* Separator with CTA message */}
+          <div className="py-12 bg-[#000] z-40">
+            <ScrollVelocity
+              texts={["DISPONIBLE ✦", "CONTACTEZ-MOI ✦", "PARLONS PROJET ✦", "DISCUTONS ✦"]}
+              velocity={50}
+              numCopies={8}
+              className="custom-scroll-text text-violet-primary sm:text-6xl"
+            />
+          </div>
+
+          {/* 7. ACTION - Appel à l'action final */}
           <Contact />
         </main>
 

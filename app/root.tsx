@@ -9,6 +9,7 @@ import type { LinksFunction } from "@remix-run/node";
 import { useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { initializeGSAP } from "~/config/gsapConfig";
 import {
   SmoothScrollProvider,
   ScrollProgress,
@@ -21,6 +22,8 @@ import "./styles/animations.css";
 // Enregistrer les plugins GSAP
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
+  // Initialize GSAP configuration
+  initializeGSAP();
 }
 
 export const links: LinksFunction = () => [
@@ -36,26 +39,21 @@ export const links: LinksFunction = () => [
   },
 ];
 
-// Main sections for navigation
+// Main sections for navigation - Story-first approach
 const mainSections = [
   { id: "hero", label: "Accueil" },
   { id: "about", label: "À propos" },
+  { id: "projects", label: "Projets" },
   { id: "services", label: "Services" },
   { id: "skills", label: "Compétences" },
-  { id: "projects", label: "Projets" },
   { id: "experience", label: "Expérience" },
   { id: "contact", label: "Contact" },
 ];
 
 function GSAPProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
-    // Configure GSAP defaults for premium feel
-    gsap.defaults({
-      ease: "power3.out",
-      duration: 0.8,
-    });
-
-    // Refresh ScrollTrigger on navigation
+    // GSAP defaults are now configured via initializeGSAP() in config
+    // Cleanup ScrollTriggers on navigation
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };

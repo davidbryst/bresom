@@ -8,12 +8,13 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+// Navigation - Story-first approach (connexion personnelle avant tout)
 const navLinks = [
   { name: "Accueil", href: "#hero" },
   { name: "A propos", href: "#about" },
+  { name: "Projets", href: "#projects" },
   { name: "Services", href: "#services" },
   { name: "Skills", href: "#skills" },
-  { name: "Projets", href: "#projects" },
   { name: "Experience", href: "#experience" },
   { name: "Contact", href: "#contact" },
 ];

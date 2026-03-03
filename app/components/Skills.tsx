@@ -2,6 +2,7 @@ import { useRef, useEffect, useState, useMemo } from "react";
 import { gsap, ScrollTrigger, easings } from "~/hooks/useGSAP";
 import FallingText from "./FallingText";
 import CardSwap, { Card } from "./CardSwap";
+import { SkillsCTA } from "./MiniCTA";
 import {
   skillsData,
   type DomainGroup,
@@ -714,6 +715,9 @@ export default function Skills() {
             </CardSwap>
           </div>
         </div>
+
+        {/* CTA intégré dans la section */}
+        <SkillsCTA />
       </div>
 
       {/* Custom scrollbar styles */}

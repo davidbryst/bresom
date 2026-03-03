@@ -17,7 +17,10 @@
       "Bash(npx vite-bundle-visualizer)",
       "Bash(git rm:*)",
       "Bash(npm ls:*)",
-      "Bash(git check-ignore:*)"
+      "Bash(git check-ignore:*)",
+      "WebFetch(domain:koraconsult.vercel.app)",
+      "WebFetch(domain:freshafrique.vercel.app)",
+      "WebFetch(domain:queenbydkloth.vercel.app)"
     ]
   }
 }

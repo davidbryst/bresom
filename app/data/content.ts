@@ -129,16 +129,37 @@ export const dosData: dosInfoItem[] = [
 
 export const projectsData: Project[] = [
   {
+    title: "Queen By DKloth",
+    description: "E-commerce de mode féminine ivoirienne",
+    image: "/queenbydklothMockup1.png",
+    tags: ["Remix.js", "Supabase", "E-commerce", "Fashion"],
+    link: "https://queenbydkloth.vercel.app/",
+  },
+  {
+    title: "Fresh Afrique",
+    description: "Restaurant de cuisine ivoirienne authentique",
+    image: "/freshafriqueMockup1.png",
+    tags: ["React", "Vite", "Restaurant", "Réservation"],
+    link: "https://freshafrique.vercel.app/",
+  },
+  {
+    title: "KoraConsult",
+    description: "Conseil stratégique pour organisations",
+    image: "/koraconsultMockup1.png",
+    tags: ["React Router", "Vite", "Corporate", "Conseil"],
+    link: "https://koraconsult.vercel.app/",
+  },
+  {
     title: "DavStore",
     description: "Plate-forme de commerce électronique",
-    image: "/DavStore.png",
+    image: "/DavStoreMockup.png",
     tags: ["Figma", "UI/UX", "Design"],
     link: "https://www.figma.com/design/zTTfQHgcKZob5qFwajJuqS/DavStore?node-id=0-1&t=CXe7jUEU1ARIFB2N-1",
   },
   {
     title: "DavHotel",
     description: "Plate-forme de réservation hôtelière",
-    image: "/DavHotel.png",
+    image: "/DavHotelMockup.png",
     tags: ["Figma", "UI/UX", "Design"],
     link: "https://www.figma.com/design/FiPEHvKORyhPGi57VmiioM/DavHotel?node-id=0-1&t=9PhqDAhIFeAcYoJc-1",
   },

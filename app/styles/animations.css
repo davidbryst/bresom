@@ -33,6 +33,22 @@ html {
   will-change: transform, opacity;
 }
 
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+.will-change-filter {
+  will-change: filter;
+}
+
+.will-change-auto {
+  will-change: auto;
+}
+
 /* Parallax container */
 .parallax-container {
   perspective: 1000px;
@@ -52,6 +68,8 @@ html {
 
 .animate-float {
   animation: float 3s ease-in-out infinite;
+  will-change: transform;
+  transform-origin: center;
 }
 
 /* Pulse animation */
@@ -69,6 +87,7 @@ html {
 
 .animate-pulse-glow {
   animation: pulse-glow 2s ease-in-out infinite;
+  will-change: opacity, box-shadow;
 }
 
 /* Shimmer/shine effect */
@@ -82,8 +101,15 @@ html {
 }
 
 .animate-shimmer {
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
   background-size: 1000px 100%;
   animation: shimmer 2s infinite;
+  will-change: background-position;
 }
 
 /* Text reveal effect */
@@ -125,6 +151,7 @@ html {
 .animate-gradient {
   background-size: 200% 200%;
   animation: gradient 3s ease infinite;
+  will-change: background-position;
 }
 
 /* Bounce animation */
@@ -140,6 +167,7 @@ html {
 
 .animate-bounce-custom {
   animation: bounce-custom 1s ease-in-out infinite;
+  will-change: transform;
 }
 
 /* Scale animation */
@@ -155,6 +183,7 @@ html {
 
 .animate-scale-pulse {
   animation: scale-pulse 2s ease-in-out infinite;
+  will-change: transform;
 }
 
 /* Rotate animation */
@@ -169,6 +198,22 @@ html {
 
 .animate-rotate-slow {
   animation: rotate-slow 20s linear infinite;
+  will-change: transform;
+}
+
+/* Faster rotate variant */
+@keyframes rotate-medium {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-rotate-medium {
+  animation: rotate-medium 10s linear infinite;
+  will-change: transform;
 }
 
 /* Skew animation */
@@ -184,6 +229,7 @@ html {
 
 .animate-skew {
   animation: skew 1s ease-in-out infinite;
+  will-change: transform;
 }
 
 /* Blur in animation */

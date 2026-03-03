@@ -4,6 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { projectsData, type Project } from "~/data/content";
 import { ExternalLink, ArrowUpRight } from "lucide-react";
 import { easings } from "~/hooks/useGSAP";
+import { ProjectsCTA } from "./MiniCTA";
 
 // Register plugins
 if (typeof window !== "undefined") {
@@ -194,10 +195,11 @@ export default function Projects() {
             },
           );
 
+          const isZoomed = index === 3 || index === 4;
           // Image parallax scrub
           gsap.to(image, {
-            yPercent: -15,
-            scale: 1.1,
+            yPercent: isZoomed ? -5 : -15,
+            scale: isZoomed ? 1.85 : 1.1,
             ease: "none",
             scrollTrigger: {
               trigger: card,
@@ -287,8 +289,9 @@ export default function Projects() {
               ease: "power2.out",
             });
 
+            const isZoomed = index === 3 || index === 4;
             gsap.to(image, {
-              scale: 1.2,
+              scale: isZoomed ? 2.0 : 1.2,
               duration: 0.6,
               ease: "power2.out",
             });
@@ -343,8 +346,9 @@ export default function Projects() {
               ease: "power2.out",
             });
 
+            const isZoomed = index === 3 || index === 4;
             gsap.to(image, {
-              scale: 1,
+              scale: isZoomed ? 1.65 : 1,
               duration: 0.6,
               ease: "power2.out",
             });
@@ -517,39 +521,42 @@ export default function Projects() {
               />
 
               {/* Image container */}
-              <div className="relative aspect-[4/3] overflow-hidden">
+              <div className={`relative aspect-[4/3] overflow-hidden bg-white/5 flex items-center justify-center ${index === 3 || index === 4 ? 'p-0' : 'p-2 sm:p-4'}`}>
+                {/* Subtle backglow behind the PNG */}
+                <div className="absolute inset-0 bg-gradient-to-br from-violet-primary/20 via-transparent to-dark-surface/80 opacity-60" />
+
                 <img
                   src={`/projet${project.image}`}
                   alt={project.title}
-                  className="project-image w-full h-full object-cover"
+                  className={`project-image relative z-10 w-full h-full object-contain object-center filter drop-shadow-[0_20px_20px_rgba(0,0,0,0.6)] ${index === 3 || index === 4 ? 'scale-[1.65]' : 'scale-100'}`}
                 />
 
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-dark-surface via-dark-surface/50 to-transparent opacity-60" />
+                {/* Gradient overlay at the bottom for smooth transition to content */}
+                <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-dark-surface to-transparent z-10 pointer-events-none" />
 
                 {/* Hover overlay */}
-                <div className="project-overlay absolute inset-0 bg-violet-primary/30 flex items-center justify-center opacity-0">
-                  <div className="overlay-icon w-14 h-14 bg-gradient-violet rounded-full flex items-center justify-center shadow-glow-violet scale-75 opacity-0">
+                <div className="project-overlay absolute inset-0 bg-dark-deep/40 backdrop-blur-[2px] flex items-center justify-center opacity-0 z-20 transition-all duration-300">
+                  <div className="overlay-icon w-14 h-14 bg-gradient-violet rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(124,58,237,0.5)] scale-75 opacity-0 transition-transform duration-300">
                     <ExternalLink className="w-6 h-6 text-white" />
                   </div>
                 </div>
               </div>
 
               {/* Content */}
-              <div className="project-content p-6">
-                <div className="flex items-start justify-between gap-4 mb-3">
+              <div className="project-content p-3">
+                <div className="flex items-start justify-between gap-4 mb-1 mx-2">
                   <h3 className="text-base sm:text-lg md:text-xl font-bold text-light-primary transition-colors duration-300">
                     {project.title}
                   </h3>
                   <ArrowUpRight className="project-arrow w-5 h-5 text-light-muted transition-all duration-300" />
                 </div>
 
-                <p className="text-light-secondary text-xs sm:text-sm mb-3 sm:mb-4 line-clamp-2">
+                <p className="text-light-secondary text-xs sm:text-sm mb-2 sm:mb-3 line-clamp-2 mx-2">
                   {project.description}
                 </p>
 
                 {/* Tags */}
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 mx-">
                   {project.tags.map((tag: string, tagIndex: number) => (
                     <span
                       key={tagIndex}
@@ -567,18 +574,8 @@ export default function Projects() {
           ))}
         </div>
 
-        {/* CTA */}
-        {/* <div ref={ctaRef} className="text-center mt-12">
-          <a
-            href="https://github.com/davidabraham"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="cta-btn inline-flex items-center gap-2 px-8 py-4 border-2 border-dark-border text-light-primary font-semibold rounded-xl transition-all duration-300"
-          >
-            <span>Voir plus sur GitHub</span>
-            <ArrowUpRight className="w-4 h-4" />
-          </a>
-        </div> */}
+        {/* CTA intégré dans la section */}
+        <ProjectsCTA />
       </div>
     </section>
   );

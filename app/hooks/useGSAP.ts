@@ -50,7 +50,6 @@ export function useScrollAnimation<T extends HTMLElement>(
 
     return () => {
       tl.current?.kill();
-      ScrollTrigger.getAll().forEach((st) => st.kill());
     };
   }, [options]);
 
@@ -97,11 +96,12 @@ export function useSplitText<T extends HTMLElement>() {
 // Hook pour les animations de parallax
 export function useParallax<T extends HTMLElement>(speed = 0.5) {
   const ref = useRef<T>(null);
+  const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
 
   useEffect(() => {
     if (!ref.current || typeof window === "undefined") return;
 
-    gsap.to(ref.current, {
+    const animation = gsap.to(ref.current, {
       yPercent: -50 * speed,
       ease: "none",
       scrollTrigger: {
@@ -112,8 +112,11 @@ export function useParallax<T extends HTMLElement>(speed = 0.5) {
       },
     });
 
+    scrollTriggerRef.current = animation.scrollTrigger as ScrollTrigger;
+
     return () => {
-      ScrollTrigger.getAll().forEach((st) => st.kill());
+      scrollTriggerRef.current?.kill();
+      animation.kill();
     };
   }, [speed]);
 
@@ -175,6 +178,8 @@ export function useStaggerAnimation<T extends HTMLElement>(
   } = {}
 ) {
   const ref = useRef<T>(null);
+  const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
+  const animationRef = useRef<gsap.core.Tween | null>(null);
 
   useEffect(() => {
     if (!ref.current || typeof window === "undefined") return;
@@ -192,7 +197,7 @@ export function useStaggerAnimation<T extends HTMLElement>(
     };
 
     if (options.scrollTrigger !== false) {
-      gsap.fromTo(elements, fromVars, {
+      animationRef.current = gsap.fromTo(elements, fromVars, {
         ...toVars,
         scrollTrigger: {
           trigger: ref.current,
@@ -200,12 +205,14 @@ export function useStaggerAnimation<T extends HTMLElement>(
           toggleActions: "play none none reverse",
         },
       });
+      scrollTriggerRef.current = animationRef.current.scrollTrigger as ScrollTrigger;
     } else {
-      gsap.fromTo(elements, fromVars, toVars);
+      animationRef.current = gsap.fromTo(elements, fromVars, toVars);
     }
 
     return () => {
-      ScrollTrigger.getAll().forEach((st) => st.kill());
+      scrollTriggerRef.current?.kill();
+      animationRef.current?.kill();
     };
   }, [selector, options]);
 
