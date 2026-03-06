@@ -472,7 +472,8 @@ export default function Services() {
     <section
       id="services"
       ref={sectionRef}
-      className=" bg-dark-deep relative overflow-clip"
+      className="bg-dark-deep relative overflow-clip"
+    // className="py-16 sm:py-20 md:py-24 bg-dark-deep relative overflow-clip"
     >
       {/* Progress bar - scrub indicator */}
 

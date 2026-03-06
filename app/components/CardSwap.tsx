@@ -81,20 +81,20 @@ const CardSwap: React.FC<CardSwapProps> = ({
   const config =
     easing === 'elastic'
       ? {
-          ease: 'elastic.out(0.6,0.9)',
-          durDrop: 2,
-          durMove: 2,
-          durReturn: 2,
-          promoteOverlap: 0.9,
-          returnDelay: 0.05
+          ease: 'elastic.out(0.7,0.85)',
+          durDrop: 1.6,
+          durMove: 1.6,
+          durReturn: 1.6,
+          promoteOverlap: 0.88,
+          returnDelay: 0.08
         }
       : {
-          ease: 'power1.inOut',
-          durDrop: 0.8,
-          durMove: 0.8,
-          durReturn: 0.8,
-          promoteOverlap: 0.45,
-          returnDelay: 0.2
+          ease: 'power2.inOut',
+          durDrop: 0.75,
+          durMove: 0.75,
+          durReturn: 0.75,
+          promoteOverlap: 0.5,
+          returnDelay: 0.18
         };
 
   const childArr = useMemo(() => Children.toArray(children) as ReactElement<CardProps>[], [children]);
@@ -120,6 +120,7 @@ const CardSwap: React.FC<CardSwapProps> = ({
 
       tl.to(elFront, {
         y: '+=500',
+        rotateZ: 6,
         duration: config.durDrop,
         ease: config.ease
       });
@@ -157,6 +158,7 @@ const CardSwap: React.FC<CardSwapProps> = ({
           x: backSlot.x,
           y: backSlot.y,
           z: backSlot.z,
+          rotateZ: 0,
           duration: config.durReturn,
           ease: config.ease
         },
@@ -213,7 +215,7 @@ const CardSwap: React.FC<CardSwapProps> = ({
   return (
     <div
       ref={container}
-      className="absolute bottom-0 left-1/2 -translate-x-[45%] translate-y-[8%] origin-center perspective-[900px] overflow-visible sm:-translate-x-[40%] sm:translate-y-[10%] md:left-auto md:right-0 md:translate-x-[8%] md:translate-y-[15%] md:origin-bottom-right lg:translate-x-[5%] lg:translate-y-[12%] xl:translate-x-[3%] xl:translate-y-[8%]"
+      className="absolute top-1/2 left-1/2 -translate-x-[60%] -translate-y-[30%] lg:-translate-x-[65%] origin-center perspective-[900px] overflow-visible py-12 sm:py-14 md:py-16 lg:py-20 xl:py-24"
       style={{ width, height }}
     >
       {rendered}

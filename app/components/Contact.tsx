@@ -353,7 +353,7 @@ export default function Contact() {
     <section
       id="contact"
       ref={sectionRef}
-      className="py-24 md:py-32 bg-dark-deep relative overflow-hidden"
+      className="py-16 sm:py-20 md:py-24 bg-dark-deep relative overflow-hidden"
     >
       {/* Background effects */}
       <div className="absolute inset-0 bg-gradient-glow opacity-30 pointer-events-none" />

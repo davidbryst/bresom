@@ -56,7 +56,7 @@ export default function Home() {
           <Hero />
 
           {/* Separator */}
-          <div className="py-8 bg-[#000] z-40">
+          <div className="py-6 sm:py-8 bg-[#000] z-40">
             <ScrollVelocity
               texts={["QUI SUIS-JE ✦", "MON HISTOIRE ✦", "À PROPOS ✦", "DÉCOUVREZ ✦"]}
               velocity={50}
@@ -69,7 +69,7 @@ export default function Home() {
           <About />
 
           {/* Separator */}
-          <div className="py-8 bg-[#000] z-40">
+          <div className="py-6 sm:py-8 bg-[#000] z-40">
             <ScrollVelocity
               texts={["PROJETS ✦", "RÉALISATIONS ✦", "PORTFOLIO ✦", "TRAVAUX ✦"]}
               velocity={50}
@@ -85,7 +85,7 @@ export default function Home() {
           <Services />
 
           {/* Separator */}
-          <div className="py-8 bg-[#000] z-40">
+          <div className="py-6 sm:py-8 bg-[#000] z-40">
             <ScrollVelocity
               texts={["REMIX ✦", "TYPESCRIPT ✦", "SUPABASE ✦", "FIGMA ✦"]}
               velocity={50}
@@ -101,7 +101,7 @@ export default function Home() {
           <Experience />
 
           {/* Separator with CTA message */}
-          <div className="py-12 bg-[#000] z-40">
+          <div className="py-8 sm:py-10 md:py-12 bg-[#000] z-40">
             <ScrollVelocity
               texts={["DISPONIBLE ✦", "CONTACTEZ-MOI ✦", "PARLONS PROJET ✦", "DISCUTONS ✦"]}
               velocity={50}

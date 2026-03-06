@@ -125,11 +125,11 @@ export default function Skills() {
   const cardSwapRef = useRef<HTMLDivElement>(null);
   const [activeCard, setActiveCard] = useState(0);
   const [cardConfig, setCardConfig] = useState({
-    width: 650,
-    height: 450,
-    cardDistance: 50,
-    verticalDistance: 40,
-    skewAmount: 8,
+    width: 420,
+    height: 350,
+    cardDistance: 32,
+    verticalDistance: 26,
+    skewAmount: 6,
   });
 
   // Responsive card dimensions + CardSwap parameters
@@ -139,83 +139,83 @@ export default function Skills() {
       if (w < 380) {
         // Very small phones (iPhone SE, Galaxy S mini)
         setCardConfig({
-          width: 290,
-          height: 340,
-          cardDistance: 15,
-          verticalDistance: 12,
+          width: 260,
+          height: 310,
+          cardDistance: 12,
+          verticalDistance: 10,
           skewAmount: 3,
         });
       } else if (w < 480) {
         // Small phones (iPhone 12 mini, standard Android)
         setCardConfig({
-          width: 340,
-          height: 380,
-          cardDistance: 20,
-          verticalDistance: 16,
+          width: 300,
+          height: 340,
+          cardDistance: 15,
+          verticalDistance: 12,
           skewAmount: 4,
         });
       } else if (w < 640) {
         // Large phones (iPhone Pro Max, Galaxy S Ultra)
         setCardConfig({
-          width: 400,
-          height: 420,
-          cardDistance: 25,
-          verticalDistance: 20,
-          skewAmount: 5,
+          width: 340,
+          height: 370,
+          cardDistance: 18,
+          verticalDistance: 14,
+          skewAmount: 4,
         });
       } else if (w < 768) {
         // Small tablets / large phones landscape
         setCardConfig({
-          width: 480,
-          height: 440,
-          cardDistance: 30,
-          verticalDistance: 25,
+          width: 360,
+          height: 380,
+          cardDistance: 20,
+          verticalDistance: 16,
           skewAmount: 5,
         });
       } else if (w < 1024) {
         // Tablets (iPad, Galaxy Tab)
         setCardConfig({
-          width: 480,
-          height: 460,
-          cardDistance: 38,
-          verticalDistance: 30,
-          skewAmount: 6,
+          width: 380,
+          height: 400,
+          cardDistance: 24,
+          verticalDistance: 18,
+          skewAmount: 5,
         });
       } else if (w < 1280) {
         // Small desktops / laptops
         setCardConfig({
-          width: 400,
-          height: 470,
-          cardDistance: 32,
-          verticalDistance: 34,
-          skewAmount: 7,
+          width: 340,
+          height: 380,
+          cardDistance: 22,
+          verticalDistance: 20,
+          skewAmount: 6,
         });
       } else if (w < 1440) {
         // Standard desktops
         setCardConfig({
-          width: 530,
-          height: 480,
-          cardDistance: 42,
-          verticalDistance: 36,
-          skewAmount: 8,
+          width: 400,
+          height: 400,
+          cardDistance: 28,
+          verticalDistance: 24,
+          skewAmount: 6,
         });
       } else if (w < 1920) {
         // Large desktops / QHD
         setCardConfig({
-          width: 620,
-          height: 530,
-          cardDistance: 50,
-          verticalDistance: 40,
-          skewAmount: 8,
+          width: 460,
+          height: 430,
+          cardDistance: 32,
+          verticalDistance: 26,
+          skewAmount: 6,
         });
       } else {
         // Ultra-wide / 4K
         setCardConfig({
-          width: 720,
-          height: 580,
-          cardDistance: 55,
-          verticalDistance: 44,
-          skewAmount: 9,
+          width: 520,
+          height: 460,
+          cardDistance: 36,
+          verticalDistance: 30,
+          skewAmount: 7,
         });
       }
     };
@@ -484,7 +484,7 @@ export default function Skills() {
     <section
       id="skills"
       ref={sectionRef}
-      className="relative bg-dark-deep py-16 sm:py-24 md:py-32 overflow-hidden"
+      className="relative bg-dark-deep py-16 sm:py-20 md:py-24 overflow-hidden"
     >
       {/* Background */}
       <div
@@ -558,7 +558,7 @@ export default function Skills() {
             {/* FallingText Section */}
             <div
               ref={fallingTextRef}
-              className="mb-8 sm:mb-12 md:mb-16 h-80 sm:h-64 md:h-52 lg:h-[17rem] xl:h-52 backdrop-blur-sm overflow-hidden pointer-events-auto"
+              className="mb-7 sm:mb-9 md:mb-11 lg:mb-14 xl:mb-12 h-60 sm:h-56 md:h-52 lg:h-64 xl:h-56 bg-gradient-to-b from-violet-primary/5 via-transparent to-violet-primary/10 backdrop-blur-sm overflow-hidden pointer-events-auto rounded-lg shadow-lg shadow-violet-primary/5"
             >
               <FallingText
                 text="Je maîtrise le développement web frontend avec React, Next.js, Remix et Angular, accompagnés de TypeScript et Tailwind CSS. Côté backend, je travaille avec Node.js, Laravel et Spring Boot, connectés à des bases de données PostgreSQL et MongoDB. Pour le design, j'utilise Figma, Photoshop, Illustrator et Blender, en appliquant les principes d'UI/UX Design, Responsive Design et Design System. En mobile, je développe avec React Native et Expo. Je déploie mes projets sur Vercel, AWS, Firebase et Supabase."
@@ -588,19 +588,19 @@ export default function Skills() {
                   "Firebase",
                   "Supabase",
                 ]}
-                highlightClass="text-violet-accent font-black"
+                highlightClass="text-violet-accent font-extrabold drop-shadow-sm"
                 trigger="hover"
                 backgroundColor="transparent"
                 wireframes={false}
-                gravity={0.7}
-                fontSize="0.875rem"
-                mouseConstraintStiffness={2}
+                gravity={0.65}
+                fontSize="0.85rem"
+                mouseConstraintStiffness={2.2}
               />
             </div>
             {/* Stats */}
             <div
               ref={infoBulleRef}
-              className="grid grid-cols-3 gap-2 sm:gap-4 pt-4"
+              className="grid grid-cols-3 gap-2 sm:gap-3 md:gap-4 pt-2 sm:pt-3 md:pt-4"
             >
               <div className="ele text-center p-2 sm:p-4 bg-dark-card/40 rounded-lg sm:rounded-xl border border-dark-border/30">
                 <p className="text-xl sm:text-3xl font-bold text-violet-accent">
@@ -634,13 +634,13 @@ export default function Skills() {
           {/* Right Side - CardSwap */}
           <div
             // ref={cardSwapRef}
-            className="relative min-h-[340px] h-[45dvh] sm:min-h-[400px] sm:h-[55dvh] md:min-h-[440px] md:h-[60dvh] lg:min-h-[500px] lg:h-[65dvh] xl:min-h-[540px] xl:h-[68dvh] w-4/5 sm:w-3/4 lg:w-5/6 xl:w-6/6 lg:ml-8 xs:mt-16 sm:mt-28 order-2 lg:order-2 flex items-center justify-center md:justify-end"
+            className="relative min-h-[320px] h-[40dvh] sm:min-h-[360px] sm:h-[45dvh] md:min-h-[400px] md:h-[50dvh] lg:min-h-[430px] lg:h-[52dvh] xl:min-h-[450px] xl:h-[54dvh] w-full mx-auto order-2 lg:order-2 flex items-center justify-center"
           >
             <CardSwap
               cardDistance={cardConfig.cardDistance}
               verticalDistance={cardConfig.verticalDistance}
-              delay={3000}
-              pauseOnHover={false}
+              delay={2500}
+              pauseOnHover={true}
               width={cardConfig.width}
               height={cardConfig.height}
               skewAmount={cardConfig.skewAmount}
@@ -652,38 +652,38 @@ export default function Skills() {
                 return (
                   <Card
                     key={index}
-                    customClass="buckets !bg-dark-card/95 !border-violet-primary/30 backdrop-blur-xl p-3 sm:p-6 md:p-8 overflow-hidden"
+                    customClass="buckets !bg-dark-card/95 !border-violet-primary/30 backdrop-blur-xl p-3 sm:p-4 md:p-5 overflow-hidden"
                   >
                     {/* Card Header */}
-                    <div className="flex items-center gap-2 sm:gap-4 mb-4 sm:mb-6 md:mb-8 pb-3 sm:pb-5 border-b border-dark-border/30">
-                      <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-lg sm:rounded-xl bg-gradient-violet flex items-center justify-center shadow-glow-violet flex-shrink-0">
-                        <Icon className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-white" />
+                    <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4 md:mb-5 pb-2 sm:pb-3 border-b border-dark-border/30">
+                      <div className="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-lg sm:rounded-xl bg-gradient-violet flex items-center justify-center shadow-glow-violet flex-shrink-0">
+                        <Icon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-white" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-[10px] sm:text-xs text-violet-accent uppercase tracking-wider sm:tracking-widest font-medium">
+                        <p className="text-[9px] sm:text-[10px] text-violet-accent uppercase tracking-wider font-medium">
                           {flatBucket.category}
                         </p>
-                        <h4 className="text-base sm:text-xl md:text-2xl font-bold text-light-primary truncate">
+                        <h4 className="text-sm sm:text-base md:text-lg font-bold text-light-primary truncate">
                           {flatBucket.bucket.title}
                         </h4>
                       </div>
-                      <div className="text-xl sm:text-2xl md:text-3xl font-bold text-violet-accent/40 flex-shrink-0">
+                      <div className="text-lg sm:text-xl md:text-2xl font-bold text-violet-accent/40 flex-shrink-0">
                         {String(index + 1).padStart(2, "0")}
                       </div>
                     </div>
 
                     {/* Skills Grid */}
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-4 overflow-y-auto max-h-[250px] sm:max-h-[400px] pr-2 custom-scrollbar">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5 sm:gap-2 md:gap-3 overflow-y-auto max-h-[200px] sm:max-h-[240px] md:max-h-[260px] pr-1 sm:pr-2 custom-scrollbar">
                       {flatBucket.bucket.items.map(
                         (skill: SkillItem, skillIndex: number) => (
                           <div
                             key={skillIndex}
-                            className="flex flex-col items-center p-2 sm:p-4 bg-dark-deep/50 rounded-lg sm:rounded-xl border border-dark-border/30 hover:border-violet-primary/50 hover:bg-dark-deep/80 transition-all duration-300 group cursor-pointer"
+                            className="flex flex-col items-center p-1.5 sm:p-2 md:p-3 bg-dark-deep/50 rounded-lg border border-dark-border/30 hover:border-violet-primary/50 hover:bg-dark-deep/80 transition-all duration-300 group cursor-pointer"
                           >
-                            <span className="text-2xl sm:text-3xl text-violet-accent/80 group-hover:text-violet-accent group-hover:scale-125 transition-all duration-300 mb-1 sm:mb-3">
+                            <span className="text-xl sm:text-2xl md:text-2xl text-violet-accent/80 group-hover:text-violet-accent group-hover:scale-125 transition-all duration-300 mb-1 sm:mb-2">
                               {getTechIcon(skill.name)}
                             </span>
-                            <span className="text-xs sm:text-sm font-medium text-light-primary text-center leading-tight">
+                            <span className="text-[10px] sm:text-xs font-medium text-light-primary text-center leading-tight">
                               {skill.name}
                             </span>
                           </div>
@@ -692,19 +692,18 @@ export default function Skills() {
                     </div>
 
                     {/* Card Footer */}
-                    <div className="mt-4 sm:mt-6 pt-3 sm:pt-5 border-t border-dark-border/30 flex items-center justify-between">
-                      <span className="text-xs sm:text-sm md:text-base text-light-muted font-medium">
+                    <div className="mt-3 sm:mt-4 pt-2 sm:pt-3 border-t border-dark-border/30 flex items-center justify-between">
+                      <span className="text-[10px] sm:text-xs md:text-sm text-light-muted font-medium">
                         {flatBucket.bucket.items.length} compétences
                       </span>
-                      <div className="flex gap-1 sm:gap-1.5">
+                      <div className="flex gap-1">
                         {[...Array(5)].map((_, i) => (
                           <div
                             key={i}
-                            className={`w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full transition-all duration-300 ${
-                              i < Math.ceil(flatBucket.bucket.items.length / 2)
+                            className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-all duration-300 ${i < Math.ceil(flatBucket.bucket.items.length / 2)
                                 ? "bg-violet-accent"
                                 : "bg-dark-border"
-                            }`}
+                              }`}
                           />
                         ))}
                       </div>
@@ -715,25 +714,29 @@ export default function Skills() {
             </CardSwap>
           </div>
         </div>
+      </div>
 
-        {/* CTA intégré dans la section */}
+      {/* CTA intégré dans la section - Séparé pour éviter chevauchement */}
+      <div className="relative z-3 mt-20 sm:mt-24 md:mt-28 lg:mt-32 xl:mt-36">
         <SkillsCTA />
       </div>
 
       {/* Custom scrollbar styles */}
       <style>{`
         .custom-scrollbar::-webkit-scrollbar {
-          width: 4px;
+          width: 5px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
-          background: transparent;
+          background: rgba(11, 11, 15, 0.2);
+          border-radius: 10px;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: rgba(124, 58, 237, 0.3);
-          border-radius: 4px;
+          background: linear-gradient(180deg, rgba(124, 58, 237, 0.5), rgba(109, 40, 217, 0.7));
+          border-radius: 10px;
+          transition: all 0.3s ease;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: rgba(124, 58, 237, 0.5);
+          background: linear-gradient(180deg, rgba(139, 92, 246, 0.8), rgba(124, 58, 237, 0.9));
         }
       `}</style>
     </section>

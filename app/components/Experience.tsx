@@ -253,7 +253,7 @@ export default function Experience() {
     <section
       id="experience"
       ref={sectionRef}
-      className="pt-24sm:py-24 md:py-32 bg-dark-surface relative overflow-hidden"
+      className="py-16 sm:py-20 md:py-24 bg-dark-surface relative overflow-hidden"
     >
       {/* Background decoration */}
       <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-dark-deep to-transparent pointer-events-none" />

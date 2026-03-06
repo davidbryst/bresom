@@ -20,7 +20,8 @@
       "Bash(git check-ignore:*)",
       "WebFetch(domain:koraconsult.vercel.app)",
       "WebFetch(domain:freshafrique.vercel.app)",
-      "WebFetch(domain:queenbydkloth.vercel.app)"
+      "WebFetch(domain:queenbydkloth.vercel.app)",
+      "Bash(git restore:*)"
     ]
   }
 }

@@ -455,7 +455,7 @@ export default function Projects() {
     <section
       id="projects"
       ref={sectionRef}
-      className="py-24 md:py-32 bg-dark-deep relative overflow-hidden"
+      className="py-16 sm:py-20 md:py-24 bg-dark-deep relative overflow-hidden"
     >
       {/* Progress bar - scrub indicator */}
       {/* <div
@@ -521,14 +521,16 @@ export default function Projects() {
               />
 
               {/* Image container */}
-              <div className={`relative aspect-[4/3] overflow-hidden bg-white/5 flex items-center justify-center ${index === 3 || index === 4 ? 'p-0' : 'p-2 sm:p-4'}`}>
+              <div className={`relative aspect-[4/3] overflow-hidden bg-white/5 flex items-center justify-center ${index === 3 || index === 4 ? 'p-0' : 'p-0'}`}>
+                {/* <div className={`relative aspect-[4/3] overflow-hidden bg-white/5 flex items-center justify-center ${index === 3 || index === 4 ? 'p-0' : 'p-2 sm:p-4'}`}> */}
                 {/* Subtle backglow behind the PNG */}
                 <div className="absolute inset-0 bg-gradient-to-br from-violet-primary/20 via-transparent to-dark-surface/80 opacity-60" />
 
                 <img
                   src={`/projet${project.image}`}
                   alt={project.title}
-                  className={`project-image relative z-10 w-full h-full object-contain object-center filter drop-shadow-[0_20px_20px_rgba(0,0,0,0.6)] ${index === 3 || index === 4 ? 'scale-[1.65]' : 'scale-100'}`}
+                  className={`project-image relative z-10 w-full h-full object-contain object-bottom translate-y-1/6 filter drop-shadow-[0_20px_20px_rgba(0,0,0,0.6)] ${index === 3 || index === 4 ? 'scale-[1.67]' : 'scale-[1.6]'}`}
+                // className={`project-image relative z-10 w-full h-full object-contain object-center filter drop-shadow-[0_20px_20px_rgba(0,0,0,0.6)] ${index === 3 || index === 4 ? 'scale-[1.65]' : 'scale-100'}`}
                 />
 
                 {/* Gradient overlay at the bottom for smooth transition to content */}

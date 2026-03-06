@@ -211,7 +211,7 @@ export default function Footer() {
 
   return (
     <footer ref={footerRef} className="bg-dark-surface border-t border-dark-border">
-      <div className="container mx-auto px-6 py-12">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20">
         <div className="grid md:grid-cols-3 gap-12">
           {/* Logo & Description */}
           <div ref={logoSectionRef}>

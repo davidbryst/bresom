@@ -29,16 +29,33 @@ const FallingText: React.FC<FallingTextProps> = ({
   const canvasContainerRef = useRef<HTMLDivElement | null>(null);
 
   const [effectStarted, setEffectStarted] = useState(false);
+  const [isVisible, setIsVisible] = useState(false); // Contrôle de visibilité pour pause
+  const rafIdRef = useRef<number | null>(null); // Pour stocker requestAnimationFrame ID
 
   useEffect(() => {
     if (!textRef.current) return;
-    const words = text.split(' ');
+
+    // Optimisation responsive: adapter le nombre de mots selon la taille d'écran
+    const getMaxWords = () => {
+      if (typeof window === 'undefined') return 100;
+      const w = window.innerWidth;
+      if (w < 480) return 40;      // Très petit mobile
+      if (w < 640) return 50;      // Mobile
+      if (w < 768) return 60;      // Grand mobile
+      if (w < 1024) return 70;     // Tablette
+      if (w < 1280) return 85;     // Desktop lg (plus de hauteur)
+      return 100;                  // Desktop xl+
+    };
+
+    const maxWords = getMaxWords();
+    const words = text.split(' ').slice(0, maxWords);
 
     const newHTML = words
       .map(word => {
         const isHighlighted = highlightWords.some(hw => word.toLowerCase().includes(hw.toLowerCase()));
         return `<span
-          class="inline-block mx-[2px] select-none ${isHighlighted ? highlightClass : 'text-light-secondary'}"
+          class="inline-block select-none ${isHighlighted ? highlightClass : 'text-light-secondary'}"
+          style="will-change: transform;"
         >
           ${word}
         </span>`;
@@ -114,15 +131,16 @@ const FallingText: React.FC<FallingTextProps> = ({
 
       const body = Bodies.rectangle(x, y, rect.width, rect.height, {
         render: { fillStyle: 'transparent' },
-        restitution: 0.8,
-        frictionAir: 0.01,
-        friction: 0.2
+        restitution: 0.65,
+        frictionAir: 0.02,
+        friction: 0.35,
+        density: 0.002
       });
       Matter.Body.setVelocity(body, {
-        x: (Math.random() - 0.5) * 5,
+        x: (Math.random() - 0.5) * 3,
         y: 0
       });
-      Matter.Body.setAngularVelocity(body, (Math.random() - 0.5) * 0.05);
+      Matter.Body.setAngularVelocity(body, (Math.random() - 0.5) * 0.03);
 
       return { elem, body };
     });
@@ -151,6 +169,12 @@ const FallingText: React.FC<FallingTextProps> = ({
     Render.run(render);
 
     const updateLoop = () => {
+      // Pause si non visible (optimisation performance)
+      if (!isVisible) {
+        rafIdRef.current = null;
+        return;
+      }
+
       wordBodies.forEach(({ body, elem }) => {
         const { x, y } = body.position;
         elem.style.left = `${x}px`;
@@ -158,11 +182,20 @@ const FallingText: React.FC<FallingTextProps> = ({
         elem.style.transform = `translate(-50%, -50%) rotate(${body.angle}rad)`;
       });
       Matter.Engine.update(engine);
-      requestAnimationFrame(updateLoop);
+      rafIdRef.current = requestAnimationFrame(updateLoop);
     };
-    updateLoop();
+
+    // Démarrer la loop seulement si visible
+    if (isVisible) {
+      updateLoop();
+    }
 
     return () => {
+      // Cancel RAF si en cours
+      if (rafIdRef.current !== null) {
+        cancelAnimationFrame(rafIdRef.current);
+        rafIdRef.current = null;
+      }
       Render.stop(render);
       Runner.stop(runner);
       if (render.canvas && canvasContainerRef.current) {
@@ -171,7 +204,23 @@ const FallingText: React.FC<FallingTextProps> = ({
       World.clear(engine.world, false);
       Engine.clear(engine);
     };
-  }, [effectStarted, gravity, wireframes, backgroundColor, mouseConstraintStiffness]);
+  }, [effectStarted, gravity, wireframes, backgroundColor, mouseConstraintStiffness, isVisible]);
+
+  // IntersectionObserver pour contrôle de visibilité (optimisation performance)
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1 } // 10% visible minimum
+    );
+
+    observer.observe(containerRef.current);
+
+    return () => observer.disconnect();
+  }, []);
 
   const handleTrigger = () => {
     if (!effectStarted && (trigger === 'click' || trigger === 'hover')) {
@@ -182,16 +231,16 @@ const FallingText: React.FC<FallingTextProps> = ({
   return (
     <div
       ref={containerRef}
-      className="relative z-[1] w-full h-full cursor-pointer text-center pt-8 overflow-hidden"
+      className="relative z-[1] w-full h-full cursor-pointer text-center pt-4 sm:pt-5 md:pt-6 lg:pt-7 xl:pt-6 px-2 sm:px-3 md:px-4 overflow-hidden"
       onClick={trigger === 'click' ? handleTrigger : undefined}
       onMouseEnter={trigger === 'hover' ? handleTrigger : undefined}
     >
       <div
         ref={textRef}
-        className="inline-block"
+        className="inline-block max-w-full"
         style={{
           fontSize,
-          lineHeight: 1.4
+          lineHeight: 1.6
         }}
       />
 

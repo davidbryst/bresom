@@ -487,7 +487,7 @@ export default function About() {
     <section
       id="about"
       ref={sectionRef}
-      className="py-24 md:py-32 bg-dark-surface relative overflow-hidden"
+      className="py-16 sm:py-20 md:py-24 bg-dark-surface relative overflow-hidden"
     >
       {/* Progress bar - scrub indicator */}
       {/* <div

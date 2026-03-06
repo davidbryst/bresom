@@ -1,4 +1,4 @@
-import { useRef, useEffect, useCallback } from "react";
+import { useRef, useEffect, useCallback, useState } from "react";
 import { gsap, ScrollTrigger, easings } from "~/hooks/useGSAP";
 import { GSAP_CONFIG, createMasterRhythm } from "~/config/gsapConfig";
 import { heroData } from "~/data/content";
@@ -25,6 +25,13 @@ export default function Hero() {
   const glowOrb2Ref = useRef<HTMLDivElement>(null);
   const glowOrb3Ref = useRef<HTMLDivElement>(null);
 
+  // Refs pour stocker les animations afin de les contrôler
+  const orbAnimationsRef = useRef<gsap.core.Tween[]>([]);
+  const masterTimelineRef = useRef<gsap.core.Timeline | null>(null);
+
+  // État de visibilité pour IntersectionObserver
+  const [isVisible, setIsVisible] = useState(true);
+
   // Animations principales au chargement
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -34,6 +41,10 @@ export default function Hero() {
     const ctx = gsap.context(() => {
       // Timeline principale
       const tl = gsap.timeline({ defaults: { ease: easings.spring } });
+
+      // Détection mobile pour réduire l'amplitude des animations
+      const isMobile = window.matchMedia("(max-width: 768px)").matches;
+      const amplitudeMultiplier = isMobile ? 0.5 : 1;
 
       // Synchronized breathing effect for glow orbs using master rhythm
       const orbsArray = [glowOrb1Ref.current, glowOrb2Ref.current, glowOrb3Ref.current].filter(Boolean);
@@ -52,40 +63,46 @@ export default function Hero() {
           }
         });
 
-        // Individual movements for depth (subtle)
+        // Stocker la timeline master pour contrôle
+        masterTimelineRef.current = masterTl;
+
+        // Individual movements for depth (subtle) - avec amplitude réduite sur mobile
         if (glowOrb1Ref.current) {
-          gsap.to(glowOrb1Ref.current, {
-            x: 80,
-            y: -50,
+          const anim1 = gsap.to(glowOrb1Ref.current, {
+            x: 80 * amplitudeMultiplier,
+            y: -50 * amplitudeMultiplier,
             duration: GSAP_CONFIG.masterRhythm.waveDuration,
             repeat: -1,
             yoyo: true,
             ease: "sine.inOut",
           });
+          orbAnimationsRef.current.push(anim1);
         }
 
         if (glowOrb2Ref.current) {
-          gsap.to(glowOrb2Ref.current, {
-            x: -60,
-            y: 70,
+          const anim2 = gsap.to(glowOrb2Ref.current, {
+            x: -60 * amplitudeMultiplier,
+            y: 70 * amplitudeMultiplier,
             duration: GSAP_CONFIG.masterRhythm.waveDuration + 2,
             repeat: -1,
             yoyo: true,
             ease: "sine.inOut",
             delay: 1,
           });
+          orbAnimationsRef.current.push(anim2);
         }
 
         if (glowOrb3Ref.current) {
-          gsap.to(glowOrb3Ref.current, {
-            x: 40,
-            y: 40,
+          const anim3 = gsap.to(glowOrb3Ref.current, {
+            x: 40 * amplitudeMultiplier,
+            y: 40 * amplitudeMultiplier,
             duration: GSAP_CONFIG.masterRhythm.waveDuration + 4,
             repeat: -1,
             yoyo: true,
             ease: "sine.inOut",
             delay: 2,
           });
+          orbAnimationsRef.current.push(anim3);
         }
       }
 
@@ -209,46 +226,90 @@ export default function Hero() {
         });
       }
 
-      // Parallax effect au scroll
-      ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: "top top",
-        end: "bottom top",
-        scrub: 1,
-        onUpdate: (self) => {
-          const progress = self.progress;
-          if (titleRef.current) {
-            gsap.to(titleRef.current, {
-              y: progress * 100,
-              opacity: 1 - progress * 0.5,
-              duration: 0.1,
-            });
-          }
-          if (imageContainerRef.current) {
-            gsap.to(imageContainerRef.current, {
-              y: progress * 50,
-              scale: 1 - progress * 0.1,
-              duration: 0.1,
-            });
-          }
-          // Parallax on glow orbs
-          if (glowOrb1Ref.current) {
-            gsap.to(glowOrb1Ref.current, {
-              y: progress * -150,
-              duration: 0.1,
-            });
-          }
-          if (glowOrb2Ref.current) {
-            gsap.to(glowOrb2Ref.current, {
-              y: progress * -100,
-              duration: 0.1,
-            });
-          }
+      // Parallax effect au scroll - Optimisé avec scrub direct (pas de onUpdate)
+      const parallaxTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: 1,
         },
       });
+
+      // Parallax du titre
+      if (titleRef.current) {
+        parallaxTl.to(titleRef.current, {
+          y: 100,
+          opacity: 0.5,
+          ease: "none",
+        }, 0);
+      }
+
+      // Parallax de l'image
+      if (imageContainerRef.current) {
+        parallaxTl.to(imageContainerRef.current, {
+          y: 50,
+          scale: 0.9,
+          ease: "none",
+        }, 0);
+      }
+
+      // Parallax des orbes lumineux
+      if (glowOrb1Ref.current) {
+        parallaxTl.to(glowOrb1Ref.current, {
+          y: -150,
+          ease: "none",
+        }, 0);
+      }
+
+      if (glowOrb2Ref.current) {
+        parallaxTl.to(glowOrb2Ref.current, {
+          y: -100,
+          ease: "none",
+        }, 0);
+      }
+
+      if (glowOrb3Ref.current) {
+        parallaxTl.to(glowOrb3Ref.current, {
+          y: -80,
+          ease: "none",
+        }, 0);
+      }
     }, sectionRef);
 
-    return () => ctx.revert();
+    return () => {
+      // Cleanup: kill all orb animations
+      orbAnimationsRef.current.forEach(anim => anim.kill());
+      if (masterTimelineRef.current) {
+        masterTimelineRef.current.kill();
+      }
+      ctx.revert();
+    };
+  }, []);
+
+  // IntersectionObserver pour pause/play des animations hors écran (optimisation performance)
+  useEffect(() => {
+    if (!sectionRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+
+        // Pause ou play des animations d'orbes basé sur la visibilité
+        if (entry.isIntersecting) {
+          orbAnimationsRef.current.forEach(anim => anim.play());
+          masterTimelineRef.current?.play();
+        } else {
+          orbAnimationsRef.current.forEach(anim => anim.pause());
+          masterTimelineRef.current?.pause();
+        }
+      },
+      { threshold: 0.1 } // Trigger quand au moins 10% visible
+    );
+
+    observer.observe(sectionRef.current);
+
+    return () => observer.disconnect();
   }, []);
 
   // Enhanced magnetic effect for buttons with rotation

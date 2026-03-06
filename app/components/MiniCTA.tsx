@@ -13,17 +13,22 @@ export default function MiniCTA({
   href = "#contact",
 }: MiniCTAProps) {
   return (
-    <div className={`${SPACING.cta.py} ${SPACING.cta.mt} px-6 text-center`}>
-      <p className="text-light-secondary text-2xl md:text-3xl mb-4">
-        {message}
-      </p>
-      <a
-        href={href}
-        className="inline-flex items-center gap-2 text-xl md:text-2xl text-violet-accent hover:text-violet-light transition-colors group"
-      >
-        <span className="font-semibold">{ctaText}</span>
-        <ArrowRight className="w-6 h-6 md:w-7 md:h-7 group-hover:translate-x-2 transition-transform" />
-      </a>
+    <div className={`${SPACING.cta.py} ${SPACING.cta.mt} px-4 sm:px-6 text-center`}>
+      <div className="max-w-3xl mx-auto space-y-6 sm:space-y-8">
+        {/* Message */}
+        <p className="text-light-secondary text-xl sm:text-2xl md:text-3xl font-medium">
+          {message}
+        </p>
+
+        {/* CTA Button */}
+        <a
+          href={href}
+          className="group inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-dark-card/60 hover:bg-dark-surface/80 border border-violet-primary/30 hover:border-violet-accent/60 rounded-xl text-violet-accent hover:text-violet-light text-base sm:text-lg font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-violet-primary/20"
+        >
+          <span>{ctaText}</span>
+          <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-1 transition-transform duration-300" />
+        </a>
+      </div>
     </div>
   );
 }
