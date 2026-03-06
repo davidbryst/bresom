@@ -398,3 +398,84 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* ✅ Support pour prefers-reduced-motion (Accessibilité) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Désactiver les animations GSAP complexes */
+  .animate-blob-1,
+  .animate-blob-2,
+  .animate-blob-3,
+  .animate-gradient,
+  .animate-fadein,
+  .animate-slideup,
+  .animate-scale {
+    animation: none !important;
+  }
+}
+
+/* ✅ Amélioration du focus visible pour navigation au clavier */
+@layer utilities {
+  /* Focus ring premium pour tous les éléments interactifs */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible,
+  [tabindex]:focus-visible {
+    @apply outline-none ring-2 ring-violet-accent ring-offset-2 ring-offset-dark-deep;
+  }
+
+  /* Focus spécifique pour les liens */
+  a:focus-visible {
+    @apply rounded-md;
+  }
+
+  /* Skip link visible au focus */
+  .skip-link:focus {
+    @apply not-sr-only;
+  }
+
+  /* Classe pour masquer visuellement mais garder accessible */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  .not-sr-only {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: inherit;
+    margin: inherit;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+}
+
+/* ✅ Amélioration des touch targets pour mobile (minimum 44x44px) */
+@media (max-width: 768px) {
+  button,
+  a,
+  input[type="button"],
+  input[type="submit"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}

@@ -10,31 +10,91 @@ import Experience from "~/components/Experience";
 import Contact from "~/components/Contact";
 import Footer from "~/components/Footer";
 import ScrollVelocity from "~/components/ScrollVelocity";
+import { aboutData, contactData } from "~/data/content";
 
 export const meta: MetaFunction = () => {
-  return [
-    { title: "David Abraham | Développeur Full Stack & Designer UI/UX" },
-    {
-      name: "description",
-      content:
-        "Portfolio de David Abraham - Développeur Web & Mobile Full Stack et Designer UI/UX. Création de sites web et applications performantes, modernes et accessibles.",
+  const siteUrl = "https://davidabraham.vercel.app"; // ✅ Remplacez par votre vraie URL
+  const title = "David Abraham | Développeur Full Stack & Designer UI/UX";
+  const description =
+    "Portfolio de David Abraham - Développeur Web & Mobile Full Stack et Designer UI/UX. Création de sites web et applications performantes, modernes et accessibles.";
+  const imageUrl = `${siteUrl}/face-identiter-large.jpg`; // ✅ Image de preview
+
+  // ✅ Structured Data (JSON-LD) pour le SEO
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "David Abraham",
+    jobTitle: "Développeur Full Stack & Designer UI/UX",
+    url: siteUrl,
+    image: imageUrl,
+    description: aboutData.description,
+    email: contactData.email,
+    telephone: contactData.phone,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Abidjan",
+      addressRegion: "Cocody",
+      addressCountry: "CI",
     },
+    sameAs: [
+      // ✅ Ajoutez vos profils sociaux
+      // "https://github.com/votreprofil",
+      // "https://linkedin.com/in/votreprofil",
+    ],
+    knowsAbout: [
+      "Développement Web",
+      "React",
+      "Remix",
+      "Next.js",
+      "TypeScript",
+      "Node.js",
+      "UI/UX Design",
+      "Figma",
+      "Développement Mobile",
+      "React Native",
+    ],
+  };
+
+  return [
+    // Balises de base
+    { title },
+    { name: "description", content: description },
     {
       name: "keywords",
       content:
-        "développeur, full stack, react, ui/ux, design, web, mobile, abidjan",
+        "développeur, full stack, react, remix, nextjs, typescript, ui/ux, design, web, mobile, abidjan, côte d'ivoire",
     },
-    {
-      property: "og:title",
-      content: "David Abraham | Développeur Full Stack & Designer UI/UX",
-    },
-    {
-      property: "og:description",
-      content:
-        "Portfolio de David Abraham - Développeur Web & Mobile Full Stack et Designer UI/UX.",
-    },
+    { name: "author", content: "David Abraham" },
+    { name: "robots", content: "index, follow" },
+    { name: "language", content: "fr" },
+    { name: "revisit-after", content: "7 days" },
+
+    // ✅ Open Graph (Facebook, LinkedIn, etc.)
+    { property: "og:title", content: title },
+    { property: "og:description", content: description },
     { property: "og:type", content: "website" },
+    { property: "og:url", content: siteUrl },
+    { property: "og:image", content: imageUrl },
+    { property: "og:image:width", content: "1200" },
+    { property: "og:image:height", content: "630" },
+    { property: "og:site_name", content: "David Abraham Portfolio" },
+    { property: "og:locale", content: "fr_FR" },
+
+    // ✅ Twitter Card
     { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:title", content: title },
+    { name: "twitter:description", content: description },
+    { name: "twitter:image", content: imageUrl },
+    // { name: "twitter:site", content: "@votrecompte" }, // Ajoutez si vous avez Twitter
+    // { name: "twitter:creator", content: "@votrecompte" },
+
+    // ✅ Canonical URL
+    { tagName: "link", rel: "canonical", href: siteUrl },
+
+    // ✅ Structured Data JSON-LD
+    {
+      "script:ld+json": structuredData,
+    },
   ];
 };
 
@@ -51,7 +111,7 @@ export default function Home() {
         <Navbar />
 
         {/* Main content */}
-        <main>
+        <main id="main-content" role="main">
           {/* 1. HOOK - Première impression */}
           <Hero />
 

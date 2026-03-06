@@ -302,5 +302,6 @@ export const contactConfig = {
   email: "pro.mailer.sender@gmail.com",
   from: "onboarding@resend.dev",
   subject: "Contact Form Submission david abraham bresom",
-  resendApiKey: "re_Br1bKvYh_ATgqDuXLterQLa5C61nAq1Zf",
+  // Note: La clé API Resend est maintenant chargée directement dans api.contact.tsx
+  // via process.env pour éviter l'exposition côté client
 };

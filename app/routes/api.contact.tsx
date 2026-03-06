@@ -1,20 +1,79 @@
 import type { ActionFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Resend } from "resend";
+import sanitizeHtml from "sanitize-html";
 import { contactConfig } from "~/data/content";
+import { isRateLimited } from "~/utils/rateLimiter";
 
-const resend = new Resend(contactConfig.resendApiKey);
+// ✅ Charger la clé API depuis les variables d'environnement (sécurisé côté serveur)
+const RESEND_API_KEY = process.env.RESEND_API_KEY || "";
+const resend = new Resend(RESEND_API_KEY);
+
+// Configuration de sanitization stricte
+const sanitizeOptions = {
+  allowedTags: [], // Aucune balise HTML autorisée
+  allowedAttributes: {},
+  disallowedTagsMode: 'discard' as const
+};
+
+// Validation d'email améliorée
+const isValidEmail = (email: string): boolean => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
 
 export async function action({ request }: ActionFunctionArgs) {
+  // ✅ Vérification du rate limiting
+  const rateLimitResult = isRateLimited(request);
+  if (rateLimitResult.limited) {
+    const resetInSeconds = Math.ceil(rateLimitResult.resetIn / 1000);
+    return json(
+      {
+        success: false,
+        error: `Trop de tentatives. Veuillez réessayer dans ${resetInSeconds} secondes.`,
+      },
+      {
+        status: 429,
+        headers: {
+          "Retry-After": String(resetInSeconds),
+        },
+      }
+    );
+  }
+
   const formData = await request.formData();
-  const name = formData.get("name") as string;
-  const email = formData.get("email") as string;
-  const subject = formData.get("subject") as string;
-  const message = formData.get("message") as string;
+
+  // ✅ Sanitization des inputs pour prévenir XSS
+  const rawName = formData.get("name") as string;
+  const rawEmail = formData.get("email") as string;
+  const rawSubject = formData.get("subject") as string;
+  const rawMessage = formData.get("message") as string;
 
   // Validation basique
-  if (!name || !email || !subject || !message) {
+  if (!rawName || !rawEmail || !rawSubject || !rawMessage) {
     return json({ success: false, error: "Tous les champs sont requis" }, { status: 400 });
+  }
+
+  // Sanitization
+  const name = sanitizeHtml(rawName, sanitizeOptions).trim();
+  const email = sanitizeHtml(rawEmail, sanitizeOptions).trim().toLowerCase();
+  const subject = sanitizeHtml(rawSubject, sanitizeOptions).trim();
+  const message = sanitizeHtml(rawMessage, sanitizeOptions).trim();
+
+  // Validation longueur
+  if (name.length > 100) {
+    return json({ success: false, error: "Le nom est trop long (max 100 caractères)" }, { status: 400 });
+  }
+  if (subject.length > 200) {
+    return json({ success: false, error: "Le sujet est trop long (max 200 caractères)" }, { status: 400 });
+  }
+  if (message.length > 5000) {
+    return json({ success: false, error: "Le message est trop long (max 5000 caractères)" }, { status: 400 });
+  }
+
+  // Validation email
+  if (!isValidEmail(email)) {
+    return json({ success: false, error: "L'adresse email n'est pas valide" }, { status: 400 });
   }
 
   try {

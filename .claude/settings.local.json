@@ -21,7 +21,8 @@
       "WebFetch(domain:koraconsult.vercel.app)",
       "WebFetch(domain:freshafrique.vercel.app)",
       "WebFetch(domain:queenbydkloth.vercel.app)",
-      "Bash(git restore:*)"
+      "Bash(git restore:*)",
+      "Bash(npm run dev:*)"
     ]
   }
 }

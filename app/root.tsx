@@ -81,6 +81,20 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body className="bg-dark-deep text-light-primary antialiased">
+        {/* ✅ Skip links pour l'accessibilité */}
+        <a
+          href="#main-content"
+          className="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-6 focus:py-3 focus:bg-violet-accent focus:text-white focus:rounded-lg focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-violet-light"
+        >
+          Aller au contenu principal
+        </a>
+        <a
+          href="#contact"
+          className="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-52 focus:z-50 focus:px-6 focus:py-3 focus:bg-violet-accent focus:text-white focus:rounded-lg focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-violet-light"
+        >
+          Aller au formulaire de contact
+        </a>
+
         <GSAPProvider>{children}</GSAPProvider>
         <ScrollRestoration />
         <Scripts />

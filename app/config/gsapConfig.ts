@@ -325,3 +325,53 @@ export function createClipReveal(
     }
   );
 }
+
+/**
+ * ✅ Vérifier si l'utilisateur préfère des animations réduites
+ * Respecte les besoins d'accessibilité
+ */
+export function prefersReducedMotion(): boolean {
+  if (typeof window === "undefined") return false;
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+/**
+ * ✅ Obtenir une durée d'animation respectueuse de l'accessibilité
+ * @param normalDuration Durée normale en secondes
+ * @param reducedDuration Durée réduite en secondes (défaut: 0.1s pour une transition instantanée)
+ */
+export function getAccessibleDuration(
+  normalDuration: number,
+  reducedDuration: number = 0.1
+): number {
+  return prefersReducedMotion() ? reducedDuration : normalDuration;
+}
+
+/**
+ * ✅ Wrapper pour créer des animations GSAP respectueuses de l'accessibilité
+ * Si prefers-reduced-motion est activé, retourne une animation instantanée
+ */
+export function createAccessibleAnimation(
+  vars: gsap.TweenVars,
+  reducedVars?: Partial<gsap.TweenVars>
+): gsap.TweenVars {
+  if (prefersReducedMotion()) {
+    // Animation réduite: durée très courte, pas d'effets complexes
+    return {
+      ...vars,
+      duration: 0.1,
+      ease: "none",
+      // Garder seulement les propriétés de position finale
+      scale: vars.scale !== undefined ? vars.scale : undefined,
+      opacity: vars.opacity !== undefined ? vars.opacity : undefined,
+      x: vars.x !== undefined ? vars.x : undefined,
+      y: vars.y !== undefined ? vars.y : undefined,
+      // Supprimer les effets de rotation, parallax, etc.
+      rotateX: 0,
+      rotateY: 0,
+      rotateZ: 0,
+      ...reducedVars,
+    };
+  }
+  return vars;
+}
