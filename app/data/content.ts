@@ -166,7 +166,7 @@ export const projectsData: Project[] = [
   {
     title: "Beats d'Éléphants",
     description: "Plate-forme de musique : trap, afro, drill, boombap.",
-    image: "/beatsdelephants.png",
+    image: "/beatsdelephantsMockup1.png",
     tags: ["Remix.js", "beats", "musique ", "drill"],
     link: "https://beatsdelephants.vercel.app/",
   },

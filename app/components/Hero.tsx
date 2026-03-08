@@ -487,9 +487,9 @@ export default function Hero() {
           {/* Hero Image Card */}
           <div
             ref={imageContainerRef}
-            className="relative flex justify-center lg:justify-end"
+            className="relative flex justify-center lg:justify-end "
           >
-            <div ref={imageRef} className="relative">
+            <div ref={imageRef} className="relative ">
               {/* Animated glow behind image */}
               <div
                 className="image-glow absolute -inset-8 rounded-full opacity-30"
@@ -501,39 +501,46 @@ export default function Hero() {
               />
 
               {/* Image card */}
-              <div className="relative bg-dark-card p-3 rounded-3xl shadow-premium border border-dark-border overflow-hidden group will-animate">
-                {/* Violet overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-violet-primary/10 to-transparent pointer-events-none z-10 rounded-3xl transition-opacity duration-500 group-hover:opacity-50" />
+              <div className="bg-dark-card p-3 rounded-3xl shadow-premium border border-dark-border">
+                <div className="relative  rounded-2xl overflow-hidden group will-animate">
+                  {/* Violet overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-violet-primary/10 to-transparent pointer-events-none z-10 rounded-3xl transition-opacity duration-500 group-hover:opacity-50" />
 
-                {/* Enhanced shine effect on hover */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-20">
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-violet-accent/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                </div>
+                  {/* Enhanced shine effect on hover */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-20">
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-violet-accent/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                  </div>
 
-                {/* Additional shimmer pass on load */}
-                <div className="absolute inset-0 pointer-events-none z-20 animate-shimmer opacity-40" />
+                  {/* Additional shimmer pass on load */}
+                  <div className="absolute inset-0 pointer-events-none z-20 animate-shimmer opacity-40" />
 
-                <img
-                  src="/profile/face-identiter-large.jpg"
-                  alt="David Abraham"
-                  className="w-72 h-72 md:w-80 md:h-80 lg:w-[22rem] lg:h-[26rem] object-cover object-top rounded-2xl transition-all duration-700 group-hover:scale-105 group-hover:saturate-110 will-change-transform"
-                />
-                <CircularText
-                  text="REACT✦REMIX✦COMPONENTS✦PATTERNS✦UI/UX✦TEMPLATES✦"
-                  onHover="slowDown"
-                  spinDuration={20}
-                  className="!absolute !left-8 !top-16 lg:!left-12 lg:!top-24  !text-violet-primary  !inset-0 custom-class w-[25em]"
-                />
+                  <img
+                    src="/profile/s-face-identiter-large.png"
+                    alt="David Abraham"
+                    className=" absolute  z-20 w-72 h-72 md:w-80 md:h-80 lg:w-[22rem] lg:h-[26rem] object-cover object-top rounded-2xl transition-all duration-700 group-hover:scale-105 group-hover:saturate-110 will-change-transform"
+                  />
+                  <img
+                    src="/profile/face-identiter-large.jpg"
+                    alt="David Abraham"
+                    className="w-72 h-72 md:w-80 md:h-80 lg:w-[22rem] lg:h-[26rem] object-cover object-top rounded-2xl transition-all duration-700 group-hover:scale-105 group-hover:saturate-110 will-change-transform"
+                  />
+                  <CircularText
+                    text="REACT✦REMIX✦COMPONENTS✦PATTERNS✦UI/UX✦TEMPLATES✦"
+                    onHover="slowDown"
+                    spinDuration={20}
+                    className="!absolute !left-8 !top-16 lg:!left-12 lg:!top-24  !text-violet-primary  !inset-0 custom-class w-[25em]"
+                  />
 
-                {/* Status badge with glow */}
-                <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 bg-dark-surface/90 backdrop-blur-sm px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border border-dark-border flex items-center gap-2 shadow-lg">
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                  </span>
-                  <span className="text-light-secondary text-sm">
-                    Disponible
-                  </span>
+                  {/* Status badge with glow */}
+                  <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 bg-dark-surface/90 backdrop-blur-sm px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border border-dark-border flex items-center gap-2 shadow-lg">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                    </span>
+                    <span className="text-light-secondary text-sm">
+                      Disponible
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>

@@ -391,20 +391,27 @@ export default function Contact() {
           <div ref={leftColRef} className="lg:col-span-2 space-y-6">
             {/* Image */}
             <div className="contact-image relative lg:block">
-              <div className="relative bg-dark-card p-2 rounded-2xl shadow-premium border border-dark-border overflow-hidden">
-                <img
-                  src="/profile/face-identiter.jpg"
-                  alt="David Abraham - Contact"
-                  className="w-full aspect-[4/3] object-cover rounded-xl"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-dark-card/80 to-transparent pointer-events-none rounded-xl" />
+              <div className="bg-dark-card p-2 rounded-2xl shadow-premium border border-dark-border">
+                <div className="relative rounded-xl overflow-hidden">
+                  {/* <img
+                    src="/profile/s-face-identiter.png"
+                    alt="David Abraham - Contact"
+                    className="absolute z-20 w-full aspect-[4/3] object-cover rounded-xl"
+                  /> */}
+                  <img
+                    src="/profile/face-identiter.jpg"
+                    alt="David Abraham - Contact"
+                    className="w-full aspect-[4/3] object-cover rounded-xl"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-dark-card/80 to-transparent pointer-events-none rounded-xl" />
 
-                <CircularText
-                  text="DOCKER✦POSTGRES✦GSAP✦MOTION✦PRISMA✦"
-                  onHover="slowDown"
-                  spinDuration={20}
-                  className="!absolute !left-6 !top-6  sm:!left-12 sm:!top-16 lg:!left-6 lg:!top-6 !text-violet-primary !inset-0 custom-class w-72 sm:w-[27rem] lg:w-80 2xl:w-[23rem]"
-                />
+                  <CircularText
+                    text="DOCKER✦POSTGRES✦GSAP✦MOTION✦PRISMA✦"
+                    onHover="slowDown"
+                    spinDuration={20}
+                    className="!absolute !left-6 !top-6 sm:!left-12 sm:!top-16 lg:!left-6 lg:!top-6 !text-violet-primary !inset-0 custom-class w-72 sm:w-[27rem] lg:w-80 2xl:w-[23rem]"
+                  />
+                </div>
               </div>
             </div>
 

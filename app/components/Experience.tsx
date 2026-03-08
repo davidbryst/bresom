@@ -354,29 +354,36 @@ export default function Experience() {
               <div className="decor-glow absolute -bottom-6 -left-6 w-40 h-40 bg-violet-primary/10 rounded-2xl blur-2xl" />
 
               {/* Image card */}
-              <div className="img-container relative bg-dark-card p-3 rounded-3xl shadow-premium border border-dark-border overflow-hidden">
-                {/* Violet overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-violet-primary/20 to-transparent pointer-events-none z-10 rounded-3xl" />
+              <div className="bg-dark-card p-3 rounded-3xl shadow-premium border border-dark-border">
+                <div className="img-container relative rounded-2xl overflow-hidden">
+                  {/* Violet overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-violet-primary/20 to-transparent pointer-events-none z-10 rounded-3xl" />
 
-                <img
-                  src="/profile/prodile-contreplonger.jpg"
-                  alt="David Abraham - Ambition"
-                  className="w-full aspect-[3/4] object-cover rounded-2xl"
-                />
-                <CircularText
-                  text="TAILWIND✦NEST✦MONGO✦FLUTTER✦BLENDER✦"
-                  onHover="slowDown"
-                  spinDuration={20}
-                  className="!absolute !left-12 !top-6 sm:!left-12 sm:!top-16 md:!left-12 md:!top-20 lg:!left-12 lg:!top-8 2xl:!left-12 2xl:!top-12 !text-violet-primary !inset-0 custom-class w-72 md:w-[29rem] lg:w-80 2xl:w-[23rem]"
-                />
-                {/* Badge */}
-                <div className="img-badge absolute bottom-6 left-6 right-6 bg-dark-surface/90 backdrop-blur-sm p-4 rounded-xl border border-dark-border">
-                  <p className="text-light-primary font-semibold text-sm">
-                    Toujours en quête d'excellence
-                  </p>
-                  <p className="text-light-muted text-xs mt-1">
-                    Passion, rigueur et innovation
-                  </p>
+                  {/* <img
+                    src="/profile/s-prodile-contreplonger.png"
+                    alt="David Abraham - Ambition"
+                    className="absolute z-0 w-full aspect-[3/4] object-cover rounded-2xl"
+                  /> */}
+                  <img
+                    src="/profile/prodile-contreplonger.jpg"
+                    alt="David Abraham - Ambition"
+                    className="w-full aspect-[3/4] object-cover rounded-2xl"
+                  />
+                  <CircularText
+                    text="TAILWIND✦NEST✦MONGO✦FLUTTER✦BLENDER✦"
+                    onHover="slowDown"
+                    spinDuration={20}
+                    className="!absolute !left-12 !top-6 sm:!left-12 sm:!top-16 md:!left-12 md:!top-20 lg:!left-12 lg:!top-8 2xl:!left-12 2xl:!top-12 !text-violet-primary !inset-0 custom-class w-72 md:w-[29rem] lg:w-80 2xl:w-[23rem]"
+                  />
+                  {/* Badge */}
+                  <div className="img-badge absolute bottom-6 left-6 right-6 bg-dark-surface/90 backdrop-blur-sm p-4 rounded-xl border border-dark-border">
+                    <p className="text-light-primary font-semibold text-sm">
+                      Toujours en quête d'excellence
+                    </p>
+                    <p className="text-light-muted text-xs mt-1">
+                      Passion, rigueur et innovation
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

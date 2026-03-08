@@ -550,11 +550,16 @@ export default function About() {
               <div className="decor-element absolute -bottom-4 -right-4 w-32 h-32 bg-violet-primary/10 rounded-2xl blur-xl" />
               <div className="decor-element absolute top-1/2 -right-8 w-4 h-4 bg-violet-accent rounded-full" />
 
-              <div
-                className="image-wrapper relative bg-dark-card p-2 rounded-2xl shadow-premium border border-dark-border overflow-hidden"
-                style={{ transformStyle: "preserve-3d" }}
-              >
-                <div className="relative rounded-2xl overflow-hidden">
+              <div className="bg-dark-card p-2 rounded-2xl shadow-premium border border-dark-border">
+                <div
+                  className="image-wrapper relative rounded-2xl overflow-hidden"
+                  style={{ transformStyle: "preserve-3d" }}
+                >
+                  {/* <img
+                    src="/profile/s-face-identiter.png"
+                    alt="David Abraham - About"
+                    className="absolute z-20 w-72 h-80 md:w-80 md:h-96 2xl:w-[25rem] 2xl:h-[27rem] object-cover rounded-xl"
+                  /> */}
                   <img
                     src="/profile/face-identiter.jpg"
                     alt="David Abraham - About"
@@ -562,14 +567,14 @@ export default function About() {
                   />
                   {/* Overlay gradient */}
                   {/* <div className="absolute inset-0 bg-gradient-to-t from-violet-primary via-violet-primary/5 to-violet-primary/20 from-20% pointer-events-none" /> */}
-                </div>
 
-                <CircularText
-                  text="NODE.JS✦TYPESCRIPT✦SUPABASE✦FIGMA✦DESIGN✦"
-                  onHover="slowDown"
-                  spinDuration={20}
-                  className="!absolute !left-0 !top-20 sm:!left-0 sm:!top-28 lg:!left-6 lg:!top-24 !text-violet-primary !inset-0 custom-class w-96 2xl:w-[30rem]"
-                />
+                  <CircularText
+                    text="NODE.JS✦TYPESCRIPT✦SUPABASE✦FIGMA✦DESIGN✦"
+                    onHover="slowDown"
+                    spinDuration={20}
+                    className="!absolute !left-0 !top-20 sm:!left-0 sm:!top-28 lg:!left-6 lg:!top-24 !text-violet-primary !inset-0 custom-class w-96 2xl:w-[30rem]"
+                  />
+                </div>
               </div>
             </div>
           </div>
