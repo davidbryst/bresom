@@ -1,6 +1,7 @@
-import { useRef, useEffect, useState, useMemo } from "react";
+import { useRef, useEffect, useState, useMemo, lazy, Suspense } from "react";
 import { gsap, ScrollTrigger, easings } from "~/hooks/useGSAP";
-import FallingText from "./FallingText";
+// FallingText pulls in matter-js (~86 KB) — lazy-load it into its own chunk.
+const FallingText = lazy(() => import("./FallingText"));
 import CardSwap, { Card } from "./CardSwap";
 import { SkillsCTA } from "./MiniCTA";
 import {
@@ -9,35 +10,21 @@ import {
   type SkillItem,
   type SkillBucket,
 } from "~/data/content";
-import { Download, ChevronLeft, ChevronRight } from "lucide-react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faReact,
-  faNodeJs,
-  faLaravel,
-  faGitAlt,
-  faFigma,
-  faAws,
-  faAngular,
-  faDocker,
-  faAndroid,
-  faApple,
-} from "@fortawesome/free-brands-svg-icons";
-import {
-  faCode,
-  faImage,
-  faPenNib,
-  faPalette,
-  faMobileScreen,
-  faLayerGroup,
-  faCubes,
-  faPencilRuler,
-  faObjectGroup,
-  faFont,
-  faDroplet,
-  faUniversalAccess,
-  faMobileAlt,
-} from "@fortawesome/free-solid-svg-icons";
+  Download,
+  ChevronLeft,
+  ChevronRight,
+  Code,
+  Palette,
+  Smartphone,
+  Layers,
+  Boxes,
+  Ruler,
+  LayoutGrid,
+  Type,
+  Droplet,
+  Accessibility,
+} from "lucide-react";
 import {
   SiNextdotjs,
   SiTypescript,
@@ -56,56 +43,66 @@ import {
   SiCloudflare,
   SiSpringboot,
   SiAdobeaftereffects,
+  SiReact,
+  SiAngular,
+  SiNodedotjs,
+  SiLaravel,
+  SiGit,
+  SiDocker,
+  SiFigma,
+  SiAdobephotoshop,
+  SiAdobeillustrator,
+  SiAndroidstudio,
+  SiXcode,
+  SiAmazonwebservices,
 } from "react-icons/si";
 
 // Mapping des technologies aux icônes
 const getTechIcon = (techName: string) => {
   const name = techName.toLowerCase();
 
-  if (name === "react") return <FontAwesomeIcon icon={faReact} />;
+  if (name === "react") return <SiReact />;
   if (name === "next.js") return <SiNextdotjs />;
   if (name === "remix") return <SiRemix />;
-  if (name === "angular") return <FontAwesomeIcon icon={faAngular} />;
+  if (name === "angular") return <SiAngular />;
   if (name === "typescript") return <SiTypescript />;
   if (name === "tailwind css") return <SiTailwindcss />;
-  if (name === "node.js") return <FontAwesomeIcon icon={faNodeJs} />;
-  if (name === "laravel") return <FontAwesomeIcon icon={faLaravel} />;
+  if (name === "node.js") return <SiNodedotjs />;
+  if (name === "laravel") return <SiLaravel />;
   if (name === "spring boot") return <SiSpringboot />;
   if (name === "graphql") return <SiGraphql />;
   if (name === "postgresql") return <SiPostgresql />;
   if (name === "mongodb") return <SiMongodb />;
   if (name === "redis") return <SiRedis />;
-  if (name === "git") return <FontAwesomeIcon icon={faGitAlt} />;
-  if (name === "docker") return <FontAwesomeIcon icon={faDocker} />;
-  if (name === "figma") return <FontAwesomeIcon icon={faFigma} />;
-  if (name === "photoshop") return <FontAwesomeIcon icon={faImage} />;
-  if (name === "illustrator") return <FontAwesomeIcon icon={faPenNib} />;
+  if (name === "git") return <SiGit />;
+  if (name === "docker") return <SiDocker />;
+  if (name === "figma") return <SiFigma />;
+  if (name === "photoshop") return <SiAdobephotoshop />;
+  if (name === "illustrator") return <SiAdobeillustrator />;
   if (name === "blender") return <SiBlender />;
   if (name === "after effects") return <SiAdobeaftereffects />;
-  if (name === "ui/ux design") return <FontAwesomeIcon icon={faPalette} />;
-  if (name === "responsive design")
-    return <FontAwesomeIcon icon={faMobileScreen} />;
-  if (name === "design system") return <FontAwesomeIcon icon={faLayerGroup} />;
-  if (name === "atomic design") return <FontAwesomeIcon icon={faCubes} />;
-  if (name === "wireframing") return <FontAwesomeIcon icon={faPencilRuler} />;
-  if (name === "prototyping") return <FontAwesomeIcon icon={faObjectGroup} />;
-  if (name === "typography") return <FontAwesomeIcon icon={faFont} />;
-  if (name === "color theory") return <FontAwesomeIcon icon={faDroplet} />;
-  if (name === "accessibilité")
-    return <FontAwesomeIcon icon={faUniversalAccess} />;
-  if (name === "mobile-first") return <FontAwesomeIcon icon={faMobileAlt} />;
-  if (name === "react native") return <FontAwesomeIcon icon={faReact} />;
+  if (name === "ui/ux design") return <Palette />;
+  if (name === "responsive design") return <Smartphone />;
+  if (name === "design system") return <Layers />;
+  if (name === "atomic design") return <Boxes />;
+  if (name === "wireframing") return <Ruler />;
+  if (name === "prototyping") return <LayoutGrid />;
+  if (name === "typography") return <Type />;
+  if (name === "color theory") return <Droplet />;
+  if (name === "accessibilité") return <Accessibility />;
+  if (name === "mobile-first") return <Smartphone />;
+  if (name === "react native") return <SiReact />;
   if (name === "expo") return <SiExpo />;
   if (name === "flutter") return <SiFlutter />;
-  if (name === "android studio") return <FontAwesomeIcon icon={faAndroid} />;
-  if (name === "xcode") return <FontAwesomeIcon icon={faApple} />;
+  if (name === "android studio") return <SiAndroidstudio />;
+  if (name === "xcode") return <SiXcode />;
   if (name === "supabase") return <SiSupabase />;
   if (name === "firebase") return <SiFirebase />;
-  if (name === "aws") return <FontAwesomeIcon icon={faAws} />;
+  if (name === "aws") return <SiAmazonwebservices />;
   if (name === "vercel") return <SiVercel />;
   if (name === "cloudflare") return <SiCloudflare />;
 
-  return <FontAwesomeIcon icon={faCode} />;
+  return <Code />;
 };
 
 interface FlatBucket {
@@ -123,6 +120,8 @@ export default function Skills() {
   const fallingTextRef = useRef<HTMLDivElement>(null);
   const infoBulleRef = useRef<HTMLDivElement>(null);
   const cardSwapRef = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
   const [activeCard, setActiveCard] = useState(0);
   const [cardConfig, setCardConfig] = useState({
     width: 420,
@@ -560,6 +559,8 @@ export default function Skills() {
               ref={fallingTextRef}
               className="mb-7 sm:mb-9 md:mb-11 lg:mb-14 xl:mb-12 h-60 sm:h-56 md:h-52 lg:h-64 xl:h-56 bg-gradient-to-b from-violet-primary/5 via-transparent to-violet-primary/10 backdrop-blur-sm overflow-hidden pointer-events-auto rounded-lg shadow-lg shadow-violet-primary/5"
             >
+              {mounted && (
+                <Suspense fallback={null}>
               <FallingText
                 text="Je maîtrise le développement web frontend avec React, Next.js, Remix et Angular, accompagnés de TypeScript et Tailwind CSS. Côté backend, je travaille avec Node.js, Laravel et Spring Boot, connectés à des bases de données PostgreSQL et MongoDB. Pour le design, j'utilise Figma, Photoshop, Illustrator et Blender, en appliquant les principes d'UI/UX Design, Responsive Design et Design System. En mobile, je développe avec React Native et Expo. Je déploie mes projets sur Vercel, AWS, Firebase et Supabase."
                 highlightWords={[
@@ -596,6 +597,8 @@ export default function Skills() {
                 fontSize="0.85rem"
                 mouseConstraintStiffness={2.2}
               />
+                </Suspense>
+              )}
             </div>
             {/* Stats */}
             <div

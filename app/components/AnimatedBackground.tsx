@@ -1,8 +1,11 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, lazy, Suspense } from "react";
 import gsap from "gsap";
 
-import Silk from "../../src/component/Silk";
 import { usePrefersReducedMotion } from "~/hooks/usePrefersReducedMotion";
+
+// Lazy-loaded so three.js / @react-three/fiber land in their own chunk,
+// out of the initial bundle. Only mounted client-side (see `mounted` below).
+const Silk = lazy(() => import("../../src/component/Silk"));
 interface GlowOrbProps {
   color?: string;
   size?: number;
@@ -469,7 +472,12 @@ export default function AnimatedBackground({
 }: AnimatedBackgroundProps) {
   const prefersReducedMotion = usePrefersReducedMotion();
   const [isDesktop, setIsDesktop] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
+
+  // The WebGL fabric is client-only; mounting it after hydration keeps three.js
+  // out of the SSR/initial bundle and avoids hydration mismatches.
+  useEffect(() => setMounted(true), []);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -526,30 +534,38 @@ export default function AnimatedBackground({
                   "radial-gradient(ellipse at 50% 40%, rgba(124, 58, 237, 0.18) 0%, transparent 60%)",
               }}
             />
-            <Silk
-              speed={5}
-              scale={1}
-              color="#7C3AEDC1"
-              noiseIntensity={1.5}
-              rotation={0}
-              animate={false}
-              dpr={[1, 1]}
-            />
+            {mounted && (
+              <Suspense fallback={null}>
+                <Silk
+                  speed={5}
+                  scale={1}
+                  color="#7C3AEDC1"
+                  noiseIntensity={1.5}
+                  rotation={0}
+                  animate={false}
+                  dpr={[1, 1]}
+                />
+              </Suspense>
+            )}
           </>
         ) : (
           <>
             <GradientMesh />
             <AuroraBackground className="opacity-50" />
             <GlowingParticles count={isDesktop ? 10 : 6} />
-            <Silk
-              speed={5}
-              scale={1}
-              color="#7C3AEDC1"
-              noiseIntensity={1.5}
-              rotation={0}
-              paused={!isVisible}
-              dpr={silkDpr}
-            />
+            {mounted && (
+              <Suspense fallback={null}>
+                <Silk
+                  speed={5}
+                  scale={1}
+                  color="#7C3AEDC1"
+                  noiseIntensity={1.5}
+                  rotation={0}
+                  paused={!isVisible}
+                  dpr={silkDpr}
+                />
+              </Suspense>
+            )}
           </>
         ))}
     </div>

@@ -11,11 +11,11 @@ if (typeof window !== "undefined") {
 // Navigation - Story-first approach (connexion personnelle avant tout)
 const navLinks = [
   { name: "Accueil", href: "#hero" },
-  { name: "A propos", href: "#about" },
+  { name: "À propos", href: "#about" },
   { name: "Projets", href: "#projects" },
   { name: "Services", href: "#services" },
-  { name: "Skills", href: "#skills" },
-  { name: "Experience", href: "#experience" },
+  { name: "Compétences", href: "#skills" },
+  { name: "Expérience", href: "#experience" },
   { name: "Contact", href: "#contact" },
 ];
 
