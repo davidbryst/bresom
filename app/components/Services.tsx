@@ -472,8 +472,7 @@ export default function Services() {
     <section
       id="services"
       ref={sectionRef}
-      className="bg-dark-deep relative overflow-clip"
-    // className="py-16 sm:py-20 md:py-24 bg-dark-deep relative overflow-clip"
+      className=" bg-dark-deep relative overflow-clip"
     >
       {/* Progress bar - scrub indicator */}
 
@@ -500,8 +499,10 @@ export default function Services() {
 
           {/* Main image */}
           <img
-            src="/profile/face-plonger.jpg"
+            src="/profile/face-plonger.webp"
             alt="Vision stratégique"
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover"
           />
 
@@ -524,8 +525,10 @@ export default function Services() {
 
           {/* Main image */}
           <img
-            src="/profile/face-plonger.jpg"
+            src="/profile/face-plonger.webp"
             alt="Vision stratégique"
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover rounded-l-3xl shadow-2xl"
             style={{ perspective: "1000px" }}
           />
@@ -579,9 +582,9 @@ export default function Services() {
         </div>
       </div>
 
-      <div className="max-w-7xl 2xl:max-w-[1400px] 3xl:max-w-[1700px] 4xl:max-w-[2100px] mx-auto mt-0 px-6 relative z-10 bg-gradient-to-b from-black via-10% via-dark-deep/50 to-dark-black py-12">
+      <div className="max-w-7xl 2xl:max-w-[1400px] 3xl:max-w-[1700px] 4xl:max-w-[2100px] mx-auto mt-0 px-6 relative z-10 bg-gradient-to-b from-black via-10% via-dark-deep/50 to-dark-black py-32 sm:py-44 md:py-64">
         <div ref={headerRef} className="text-center mb-16">
-          <span className="section-label text-violet-accent font-semibold text-sm tracking-wider uppercase mb-4 px-4 py-2 bg-violet-primary/10 rounded-full inline-block border border-violet-primary/20">
+          <span className="section-label text-violet-accent font-semibold text-sm tracking-wider uppercase mb-5 sm:mb-10 px-4 py-2 bg-violet-primary/10 rounded-full inline-block border border-violet-primary/20">
             Services
           </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-light-primary mb-4">

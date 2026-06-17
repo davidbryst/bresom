@@ -487,7 +487,7 @@ export default function About() {
     <section
       id="about"
       ref={sectionRef}
-      className="py-16 sm:py-20 md:py-24 bg-dark-surface relative overflow-hidden"
+      className="py-32 sm:py-44 md:py-64 bg-dark-surface relative overflow-hidden"
     >
       {/* Progress bar - scrub indicator */}
       {/* <div
@@ -509,7 +509,7 @@ export default function About() {
           ref={titleRef2}
           className="flex 2xl:hidden flex-col items-center mb-8"
         >
-          <span className="header-badge inline-block text-violet-accent font-semibold text-sm tracking-wider uppercase mb-4 px-4 py-2 bg-violet-primary/10 rounded-full border border-violet-primary/20">
+          <span className="header-badge inline-block text-violet-accent font-semibold text-sm tracking-wider uppercase mb-5 sm:mb-10 px-4 py-2 bg-violet-primary/10 rounded-full border border-violet-primary/20">
             A propos
           </span>
 
@@ -561,8 +561,10 @@ export default function About() {
                     className="absolute z-20 w-72 h-80 md:w-80 md:h-96 2xl:w-[25rem] 2xl:h-[27rem] object-cover rounded-xl"
                   /> */}
                   <img
-                    src="/profile/face-identiter.jpg"
+                    src="/profile/face-identiter.webp"
                     alt="David Abraham - About"
+                    loading="lazy"
+                    decoding="async"
                     className="w-72 h-80 md:w-80 md:h-96 2xl:w-[25rem] 2xl:h-[27rem] object-cover rounded-xl"
                   />
                   {/* Overlay gradient */}

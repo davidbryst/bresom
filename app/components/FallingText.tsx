@@ -31,6 +31,10 @@ const FallingText: React.FC<FallingTextProps> = ({
   const [effectStarted, setEffectStarted] = useState(false);
   const [isVisible, setIsVisible] = useState(false); // Contrôle de visibilité pour pause
   const rafIdRef = useRef<number | null>(null); // Pour stocker requestAnimationFrame ID
+  const engineRef = useRef<Matter.Engine | null>(null);
+  const runnerRef = useRef<Matter.Runner | null>(null);
+  const renderRef = useRef<Matter.Render | null>(null);
+  const wordBodiesRef = useRef<{ elem: HTMLElement; body: Matter.Body }[]>([]);
 
   useEffect(() => {
     if (!textRef.current) return;
@@ -85,6 +89,7 @@ const FallingText: React.FC<FallingTextProps> = ({
     }
   }, [trigger]);
 
+  // --- Construire le monde physique UNE seule fois (indépendant de la visibilité) ---
   useEffect(() => {
     if (!effectStarted) return;
 
@@ -142,7 +147,7 @@ const FallingText: React.FC<FallingTextProps> = ({
       });
       Matter.Body.setAngularVelocity(body, (Math.random() - 0.5) * 0.03);
 
-      return { elem, body };
+      return { elem: elem as HTMLElement, body };
     });
 
     wordBodies.forEach(({ elem, body }) => {
@@ -165,33 +170,15 @@ const FallingText: React.FC<FallingTextProps> = ({
     World.add(engine.world, [floor, leftWall, rightWall, ceiling, mouseConstraint, ...wordBodies.map(wb => wb.body)]);
 
     const runner = Runner.create();
-    Runner.run(runner, engine);
-    Render.run(render);
+    runner.enabled = false; // en pause tant que la section n'est pas visible
+    Runner.run(runner, engine); // s'auto-planifie mais ne steppe rien tant que enabled=false
 
-    const updateLoop = () => {
-      // Pause si non visible (optimisation performance)
-      if (!isVisible) {
-        rafIdRef.current = null;
-        return;
-      }
-
-      wordBodies.forEach(({ body, elem }) => {
-        const { x, y } = body.position;
-        elem.style.left = `${x}px`;
-        elem.style.top = `${y}px`;
-        elem.style.transform = `translate(-50%, -50%) rotate(${body.angle}rad)`;
-      });
-      Matter.Engine.update(engine);
-      rafIdRef.current = requestAnimationFrame(updateLoop);
-    };
-
-    // Démarrer la loop seulement si visible
-    if (isVisible) {
-      updateLoop();
-    }
+    engineRef.current = engine;
+    runnerRef.current = runner;
+    renderRef.current = render;
+    wordBodiesRef.current = wordBodies;
 
     return () => {
-      // Cancel RAF si en cours
       if (rafIdRef.current !== null) {
         cancelAnimationFrame(rafIdRef.current);
         rafIdRef.current = null;
@@ -203,8 +190,54 @@ const FallingText: React.FC<FallingTextProps> = ({
       }
       World.clear(engine.world, false);
       Engine.clear(engine);
+      engineRef.current = null;
+      runnerRef.current = null;
+      renderRef.current = null;
+      wordBodiesRef.current = [];
     };
-  }, [effectStarted, gravity, wireframes, backgroundColor, mouseConstraintStiffness, isVisible]);
+  }, [effectStarted, gravity, wireframes, backgroundColor, mouseConstraintStiffness]);
+
+  // --- Démarrer / arrêter les boucles lourdes selon la visibilité (sans reconstruire le monde) ---
+  useEffect(() => {
+    const runner = runnerRef.current;
+    const render = renderRef.current;
+    if (!runner || !render) return;
+
+    const syncLoop = () => {
+      wordBodiesRef.current.forEach(({ body, elem }) => {
+        const { x, y } = body.position;
+        elem.style.left = `${x}px`;
+        elem.style.top = `${y}px`;
+        elem.style.transform = `translate(-50%, -50%) rotate(${body.angle}rad)`;
+      });
+      rafIdRef.current = requestAnimationFrame(syncLoop);
+    };
+
+    if (isVisible) {
+      // Reprise : la physique steppe, le canvas se redessine, le DOM se synchronise.
+      runner.enabled = true;
+      Matter.Render.run(render);
+      if (rafIdRef.current === null) syncLoop();
+    } else {
+      // Hors écran : on gèle physique + rendu + synchro DOM (zéro coût CPU/GPU).
+      runner.enabled = false;
+      Matter.Render.stop(render);
+      if (rafIdRef.current !== null) {
+        cancelAnimationFrame(rafIdRef.current);
+        rafIdRef.current = null;
+      }
+    }
+
+    return () => {
+      if (rafIdRef.current !== null) {
+        cancelAnimationFrame(rafIdRef.current);
+        rafIdRef.current = null;
+      }
+      // Stopper proprement pour éviter des boucles dupliquées si l'effet re-tourne.
+      if (renderRef.current) Matter.Render.stop(renderRef.current);
+      if (runnerRef.current) runnerRef.current.enabled = false;
+    };
+  }, [isVisible, effectStarted]);
 
   // IntersectionObserver pour contrôle de visibilité (optimisation performance)
   useEffect(() => {

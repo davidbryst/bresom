@@ -77,6 +77,23 @@ export const ScrollVelocity: React.FC<ScrollVelocityProps> = ({
   parallaxStyle,
   scrollerStyle
 }) => {
+  const sectionRef = useRef<HTMLElement>(null);
+  // Le marquee est mis en pause hors écran (le coût, c'est le transform par frame).
+  const isInViewRef = useRef(true);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isInViewRef.current = entry.isIntersecting;
+      },
+      { rootMargin: '100px' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   function VelocityText({
     children,
     baseVelocity = velocity,
@@ -122,6 +139,8 @@ export const ScrollVelocity: React.FC<ScrollVelocityProps> = ({
 
     const directionFactor = useRef<number>(1);
     useAnimationFrame((t, delta) => {
+      // Ne pas recalculer le transform du marquee tant que la section est hors écran.
+      if (!isInViewRef.current) return;
       let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
 
       if (velocityFactor.get() < 0) {
@@ -156,7 +175,7 @@ export const ScrollVelocity: React.FC<ScrollVelocityProps> = ({
   }
 
   return (
-    <section>
+    <section ref={sectionRef}>
       {texts.map((text: string, index: number) => (
         <VelocityText
           key={index}

@@ -4,3 +4,8 @@ node_modules
 /build
 .env
 .vercel
+
+# Local backup of original images (replaced by .webp) — not deployed.
+# Extract to restore originals: unzip image-originals.zip -d public/
+image-originals.zip
+graphify-out/

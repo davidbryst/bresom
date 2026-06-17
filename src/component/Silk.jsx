@@ -91,7 +91,16 @@ const SilkPlane = forwardRef(function SilkPlane({ uniforms }, ref) {
 });
 SilkPlane.displayName = 'SilkPlane';
 
-const Silk = ({ speed = 5, scale = 1, color = '#7B7481', noiseIntensity = 1.5, rotation = 0 }) => {
+const Silk = ({
+  speed = 5,
+  scale = 1,
+  color = '#7B7481',
+  noiseIntensity = 1.5,
+  rotation = 0,
+  paused = false,
+  animate = true,
+  dpr = [1, 1.5]
+}) => {
   const meshRef = useRef();
 
   const uniforms = useMemo(
@@ -106,8 +115,15 @@ const Silk = ({ speed = 5, scale = 1, color = '#7B7481', noiseIntensity = 1.5, r
     [speed, scale, noiseIntensity, color, rotation]
   );
 
+  // The fabric stays visible in every mode — only the render cost changes:
+  //   paused (offscreen)        -> 'never'  : stop drawing while not on screen
+  //   !animate (reduced-motion) -> 'demand' : draw one static frame, no motion
+  //   otherwise                 -> 'always' : animate every frame
+  // dpr is capped (1.5 desktop / 1 mobile) to keep the fragment shader cheap.
+  const frameloop = paused ? 'never' : animate ? 'always' : 'demand';
+
   return (
-    <Canvas dpr={[1, 2]} frameloop="always">
+    <Canvas dpr={dpr} frameloop={frameloop}>
       <SilkPlane ref={meshRef} uniforms={uniforms} />
     </Canvas>
   );

@@ -1,7 +1,8 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 
 import Silk from "../../src/component/Silk";
+import { usePrefersReducedMotion } from "~/hooks/usePrefersReducedMotion";
 interface GlowOrbProps {
   color?: string;
   size?: number;
@@ -236,9 +237,10 @@ export function GlowingParticles({
         },
       });
 
-      // Pulsing glow
+      // Pulsing glow via opacity (transform/opacity are GPU-composited;
+      // animating box-shadow forces a full repaint each frame — avoided here).
       gsap.to(particle, {
-        boxShadow: "0 0 20px rgba(124, 58, 237, 0.8)",
+        opacity: Math.random() * 0.4 + 0.4,
         duration: Math.random() * 2 + 1,
         repeat: -1,
         yoyo: true,
@@ -455,41 +457,101 @@ interface AnimatedBackgroundProps {
   variant?: "aurora" | "mesh" | "particles" | "spotlight" | "combined";
   className?: string;
   intensity?: "low" | "medium" | "high";
+  /** When false (e.g. section scrolled offscreen) the WebGL shader stops rendering. */
+  isVisible?: boolean;
 }
 
 export default function AnimatedBackground({
   variant = "combined",
   className = "",
   intensity = "medium",
+  isVisible = true,
 }: AnimatedBackgroundProps) {
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const [isDesktop, setIsDesktop] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mq = window.matchMedia("(min-width: 768px)");
+    const update = () => setIsDesktop(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  // Freeze every looping GSAP tween inside the background (mesh blobs, aurora
+  // waves, particles) when the section is offscreen — otherwise they keep
+  // running and the large blurs are costly to composite every frame.
+  useEffect(() => {
+    if (typeof window === "undefined" || !rootRef.current) return;
+    const targets = gsap.utils.toArray<HTMLElement>(
+      rootRef.current.querySelectorAll("*"),
+    );
+    if (targets.length === 0) return;
+    gsap
+      .getTweensOf(targets)
+      .forEach((t) => (isVisible ? t.resume() : t.pause()));
+  }, [isVisible, isDesktop, prefersReducedMotion]);
+
   const intensityOpacity = {
     low: "opacity-30",
     medium: "opacity-50",
     high: "opacity-70",
   };
 
+  // The fabric (Silk) is always rendered — never removed. We only make it
+  // cheaper: lower dpr on mobile, frozen frame for reduced-motion, paused when
+  // the section is scrolled offscreen.
+  const silkDpr: [number, number] = isDesktop ? [1, 1.5] : [1, 1];
+
   return (
     <div
+      ref={rootRef}
       className={`absolute inset-0 overflow-hidden pointer-events-none ${intensityOpacity[intensity]} ${className}`}
     >
       {variant === "aurora" && <AuroraBackground />}
       {variant === "mesh" && <GradientMesh />}
       {variant === "particles" && <GlowingParticles count={15} />}
       {variant === "spotlight" && <SpotlightEffect />}
-      {variant === "combined" && (
-        <>
-          <GradientMesh />
-          <AuroraBackground className="opacity-50" />
-          <GlowingParticles count={12} />
-          <Silk
-            speed={5}
-            scale={1}
-            color="#7C3AEDC1"
-            noiseIntensity={1.5}
-            rotation={0}
-          />
-        </>
-      )}
+      {variant === "combined" &&
+        (prefersReducedMotion ? (
+          // Reduced motion: keep the fabric but frozen (one static frame) over a
+          // static gradient — no looping animations.
+          <>
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "radial-gradient(ellipse at 50% 40%, rgba(124, 58, 237, 0.18) 0%, transparent 60%)",
+              }}
+            />
+            <Silk
+              speed={5}
+              scale={1}
+              color="#7C3AEDC1"
+              noiseIntensity={1.5}
+              rotation={0}
+              animate={false}
+              dpr={[1, 1]}
+            />
+          </>
+        ) : (
+          <>
+            <GradientMesh />
+            <AuroraBackground className="opacity-50" />
+            <GlowingParticles count={isDesktop ? 10 : 6} />
+            <Silk
+              speed={5}
+              scale={1}
+              color="#7C3AEDC1"
+              noiseIntensity={1.5}
+              rotation={0}
+              paused={!isVisible}
+              dpr={silkDpr}
+            />
+          </>
+        ))}
     </div>
   );
 }

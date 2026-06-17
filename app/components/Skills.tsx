@@ -484,12 +484,12 @@ export default function Skills() {
     <section
       id="skills"
       ref={sectionRef}
-      className="relative bg-dark-deep py-16 sm:py-20 md:py-24 overflow-hidden"
+      className="relative bg-dark-deep py-32 sm:py-44 md:py-64 overflow-hidden"
     >
       {/* Background */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-5 pointer-events-none"
-        style={{ backgroundImage: "url('/profile/face-plonger.jpg')" }}
+        style={{ backgroundImage: "url('/profile/face-plonger.webp')" }}
       />
       <div className="absolute inset-0 bg-gradient-to-b from-dark-surface via-dark-deep to-dark-surface pointer-events-none" />
 
@@ -528,7 +528,7 @@ export default function Skills() {
           <div className="space-y-1 order-1 lg:order-1">
             {/* Header */}
             <div ref={headerRef} className="text-center mb-1">
-              <span className="header-badge inline-block text-violet-accent font-semibold text-sm tracking-wider uppercase mb-4 px-4 py-2 bg-violet-primary/10 rounded-full border border-violet-primary/20">
+              <span className="header-badge inline-block text-violet-accent font-semibold text-sm tracking-wider uppercase mb-5 sm:mb-10 px-4 py-2 bg-violet-primary/10 rounded-full border border-violet-primary/20">
                 Competences
               </span>
               <h2 className="title-text text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-light-primary mb-3 sm:mb-4">
@@ -700,10 +700,11 @@ export default function Skills() {
                         {[...Array(5)].map((_, i) => (
                           <div
                             key={i}
-                            className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-all duration-300 ${i < Math.ceil(flatBucket.bucket.items.length / 2)
+                            className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-all duration-300 ${
+                              i < Math.ceil(flatBucket.bucket.items.length / 2)
                                 ? "bg-violet-accent"
                                 : "bg-dark-border"
-                              }`}
+                            }`}
                           />
                         ))}
                       </div>

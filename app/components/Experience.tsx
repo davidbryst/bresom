@@ -253,7 +253,7 @@ export default function Experience() {
     <section
       id="experience"
       ref={sectionRef}
-      className="py-16 sm:py-20 md:py-24 bg-dark-surface relative overflow-hidden"
+      className="py-32 sm:py-44 md:py-64 bg-dark-surface relative overflow-hidden"
     >
       {/* Background decoration */}
       <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-dark-deep to-transparent pointer-events-none" />
@@ -266,7 +266,7 @@ export default function Experience() {
       <div className="max-w-7xl 2xl:max-w-[1400px] 3xl:max-w-[1700px] 4xl:max-w-[2100px] mx-auto px-6">
         {/* Header */}
         <div ref={headerRef} className="text-center mb-16">
-          <span className="header-badge inline-block text-violet-accent font-semibold text-sm tracking-wider uppercase mb-4 px-4 py-2 bg-violet-primary/10 rounded-full border border-violet-primary/20">
+          <span className="header-badge inline-block text-violet-accent font-semibold text-sm tracking-wider uppercase  mb-5 sm:mb-10 px-4 py-2 bg-violet-primary/10 rounded-full border border-violet-primary/20">
             Parcours
           </span>
           <h2 className="header-title text-3xl md:text-4xl lg:text-5xl font-bold text-light-primary mb-4">
@@ -365,8 +365,10 @@ export default function Experience() {
                     className="absolute z-0 w-full aspect-[3/4] object-cover rounded-2xl"
                   /> */}
                   <img
-                    src="/profile/prodile-contreplonger.jpg"
+                    src="/profile/prodile-contreplonger.webp"
                     alt="David Abraham - Ambition"
+                    loading="lazy"
+                    decoding="async"
                     className="w-full aspect-[3/4] object-cover rounded-2xl"
                   />
                   <CircularText

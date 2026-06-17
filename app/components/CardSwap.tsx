@@ -174,25 +174,51 @@ const CardSwap: React.FC<CardSwapProps> = ({
     intervalRef.current = window.setInterval(swap, delay);
 
     const node = container.current!;
+
+    let isHovered = false;
+    const stop = () => {
+      tlRef.current?.pause();
+      clearInterval(intervalRef.current);
+    };
+    const start = () => {
+      tlRef.current?.play();
+      clearInterval(intervalRef.current);
+      intervalRef.current = window.setInterval(swap, delay);
+    };
+
+    // Pause the auto-rotation (interval + GSAP timeline) while the carousel is
+    // scrolled offscreen; resume on re-entry (unless paused by hover).
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          if (!isHovered) start();
+        } else {
+          stop();
+        }
+      },
+      { threshold: 0 },
+    );
+    observer.observe(node);
+
+    const pause = () => {
+      isHovered = true;
+      stop();
+    };
+    const resume = () => {
+      isHovered = false;
+      start();
+    };
     if (pauseOnHover) {
-      const pause = () => {
-        tlRef.current?.pause();
-        clearInterval(intervalRef.current);
-      };
-      const resume = () => {
-        tlRef.current?.play();
-        intervalRef.current = window.setInterval(swap, delay);
-      };
       node.addEventListener('mouseenter', pause);
       node.addEventListener('mouseleave', resume);
-      return () => {
+    }
+
+    return () => {
+      observer.disconnect();
+      if (pauseOnHover) {
         node.removeEventListener('mouseenter', pause);
         node.removeEventListener('mouseleave', resume);
-        tlRef.current?.kill();
-        clearInterval(intervalRef.current);
-      };
-    }
-    return () => {
+      }
       tlRef.current?.kill();
       clearInterval(intervalRef.current);
     };

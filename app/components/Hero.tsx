@@ -1,10 +1,10 @@
-import { useRef, useEffect, useCallback, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import { gsap, ScrollTrigger, easings } from "~/hooks/useGSAP";
 import { GSAP_CONFIG, createMasterRhythm } from "~/config/gsapConfig";
 import { heroData } from "~/data/content";
 import TypingEffect from "./TypingEffect";
 
-import AnimatedBackground, { GlowingParticles } from "./AnimatedBackground";
+import AnimatedBackground from "./AnimatedBackground";
 import Magnet from "./Magnet";
 import CircularText from "./CircularText";
 import { Download } from "lucide-react";
@@ -47,7 +47,11 @@ export default function Hero() {
       const amplitudeMultiplier = isMobile ? 0.5 : 1;
 
       // Synchronized breathing effect for glow orbs using master rhythm
-      const orbsArray = [glowOrb1Ref.current, glowOrb2Ref.current, glowOrb3Ref.current].filter(Boolean);
+      const orbsArray = [
+        glowOrb1Ref.current,
+        glowOrb2Ref.current,
+        glowOrb3Ref.current,
+      ].filter(Boolean);
 
       if (orbsArray.length > 0) {
         // Master rhythm - all orbs breathe together
@@ -59,8 +63,8 @@ export default function Hero() {
           ease: "sine.inOut",
           stagger: {
             each: 0.3,
-            from: "center"
-          }
+            from: "center",
+          },
         });
 
         // Stocker la timeline master pour contrôle
@@ -170,7 +174,16 @@ export default function Hero() {
         tl.fromTo(
           buttons,
           { opacity: 0, y: 30, scale: 0.9 },
-          { opacity: 1, y: 0, scale: 1, duration: 0.6, stagger: 0.15 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.6,
+            stagger: 0.15,
+            // Retire le transform inline laissé par GSAP pour que les
+            // hover:scale-105 / active:scale-95 Tailwind puissent s'appliquer.
+            clearProps: "transform",
+          },
           1.2,
         );
       }
@@ -238,48 +251,68 @@ export default function Hero() {
 
       // Parallax du titre
       if (titleRef.current) {
-        parallaxTl.to(titleRef.current, {
-          y: 100,
-          opacity: 0.5,
-          ease: "none",
-        }, 0);
+        parallaxTl.to(
+          titleRef.current,
+          {
+            y: 100,
+            opacity: 0.5,
+            ease: "none",
+          },
+          0,
+        );
       }
 
       // Parallax de l'image
       if (imageContainerRef.current) {
-        parallaxTl.to(imageContainerRef.current, {
-          y: 50,
-          scale: 0.9,
-          ease: "none",
-        }, 0);
+        parallaxTl.to(
+          imageContainerRef.current,
+          {
+            y: 50,
+            scale: 0.9,
+            ease: "none",
+          },
+          0,
+        );
       }
 
       // Parallax des orbes lumineux
       if (glowOrb1Ref.current) {
-        parallaxTl.to(glowOrb1Ref.current, {
-          y: -150,
-          ease: "none",
-        }, 0);
+        parallaxTl.to(
+          glowOrb1Ref.current,
+          {
+            y: -150,
+            ease: "none",
+          },
+          0,
+        );
       }
 
       if (glowOrb2Ref.current) {
-        parallaxTl.to(glowOrb2Ref.current, {
-          y: -100,
-          ease: "none",
-        }, 0);
+        parallaxTl.to(
+          glowOrb2Ref.current,
+          {
+            y: -100,
+            ease: "none",
+          },
+          0,
+        );
       }
 
       if (glowOrb3Ref.current) {
-        parallaxTl.to(glowOrb3Ref.current, {
-          y: -80,
-          ease: "none",
-        }, 0);
+        parallaxTl.to(
+          glowOrb3Ref.current,
+          {
+            y: -80,
+            ease: "none",
+          },
+          0,
+        );
       }
     }, sectionRef);
 
     return () => {
       // Cleanup: kill all orb animations
-      orbAnimationsRef.current.forEach(anim => anim.kill());
+      orbAnimationsRef.current.forEach((anim) => anim.kill());
       if (masterTimelineRef.current) {
         masterTimelineRef.current.kill();
       }
@@ -297,14 +330,14 @@ export default function Hero() {
 
         // Pause ou play des animations d'orbes basé sur la visibilité
         if (entry.isIntersecting) {
-          orbAnimationsRef.current.forEach(anim => anim.play());
+          orbAnimationsRef.current.forEach((anim) => anim.play());
           masterTimelineRef.current?.play();
         } else {
-          orbAnimationsRef.current.forEach(anim => anim.pause());
+          orbAnimationsRef.current.forEach((anim) => anim.pause());
           masterTimelineRef.current?.pause();
         }
       },
-      { threshold: 0.1 } // Trigger quand au moins 10% visible
+      { threshold: 0.1 }, // Trigger quand au moins 10% visible
     );
 
     observer.observe(sectionRef.current);
@@ -312,52 +345,19 @@ export default function Hero() {
     return () => observer.disconnect();
   }, []);
 
-  // Enhanced magnetic effect for buttons with rotation
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
-    const button = e.currentTarget;
-    const rect = button.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-
-    // Calculate angle for rotation
-    const angle = Math.atan2(y, x) * (180 / Math.PI);
-    const distance = Math.sqrt(x * x + y * y);
-
-    // Enhanced magnetic config
-    const magneticStrength = GSAP_CONFIG.magnetic.strong.strength;
-
-    gsap.to(button, {
-      x: x * magneticStrength,
-      y: y * magneticStrength,
-      rotation: angle * 0.05, // Subtle rotation based on angle
-      scale: 1.05,
-      boxShadow: `0 0 ${Math.min(distance / 2, 30)}px rgba(124, 58, 237, 0.6)`,
-      duration: GSAP_CONFIG.magnetic.strong.duration,
-      ease: GSAP_CONFIG.magnetic.strong.ease,
-    });
-  }, []);
-
-  const handleMouseLeave = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
-    gsap.to(e.currentTarget, {
-      x: 0,
-      y: 0,
-      rotation: 0,
-      scale: 1,
-      boxShadow: "0 0 20px rgba(124, 58, 237, 0.5)",
-      duration: 0.6,
-      ease: GSAP_CONFIG.eases.elastic,
-    });
-  }, []);
-
   return (
     <section
       id="hero"
       ref={sectionRef}
-      className="relative h-screen flex items-center justify-center overflow-hidden bg-dark-deep"
+      className="relative h-dvh flex items-center justify-center overflow-hidden bg-dark-deep pt-32 md:pt-10"
     >
       {/* Animated Background with Glow Effects */}
 
-      <AnimatedBackground variant="combined" intensity="medium" />
+      <AnimatedBackground
+        variant="combined"
+        intensity="medium"
+        isVisible={isVisible}
+      />
 
       {/* Additional Glow Orbs with custom animations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -395,15 +395,12 @@ export default function Hero() {
         />
       </div>
 
-      {/* Glowing Particles */}
-      <GlowingParticles count={15} />
-
       {/* Grid overlay for extra depth */}
       <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
         <div className="absolute inset-0 bg-[linear-gradient(90deg,#7C3AED_1px,transparent_1px),linear-gradient(180deg,#7C3AED_1px,transparent_1px)] bg-[size:100px_100px]" />
       </div>
 
-      <div className="max-w-7xl 2xl:max-w-[1400px] 3xl:max-w-[1700px] 4xl:max-w-[2100px] mx-auto px-6 py-20 relative z-10">
+      <div className="max-w-7xl 2xl:max-w-[1400px] 3xl:max-w-[1700px] 4xl:max-w-[2100px] mx-auto px-6 py-10 sm:py-20 relative z-10">
         <div className="grid lg:grid-cols-2 gap-9 items-center">
           {/* Text Content */}
           {/* <div className="text-center lg:text-left"> */}
@@ -413,6 +410,7 @@ export default function Hero() {
               className="text-light-secondary sm:text-lg md:text-xl sm:mb-4"
             >
               {heroData.greeting}
+              <br />
             </p>
 
             <h1
@@ -440,13 +438,16 @@ export default function Hero() {
             </p>
 
             {/* Typing Effect for Roles */}
-            <div ref={roleContainerRef} className="h-12 md:h-14 mb-8">
+            <div
+              ref={roleContainerRef}
+              className="h-12 w-80 sm:w-[40rem] md:h-14 mb-12"
+            >
               <TypingEffect
                 texts={roles}
                 typingSpeed={80}
                 deletingSpeed={40}
                 pauseDuration={2500}
-                className="text-2xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-violet"
+                className="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-violet"
                 loop={true}
               />
             </div>
@@ -457,27 +458,21 @@ export default function Hero() {
             >
               <a
                 href="/cv.pdf"
-                onMouseMove={handleMouseMove}
-                onMouseLeave={handleMouseLeave}
                 download
-                className="title-btn inline-flex items-center justify-center gap-2 px-6 py-3 sm:px-8 sm:py-4 bg-gradient-violet text-white font-semibold rounded-xl shadow-glow-violet hover:scale-105 transition-all duration-300 text-sm sm:text-base"
+                className="title-btn inline-flex items-center justify-center gap-2 px-6 py-3 sm:px-8 sm:py-4 bg-gradient-violet text-white font-semibold rounded-xl shadow-glow-violet text-sm sm:text-base transition-all duration-300 ease-out hover:scale-105 hover:-translate-y-0.5 hover:shadow-[0_0_40px_rgba(124,58,237,0.6)] active:scale-95 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-accent focus-visible:ring-offset-2 focus-visible:ring-offset-dark-deep"
               >
                 <Download className="w-5 h-5" />
                 Télécharger mon CV
               </a>
               <a
                 href="#projects"
-                onMouseMove={handleMouseMove}
-                onMouseLeave={handleMouseLeave}
-                className="hidden hero-cta px-8 py-4 bg-gradient-violet text-white font-semibold rounded-xl shadow-glow-violet transition-all duration-300 hover:shadow-[0_0_40px_rgba(124,58,237,0.6)]"
+                className="hidden hero-cta px-8 py-4 bg-gradient-violet text-white font-semibold rounded-xl shadow-glow-violet transition-all duration-300 ease-out hover:scale-105 hover:-translate-y-0.5 hover:shadow-[0_0_40px_rgba(124,58,237,0.6)] active:scale-95 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-accent focus-visible:ring-offset-2 focus-visible:ring-offset-dark-deep"
               >
                 Voir mes projets
               </a>
               <a
                 href="#contact"
-                onMouseMove={handleMouseMove}
-                onMouseLeave={handleMouseLeave}
-                className="hero-cta px-5 py-2.5 sm:px-7 sm:py-3 bg-violet-primary/20 border-2 border-violet-primary text-light-primary font-semibold rounded-xl hover:bg-violet-primary/30 transition-all duration-300 text-sm sm:text-base"
+                className="hero-cta px-5 py-2.5 sm:px-7 sm:py-3 bg-violet-primary/20 border-2 border-violet-primary text-light-primary font-semibold rounded-xl text-sm sm:text-base transition-all duration-300 ease-out hover:scale-105 hover:-translate-y-0.5 hover:bg-violet-primary/30 hover:border-violet-accent hover:shadow-glow-violet active:scale-95 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-accent focus-visible:ring-offset-2 focus-visible:ring-offset-dark-deep"
               >
                 Me contacter
               </a>
@@ -515,13 +510,15 @@ export default function Hero() {
                   <div className="absolute inset-0 pointer-events-none z-20 animate-shimmer opacity-40" />
 
                   <img
-                    src="/profile/s-face-identiter-large.png"
+                    src="/profile/s-face-identiter-large.webp"
                     alt="David Abraham"
+                    decoding="async"
                     className=" absolute  z-20 w-72 h-72 md:w-80 md:h-80 lg:w-[22rem] lg:h-[26rem] object-cover object-top rounded-2xl transition-all duration-700 group-hover:scale-105 group-hover:saturate-110 will-change-transform"
                   />
                   <img
-                    src="/profile/face-identiter-large.jpg"
+                    src="/profile/face-identiter-large.webp"
                     alt="David Abraham"
+                    decoding="async"
                     className="w-72 h-72 md:w-80 md:h-80 lg:w-[22rem] lg:h-[26rem] object-cover object-top rounded-2xl transition-all duration-700 group-hover:scale-105 group-hover:saturate-110 will-change-transform"
                   />
                   <CircularText
@@ -551,7 +548,7 @@ export default function Hero() {
       {/* Scroll indicator */}
       <div
         ref={scrollIndicatorRef}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 bg-dark-deep/70 p-1.5 sm:p-2 rounded-full"
+        className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 z-20 bg-dark-deep/70 p-1.5 sm:p-2 rounded-full"
       >
         <div className="w-6 h-10 border-2 border-[#7C3AED] rounded-full flex justify-center pt-2 backdrop-blur-sm bg-dark-surface/20">
           <div className="scroll-dot w-1.5 h-1.5 bg-violet-accent rounded-full shadow-[0_0_10px_rgba(124,58,237,0.8)]" />
