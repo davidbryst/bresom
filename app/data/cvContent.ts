@@ -130,7 +130,7 @@ export const formationsData: FormationItem[] = [
   // },
   {
     ecole: "ESATIC",
-    diplome: "TWIN (Techniques du Web et de l'Internet)",
+    diplome: "TWIN (Technologies du web et images numeriques)",
     date: "SEPT 2019 - JUILL 2022",
     desc: "Formation spécialisée en développement web et mobile, bases de données et administration système.",
   },
