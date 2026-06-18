@@ -508,10 +508,23 @@ export default function AnimatedBackground({
     high: "opacity-70",
   };
 
-  // The fabric (Silk) is always rendered — never removed. We only make it
-  // cheaper: lower dpr on mobile, frozen frame for reduced-motion, paused when
-  // the section is scrolled offscreen.
-  const silkDpr: [number, number] = isDesktop ? [1, 1.5] : [1, 1];
+  // The WebGL fabric runs DESKTOP-ONLY. On mobile Safari a live WebGL context
+  // plus the large blur buffers blows past the per-tab memory budget and the
+  // tab crashes in a loop ("Un problème récurrent est survenu") — so on phones
+  // we fall back to a static gradient that mimics the fabric's purple glow.
+  const silkDpr: [number, number] = [1, 1.5];
+
+  // Static "fabric-like" gradient used wherever WebGL is off (mobile + reduced
+  // motion). Keeps the violet identity without any GPU/animation cost.
+  const staticFabric = (
+    <div
+      className="absolute inset-0"
+      style={{
+        background:
+          "radial-gradient(ellipse at 50% 35%, rgba(124, 58, 237, 0.22) 0%, rgba(109, 40, 217, 0.10) 38%, transparent 65%)",
+      }}
+    />
+  );
 
   return (
     <div
@@ -522,52 +535,38 @@ export default function AnimatedBackground({
       {variant === "mesh" && <GradientMesh />}
       {variant === "particles" && <GlowingParticles count={15} />}
       {variant === "spotlight" && <SpotlightEffect />}
-      {variant === "combined" &&
-        (prefersReducedMotion ? (
-          // Reduced motion: keep the fabric but frozen (one static frame) over a
-          // static gradient — no looping animations.
-          <>
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "radial-gradient(ellipse at 50% 40%, rgba(124, 58, 237, 0.18) 0%, transparent 60%)",
-              }}
-            />
-            {mounted && (
-              <Suspense fallback={null}>
-                <Silk
-                  speed={5}
-                  scale={1}
-                  color="#7C3AEDC1"
-                  noiseIntensity={1.5}
-                  rotation={0}
-                  animate={false}
-                  dpr={[1, 1]}
-                />
-              </Suspense>
-            )}
-          </>
-        ) : (
-          <>
-            <GradientMesh />
-            <AuroraBackground className="opacity-50" />
-            <GlowingParticles count={isDesktop ? 10 : 6} />
-            {mounted && (
-              <Suspense fallback={null}>
-                <Silk
-                  speed={5}
-                  scale={1}
-                  color="#7C3AEDC1"
-                  noiseIntensity={1.5}
-                  rotation={0}
-                  paused={!isVisible}
-                  dpr={silkDpr}
-                />
-              </Suspense>
-            )}
-          </>
-        ))}
+      {variant === "combined" && (
+        <>
+          {/* Static base: shown on mobile and under reduced-motion (no WebGL). */}
+          {(!isDesktop || prefersReducedMotion) && staticFabric}
+
+          {/* Animated CSS layers — skipped under reduced-motion. Lighter on
+              mobile: no Aurora (3 extra big blurs) and fewer particles. */}
+          {!prefersReducedMotion && (
+            <>
+              <GradientMesh />
+              {isDesktop && <AuroraBackground className="opacity-50" />}
+              <GlowingParticles count={isDesktop ? 10 : 6} />
+            </>
+          )}
+
+          {/* WebGL fabric — DESKTOP ONLY (mobile Safari crashes otherwise). */}
+          {isDesktop && mounted && (
+            <Suspense fallback={null}>
+              <Silk
+                speed={5}
+                scale={1}
+                color="#7C3AEDC1"
+                noiseIntensity={1.5}
+                rotation={0}
+                paused={!isVisible}
+                animate={!prefersReducedMotion}
+                dpr={silkDpr}
+              />
+            </Suspense>
+          )}
+        </>
+      )}
     </div>
   );
 }
