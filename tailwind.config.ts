@@ -32,6 +32,14 @@ const config: Config = {
           secondary: "#B8B8C0",
           muted: "#8B8B99",
         },
+        // --- Lite version ("Studio / Editorial") palette ---
+        ink: "#0E0E0E",
+        paper: "#F2EEE6",
+        bone: "#E7E0D2",
+        vermilion: "#FF3B12",
+        cobalt: "#2B44FF",
+        forest: "#0E8A4F",
+        rule: "rgba(14,14,14,0.12)",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
@@ -86,6 +94,10 @@ const config: Config = {
           "Segoe UI Symbol",
           "Noto Color Emoji",
         ],
+        // --- Lite version fonts ---
+        display: ['"Syne"', "ui-sans-serif", "sans-serif"],
+        body: ['"Hanken Grotesk"', "ui-sans-serif", "sans-serif"],
+        mono: ['"JetBrains Mono"', "ui-monospace", "monospace"],
       },
       backgroundImage: {
         "gradient-premium":
@@ -129,6 +141,7 @@ const config: Config = {
       },
       transitionTimingFunction: {
         "smooth-out": "cubic-bezier(0, 0, 0, 1)",
+        lite: "cubic-bezier(0.16, 1, 0.3, 1)",
       },
       boxShadow: {
         premium: "0 25px 50px -12px rgba(0, 0, 0, 0.5)",

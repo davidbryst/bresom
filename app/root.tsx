@@ -6,25 +6,9 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/node";
-import { useEffect } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { initializeGSAP } from "~/config/gsapConfig";
-import {
-  SmoothScrollProvider,
-  ScrollProgress,
-  SectionNav,
-} from "~/components/SmoothScroll";
 
 import "./tailwind.css";
-import "./styles/animations.css";
-
-// Enregistrer les plugins GSAP
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-  // Initialize GSAP configuration
-  initializeGSAP();
-}
+import "./styles/lite.css";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -35,40 +19,9 @@ export const links: LinksFunction = () => [
   },
   {
     rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap",
+    href: "https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Syne:wght@600;700;800&display=swap",
   },
 ];
-
-// Main sections for navigation - Story-first approach
-const mainSections = [
-  { id: "hero", label: "Accueil" },
-  { id: "about", label: "À propos" },
-  { id: "projects", label: "Projets" },
-  { id: "services", label: "Services" },
-  { id: "skills", label: "Compétences" },
-  { id: "experience", label: "Expérience" },
-  { id: "contact", label: "Contact" },
-];
-
-function GSAPProvider({ children }: { children: React.ReactNode }) {
-  useEffect(() => {
-    // GSAP defaults are now configured via initializeGSAP() in config
-    // Cleanup ScrollTriggers on navigation
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }, []);
-
-  return (
-    <SmoothScrollProvider>
-      {/* Global scroll progress indicator */}
-      {/* <ScrollProgress /> */}
-      {/* Section navigation dots */}
-      {/* <SectionNav sections={mainSections} /> */}
-      {children}
-    </SmoothScrollProvider>
-  );
-}
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -76,26 +29,19 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#0B0B0F" />
+        <meta name="theme-color" content="#F2EEE6" />
         <Meta />
         <Links />
       </head>
-      <body className="bg-dark-deep text-light-primary antialiased">
-        {/* ✅ Skip links pour l'accessibilité */}
+      <body className="lite lite-grain bg-paper text-ink font-body antialiased min-h-screen">
+        {/* Skip link for accessibility */}
         <a
           href="#main-content"
-          className="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-6 focus:py-3 focus:bg-violet-accent focus:text-white focus:rounded-lg focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-violet-light"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[80] focus:px-5 focus:py-3 focus:bg-vermilion focus:text-white focus:font-mono focus:text-sm focus:outline-none"
         >
           Aller au contenu principal
         </a>
-        <a
-          href="#contact"
-          className="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-52 focus:z-50 focus:px-6 focus:py-3 focus:bg-violet-accent focus:text-white focus:rounded-lg focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-violet-light"
-        >
-          Aller au formulaire de contact
-        </a>
-
-        <GSAPProvider>{children}</GSAPProvider>
+        {children}
         <ScrollRestoration />
         <Scripts />
       </body>
@@ -117,17 +63,20 @@ export function ErrorBoundary() {
         <Meta />
         <Links />
       </head>
-      <body className="bg-dark-deep text-light-primary antialiased min-h-screen flex items-center justify-center">
+      <body className="lite bg-paper text-ink antialiased min-h-screen flex items-center justify-center">
         <div className="text-center px-6">
-          <h1 className="text-6xl font-bold text-violet-accent mb-4">Oops!</h1>
-          <p className="text-xl text-light-secondary mb-8">
-            Une erreur est survenue. Veuillez réessayer.
+          <p className="font-mono text-xs tracking-[0.3em] text-vermilion mb-6">
+            ERREUR — 500
+          </p>
+          <h1 className="lite-display text-6xl sm:text-8xl mb-6">Oops.</h1>
+          <p className="text-lg text-ink/60 mb-10 max-w-md mx-auto">
+            Une erreur est survenue. Revenons sur la bonne voie.
           </p>
           <a
             href="/"
-            className="inline-block px-8 py-4 bg-gradient-violet text-white font-semibold rounded-xl shadow-glow-violet hover:scale-105 transition-transform"
+            className="inline-block px-8 py-4 bg-ink text-paper font-mono text-sm uppercase tracking-wider hover:bg-vermilion transition-colors"
           >
-            Retour à l'accueil
+            Retour à l&apos;accueil
           </a>
         </div>
         <Scripts />
