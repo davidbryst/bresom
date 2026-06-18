@@ -286,6 +286,11 @@ export function GradientMesh({ className = "" }: { className?: string }) {
   useEffect(() => {
     if (!meshRef.current) return;
 
+    // On mobile, leave the blobs static. Their slow drift is imperceptible
+    // (huge blurred gradients) but animating them forces the GPU to recomposite
+    // the large blur every frame — the single biggest scroll cost on phones.
+    if (window.matchMedia("(max-width: 767px)").matches) return;
+
     const ctx = gsap.context(() => {
       // Blob 1 - Top left
       if (blob1Ref.current) {

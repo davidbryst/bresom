@@ -51,7 +51,53 @@ export function SmoothScrollProvider({
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    // Initialize Lenis with optimized settings
+    // On mobile we deliberately DON'T run Lenis: native touch scrolling is
+    // hardware-accelerated and runs off the main thread, so it stays smooth
+    // even while GSAP is busy. Lenis (JS-driven scroll) ties scrolling to the
+    // main thread and stutters on phones. ScrollTrigger works fine on native
+    // scroll without Lenis.
+    const isMobile = window.matchMedia("(max-width: 767px)").matches;
+
+    // Smooth scroll to an in-page anchor — uses Lenis when present (desktop),
+    // otherwise native smooth scroll with the same 80px header offset.
+    const scrollToHash = (href: string) => {
+      const element = document.querySelector(href);
+      if (!element) return;
+      if (lenisRef.current) {
+        lenisRef.current.scrollTo(element as HTMLElement, {
+          offset: -80,
+          duration: 1.5,
+        });
+      } else {
+        const top =
+          (element as HTMLElement).getBoundingClientRect().top +
+          window.scrollY -
+          80;
+        window.scrollTo({ top, behavior: "smooth" });
+      }
+    };
+
+    // Handle anchor links with smooth scroll
+    const handleAnchorClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const anchor = target.closest('a[href^="#"]');
+      if (anchor) {
+        const href = anchor.getAttribute("href");
+        if (href && href !== "#") {
+          e.preventDefault();
+          scrollToHash(href);
+        }
+      }
+    };
+
+    document.addEventListener("click", handleAnchorClick);
+
+    if (isMobile) {
+      // Native scroll only — no Lenis, no extra RAF.
+      return () => document.removeEventListener("click", handleAnchorClick);
+    }
+
+    // Initialize Lenis with optimized settings (desktop)
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -74,31 +120,11 @@ export function SmoothScrollProvider({
     gsap.ticker.add(rafCallback);
     gsap.ticker.lagSmoothing(0);
 
-    // Handle anchor links with smooth scroll
-    const handleAnchorClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const anchor = target.closest('a[href^="#"]');
-      if (anchor) {
-        const href = anchor.getAttribute("href");
-        if (href && href !== "#") {
-          e.preventDefault();
-          const element = document.querySelector(href);
-          if (element) {
-            lenis.scrollTo(element as HTMLElement, {
-              offset: -80,
-              duration: 1.5,
-            });
-          }
-        }
-      }
-    };
-
-    document.addEventListener("click", handleAnchorClick);
-
     return () => {
       document.removeEventListener("click", handleAnchorClick);
       gsap.ticker.remove(rafCallback);
       lenis.destroy();
+      lenisRef.current = null;
     };
   }, []);
 
