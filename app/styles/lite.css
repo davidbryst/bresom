@@ -1,0 +1,147 @@
+/* ==========================================================================
+   Lite version — "Studio / Editorial" theme
+   Vermilion on bone. Syne display · Hanken Grotesk body · JetBrains Mono labels.
+   Lightweight: no WebGL / physics / smooth-scroll libs. CSS-first motion.
+   ========================================================================== */
+
+:root {
+  --paper: #f2eee6;
+  --bone: #e7e0d2;
+  --ink: #0e0e0e;
+  --accent: #ff3b12;
+  --cobalt: #2b44ff;
+  --forest: #0e8a4f;
+  --rule: rgba(14, 14, 14, 0.12);
+}
+
+/* Text selection picks up the accent — small detail, big personality. */
+.lite ::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+.lite {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Hanken Grotesk", ui-sans-serif, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Film grain overlay — fixed, ultra-cheap, gives the paper some tooth. */
+.lite-grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Visible column grid — the spine of the layout. Five hairlines. */
+.lite-grid-rules {
+  background-image: repeating-linear-gradient(
+    to right,
+    transparent 0,
+    transparent calc(100% / 6 - 1px),
+    var(--rule) calc(100% / 6 - 1px),
+    var(--rule) calc(100% / 6)
+  );
+}
+
+/* Marquee track (duplicated content, translate -50%). */
+@keyframes lite-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.lite-marquee {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: lite-marquee var(--marquee-duration, 28s) linear infinite;
+  will-change: transform;
+}
+.lite-marquee--reverse {
+  animation-direction: reverse;
+}
+.lite-marquee-wrap:hover .lite-marquee {
+  animation-play-state: paused;
+}
+
+/* Staggered entrance used on the hero (CSS-only, no JS). */
+@keyframes lite-rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.lite-rise {
+  opacity: 0;
+  animation: lite-rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Marker underline that wipes in on hover. */
+.lite-link {
+  position: relative;
+  display: inline-block;
+}
+.lite-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 2px;
+  width: 100%;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.lite-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Display type tuned tight for the oversized headings. */
+.lite-display {
+  font-family: "Syne", ui-sans-serif, sans-serif;
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+}
+
+.lite-mono {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* Scroll reveal (IntersectionObserver toggles .is-visible). */
+.lite-reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.lite-reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lite-marquee {
+    animation: none;
+  }
+  .lite-rise,
+  .lite-reveal {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}

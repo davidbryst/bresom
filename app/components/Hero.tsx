@@ -53,7 +53,11 @@ export default function Hero() {
         glowOrb3Ref.current,
       ].filter(Boolean);
 
-      if (orbsArray.length > 0) {
+      // On mobile, skip the orbs' continuous breathing/drift: the breathing
+      // animates `scale` on heavily-blurred elements, forcing the GPU to
+      // re-rasterize the blur every frame. The orbs stay visible as static
+      // ambient glow — the look is unchanged, the per-frame cost disappears.
+      if (orbsArray.length > 0 && !isMobile) {
         // Master rhythm - all orbs breathe together
         const masterTl = gsap.timeline({ repeat: -1, yoyo: true });
         masterTl.to(orbsArray, {
@@ -275,38 +279,42 @@ export default function Hero() {
         );
       }
 
-      // Parallax des orbes lumineux
-      if (glowOrb1Ref.current) {
-        parallaxTl.to(
-          glowOrb1Ref.current,
-          {
-            y: -150,
-            ease: "none",
-          },
-          0,
-        );
-      }
+      // Parallax des orbes lumineux — desktop only. On mobile, scrubbing the
+      // position of large blurred orbs every scroll frame is a major jank
+      // source; the orbs stay put (imperceptible for ambient background glow).
+      if (!isMobile) {
+        if (glowOrb1Ref.current) {
+          parallaxTl.to(
+            glowOrb1Ref.current,
+            {
+              y: -150,
+              ease: "none",
+            },
+            0,
+          );
+        }
 
-      if (glowOrb2Ref.current) {
-        parallaxTl.to(
-          glowOrb2Ref.current,
-          {
-            y: -100,
-            ease: "none",
-          },
-          0,
-        );
-      }
+        if (glowOrb2Ref.current) {
+          parallaxTl.to(
+            glowOrb2Ref.current,
+            {
+              y: -100,
+              ease: "none",
+            },
+            0,
+          );
+        }
 
-      if (glowOrb3Ref.current) {
-        parallaxTl.to(
-          glowOrb3Ref.current,
-          {
-            y: -80,
-            ease: "none",
-          },
-          0,
-        );
+        if (glowOrb3Ref.current) {
+          parallaxTl.to(
+            glowOrb3Ref.current,
+            {
+              y: -80,
+              ease: "none",
+            },
+            0,
+          );
+        }
       }
     }, sectionRef);
 
