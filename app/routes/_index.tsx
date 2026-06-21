@@ -8,6 +8,7 @@ import LiteSkills from "~/components/lite/LiteSkills";
 import LiteExperience from "~/components/lite/LiteExperience";
 import LiteContact from "~/components/lite/LiteContact";
 import LiteFooter from "~/components/lite/LiteFooter";
+import SmoothAnchors from "~/components/lite/SmoothAnchors";
 import { aboutData, contactData } from "~/data/content";
 
 export const meta: MetaFunction = () => {
@@ -75,6 +76,7 @@ export const meta: MetaFunction = () => {
 export default function Index() {
   return (
     <>
+      <SmoothAnchors />
       <LiteHeader />
       <main id="main-content">
         <LiteHero />

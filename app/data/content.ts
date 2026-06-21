@@ -92,7 +92,7 @@ export const aboutData: AboutInfo = {
     "Développement front‑end React/Remix/Next et mobile React Native.",
     "API, bases de données et bonnes pratiques de qualité (tests, accessibilité).",
   ],
-  experience: "3+ ans",
+  experience: "5+ ans",
   stack: "TypeScript, React, Remix, Node.js",
   values: "Qualité, simplicité, professionnalisme",
 };

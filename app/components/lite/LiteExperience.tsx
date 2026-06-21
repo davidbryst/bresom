@@ -10,14 +10,14 @@ export default function LiteExperience() {
       <div className="mx-auto max-w-[1500px] px-5 md:px-10">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12 md:mb-16">
           <div>
-            <span className="font-mono text-xs uppercase tracking-[0.22em] text-ink/55">
+            <span className="font-mono text-xs uppercase tracking-[0.22em] text-ink/80">
               (05) — Parcours
             </span>
             <h2 className="lite-display text-[clamp(2.75rem,8vw,7rem)] mt-3">
               EXPÉRIENCE
             </h2>
           </div>
-          <p className="font-mono text-xs uppercase tracking-[0.16em] text-ink/55 md:text-right md:max-w-[16rem]">
+          <p className="font-mono text-xs uppercase tracking-[0.16em] text-ink/80 md:text-right md:max-w-[16rem]">
             Trois maisons, un fil rouge : design + code en bout en bout.
           </p>
         </div>
@@ -31,7 +31,7 @@ export default function LiteExperience() {
                   <span className="lite-display text-3xl md:text-5xl text-ink/25 group-hover:text-vermilion transition-colors duration-500">
                     0{i + 1}
                   </span>
-                  <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink/55">
+                  <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink/80">
                     {exp.date}
                   </span>
                 </div>

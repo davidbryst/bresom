@@ -14,9 +14,9 @@ export default function LiteFooter() {
     <footer className="relative bg-paper text-ink border-t-2 border-ink">
       <div className="mx-auto max-w-[1500px] px-5 md:px-10 pt-14 md:pt-20 pb-8">
         {/* Top: CTA + nav */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pb-12 border-b border-ink/15">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pb-12 border-b border-ink/35">
           <div className="md:col-span-7">
-            <p className="font-mono text-xs uppercase tracking-[0.18em] text-ink/55">
+            <p className="font-mono text-xs uppercase tracking-[0.18em] text-ink/80">
               Disponible pour de nouveaux projets
             </p>
             <a
@@ -46,13 +46,17 @@ export default function LiteFooter() {
         <a
           href="#top"
           aria-label="Retour en haut"
-          className="block lite-display text-[clamp(3rem,18vw,16rem)] leading-[0.8] mt-12 hover:text-vermilion transition-colors"
+          className="block lite-display  leading-[0.8] mt-12 hover:text-vermilion transition-colors"
         >
-          DAVID ABRAHAM
+          <div>
+            <span className="text-[17rem]">DAVID</span>
+            <br />
+            <span className="text-[10rem] ">ABRAHAM</span>
+          </div>
         </a>
 
         {/* Bottom bar */}
-        <div className="mt-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 font-mono text-[11px] uppercase tracking-[0.14em] text-ink/55">
+        <div className="mt-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 font-mono text-[11px] uppercase tracking-[0.14em] text-ink/80">
           <span>© {year} David Abraham — Tous droits réservés</span>
           <span>Abidjan, Côte d'Ivoire · {year}</span>
           <a href="#top" className="lite-link hover:text-ink">

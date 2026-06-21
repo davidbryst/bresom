@@ -10,14 +10,14 @@ export default function LiteServices() {
       <div className="mx-auto max-w-[1500px] px-5 md:px-10">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12 md:mb-16">
           <div>
-            <span className="font-mono text-xs uppercase tracking-[0.22em] text-ink/55">
+            <span className="font-mono text-xs uppercase tracking-[0.22em] text-ink/80">
               (03) — Services
             </span>
             <h2 className="lite-display text-[clamp(2.75rem,8vw,7rem)] mt-3">
               CE QUE JE FAIS
             </h2>
           </div>
-          <p className="font-mono text-xs uppercase tracking-[0.16em] text-ink/55 md:text-right md:max-w-[16rem]">
+          <p className="font-mono text-xs uppercase tracking-[0.16em] text-ink/80 md:text-right md:max-w-[16rem]">
             De la maquette au déploiement — un seul interlocuteur.
           </p>
         </div>
@@ -27,7 +27,7 @@ export default function LiteServices() {
             const Icon = item.icon;
             return (
               <Reveal key={item.titre} delay={i * 70}>
-                <div className="group relative border-b border-ink overflow-hidden">
+                <div className="group relative border-b border-ink overflow-hidden px-10">
                   {/* Hover fill */}
                   <span className="absolute inset-0 bg-ink translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-lite" />
                   <div className="relative flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-8 py-8 md:py-10">

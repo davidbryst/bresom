@@ -24,22 +24,23 @@ export default function LiteContact() {
         </span>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mt-6">
+          <Reveal>
+            <h2 className="lite-display text-[clamp(2.5rem,8vw,7rem)] text-paper">
+              TRAVAILLONS
+              <br />
+              <span className="text-vermilion">ENSEMBLE</span>
+            </h2>
+          </Reveal>
+        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mt-6">
           {/* Left: statement + coordinates */}
           <div className="lg:col-span-6">
-            <Reveal>
-              <h2 className="lite-display text-[clamp(2.5rem,8vw,7rem)] text-paper">
-                TRAVAILLONS
-                <br />
-                <span className="text-vermilion">ENSEMBLE</span>
-              </h2>
-            </Reveal>
-
             <Reveal delay={80}>
               <p className="mt-6 text-paper/70 text-lg max-w-md">
-                Un projet, une idée, une refonte ? Écrivez‑moi — je réponds vite.
+                Un projet, une idée, une refonte ? Écrivez‑moi — je réponds
+                vite.
               </p>
             </Reveal>
-
             <Reveal delay={140}>
               <dl className="mt-10 space-y-6">
                 <div>

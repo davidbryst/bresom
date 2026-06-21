@@ -118,9 +118,7 @@ export default function LiteHeader() {
               className="group flex items-baseline justify-between border-b border-ink/10 py-5"
             >
               <span className="lite-display text-4xl">{item.label}</span>
-              <span className="font-mono text-xs text-ink/40">
-                0{i + 1}
-              </span>
+              <span className="font-mono text-xs text-ink/40">0{i + 1}</span>
             </a>
           ))}
           <a

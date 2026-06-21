@@ -145,3 +145,14 @@
     animation: none;
   }
 }
+
+/* Skill level bars: fill to their level (--lvl). On hover-capable
+   devices they start empty and reveal on hover; touch stays filled. */
+.lite-skillbar {
+  width: var(--lvl, 0%);
+  transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@media (hover: hover) {
+  .lite-skillbar { width: 0; }
+  .group:hover .lite-skillbar { width: var(--lvl, 0%); }
+}

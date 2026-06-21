@@ -14,7 +14,7 @@ const MARQUEE = [
 ];
 
 const STATS = [
-  { value: "3+", label: "Années d'expérience" },
+  { value: aboutData.experience.replace(" ans", ""), label: "Années d'expérience" },
   { value: "06", label: "Projets livrés" },
   { value: "04", label: "Domaines maîtrisés" },
   { value: "100%", label: "Sur‑mesure" },
@@ -22,14 +22,11 @@ const STATS = [
 
 export default function LiteHero() {
   return (
-    <section
-      id="top"
-      className="relative overflow-hidden pt-28 md:pt-36 pb-0"
-    >
+    <section id="top" className="relative overflow-hidden pt-28 md:pt-36 pb-0">
       <div className="mx-auto max-w-[1500px] px-5 md:px-10">
         {/* Top coordinates */}
         <div
-          className="lite-rise flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.18em] text-ink/55 border-t border-ink/15 pt-4"
+          className="lite-rise flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.18em] text-ink/80 border-t border-ink/35 pt-4"
           style={{ animationDelay: "0.05s" }}
         >
           <span>Portfolio — Éd. 2026</span>
@@ -47,15 +44,15 @@ export default function LiteHero() {
             >
               {heroData.greeting}
             </p>
-            <h1 className="lite-display text-ink text-[clamp(3.25rem,12.5vw,11rem)]">
+            <h1 className="lite-display text-ink ">
               <span
-                className="lite-rise block"
+                className="lite-rise block text-[11rem]"
                 style={{ animationDelay: "0.18s" }}
               >
                 DAVID
               </span>
               <span
-                className="lite-rise block -mt-[0.08em]"
+                className="lite-rise block -mt-[0.08em] text-[6.5rem]"
                 style={{ animationDelay: "0.26s" }}
               >
                 ABRAHAM
@@ -82,12 +79,12 @@ export default function LiteHero() {
           </div>
 
           {/* Portrait */}
-          <div className="lg:col-span-4 flex lg:justify-end">
+          <div className="lg:col-span-4 flex lg:justify-center">
             <div
               className="lite-rise relative w-40 sm:w-52 lg:w-full max-w-[280px]"
               style={{ animationDelay: "0.42s" }}
             >
-              <div className="absolute -inset-3 bg-vermilion -rotate-3" />
+              <div className="absolute -inset-3 bg-vermilion -rotate-3 " />
               <img
                 src="/profile/face-identiter-large.webp"
                 alt="Portrait de David Abraham"
@@ -105,7 +102,7 @@ export default function LiteHero() {
         </div>
 
         {/* Intro + CTA + stats */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-12 md:mt-16 border-t border-ink/15 pt-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-12 md:mt-16 border-t border-ink/35 pt-8">
           <div className="lg:col-span-6">
             <p
               className="lite-rise text-lg md:text-xl leading-relaxed text-ink/80 max-w-xl"
@@ -139,7 +136,7 @@ export default function LiteHero() {
           </div>
 
           {/* Stats */}
-          <div className="lg:col-span-6 grid grid-cols-2 sm:grid-cols-4 gap-px bg-ink/15 border border-ink/15 self-start">
+          <div className="lg:col-span-6 grid grid-cols-2 sm:grid-cols-4 gap-px bg-ink/15 border border-ink/35 self-start">
             {STATS.map((s, i) => (
               <div
                 key={s.label}
@@ -149,7 +146,7 @@ export default function LiteHero() {
                 <div className="lite-display text-3xl md:text-4xl text-vermilion">
                   {s.value}
                 </div>
-                <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink/55 mt-2 leading-tight">
+                <div className="font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-ink mt-2 leading-tight">
                   {s.label}
                 </div>
               </div>

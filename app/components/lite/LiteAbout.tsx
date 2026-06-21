@@ -14,7 +14,7 @@ export default function LiteAbout() {
       className="relative py-20 md:py-32 border-t-2 border-ink bg-bone/40"
     >
       <div className="mx-auto max-w-[1500px] px-5 md:px-10">
-        <span className="font-mono text-xs uppercase tracking-[0.22em] text-ink/55">
+        <span className="font-mono text-xs uppercase tracking-[0.22em] text-ink/80">
           (02) — À propos
         </span>
 
@@ -70,7 +70,7 @@ export default function LiteAbout() {
 
             {/* Facts */}
             <Reveal delay={160}>
-              <dl className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-px bg-ink/15 border border-ink/15">
+              <dl className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-px bg-ink/15 border border-ink/35">
                 {FACTS.map((f) => (
                   <div key={f.k} className="bg-paper p-5">
                     <dt className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink/50">
