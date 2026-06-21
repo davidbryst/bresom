@@ -46,12 +46,11 @@ export default function LiteFooter() {
         <a
           href="#top"
           aria-label="Retour en haut"
-          className="block lite-display  leading-[0.8] mt-12 hover:text-vermilion transition-colors"
+          className="block lite-display  leading-[0.8] mt-12 hover:text-vermilion transition-colors [overflow-wrap:anywhere]"
         >
           <div>
-            <span className="text-[17rem]">DAVID</span>
-            <br />
-            <span className="text-[10rem] ">ABRAHAM</span>
+            <span className="block text-[clamp(3rem,17vw,17rem)]">DAVID</span>
+            <span className="block text-[clamp(2rem,12vw,10rem)]">ABRAHAM</span>
           </div>
         </a>
 

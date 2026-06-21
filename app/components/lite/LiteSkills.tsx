@@ -21,7 +21,7 @@ export default function LiteSkills() {
             <span className="font-mono text-xs uppercase tracking-[0.22em] text-ink/80">
               (04) — Expertise
             </span>
-            <h2 className="lite-display break-words text-[clamp(1.5rem,8.5vw,7rem)] mt-3">
+            <h2 className="lite-display text-[clamp(1.5rem,8vw,7rem)] [overflow-wrap:anywhere] mt-3">
               COMPÉTENCES
             </h2>
           </div>

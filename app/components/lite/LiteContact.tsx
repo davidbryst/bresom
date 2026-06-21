@@ -25,7 +25,7 @@ export default function LiteContact() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mt-6">
           <Reveal>
-            <h2 className="lite-display break-words text-[clamp(1.5rem,8.5vw,7rem)] text-paper">
+            <h2 className="lite-display text-[clamp(1.5rem,8vw,7rem)] [overflow-wrap:anywhere] text-paper">
               TRAVAILLONS
               <br />
               <span className="text-vermilion">ENSEMBLE</span>

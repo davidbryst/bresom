@@ -13,7 +13,7 @@ export default function LiteServices() {
             <span className="font-mono text-xs uppercase tracking-[0.22em] text-ink/80">
               (03) — Services
             </span>
-            <h2 className="lite-display break-words text-[clamp(1.5rem,8.5vw,7rem)] mt-3">
+            <h2 className="lite-display text-[clamp(1.5rem,8vw,7rem)] [overflow-wrap:anywhere] mt-3">
               CE QUE JE FAIS
             </h2>
           </div>

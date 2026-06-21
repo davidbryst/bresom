@@ -33,7 +33,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body className="lite lite-grain bg-paper text-ink font-body antialiased min-h-screen">
+      <body className="lite lite-grain bg-paper text-ink font-body antialiased min-h-screen overflow-x-hidden">
         {/* Skip link for accessibility */}
         <a
           href="#main-content"

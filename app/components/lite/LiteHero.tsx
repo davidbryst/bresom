@@ -44,15 +44,15 @@ export default function LiteHero() {
             >
               {heroData.greeting}
             </p>
-            <h1 className="lite-display text-ink ">
+            <h1 className="lite-display text-ink [overflow-wrap:anywhere]">
               <span
-                className="lite-rise block break-words text-[clamp(3rem,15vw,11rem)]"
+                className="lite-rise block text-[clamp(3.5rem,17vw,11rem)]"
                 style={{ animationDelay: "0.18s" }}
               >
                 DAVID
               </span>
               <span
-                className="lite-rise block break-words -mt-[0.08em] text-[clamp(2rem,9.5vw,6.5rem)]"
+                className="lite-rise block -mt-[0.08em] text-[clamp(2.25rem,11vw,6.5rem)]"
                 style={{ animationDelay: "0.26s" }}
               >
                 ABRAHAM
