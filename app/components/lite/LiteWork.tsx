@@ -19,7 +19,7 @@ export default function LiteWork() {
             <span className="font-mono text-xs uppercase tracking-[0.22em] text-ink/80">
               (01) — Sélection
             </span>
-            <h2 className="lite-display text-[clamp(2.75rem,8vw,7rem)] mt-3">
+            <h2 className="lite-display break-words text-[clamp(1.5rem,8.5vw,7rem)] mt-3">
               TRAVAUX
             </h2>
           </div>
