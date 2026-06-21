@@ -49,8 +49,8 @@ export default function LiteFooter() {
           className="block lite-display  leading-[0.8] mt-12 hover:text-vermilion transition-colors"
         >
           <div>
-            <span className="block text-[clamp(2.5rem,16vw,17rem)]">DAVID</span>
-            <span className="block text-[clamp(1.75rem,11vw,10rem)]">
+            <span className="block text-[clamp(2.5rem,17vw,19rem)]">DAVID</span>
+            <span className="block text-[clamp(1.75rem,11vw,12rem)] text-ink/55">
               ABRAHAM
             </span>
           </div>

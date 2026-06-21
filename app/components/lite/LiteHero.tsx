@@ -46,13 +46,13 @@ export default function LiteHero() {
             </p>
             <h1 className="lite-display text-ink ">
               <span
-                className="lite-rise block text-[clamp(3.5rem,17vw,11rem)]"
+                className="lite-rise block text-[clamp(3.5rem,17vw,14rem)]"
                 style={{ animationDelay: "0.18s" }}
               >
                 DAVID
               </span>
               <span
-                className="lite-rise block -mt-[0.08em] text-[clamp(2.25rem,11vw,6.5rem)]"
+                className="lite-rise block -mt-[0.06em] text-[clamp(2.25rem,10vw,7.5rem)] text-ink/70"
                 style={{ animationDelay: "0.26s" }}
               >
                 ABRAHAM
@@ -143,7 +143,7 @@ export default function LiteHero() {
                 className="lite-rise bg-paper p-5"
                 style={{ animationDelay: `${0.6 + i * 0.06}s` }}
               >
-                <div className="lite-display text-3xl md:text-4xl text-vermilion">
+                <div className="lite-display text-4xl md:text-5xl text-vermilion leading-none">
                   {s.value}
                 </div>
                 <div className="font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-ink mt-2 leading-tight">

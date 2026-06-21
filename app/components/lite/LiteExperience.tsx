@@ -28,7 +28,7 @@ export default function LiteExperience() {
               <article className="group grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 border-b border-ink py-8 md:py-12">
                 {/* Left: index + date */}
                 <div className="md:col-span-3 flex md:flex-col items-baseline md:items-start justify-between gap-2">
-                  <span className="lite-display text-3xl md:text-5xl text-ink/25 group-hover:text-vermilion transition-colors duration-500">
+                  <span className="lite-display text-4xl md:text-6xl text-ink/25 group-hover:text-vermilion transition-colors duration-500 leading-none">
                     0{i + 1}
                   </span>
                   <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink/80">

@@ -31,7 +31,7 @@ export default function LiteServices() {
                   {/* Hover fill */}
                   <span className="absolute inset-0 bg-ink translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-lite" />
                   <div className="relative flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-8 py-8 md:py-10">
-                    <span className="lite-display text-4xl md:text-5xl text-ink/30 group-hover:text-vermilion transition-colors duration-500 sm:w-24 shrink-0">
+                    <span className="lite-display text-5xl md:text-7xl text-ink/30 group-hover:text-vermilion transition-colors duration-500 leading-none sm:w-28 shrink-0">
                       0{i + 1}
                     </span>
                     <div className="sm:w-16 shrink-0">
