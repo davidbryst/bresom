@@ -8,16 +8,16 @@ export default function LiteServices() {
       className="relative py-20 md:py-32 border-t-2 border-ink"
     >
       <div className="mx-auto max-w-[1500px] px-5 md:px-10">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12 md:mb-16">
+        <div className="flex flex-col -md:flex-row -md:items-end -md:justify-between gap-4 mb-12 md:mb-16">
           <div>
             <span className="font-mono text-xs uppercase tracking-[0.22em] text-ink/80">
               (03) — Services
             </span>
-            <h2 className="lite-display text-[clamp(1.5rem,7vw,7rem)] mt-3">
+            <h2 className="lite-display text-[clamp(1.5rem,7vw,6.6rem)] mt-3">
               CE QUE JE FAIS
             </h2>
           </div>
-          <p className="font-mono text-xs uppercase tracking-[0.16em] text-ink/80 md:text-right md:max-w-[16rem]">
+          <p className="self-end font-mono text-xs uppercase tracking-[0.16em] text-ink/80 md:text-right md:max-w-[16rem]">
             De la maquette au déploiement — un seul interlocuteur.
           </p>
         </div>
@@ -36,7 +36,7 @@ export default function LiteServices() {
                     </span>
                     <div className="sm:w-16 shrink-0">
                       <Icon
-                        className="w-9 h-9 text-ink group-hover:text-paper transition-colors duration-500"
+                        className="w-9 h-9 sm:ml-10 text-ink group-hover:text-paper transition-colors duration-500"
                         strokeWidth={1.5}
                       />
                     </div>

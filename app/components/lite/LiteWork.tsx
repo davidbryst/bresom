@@ -14,16 +14,16 @@ export default function LiteWork() {
     >
       <div className="mx-auto max-w-[1500px] px-5 md:px-10">
         {/* Section header */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12 md:mb-16">
+        <div className="flex flex-col -md:flex-row -md:items-end -md:justify-between gap-4 mb-12 md:mb-16">
           <div>
             <span className="font-mono text-xs uppercase tracking-[0.22em] text-ink/80">
               (01) — Sélection
             </span>
-            <h2 className="lite-display text-[clamp(1.5rem,7vw,7rem)] mt-3">
+            <h2 className="lite-display text-[clamp(1.5rem,7vw,6.6rem)] mt-3">
               TRAVAUX
             </h2>
           </div>
-          <p className="font-mono text-xs uppercase tracking-[0.16em] text-ink/80 md:text-right md:max-w-[16rem]">
+          <p className="self-end font-mono text-xs uppercase tracking-[0.16em] text-ink/80 md:text-right md:max-w-[16rem]">
             Sites, applications & systèmes de design — {projectsData.length}{" "}
             projets sélectionnés.
           </p>

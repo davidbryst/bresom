@@ -50,7 +50,7 @@ export default function LiteContact() {
                   <dd className="mt-1">
                     <a
                       href={`mailto:${contactData.email}`}
-                      className="lite-link font-display font-bold text-xl md:text-3xl break-all hover:text-vermilion transition-colors"
+                      className="lite-link font-display font-bold text-xl md:text-3xl hover:text-vermilion transition-colors"
                     >
                       {contactData.email}
                     </a>

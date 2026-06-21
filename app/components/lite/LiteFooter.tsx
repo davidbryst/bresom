@@ -21,7 +21,7 @@ export default function LiteFooter() {
             </p>
             <a
               href={`mailto:${contactData.email}`}
-              className="lite-link inline-block lite-display text-[clamp(1.75rem,5vw,3.5rem)] mt-3 hover:text-vermilion transition-colors break-all"
+              className="lite-link inline-block lite-display text-[clamp(1.6rem,3.5vw,3.5rem)] mt-3 hover:text-vermilion transition-colors break-all"
             >
               {contactData.email}
             </a>
@@ -46,11 +46,11 @@ export default function LiteFooter() {
         <a
           href="#top"
           aria-label="Retour en haut"
-          className="block lite-display  leading-[0.8] mt-12 hover:text-vermilion transition-colors"
+          className="block lite-display  leading-[0.8] mt-12 group hover:text-vermilion transition-colors"
         >
           <div>
-            <span className="block text-[clamp(2.5rem,17vw,19rem)]">DAVID</span>
-            <span className="block text-[clamp(1.75rem,11vw,12rem)] text-ink/55">
+            <span className="block text-[clamp(4rem,15vw,19rem)]">DAVID</span>
+            <span className="block text-[clamp(2.3rem,9vw,12rem)] text-ink/55 group-hover:text-vermilion">
               ABRAHAM
             </span>
           </div>

@@ -30,7 +30,9 @@ export default function LiteHeader() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-[70] transition-colors duration-300 ${
-        scrolled
+        open
+          ? "bg-paper border-b border-ink/10"
+          : scrolled
           ? "bg-paper/85 backdrop-blur-md border-b border-ink/10"
           : "bg-transparent"
       }`}
@@ -46,7 +48,7 @@ export default function LiteHeader() {
           </a>
 
           {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-8">
             {NAV.map((item) => (
               <a
                 key={item.href}
@@ -60,7 +62,7 @@ export default function LiteHeader() {
 
           {/* Right: status + CTA (desktop) / toggle (mobile) */}
           <div className="flex items-center gap-4">
-            <span className="hidden lg:flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-ink/60">
+            <span className="hidden xl:flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-ink/60">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full rounded-full bg-forest opacity-70 animate-ping" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-forest" />
@@ -68,8 +70,16 @@ export default function LiteHeader() {
               Disponible
             </span>
             <a
+              href="/cv.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden lg:inline-flex items-center gap-1.5 border border-ink/25 font-mono text-xs uppercase tracking-[0.16em] px-4 py-2.5 text-ink/80 hover:border-ink hover:text-ink transition-colors"
+            >
+              CV <span aria-hidden>↓</span>
+            </a>
+            <a
               href="#contact"
-              className="hidden md:inline-block bg-ink text-paper font-mono text-xs uppercase tracking-[0.16em] px-5 py-2.5 hover:bg-vermilion transition-colors"
+              className="hidden lg:inline-block bg-ink text-paper font-mono text-xs uppercase tracking-[0.16em] px-5 py-2.5 hover:bg-vermilion transition-colors"
             >
               Me contacter
             </a>
@@ -77,7 +87,7 @@ export default function LiteHeader() {
             {/* Mobile toggle */}
             <button
               onClick={() => setOpen((v) => !v)}
-              className="md:hidden flex flex-col items-end gap-[5px] p-2 -mr-2"
+              className="lg:hidden flex flex-col items-end gap-[5px] p-2 -mr-2"
               aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
               aria-expanded={open}
             >
@@ -103,7 +113,7 @@ export default function LiteHeader() {
 
       {/* Mobile overlay menu */}
       <div
-        className={`md:hidden fixed inset-0 top-16 bg-paper z-[65] transition-all duration-300 ${
+        className={`lg:hidden fixed inset-0 top-16 bg-paper z-[65] transition-all duration-300 ${
           open
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
@@ -127,6 +137,15 @@ export default function LiteHeader() {
             className="mt-8 bg-vermilion text-white text-center font-mono text-sm uppercase tracking-[0.16em] py-4"
           >
             Démarrer un projet
+          </a>
+          <a
+            href="/cv.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setOpen(false)}
+            className="mt-3 flex items-center justify-center gap-2 border border-ink/25 text-center font-mono text-sm uppercase tracking-[0.16em] py-4 text-ink hover:border-ink transition-colors"
+          >
+            Télécharger le CV <span aria-hidden>↓</span>
           </a>
         </nav>
       </div>

@@ -14,7 +14,10 @@ const MARQUEE = [
 ];
 
 const STATS = [
-  { value: aboutData.experience.replace(" ans", ""), label: "Années d'expérience" },
+  {
+    value: aboutData.experience.replace(" ans", ""),
+    label: "Années d'expérience",
+  },
   { value: "06", label: "Projets livrés" },
   { value: "04", label: "Domaines maîtrisés" },
   { value: "100%", label: "Sur‑mesure" },
@@ -22,7 +25,10 @@ const STATS = [
 
 export default function LiteHero() {
   return (
-    <section id="top" className="relative overflow-hidden pt-28 md:pt-36 pb-0">
+    <section
+      id="top"
+      className="relative overflow-hidden pt-16 sm:pt-28 md:pt-36 pb-0"
+    >
       <div className="mx-auto max-w-[1500px] px-5 md:px-10">
         {/* Top coordinates */}
         <div
@@ -35,24 +41,24 @@ export default function LiteHero() {
         </div>
 
         {/* Headline grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-end mt-8 md:mt-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-end mt-8 md:mt-8">
           {/* Name + roles */}
           <div className="lg:col-span-8">
             <p
-              className="lite-rise font-mono text-xs uppercase tracking-[0.22em] text-vermilion mb-5"
+              className="lite-rise font-mono text-sm font-semibold uppercase tracking-[0.22em] text-vermilion mb-5"
               style={{ animationDelay: "0.12s" }}
             >
               {heroData.greeting}
             </p>
             <h1 className="lite-display text-ink ">
               <span
-                className="lite-rise block text-[clamp(3.5rem,17vw,14rem)]"
+                className="lite-rise block lg:text-[clamp(4rem,12vw,11.5rem)] text-[clamp(4rem,16vw,11.5rem)]"
                 style={{ animationDelay: "0.18s" }}
               >
                 DAVID
               </span>
               <span
-                className="lite-rise block -mt-[0.06em] text-[clamp(2.25rem,10vw,7.5rem)] text-ink/70"
+                className="lite-rise block -mt-[0.06em]  lg:text-[clamp(2.3rem,6.9vw,6.7rem)] text-[clamp(2.3rem,9.5vw,6.7rem)] text-ink/70"
                 style={{ animationDelay: "0.26s" }}
               >
                 ABRAHAM
@@ -79,9 +85,9 @@ export default function LiteHero() {
           </div>
 
           {/* Portrait */}
-          <div className="lg:col-span-4 flex lg:justify-center">
+          <div className="lg:col-span-4 flex justify-center">
             <div
-              className="lite-rise relative w-40 sm:w-52 lg:w-full max-w-[280px]"
+              className="lite-rise relative w-60 sm:w-52 lg:w-full max-w-[280px]"
               style={{ animationDelay: "0.42s" }}
             >
               <div className="absolute -inset-3 bg-vermilion -rotate-3 " />
