@@ -13,7 +13,7 @@ export default function LiteExperience() {
             <span className="font-mono text-xs uppercase tracking-[0.22em] text-ink/80">
               (05) — Parcours
             </span>
-            <h2 className="lite-display text-[clamp(1.5rem,8vw,7rem)] [overflow-wrap:anywhere] mt-3">
+            <h2 className="lite-display text-[clamp(1.5rem,7vw,7rem)] mt-3">
               EXPÉRIENCE
             </h2>
           </div>

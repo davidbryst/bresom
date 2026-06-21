@@ -44,7 +44,7 @@ export default function LiteHero() {
             >
               {heroData.greeting}
             </p>
-            <h1 className="lite-display text-ink [overflow-wrap:anywhere]">
+            <h1 className="lite-display text-ink ">
               <span
                 className="lite-rise block text-[clamp(3.5rem,17vw,11rem)]"
                 style={{ animationDelay: "0.18s" }}
