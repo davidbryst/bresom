@@ -32,6 +32,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name="theme-color" content="#F2EEE6" />
         <Meta />
         <Links />
+        {/* Apply the saved accent color before paint to avoid a color flash. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{var a=localStorage.getItem('lite-accent');if(a)document.documentElement.style.setProperty('--accent-rgb',a)}catch(e){}`,
+          }}
+        />
       </head>
       <body className="lite lite-grain bg-paper text-ink font-body antialiased min-h-screen overflow-x-hidden">
         {/* Skip link for accessibility */}

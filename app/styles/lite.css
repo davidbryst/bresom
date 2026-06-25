@@ -8,7 +8,10 @@
   --paper: #f2eee6;
   --bone: #e7e0d2;
   --ink: #0e0e0e;
-  --accent: #ff3b12;
+  /* Accent is driven by --accent-rgb so it can be themed at runtime
+     (see LiteThemeSwitcher). Tailwind's `vermilion` color reads the same var. */
+  --accent-rgb: 255 59 18;
+  --accent: rgb(var(--accent-rgb));
   --cobalt: #2b44ff;
   --forest: #0e8a4f;
   --rule: rgba(14, 14, 14, 0.12);
