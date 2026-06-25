@@ -1,0 +1,542 @@
+{
+  "C:\\Users\\david\\.projet\\bresom\\components.json": {
+    "mtime": 1781697120.4073093,
+    "ast_hash": "3e13770ff4227fe64d2c1cbe8bf279c3",
+    "semantic_hash": "3e13770ff4227fe64d2c1cbe8bf279c3"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\package.json": {
+    "mtime": 1781697120.4103246,
+    "ast_hash": "ad3f534abaae363ecf095df3b83431a8",
+    "semantic_hash": "ad3f534abaae363ecf095df3b83431a8"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\postcss.config.js": {
+    "mtime": 1781697120.4113276,
+    "ast_hash": "33fad9c02cb0ec6d6030369ef6347d57",
+    "semantic_hash": "33fad9c02cb0ec6d6030369ef6347d57"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\tailwind.config.ts": {
+    "mtime": 1781697121.0927365,
+    "ast_hash": "3c3c5bcc9906950aaaa272abc2e4c7b2",
+    "semantic_hash": "3c3c5bcc9906950aaaa272abc2e4c7b2"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\tsconfig.json": {
+    "mtime": 1781697121.0927365,
+    "ast_hash": "c94b760ea5744c162fe3bf9e038bb4cb",
+    "semantic_hash": "c94b760ea5744c162fe3bf9e038bb4cb"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\verify-animations.sh": {
+    "mtime": 1781697121.0927365,
+    "ast_hash": "0517602433cbfaf68be4099a0b06b781",
+    "semantic_hash": "0517602433cbfaf68be4099a0b06b781"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\vite.config.ts": {
+    "mtime": 1781697121.0937407,
+    "ast_hash": "6cc43f5f00d10387022563ee95fcc782",
+    "semantic_hash": "6cc43f5f00d10387022563ee95fcc782"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\.claude\\settings.local.json": {
+    "mtime": 1781697120.372225,
+    "ast_hash": "23c767bdc8e777699f4468e08a2175a5",
+    "semantic_hash": "23c767bdc8e777699f4468e08a2175a5"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\entry.client.tsx": {
+    "mtime": 1781697120.3957884,
+    "ast_hash": "b199a694d211e60ab313882fa0662b4e",
+    "semantic_hash": "b199a694d211e60ab313882fa0662b4e"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\entry.server.tsx": {
+    "mtime": 1781697120.3957884,
+    "ast_hash": "37b0b6ea1d7f3e04224c7ac71aca72fa",
+    "semantic_hash": "37b0b6ea1d7f3e04224c7ac71aca72fa"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\root.tsx": {
+    "mtime": 1781697120.3998055,
+    "ast_hash": "c45bbc3a894b1e0be8bdcf5d84dda0da",
+    "semantic_hash": "c45bbc3a894b1e0be8bdcf5d84dda0da"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\components\\About.tsx": {
+    "mtime": 1781697120.3778038,
+    "ast_hash": "a820f890f5ecf3f684a887d9cd29a23f",
+    "semantic_hash": "a820f890f5ecf3f684a887d9cd29a23f"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\components\\AnimatedBackground.tsx": {
+    "mtime": 1781697120.3788068,
+    "ast_hash": "73ace7005c034ae92a4b97ef901eab81",
+    "semantic_hash": "73ace7005c034ae92a4b97ef901eab81"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\components\\AnimatedSection.tsx": {
+    "mtime": 1781697120.3788068,
+    "ast_hash": "1cc84d254c16a834a91d6e1d373c0138",
+    "semantic_hash": "1cc84d254c16a834a91d6e1d373c0138"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\components\\AnimationsDemo.tsx": {
+    "mtime": 1781697120.379811,
+    "ast_hash": "719f95ccc985e2c5b23da3c2de0feaba",
+    "semantic_hash": "719f95ccc985e2c5b23da3c2de0feaba"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\components\\CardSwap.tsx": {
+    "mtime": 1781697120.379811,
+    "ast_hash": "0391a439378e08b95fc90ac64b8d7c22",
+    "semantic_hash": "0391a439378e08b95fc90ac64b8d7c22"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\components\\CircularText.tsx": {
+    "mtime": 1781697120.379811,
+    "ast_hash": "cc896a1750f7607f95fa148b4b41ae7f",
+    "semantic_hash": "cc896a1750f7607f95fa148b4b41ae7f"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\components\\Contact.tsx": {
+    "mtime": 1781697120.3808157,
+    "ast_hash": "520c5325af9fc3058212789a20de38ff",
+    "semantic_hash": "520c5325af9fc3058212789a20de38ff"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\components\\Experience.tsx": {
+    "mtime": 1781697120.3818185,
+    "ast_hash": "db8cc97592e9c5613f1b121fc35c1d9f",
+    "semantic_hash": "db8cc97592e9c5613f1b121fc35c1d9f"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\components\\FallingText.tsx": {
+    "mtime": 1781697120.3818185,
+    "ast_hash": "fe6079bcb1c985d32dc1f3100e6b5215",
+    "semantic_hash": "fe6079bcb1c985d32dc1f3100e6b5215"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\components\\Footer.tsx": {
+    "mtime": 1781697120.3818185,
+    "ast_hash": "e47c54efd5e6f4cbccb5fda75e0206f8",
+    "semantic_hash": "e47c54efd5e6f4cbccb5fda75e0206f8"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\components\\GradualBlur.tsx": {
+    "mtime": 1781697120.3818185,
+    "ast_hash": "6e85aeb5ec4ebdef1df7a36f555dce8c",
+    "semantic_hash": "6e85aeb5ec4ebdef1df7a36f555dce8c"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\components\\Hero.tsx": {
+    "mtime": 1781697120.3828213,
+    "ast_hash": "d3a967d6c9490fe15f26c17756d0de7f",
+    "semantic_hash": "d3a967d6c9490fe15f26c17756d0de7f"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\components\\LogoLoop.tsx": {
+    "mtime": 1781697120.3828213,
+    "ast_hash": "53d99914ab4cd205355c80053709fef9",
+    "semantic_hash": "53d99914ab4cd205355c80053709fef9"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\components\\Magnet.tsx": {
+    "mtime": 1781697120.3843281,
+    "ast_hash": "887969b62b4522837c82e359f0610b4b",
+    "semantic_hash": "887969b62b4522837c82e359f0610b4b"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\components\\MiniCTA.tsx": {
+    "mtime": 1781697120.3843281,
+    "ast_hash": "8dd0ab9f163a05f682c76d09ad148444",
+    "semantic_hash": "8dd0ab9f163a05f682c76d09ad148444"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\components\\Navbar.tsx": {
+    "mtime": 1781697120.3843281,
+    "ast_hash": "804468e8bad620816369c1000d2eb3ed",
+    "semantic_hash": "804468e8bad620816369c1000d2eb3ed"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\components\\Projects.tsx": {
+    "mtime": 1781697120.3843281,
+    "ast_hash": "dff03af2f4acf8d70441e7e093124c7e",
+    "semantic_hash": "dff03af2f4acf8d70441e7e093124c7e"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\components\\ScrollAdvanced.tsx": {
+    "mtime": 1781697120.3862257,
+    "ast_hash": "764a9a5ce81861f1b24002e4bb318a97",
+    "semantic_hash": "764a9a5ce81861f1b24002e4bb318a97"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\components\\ScrollEffects.tsx": {
+    "mtime": 1781697120.3862257,
+    "ast_hash": "8d2ef9a2a87c37df3b702805faaf9178",
+    "semantic_hash": "8d2ef9a2a87c37df3b702805faaf9178"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\components\\ScrollTriggerAnimations.tsx": {
+    "mtime": 1781697120.387228,
+    "ast_hash": "b88b9c8e46825af0e7694e0df088e786",
+    "semantic_hash": "b88b9c8e46825af0e7694e0df088e786"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\components\\ScrollVelocity.tsx": {
+    "mtime": 1781697120.387228,
+    "ast_hash": "aa32434f7ecca79a2d472b60495e5bb3",
+    "semantic_hash": "aa32434f7ecca79a2d472b60495e5bb3"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\components\\Services.tsx": {
+    "mtime": 1781697120.388228,
+    "ast_hash": "2acd2123cb5f55588ed97c4afb33f976",
+    "semantic_hash": "2acd2123cb5f55588ed97c4afb33f976"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\components\\Skills.tsx": {
+    "mtime": 1781697120.388228,
+    "ast_hash": "2f195b1ff9cf54aa2669a187628f0f78",
+    "semantic_hash": "2f195b1ff9cf54aa2669a187628f0f78"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\components\\SmoothScroll.tsx": {
+    "mtime": 1781697120.3892958,
+    "ast_hash": "1c43ae78487feb1a912d7643759a2477",
+    "semantic_hash": "1c43ae78487feb1a912d7643759a2477"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\components\\ThemeToggle.tsx": {
+    "mtime": 1781697120.3903017,
+    "ast_hash": "a92a6bb8c6201b4ac7ac971170fdca1d",
+    "semantic_hash": "a92a6bb8c6201b4ac7ac971170fdca1d"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\components\\TypingEffect.tsx": {
+    "mtime": 1781697120.3903017,
+    "ast_hash": "8f241ba3a2c83a7c7830a2912b3f20e3",
+    "semantic_hash": "8f241ba3a2c83a7c7830a2912b3f20e3"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\components\\ui\\DownloadButton.tsx": {
+    "mtime": 1781697120.3913114,
+    "ast_hash": "2b384a2ffc6737fa7adf3be1a073c18d",
+    "semantic_hash": "2b384a2ffc6737fa7adf3be1a073c18d"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\components\\ui\\LoadingSpinner.tsx": {
+    "mtime": 1781697120.3913114,
+    "ast_hash": "f149314a477635adf64b61493cff6a85",
+    "semantic_hash": "f149314a477635adf64b61493cff6a85"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\config\\gsapConfig.ts": {
+    "mtime": 1781697120.3923779,
+    "ast_hash": "ea1a144802f68a4023f8d8cb85732467",
+    "semantic_hash": "ea1a144802f68a4023f8d8cb85732467"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\config\\motionConfig.ts": {
+    "mtime": 1781697120.3932378,
+    "ast_hash": "3836ce05fc748448bde33383f9c357a0",
+    "semantic_hash": "3836ce05fc748448bde33383f9c357a0"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\config\\spacingConfig.ts": {
+    "mtime": 1781697120.3932378,
+    "ast_hash": "4cc4945fb4d4a92d133dcab779315c46",
+    "semantic_hash": "4cc4945fb4d4a92d133dcab779315c46"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\data\\content.ts": {
+    "mtime": 1781697120.3947754,
+    "ast_hash": "65eaff087a19bf52ef11b3ab8b3f0e0c",
+    "semantic_hash": "65eaff087a19bf52ef11b3ab8b3f0e0c"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\data\\cvContent.ts": {
+    "mtime": 1781697120.3947754,
+    "ast_hash": "e6ad9fcc7ee6decc35407f84de6203c2",
+    "semantic_hash": "e6ad9fcc7ee6decc35407f84de6203c2"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\emails\\contactTemplate.ts": {
+    "mtime": 1781697120.3957884,
+    "ast_hash": "8759e604428a4d9f4d2a949464c75740",
+    "semantic_hash": "8759e604428a4d9f4d2a949464c75740"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\examples\\AnimationIntegrationExamples.tsx": {
+    "mtime": 1781697120.3967938,
+    "ast_hash": "496d476d84c8ba5466ac33fe1a1ff0e3",
+    "semantic_hash": "496d476d84c8ba5466ac33fe1a1ff0e3"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\hooks\\useAdvancedGSAP.ts": {
+    "mtime": 1781697120.3977969,
+    "ast_hash": "0c1eee7628149473e599c5d1cf1d814e",
+    "semantic_hash": "0c1eee7628149473e599c5d1cf1d814e"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\hooks\\useGSAP.ts": {
+    "mtime": 1781697120.3977969,
+    "ast_hash": "57a1d1361bc95695e494a70355c45bec",
+    "semantic_hash": "57a1d1361bc95695e494a70355c45bec"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\hooks\\usePrefersReducedMotion.ts": {
+    "mtime": 1781697120.3977969,
+    "ast_hash": "85e46ee3e8885dd156e6eb2c63c3a54e",
+    "semantic_hash": "85e46ee3e8885dd156e6eb2c63c3a54e"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\hooks\\useScrollAnimation.tsx": {
+    "mtime": 1781697120.3988025,
+    "ast_hash": "d8592aff6614fea18b9329325899efa2",
+    "semantic_hash": "d8592aff6614fea18b9329325899efa2"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\hooks\\useScrollAnimations.ts": {
+    "mtime": 1781697120.3988025,
+    "ast_hash": "3da983bb7a8697981908b25e6c4c1c03",
+    "semantic_hash": "3da983bb7a8697981908b25e6c4c1c03"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\hooks\\useTheme.ts": {
+    "mtime": 1781697120.3998055,
+    "ast_hash": "737193490bf0edb8b389196240d37061",
+    "semantic_hash": "737193490bf0edb8b389196240d37061"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\routes\\api.contact.tsx": {
+    "mtime": 1781697120.400821,
+    "ast_hash": "10b132ec2e7ac1833b7a2170b9e6fc85",
+    "semantic_hash": "10b132ec2e7ac1833b7a2170b9e6fc85"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\routes\\cv[.]pdf.tsx": {
+    "mtime": 1781697120.400821,
+    "ast_hash": "a9eafab6bf7cb622169c4f747d746cd4",
+    "semantic_hash": "a9eafab6bf7cb622169c4f747d746cd4"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\routes\\sitemap[.]xml.tsx": {
+    "mtime": 1781697120.4022813,
+    "ast_hash": "792df66ee3970caafc69413b033813ab",
+    "semantic_hash": "792df66ee3970caafc69413b033813ab"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\routes\\yscv[.]pdf.tsx": {
+    "mtime": 1781697120.40332,
+    "ast_hash": "e49b5e872cfc5b15e99beaaef053ad65",
+    "semantic_hash": "e49b5e872cfc5b15e99beaaef053ad65"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\routes\\_index.tsx": {
+    "mtime": 1781697120.400821,
+    "ast_hash": "309c8f37f8620e4194f73802d4012f65",
+    "semantic_hash": "309c8f37f8620e4194f73802d4012f65"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\types\\shader-art.d.ts": {
+    "mtime": 1781697120.4048252,
+    "ast_hash": "a75f2c2f1477d38079d6d6eb2cbcaa1e",
+    "semantic_hash": "a75f2c2f1477d38079d6d6eb2cbcaa1e"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\utils\\animationPatterns.ts": {
+    "mtime": 1781697120.405912,
+    "ast_hash": "4a34a05e9424b0aecbead3699aa0a8cc",
+    "semantic_hash": "4a34a05e9424b0aecbead3699aa0a8cc"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\utils\\rateLimiter.ts": {
+    "mtime": 1781697120.405912,
+    "ast_hash": "cb072ad8d3d1acbaf4a62fe93e18f1df",
+    "semantic_hash": "cb072ad8d3d1acbaf4a62fe93e18f1df"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\utils\\scrollAnimations.ts": {
+    "mtime": 1781697120.405912,
+    "ast_hash": "3b3e1390a9ec8a2f949d16bd65d42614",
+    "semantic_hash": "3b3e1390a9ec8a2f949d16bd65d42614"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\src\\component\\Silk.jsx": {
+    "mtime": 1781697121.091707,
+    "ast_hash": "dfef88f0f86edb24f85de131a802db42",
+    "semantic_hash": "dfef88f0f86edb24f85de131a802db42"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\AMELIORATIONS.md": {
+    "mtime": 1781697120.3732712,
+    "ast_hash": "d8d1cc36a08d0fff371c215a37483039",
+    "semantic_hash": "d8d1cc36a08d0fff371c215a37483039"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\ANIMATIONS_GUIDE.md": {
+    "mtime": 1781697120.3747797,
+    "ast_hash": "c1d43be1f45f19c555d09729d19abce0",
+    "semantic_hash": "c1d43be1f45f19c555d09729d19abce0"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\ANIMATIONS_SUMMARY.md": {
+    "mtime": 1781697120.3747797,
+    "ast_hash": "f81e9e51d5200052762905d3e4d7b2dc",
+    "semantic_hash": "f81e9e51d5200052762905d3e4d7b2dc"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\CHANGELOG.md": {
+    "mtime": 1781697120.3747797,
+    "ast_hash": "0dd32d804b2ee4be43efff15b05b6c01",
+    "semantic_hash": "0dd32d804b2ee4be43efff15b05b6c01"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\claude.md": {
+    "mtime": 1781697120.405912,
+    "ast_hash": "b6fea72472300e1cd4aef40a515e5d3a",
+    "semantic_hash": "b6fea72472300e1cd4aef40a515e5d3a"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\COMMIT_MESSAGE.md": {
+    "mtime": 1781697120.3757963,
+    "ast_hash": "b6ac23d5d524512ed9329beb6eb790b3",
+    "semantic_hash": "b6ac23d5d524512ed9329beb6eb790b3"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\c\uf03aUsersdavid.projetbresomFINAL_SUMMARY.txt": {
+    "mtime": 1781697120.4073093,
+    "ast_hash": "7c842c7d4d2e0df4a67e49f5673ea7bc",
+    "semantic_hash": "7c842c7d4d2e0df4a67e49f5673ea7bc"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\FILES_CREATED.md": {
+    "mtime": 1781697120.3757963,
+    "ast_hash": "011c2c8382f698109246c69eda2fa144",
+    "semantic_hash": "011c2c8382f698109246c69eda2fa144"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\INDEX.md": {
+    "mtime": 1781697120.3757963,
+    "ast_hash": "0a88f71cb35530ed7c6e442d533b1aa5",
+    "semantic_hash": "0a88f71cb35530ed7c6e442d533b1aa5"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\QUICK_START.md": {
+    "mtime": 1781697120.3757963,
+    "ast_hash": "1e946db2ddc60dcc5cf86ab552cef741",
+    "semantic_hash": "1e946db2ddc60dcc5cf86ab552cef741"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\README.md": {
+    "mtime": 1781697120.376799,
+    "ast_hash": "9e79258873ab17691a5e5165ef76fd78",
+    "semantic_hash": "9e79258873ab17691a5e5165ef76fd78"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\README_ANIMATIONS.md": {
+    "mtime": 1781697120.376799,
+    "ast_hash": "e108716995015a3fd00da1f935cfc4a5",
+    "semantic_hash": "e108716995015a3fd00da1f935cfc4a5"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\SPACING_OPTIMIZATIONS.md": {
+    "mtime": 1781697120.376799,
+    "ast_hash": "5acd8080fc8ecf8e3d5b4563678e342d",
+    "semantic_hash": "5acd8080fc8ecf8e3d5b4563678e342d"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\app\\data\\Tu es un d\u00e9veloppeur front-end senior.md": {
+    "mtime": 1781697120.3942666,
+    "ast_hash": "fbf7ef498efb369b2441f521a7449a8e",
+    "semantic_hash": "fbf7ef498efb369b2441f521a7449a8e"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\public\\robots.txt": {
+    "mtime": 1781697121.0904267,
+    "ast_hash": "9e026a8b73aba01f1780163543ed2eb7",
+    "semantic_hash": "9e026a8b73aba01f1780163543ed2eb7"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\public\\logo-dark.png": {
+    "mtime": 1781697120.4296682,
+    "ast_hash": "01baf8e84451c2bdf8d2b814c1af7da3",
+    "semantic_hash": "01baf8e84451c2bdf8d2b814c1af7da3"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\public\\logo-light.png": {
+    "mtime": 1781697120.4296682,
+    "ast_hash": "1cea347c5ec100cc3389e28f75a04241",
+    "semantic_hash": "1cea347c5ec100cc3389e28f75a04241"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\public\\cvasset\\cc.png": {
+    "mtime": 1781697120.4113276,
+    "ast_hash": "70ef5990e4c7b0ea9b4274a462eaef5a",
+    "semantic_hash": "70ef5990e4c7b0ea9b4274a462eaef5a"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\public\\cvasset\\gg.png": {
+    "mtime": 1781697120.4113276,
+    "ast_hash": "359db401af30ee5f625db15f0d460668",
+    "semantic_hash": "359db401af30ee5f625db15f0d460668"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\public\\cvasset\\profile.jpg": {
+    "mtime": 1781697120.4123354,
+    "ast_hash": "5a85aa371a14d96c4208383f6147e7f9",
+    "semantic_hash": "5a85aa371a14d96c4208383f6147e7f9"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\public\\cvasset\\profile1.jpg": {
+    "mtime": 1781697120.4133396,
+    "ast_hash": "e6e38d888353d76469c6870e7d1e937e",
+    "semantic_hash": "e6e38d888353d76469c6870e7d1e937e"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\public\\cvasset\\profileysr.jpg": {
+    "mtime": 1781697120.4143398,
+    "ast_hash": "222b46de4a78b4fbd911c77de0989ea6",
+    "semantic_hash": "222b46de4a78b4fbd911c77de0989ea6"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\public\\profile\\1face-identiter-large.jpg": {
+    "mtime": 1781697120.433773,
+    "ast_hash": "c5d87abbb86aa59f0abc0467d95d2c94",
+    "semantic_hash": "c5d87abbb86aa59f0abc0467d95d2c94"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\public\\profile\\1face-identiter-large1.jpg": {
+    "mtime": 1781697120.434773,
+    "ast_hash": "f9aa3279f187c62b18bb02f9f47fbcfa",
+    "semantic_hash": "f9aa3279f187c62b18bb02f9f47fbcfa"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\public\\profile\\1face-identiter.jpg": {
+    "mtime": 1781697120.4384077,
+    "ast_hash": "b76e7ab1ad9163a661c789f6e8a152de",
+    "semantic_hash": "b76e7ab1ad9163a661c789f6e8a152de"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\public\\profile\\1prodile-contreplonger.jpg": {
+    "mtime": 1781697120.4408505,
+    "ast_hash": "563d514d5f11aca162f0da47b9b49aad",
+    "semantic_hash": "563d514d5f11aca162f0da47b9b49aad"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\public\\profile\\face-identiter-large.jpg": {
+    "mtime": 1781697120.4620142,
+    "ast_hash": "1aebd868b28c60bd06570dd530b8f5c0",
+    "semantic_hash": "1aebd868b28c60bd06570dd530b8f5c0"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\public\\profile\\face-identiter.jpg": {
+    "mtime": 1781697120.483235,
+    "ast_hash": "17944083e50d8272ffed81ebb8ba1eee",
+    "semantic_hash": "17944083e50d8272ffed81ebb8ba1eee"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\public\\profile\\face-plonger.jpg": {
+    "mtime": 1781697120.4872007,
+    "ast_hash": "469d984421dfb04d5e88f05b1dac8d96",
+    "semantic_hash": "469d984421dfb04d5e88f05b1dac8d96"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\public\\profile\\prodile-contreplonger.jpg": {
+    "mtime": 1781697120.5116384,
+    "ast_hash": "1647c7271a708079ebd92f44c58d650c",
+    "semantic_hash": "1647c7271a708079ebd92f44c58d650c"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\public\\profile\\s-face-identiter-large.png": {
+    "mtime": 1781697120.5146582,
+    "ast_hash": "45ca6d19385c438238c72d7c95b23b67",
+    "semantic_hash": "45ca6d19385c438238c72d7c95b23b67"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\public\\profile\\s-face-identiter.png": {
+    "mtime": 1781697120.5178893,
+    "ast_hash": "e1d2dd5c19d8e3ffbece5cfc296f00bb",
+    "semantic_hash": "e1d2dd5c19d8e3ffbece5cfc296f00bb"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\public\\profile\\s-prodile-contreplonger.png": {
+    "mtime": 1781697120.522094,
+    "ast_hash": "dac0f2fc750ea37ae4a6133bacbd9aa5",
+    "semantic_hash": "dac0f2fc750ea37ae4a6133bacbd9aa5"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\public\\projet\\beatsdelephants copy.png": {
+    "mtime": 1781697120.6523342,
+    "ast_hash": "190fe839a23653dead7d6e7a66d18340",
+    "semantic_hash": "190fe839a23653dead7d6e7a66d18340"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\public\\projet\\beatsdelephants.png": {
+    "mtime": 1781697120.6579027,
+    "ast_hash": "6d53a2c7e983c7aebde406609c11330d",
+    "semantic_hash": "6d53a2c7e983c7aebde406609c11330d"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\public\\projet\\beatsdelephantsMockup1.png": {
+    "mtime": 1781697120.7082152,
+    "ast_hash": "99a7546ac9924fe1ee445ffa0c9564a0",
+    "semantic_hash": "99a7546ac9924fe1ee445ffa0c9564a0"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\public\\projet\\DavHotel.png": {
+    "mtime": 1781697120.5362203,
+    "ast_hash": "9f37f75c63d5027207cd53973ab33d37",
+    "semantic_hash": "9f37f75c63d5027207cd53973ab33d37"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\public\\projet\\DavHotelMockup.png": {
+    "mtime": 1781697120.5788567,
+    "ast_hash": "b68c6eefd30368cd0eb113b5e79d0528",
+    "semantic_hash": "b68c6eefd30368cd0eb113b5e79d0528"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\public\\projet\\DavStore.png": {
+    "mtime": 1781697120.5918164,
+    "ast_hash": "236c598ca7ab5b9f70d432776647b77a",
+    "semantic_hash": "236c598ca7ab5b9f70d432776647b77a"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\public\\projet\\DavStoreMockup.png": {
+    "mtime": 1781697120.643008,
+    "ast_hash": "d157ca935256c471e1f8bc752ec5f0ed",
+    "semantic_hash": "d157ca935256c471e1f8bc752ec5f0ed"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\public\\projet\\freshafriqueMockup.png": {
+    "mtime": 1781697120.7832272,
+    "ast_hash": "b5ca8ab4fe67b3820d273add47e7cddd",
+    "semantic_hash": "b5ca8ab4fe67b3820d273add47e7cddd"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\public\\projet\\freshafriqueMockup1.png": {
+    "mtime": 1781697120.8370745,
+    "ast_hash": "a833cbcb5938f3d1bdb8915cbfe3ccd3",
+    "semantic_hash": "a833cbcb5938f3d1bdb8915cbfe3ccd3"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\public\\projet\\koraconsultMockup.png": {
+    "mtime": 1781697120.9125476,
+    "ast_hash": "77c45863f1822bed1298a7bab9406808",
+    "semantic_hash": "77c45863f1822bed1298a7bab9406808"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\public\\projet\\koraconsultMockup1.png": {
+    "mtime": 1781697120.9621603,
+    "ast_hash": "2f2cd5d9db7539bd9b9da161fee83a38",
+    "semantic_hash": "2f2cd5d9db7539bd9b9da161fee83a38"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\public\\projet\\queenbydklothMockup.png": {
+    "mtime": 1781697121.0377667,
+    "ast_hash": "e0ce7a9c853fa00491f587c5dcb6aea9",
+    "semantic_hash": "e0ce7a9c853fa00491f587c5dcb6aea9"
+  },
+  "C:\\Users\\david\\.projet\\bresom\\public\\projet\\queenbydklothMockup1.png": {
+    "mtime": 1781697121.0883775,
+    "ast_hash": "693c25d34ab2bba3a91728dc5bf10916",
+    "semantic_hash": "693c25d34ab2bba3a91728dc5bf10916"
+  }
+}
