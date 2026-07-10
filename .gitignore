@@ -9,3 +9,12 @@ node_modules
 # Extract to restore originals: unzip image-originals.zip -d public/
 # image-originals.zip
 # graphify-out/
+
+# design-sync (claude.ai/design) — staged converter scripts, generated build
+# output, and machine/cache state. .design-sync/ itself (config.json,
+# NOTES.md, conventions.md, previews/, entry.mjs) is committed.
+.ds-sync/
+ds-bundle/
+.design-sync/.cache/
+.design-sync/learnings/
+.design-sync/node_modules

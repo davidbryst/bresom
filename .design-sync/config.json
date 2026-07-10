@@ -1,0 +1,35 @@
+{
+  "projectId": "17317033-4289-4d41-af71-babfb66c45d5",
+  "shape": "package",
+  "pkg": "bresom-lite",
+  "globalName": "BresomLite",
+  "entry": ".design-sync/entry.mjs",
+  "srcDir": "app/components/lite",
+  "tsconfig": "tsconfig.json",
+  "cssEntry": ".design-sync/.cache/generated-styles.css",
+  "componentSrcMap": {
+    "LiteAbout": "app/components/lite/LiteAbout.tsx",
+    "LiteExperience": "app/components/lite/LiteExperience.tsx",
+    "LiteFooter": "app/components/lite/LiteFooter.tsx",
+    "LiteHeader": "app/components/lite/LiteHeader.tsx",
+    "LiteHero": "app/components/lite/LiteHero.tsx",
+    "LiteServices": "app/components/lite/LiteServices.tsx",
+    "LiteSkills": "app/components/lite/LiteSkills.tsx",
+    "LiteThemeSwitcher": "app/components/lite/LiteThemeSwitcher.tsx",
+    "LiteWork": "app/components/lite/LiteWork.tsx",
+    "Reveal": "app/components/lite/Reveal.tsx",
+    "LiteContact": null,
+    "SmoothAnchors": null
+  },
+  "buildCmd": "npm run build && bash -c \"{ echo \\\"@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Syne:wght@600;700;800&display=swap');\\\"; cat build/client/assets/root-*.css; } > .design-sync/.cache/generated-styles.css\"",
+  "readmeHeader": ".design-sync/conventions.md",
+  "overrides": {
+    "LiteHeader": { "cardMode": "single", "viewport": "1200x140" },
+    "LiteThemeSwitcher": { "cardMode": "single", "viewport": "260x220" },
+    "LiteAbout": { "cardMode": "column" },
+    "LiteExperience": { "cardMode": "column" },
+    "LiteFooter": { "cardMode": "column" },
+    "LiteSkills": { "cardMode": "column" },
+    "LiteWork": { "cardMode": "column" }
+  }
+}
