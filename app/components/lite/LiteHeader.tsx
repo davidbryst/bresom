@@ -42,7 +42,7 @@ export default function LiteHeader() {
           {/* Wordmark */}
           <a
             href="/#top"
-            className="font-display font-extrabold text-lg tracking-tight leading-none"
+            className="font-display font-extrabold text-vermilion p-3 text-lg tracking-tight leading-none"
           >
             DAVID<span className="text-vermilion">.</span>ABRAHAM
           </a>
