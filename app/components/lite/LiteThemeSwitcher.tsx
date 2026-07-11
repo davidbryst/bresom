@@ -12,6 +12,7 @@ import { useEffect, useRef, useState } from "react";
  */
 
 export const ACCENT_STORAGE_KEY = "lite-accent";
+const ACCENT_CYCLE_KEY = "lite-accent-cycle";
 
 type Swatch = { name: string; rgb: string };
 
@@ -26,10 +27,18 @@ const SWATCHES: Swatch[] = [
 
 const DEFAULT_RGB = SWATCHES[0].rgb;
 
+// Seconds spent morphing from one swatch to the next in cycle mode.
+const CYCLE_STEP_SECONDS = 5;
+
+const parseRgb = (rgb: string) => rgb.split(" ").map(Number) as [number, number, number];
+const lerp = (a: number, b: number, t: number) => Math.round(a + (b - a) * t);
+
 export default function LiteThemeSwitcher() {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(DEFAULT_RGB);
+  const [cycling, setCycling] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
+  const rafRef = useRef<number>();
 
   // Sync state with whatever the inline script already applied.
   useEffect(() => {
@@ -38,7 +47,33 @@ export default function LiteThemeSwitcher() {
       window.localStorage.getItem(ACCENT_STORAGE_KEY) ||
       DEFAULT_RGB;
     setActive(current);
+    if (window.localStorage.getItem(ACCENT_CYCLE_KEY) === "1") setCycling(true);
   }, []);
+
+  // Infinite smooth loop through every swatch, one frame at a time.
+  useEffect(() => {
+    if (!cycling) return;
+    const stops = [...SWATCHES.map((s) => parseRgb(s.rgb)), parseRgb(SWATCHES[0].rgb)];
+    const stepMs = CYCLE_STEP_SECONDS * 1000;
+    const totalMs = stepMs * (stops.length - 1);
+    const start = performance.now();
+
+    const tick = (now: number) => {
+      const elapsed = (now - start) % totalMs;
+      const segment = Math.floor(elapsed / stepMs);
+      const t = (elapsed % stepMs) / stepMs;
+      const [r1, g1, b1] = stops[segment];
+      const [r2, g2, b2] = stops[segment + 1];
+      const rgb = `${lerp(r1, r2, t)} ${lerp(g1, g2, t)} ${lerp(b1, b2, t)}`;
+      document.documentElement.style.setProperty("--accent-rgb", rgb);
+      rafRef.current = requestAnimationFrame(tick);
+    };
+    rafRef.current = requestAnimationFrame(tick);
+
+    return () => {
+      if (rafRef.current !== undefined) cancelAnimationFrame(rafRef.current);
+    };
+  }, [cycling]);
 
   // Close the panel on outside click / Escape.
   useEffect(() => {
@@ -56,9 +91,20 @@ export default function LiteThemeSwitcher() {
   }, [open]);
 
   const pick = (rgb: string) => {
+    setCycling(false);
+    window.localStorage.removeItem(ACCENT_CYCLE_KEY);
     document.documentElement.style.setProperty("--accent-rgb", rgb);
     window.localStorage.setItem(ACCENT_STORAGE_KEY, rgb);
     setActive(rgb);
+  };
+
+  const toggleCycle = () => {
+    setCycling((was) => {
+      const next = !was;
+      if (next) window.localStorage.setItem(ACCENT_CYCLE_KEY, "1");
+      else window.localStorage.removeItem(ACCENT_CYCLE_KEY);
+      return next;
+    });
   };
 
   return (
@@ -75,9 +121,9 @@ export default function LiteThemeSwitcher() {
         <p className="lite-mono mb-2 text-[10px] uppercase tracking-[0.25em] text-ink/60">
           Accent
         </p>
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-3 gap-2 w-max">
           {SWATCHES.map((s) => {
-            const selected = s.rgb === active;
+            const selected = !cycling && s.rgb === active;
             return (
               <button
                 key={s.rgb}
@@ -86,15 +132,35 @@ export default function LiteThemeSwitcher() {
                 title={s.name}
                 aria-label={`Couleur ${s.name}`}
                 aria-pressed={selected}
-                className={`h-8 w-8 border transition-transform duration-200 hover:scale-110 ${
+                className={`relative h-8 w-8 border transition-colors duration-200 hover:brightness-110 ${
                   selected
-                    ? "border-ink ring-2 ring-ink ring-offset-2 ring-offset-paper"
+                    ? "border-2 border-ink shadow-[2px_2px_0_0_var(--ink)]"
                     : "border-ink/20"
                 }`}
                 style={{ background: `rgb(${s.rgb})` }}
               />
             );
           })}
+          <button
+            type="button"
+            onClick={toggleCycle}
+            title="Dégradé infini"
+            aria-label="Activer le dégradé de couleurs infini"
+            aria-pressed={cycling}
+            className={`relative h-8 w-8 overflow-hidden rounded-full border transition-colors duration-200 hover:brightness-110 ${
+              cycling
+                ? "border-2 border-ink shadow-[2px_2px_0_0_var(--ink)]"
+                : "border-ink/20"
+            }`}
+          >
+            <span
+              aria-hidden="true"
+              className="lite-cycle-swatch absolute inset-[-25%] block"
+              style={{
+                background: `conic-gradient(${SWATCHES.map((s) => `rgb(${s.rgb})`).join(", ")}, rgb(${SWATCHES[0].rgb}))`,
+              }}
+            />
+          </button>
         </div>
       </div>
 

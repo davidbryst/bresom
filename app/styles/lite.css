@@ -74,6 +74,16 @@
   animation-play-state: paused;
 }
 
+/* Spinning gradient preview for the infinite accent-cycle swatch. */
+@keyframes lite-cycle-spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+.lite-cycle-swatch {
+  animation: lite-cycle-spin 6s linear infinite;
+}
+
 /* Staggered entrance used on the hero (CSS-only, no JS). */
 @keyframes lite-rise {
   from {
