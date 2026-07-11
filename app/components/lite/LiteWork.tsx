@@ -55,7 +55,7 @@ export default function LiteWork() {
                 {/* Image */}
                 <div className="mt-5 overflow-hidden border border-ink/35 bg-ink/[0.03] aspect-[16/10]">
                   <img
-                    src={imgPath(p.image)}
+                    src={imgPath(p.cardImage ?? p.image)}
                     alt={`Aperçu du projet ${p.title}`}
                     loading="lazy"
                     decoding="async"

@@ -22,9 +22,17 @@ export interface Project {
   description: string;
   summary: string;
   image: string;
+  /** Overrides `image` for the homepage grid card only; detail page keeps `image`. */
+  cardImage?: string;
   gallery?: string[];
   tags: string[];
-  link: string;
+  /** Live site — omit for apps that only ship as a download (see apk). */
+  link?: string;
+  apk?: {
+    url: string;
+    version: string;
+    size: string;
+  };
   role: string;
   highlights: string[];
 }
@@ -137,14 +145,40 @@ const PROJECT_ROLE = "Développeur Full-Stack & Designer UI/UX";
 
 export const projectsData: Project[] = [
   {
+    title: "Olfy",
+    slug: "olfy",
+    category: "Application mobile",
+    description: "Annuaire géolocalisé des bonnes adresses de Côte d'Ivoire",
+    summary:
+      "Application mobile Flutter — annuaire géolocalisé des bonnes adresses de Côte d'Ivoire : recherche par quartier, fiches établissements vérifiées, avis et itinéraire, avec une identité mono-accent Ember pensée pour le marché ivoirien.",
+    image: "/olfy/olfyCover.webp",
+    cardImage: "/olfy/olfyMockup.webp",
+    gallery: [
+      "/olfy/olfyMockup.webp",
+      "/olfy/details.webp",
+      "/olfy/research.webp",
+      "/olfy/onboarding.webp",
+      "/olfy/profile.webp",
+    ],
+    tags: ["Flutter", "Dart", "Mobile", "Géolocalisation"],
+    apk: { url: "/apk/olfy.apk", version: "1.0.0", size: "52 Mo" },
+    role: PROJECT_ROLE,
+    highlights: [
+      "Parcours complet : onboarding, connexion, permission de localisation, coquille à 4 onglets",
+      "Fiche établissement détaillée : galerie, actions rapides, itinéraire, commande de véhicule, avis",
+      "Course en temps réel avec widget flottant draggable et ETA",
+      "Messagerie intégrée, favoris, profil et vote de confiance communautaire",
+    ],
+  },
+  {
     title: "Queen By DKloth",
     slug: "queen-by-dkloth",
     category: "E-commerce",
     description: "E-commerce de mode féminine ivoirienne",
     summary:
       "Boutique en ligne pour une marque de mode féminine ivoirienne : navigation par collections, fiches produits soignées et tunnel d'achat pensé pour convertir, du choix de l'article jusqu'au paiement.",
-    image: "/queenbydklothMockup1.webp",
-    gallery: ["/queenbydklothMockup.webp"],
+    image: "/queen-by-dkloth/hero.webp",
+    gallery: ["/queen-by-dkloth/gallery-1.webp"],
     tags: ["Remix.js", "Supabase", "E-commerce", "Fashion"],
     link: "https://queenbydkloth.vercel.app/",
     role: PROJECT_ROLE,
@@ -161,8 +195,8 @@ export const projectsData: Project[] = [
     description: "Restaurant de cuisine ivoirienne authentique",
     summary:
       "Vitrine digitale pour un restaurant de cuisine ivoirienne : présentation du menu, ambiance de la salle et prise de réservation en ligne, pour transformer la visite du site en réservation.",
-    image: "/freshafriqueMockup1.webp",
-    gallery: ["/freshafriqueMockup.webp"],
+    image: "/fresh-afrique/hero.webp",
+    gallery: ["/fresh-afrique/gallery-1.webp"],
     tags: ["React", "Vite", "Restaurant", "Réservation"],
     link: "https://freshafrique.vercel.app/",
     role: PROJECT_ROLE,
@@ -179,8 +213,8 @@ export const projectsData: Project[] = [
     description: "Conseil stratégique pour organisations",
     summary:
       "Site institutionnel pour un cabinet de conseil stratégique : présentation de l'offre, des domaines d'expertise et des équipes, avec une identité sobre et professionnelle adaptée à une clientèle corporate.",
-    image: "/koraconsultMockup1.webp",
-    gallery: ["/koraconsultMockup.webp"],
+    image: "/koraconsult/hero.webp",
+    gallery: ["/koraconsult/gallery-1.webp"],
     tags: ["React Router", "Vite", "Corporate", "Conseil"],
     link: "https://koraconsult.vercel.app/",
     role: PROJECT_ROLE,
@@ -197,8 +231,14 @@ export const projectsData: Project[] = [
     description: "Plate-forme de commerce électronique",
     summary:
       "Conception UI/UX complète d'une plateforme e-commerce : parcours d'achat, fiches produits et espace client maquettés sur Figma, avant tout développement, pour valider l'expérience utilisateur en amont.",
-    image: "/DavStoreMockup.webp",
-    gallery: ["/DavStore.webp", "/DavStoreMockupGrand.webp"],
+    image: "/davstore/davstoreCover.webp",
+    cardImage: "/davstore/hero.webp",
+    gallery: [
+      "/davstore/hero.webp",
+      "/davstore/home.webp",
+      "/davstore/detail.webp",
+      "/davstore/checkout.webp",
+    ],
     tags: ["Figma", "UI/UX", "Design"],
     link: "https://www.figma.com/design/zTTfQHgcKZob5qFwajJuqS/DavStore?node-id=0-1&t=CXe7jUEU1ARIFB2N-1",
     role: PROJECT_ROLE,
@@ -215,8 +255,14 @@ export const projectsData: Project[] = [
     description: "Plate-forme de réservation hôtelière",
     summary:
       "Conception UI/UX d'une plateforme de réservation hôtelière : recherche de chambres, fiches établissements et tunnel de réservation, pensés pour rassurer le voyageur à chaque étape.",
-    image: "/DavHotelMockup.webp",
-    gallery: ["/DavHotel.webp", "/DavHotelMockupGrand.webp"],
+    image: "/davhotel/davhotelCover.webp",
+    cardImage: "/davhotel/hero.webp",
+    gallery: [
+      "/davhotel/hero.webp",
+      "/davhotel/home.webp",
+      "/davhotel/detail.webp",
+      "/davhotel/schedule.webp",
+    ],
     tags: ["Figma", "UI/UX", "Design"],
     link: "https://www.figma.com/design/FiPEHvKORyhPGi57VmiioM/DavHotel?node-id=0-1&t=9PhqDAhIFeAcYoJc-1",
     role: PROJECT_ROLE,
@@ -233,8 +279,8 @@ export const projectsData: Project[] = [
     description: "Plate-forme de musique : trap, afro, drill, boombap.",
     summary:
       "Plateforme de découverte et de diffusion d'instrumentaux (trap, afro, drill, boombap) : catalogue de beats écoutables en ligne, pensé pour les artistes et producteurs à la recherche de leur prochain son.",
-    image: "/beatsdelephantsMockup1.webp",
-    gallery: ["/beatsdelephants.webp"],
+    image: "/beats-delephants/hero.webp",
+    gallery: ["/beats-delephants/gallery-1.webp"],
     tags: ["Remix.js", "beats", "musique ", "drill"],
     link: "https://beatsdelephants.vercel.app/",
     role: PROJECT_ROLE,

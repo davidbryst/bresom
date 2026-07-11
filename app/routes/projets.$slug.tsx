@@ -26,6 +26,11 @@ const HOVER_ACCENTS = [
   "group-hover:text-cobalt",
   "group-hover:text-forest",
 ];
+const HOVER_BG_ACCENTS = [
+  "hover:bg-vermilion",
+  "hover:bg-cobalt",
+  "hover:bg-forest",
+];
 
 export async function loader({ params }: LoaderFunctionArgs) {
   const index = projectsData.findIndex((p) => p.slug === params.slug);
@@ -133,10 +138,11 @@ export default function ProjectDetail() {
     useLoaderData<typeof loader>();
   const count = projectsData.length;
   const accent = ACCENTS[index % ACCENTS.length];
+  const hoverBgAccent = HOVER_BG_ACCENTS[index % HOVER_BG_ACCENTS.length];
   const prevHoverAccent =
     HOVER_ACCENTS[((index - 1 + count) % count) % HOVER_ACCENTS.length];
   const nextHoverAccent =
-    HOVER_ACCENTS[(index + 1) % count % HOVER_ACCENTS.length];
+    HOVER_ACCENTS[((index + 1) % count) % HOVER_ACCENTS.length];
 
   const galleryImages = [
     {
@@ -194,17 +200,33 @@ export default function ProjectDetail() {
               <p className="text-lg md:text-xl leading-relaxed text-ink/80 max-w-2xl">
                 {project.summary}
               </p>
-              <a
-                href={project.link}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="group mt-8 inline-flex items-center gap-2 bg-ink text-paper font-mono text-sm uppercase tracking-[0.14em] px-7 py-4 hover:bg-vermilion transition-colors"
-              >
-                Voir le site en ligne
-                <span className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-                  ↗
-                </span>
-              </a>
+              <div className="mt-8 flex flex-wrap gap-3">
+                {project.link && (
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="group inline-flex items-center gap-2 bg-ink text-paper font-mono text-sm uppercase tracking-[0.14em] px-7 py-4 hover:bg-vermilion transition-colors"
+                  >
+                    Voir le site en ligne
+                    <span className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+                      ↗
+                    </span>
+                  </a>
+                )}
+                {project.apk && (
+                  <a
+                    href={project.apk.url}
+                    download
+                    className="group inline-flex items-center gap-2 border-2 border-ink font-mono text-sm uppercase tracking-[0.14em] px-7 py-4 hover:bg-ink hover:text-paper transition-colors"
+                  >
+                    Télécharger l'APK
+                    <span className="transition-transform group-hover:translate-y-0.5">
+                      ⬇
+                    </span>
+                  </a>
+                )}
+              </div>
             </div>
             <div className="lg:col-span-4 grid grid-cols-1 gap-px bg-ink/15 border border-ink/35 self-start">
               <div className="bg-paper p-4">
@@ -286,6 +308,43 @@ export default function ProjectDetail() {
               </div>
             )}
           </div>
+
+          {/* App download */}
+          {project.apk && (
+            <div className="mt-12 md:mt-16 border-2 border-ink p-6 md:p-10">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+                <div>
+                  <span className="font-mono text-xs uppercase tracking-[0.22em] text-ink/60">
+                    Application mobile
+                  </span>
+                  <h3 className="lite-display text-2xl md:text-4xl mt-2">
+                    Télécharger l'app
+                  </h3>
+                  <p className="mt-2 text-ink/70 text-sm">
+                    Fichier APK Android — v{project.apk.version} ·{" "}
+                    {project.apk.size}
+                  </p>
+                </div>
+                <a
+                  href={project.apk.url}
+                  download
+                  className={`group inline-flex shrink-0 items-center justify-center gap-2 bg-ink text-paper font-mono text-sm uppercase tracking-[0.14em] px-8 py-4 transition-colors ${hoverBgAccent}`}
+                >
+                  Télécharger l'APK
+                  <span
+                    aria-hidden
+                    className="transition-transform group-hover:translate-y-0.5"
+                  >
+                    ⬇
+                  </span>
+                </a>
+              </div>
+              <p className="mt-6 border-t border-ink/15 pt-6 font-mono text-xs uppercase tracking-wide text-ink/50">
+                Android uniquement — active « Sources inconnues » dans les
+                paramètres pour installer.
+              </p>
+            </div>
+          )}
         </div>
 
         {/* Stack strip — full-bleed, matches the marquee treatment on the homepage */}
@@ -345,7 +404,7 @@ export default function ProjectDetail() {
                     >
                       <div className="overflow-hidden border border-ink/35 bg-bone aspect-[4/3]">
                         <img
-                          src={imgPath(r.image)}
+                          src={imgPath(r.cardImage ?? r.image)}
                           alt={`Aperçu du projet ${r.title}`}
                           loading="lazy"
                           decoding="async"

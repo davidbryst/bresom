@@ -6,8 +6,9 @@ node_modules
 .vercel
 
 # Local backup of original images (replaced by .webp) — not deployed.
-# Extract to restore originals: unzip image-originals.zip -d public/
-# image-originals.zip
+# Extract to restore originals: unzip <name>.zip -d public/
+*-originaux-*.zip
+image-originals.zip
 # graphify-out/
 
 # design-sync (claude.ai/design) — staged converter scripts, generated build
