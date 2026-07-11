@@ -17,15 +17,15 @@ export async function loader({ request }: LoaderFunctionArgs) {
     },
   ];
 
-  // Générer des URLs pour chaque projet (si vous avez des pages dédiées)
-  // const projectUrls = projectsData.map((project) => ({
-  //   loc: `${baseUrl}/projets/${slugify(project.title)}`,
-  //   lastmod: new Date().toISOString(),
-  //   changefreq: "monthly",
-  //   priority: "0.8",
-  // }));
+  // Une page dédiée existe pour chaque projet (voir app/routes/projets.$slug.tsx).
+  const projectUrls = projectsData.map((project) => ({
+    loc: `${baseUrl}/projets/${project.slug}`,
+    lastmod: new Date().toISOString(),
+    changefreq: "monthly",
+    priority: "0.8",
+  }));
 
-  const allUrls = [...staticUrls];
+  const allUrls = [...staticUrls, ...projectUrls];
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

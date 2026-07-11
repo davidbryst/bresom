@@ -1,11 +1,11 @@
 import { contactData } from "~/data/content";
 
 const LINKS = [
-  { label: "Travaux", href: "#work" },
-  { label: "À propos", href: "#about" },
-  { label: "Compétences", href: "#skills" },
-  { label: "Parcours", href: "#experience" },
-  { label: "Contact", href: "#contact" },
+  { label: "Travaux", href: "/#work" },
+  { label: "À propos", href: "/#about" },
+  { label: "Compétences", href: "/#skills" },
+  { label: "Parcours", href: "/#experience" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 export default function LiteFooter() {
@@ -44,7 +44,7 @@ export default function LiteFooter() {
 
         {/* Giant wordmark */}
         <a
-          href="#top"
+          href="/#top"
           aria-label="Retour en haut"
           className="block lite-display  leading-[0.8] mt-12 group hover:text-vermilion transition-colors"
         >
@@ -60,7 +60,7 @@ export default function LiteFooter() {
         <div className="mt-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 font-mono text-[11px] uppercase tracking-[0.14em] text-ink/80">
           <span>© {year} David Abraham — Tous droits réservés</span>
           <span>Abidjan, Côte d'Ivoire · {year}</span>
-          <a href="#top" className="lite-link hover:text-ink">
+          <a href="/#top" className="lite-link hover:text-ink">
             Retour en haut ↑
           </a>
         </div>

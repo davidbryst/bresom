@@ -1,3 +1,4 @@
+import { Link } from "@remix-run/react";
 import { projectsData } from "~/data/content";
 import Reveal from "./Reveal";
 
@@ -33,10 +34,8 @@ export default function LiteWork() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-ink/15 border border-ink/35">
           {projectsData.map((p, i) => (
             <Reveal key={p.title} delay={(i % 2) * 80} className="bg-paper">
-              <a
-                href={p.link}
-                target="_blank"
-                rel="noreferrer noopener"
+              <Link
+                to={`/projets/${p.slug}`}
                 className="group block h-full p-5 md:p-7 hover:bg-bone transition-colors duration-500"
               >
                 {/* Top row */}
@@ -48,8 +47,8 @@ export default function LiteWork() {
                   >
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="font-mono text-lg text-ink/40 transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1">
-                    ↗
+                  <span className="font-mono text-lg text-ink/40 transition-transform duration-500 group-hover:translate-x-1">
+                    →
                   </span>
                 </div>
 
@@ -88,7 +87,7 @@ export default function LiteWork() {
                     </span>
                   ))}
                 </div>
-              </a>
+              </Link>
             </Reveal>
           ))}
         </div>

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 
 const NAV = [
-  { label: "Travaux", href: "#work" },
-  { label: "À propos", href: "#about" },
-  { label: "Expertise", href: "#skills" },
-  { label: "Parcours", href: "#experience" },
-  { label: "Contact", href: "#contact" },
+  { label: "Travaux", href: "/#work" },
+  { label: "À propos", href: "/#about" },
+  { label: "Expertise", href: "/#skills" },
+  { label: "Parcours", href: "/#experience" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 export default function LiteHeader() {
@@ -41,7 +41,7 @@ export default function LiteHeader() {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Wordmark */}
           <a
-            href="#top"
+            href="/#top"
             className="font-display font-extrabold text-lg tracking-tight leading-none"
           >
             DAVID<span className="text-vermilion">.</span>ABRAHAM
@@ -78,7 +78,7 @@ export default function LiteHeader() {
               CV <span aria-hidden>↓</span>
             </a>
             <a
-              href="#contact"
+              href="/#contact"
               className="hidden lg:inline-block bg-ink text-paper font-mono text-xs uppercase tracking-[0.16em] px-5 py-2.5 hover:bg-vermilion transition-colors"
             >
               Me contacter
@@ -132,7 +132,7 @@ export default function LiteHeader() {
             </a>
           ))}
           <a
-            href="#contact"
+            href="/#contact"
             onClick={() => setOpen(false)}
             className="mt-8 bg-vermilion text-white text-center font-mono text-sm uppercase tracking-[0.16em] py-4"
           >

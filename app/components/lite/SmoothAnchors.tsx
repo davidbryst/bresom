@@ -26,14 +26,18 @@ export default function SmoothAnchors() {
         return;
 
       const anchor = (e.target as HTMLElement).closest?.(
-        'a[href^="#"]',
+        'a[href^="#"], a[href^="/#"]',
       ) as HTMLAnchorElement | null;
       if (!anchor) return;
 
       const href = anchor.getAttribute("href");
-      if (!href || href === "#") return;
+      if (!href || href === "#" || href === "/#") return;
 
-      const el = document.querySelector(href);
+      // "/#hash" only resolves here when the target lives on the current
+      // page (i.e. we're already on "/"). Otherwise let the browser do a
+      // real navigation to "/" and jump to the hash natively.
+      const hash = href.startsWith("/") ? href.slice(1) : href;
+      const el = document.querySelector(hash);
       if (!el) return;
 
       e.preventDefault();
@@ -55,7 +59,7 @@ export default function SmoothAnchors() {
       });
 
       // Keep the hash in the URL (shareable) without re-triggering a native jump.
-      history.replaceState(null, "", href);
+      history.replaceState(null, "", hash);
     };
 
     document.addEventListener("click", onClick);

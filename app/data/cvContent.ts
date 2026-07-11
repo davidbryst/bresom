@@ -66,7 +66,12 @@ export const dosData: dosInfoItem[] = [
   // },
 ];
 
-export const projectsData: Project[] = [
+type CvProjectItem = Pick<
+  Project,
+  "title" | "description" | "image" | "tags" | "link"
+>;
+
+export const projectsData: CvProjectItem[] = [
   {
     title: "DavStore",
     description: "Plate-forme de commerce électronique",

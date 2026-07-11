@@ -17,10 +17,16 @@ export interface FormationItem {
 
 export interface Project {
   title: string;
+  slug: string;
+  category: string;
   description: string;
+  summary: string;
   image: string;
+  gallery?: string[];
   tags: string[];
   link: string;
+  role: string;
+  highlights: string[];
 }
 
 export interface SkillItem {
@@ -127,48 +133,116 @@ export const dosData: dosInfoItem[] = [
   // },
 ];
 
+const PROJECT_ROLE = "Développeur Full-Stack & Designer UI/UX";
+
 export const projectsData: Project[] = [
   {
     title: "Queen By DKloth",
+    slug: "queen-by-dkloth",
+    category: "E-commerce",
     description: "E-commerce de mode féminine ivoirienne",
+    summary:
+      "Boutique en ligne pour une marque de mode féminine ivoirienne : navigation par collections, fiches produits soignées et tunnel d'achat pensé pour convertir, du choix de l'article jusqu'au paiement.",
     image: "/queenbydklothMockup1.webp",
+    gallery: ["/queenbydklothMockup.webp"],
     tags: ["Remix.js", "Supabase", "E-commerce", "Fashion"],
     link: "https://queenbydkloth.vercel.app/",
+    role: PROJECT_ROLE,
+    highlights: [
+      "Catalogue produits et gestion des collections via Supabase",
+      "Tunnel d'achat (panier, paiement, suivi de commande) optimisé mobile",
+      "Interface Remix.js rapide, pensée pour le SEO et la conversion",
+    ],
   },
   {
     title: "Fresh Afrique",
+    slug: "fresh-afrique",
+    category: "Site vitrine & réservation",
     description: "Restaurant de cuisine ivoirienne authentique",
+    summary:
+      "Vitrine digitale pour un restaurant de cuisine ivoirienne : présentation du menu, ambiance de la salle et prise de réservation en ligne, pour transformer la visite du site en réservation.",
     image: "/freshafriqueMockup1.webp",
+    gallery: ["/freshafriqueMockup.webp"],
     tags: ["React", "Vite", "Restaurant", "Réservation"],
     link: "https://freshafrique.vercel.app/",
+    role: PROJECT_ROLE,
+    highlights: [
+      "Présentation du menu et mise en avant des spécialités maison",
+      "Système de réservation en ligne intégré",
+      "Base React + Vite légère et rapide au chargement",
+    ],
   },
   {
     title: "KoraConsult",
+    slug: "koraconsult",
+    category: "Site institutionnel",
     description: "Conseil stratégique pour organisations",
+    summary:
+      "Site institutionnel pour un cabinet de conseil stratégique : présentation de l'offre, des domaines d'expertise et des équipes, avec une identité sobre et professionnelle adaptée à une clientèle corporate.",
     image: "/koraconsultMockup1.webp",
+    gallery: ["/koraconsultMockup.webp"],
     tags: ["React Router", "Vite", "Corporate", "Conseil"],
     link: "https://koraconsult.vercel.app/",
+    role: PROJECT_ROLE,
+    highlights: [
+      "Architecture multi-pages avec React Router",
+      "Présentation claire de l'offre et des domaines d'expertise",
+      "Design sobre et institutionnel, orienté crédibilité",
+    ],
   },
   {
     title: "DavStore",
+    slug: "davstore",
+    category: "Design UI/UX",
     description: "Plate-forme de commerce électronique",
+    summary:
+      "Conception UI/UX complète d'une plateforme e-commerce : parcours d'achat, fiches produits et espace client maquettés sur Figma, avant tout développement, pour valider l'expérience utilisateur en amont.",
     image: "/DavStoreMockup.webp",
+    gallery: ["/DavStore.webp", "/DavStoreMockupGrand.webp"],
     tags: ["Figma", "UI/UX", "Design"],
     link: "https://www.figma.com/design/zTTfQHgcKZob5qFwajJuqS/DavStore?node-id=0-1&t=CXe7jUEU1ARIFB2N-1",
+    role: PROJECT_ROLE,
+    highlights: [
+      "Maquettes haute-fidélité du parcours d'achat de bout en bout",
+      "Système de composants réutilisables dans Figma",
+      "Travail sur la hiérarchie visuelle et l'accessibilité des contrastes",
+    ],
   },
   {
     title: "DavHotel",
+    slug: "davhotel",
+    category: "Design UI/UX",
     description: "Plate-forme de réservation hôtelière",
+    summary:
+      "Conception UI/UX d'une plateforme de réservation hôtelière : recherche de chambres, fiches établissements et tunnel de réservation, pensés pour rassurer le voyageur à chaque étape.",
     image: "/DavHotelMockup.webp",
+    gallery: ["/DavHotel.webp", "/DavHotelMockupGrand.webp"],
     tags: ["Figma", "UI/UX", "Design"],
     link: "https://www.figma.com/design/FiPEHvKORyhPGi57VmiioM/DavHotel?node-id=0-1&t=9PhqDAhIFeAcYoJc-1",
+    role: PROJECT_ROLE,
+    highlights: [
+      "Parcours de recherche et de réservation de chambres",
+      "Fiches établissements détaillées (photos, équipements, avis)",
+      "Design system Figma dédié à l'univers hôtelier",
+    ],
   },
   {
     title: "Beats d'Éléphants",
+    slug: "beats-delephants",
+    category: "Plateforme musicale",
     description: "Plate-forme de musique : trap, afro, drill, boombap.",
+    summary:
+      "Plateforme de découverte et de diffusion d'instrumentaux (trap, afro, drill, boombap) : catalogue de beats écoutables en ligne, pensé pour les artistes et producteurs à la recherche de leur prochain son.",
     image: "/beatsdelephantsMockup1.webp",
+    gallery: ["/beatsdelephants.webp"],
     tags: ["Remix.js", "beats", "musique ", "drill"],
     link: "https://beatsdelephants.vercel.app/",
+    role: PROJECT_ROLE,
+    highlights: [
+      "Lecteur audio intégré pour prévisualiser les beats",
+      "Catalogue filtrable par genre (trap, afro, drill, boombap)",
+      "Interface Remix.js rapide adaptée à la découverte musicale",
+    ],
   },
 ];
 
