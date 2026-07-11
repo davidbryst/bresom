@@ -98,17 +98,21 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 // Full-format preview that opens the lightbox. object-contain (not cover) so
 // nothing gets cropped — mockups range from wide laptop shots to tall phone
 // screens and both need to show in full.
+// `natural`: box hugs the image's own aspect ratio instead of a fixed height
+// (used for the cover shot, so its frame never letterboxes around the image).
 function ZoomableShot({
   src,
   alt,
   eager = false,
   className = "",
+  natural = false,
   onOpen,
 }: {
   src: string;
   alt: string;
   eager?: boolean;
   className?: string;
+  natural?: boolean;
   onOpen: () => void;
 }) {
   return (
@@ -124,7 +128,9 @@ function ZoomableShot({
         alt={alt}
         loading={eager ? "eager" : "lazy"}
         decoding="async"
-        className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-[1.02]"
+        className={`w-full transition-transform duration-500 group-hover:scale-[1.02] ${
+          natural ? "h-auto" : "h-full object-contain"
+        }`}
       />
       <span className="absolute right-3 top-3 flex items-center gap-1.5 bg-ink text-paper font-mono text-[10px] uppercase tracking-[0.14em] px-2.5 py-1.5 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
         Voir en grand <span aria-hidden>⤢</span>
@@ -175,7 +181,20 @@ export default function ProjectDetail() {
               <span className={`lite-display text-3xl md:text-4xl ${accent}`}>
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <h1 className="lite-display text-[clamp(2.2rem,8vw,6.5rem)] mt-2 leading-[0.95]">
+
+              {/* Cover shot — mobile only, right under the project number */}
+              <div className="mt-5 md:hidden">
+                <ZoomableShot
+                  src={galleryImages[0].src}
+                  alt={galleryImages[0].alt}
+                  eager
+                  natural
+                  onOpen={() => setLightboxIndex(0)}
+                  className="border-2"
+                />
+              </div>
+
+              <h1 className="lite-display text-[clamp(2.2rem,8vw,6.5rem)] mt-5 md:mt-2 leading-[0.95]">
                 {project.title}
               </h1>
               <p className="font-mono text-xs uppercase tracking-[0.2em] text-ink/60 mt-3">
@@ -193,6 +212,18 @@ export default function ProjectDetail() {
               ))}
             </div>
           </div>
+
+          {/* Cover shot — desktop only, right under the title; on mobile it already ran under the project number */}
+          <Reveal className="hidden md:block mt-10 md:mt-12">
+            <ZoomableShot
+              src={galleryImages[0].src}
+              alt={galleryImages[0].alt}
+              eager
+              natural
+              onOpen={() => setLightboxIndex(0)}
+              className="border-2"
+            />
+          </Reveal>
 
           {/* Summary + CTA + meta */}
           <div className="mt-10 grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -256,19 +287,6 @@ export default function ProjectDetail() {
             </div>
           </div>
         </div>
-
-        {/* Cover shot — full width, click to zoom, never cropped */}
-        <Reveal className="mt-12 md:mt-16 px-5 md:px-10">
-          <div className="mx-auto max-w-[1500px]">
-            <ZoomableShot
-              src={galleryImages[0].src}
-              alt={galleryImages[0].alt}
-              eager
-              onOpen={() => setLightboxIndex(0)}
-              className="h-[46vh] sm:h-[56vh] md:h-[68vh] border-2"
-            />
-          </div>
-        </Reveal>
 
         <div className="mx-auto max-w-[1500px] px-5 md:px-10">
           {/* Approach + gallery */}
@@ -393,7 +411,7 @@ export default function ProjectDetail() {
               <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-6">
                 {related.map((r) => {
                   const rIndex = projectsData.findIndex(
-                    (p) => p.slug === r.slug,
+                    (p) => p.slug === r.slug
                   );
                   const rAccent = ACCENTS[rIndex % ACCENTS.length];
                   return (
