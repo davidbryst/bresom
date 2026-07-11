@@ -182,19 +182,7 @@ export default function ProjectDetail() {
                 {String(index + 1).padStart(2, "0")}
               </span>
 
-              {/* Cover shot — mobile only, right under the project number */}
-              <div className="mt-5 md:hidden">
-                <ZoomableShot
-                  src={galleryImages[0].src}
-                  alt={galleryImages[0].alt}
-                  eager
-                  natural
-                  onOpen={() => setLightboxIndex(0)}
-                  className="border-2"
-                />
-              </div>
-
-              <h1 className="lite-display text-[clamp(2.2rem,8vw,6.5rem)] mt-5 md:mt-2 leading-[0.95]">
+              <h1 className="lite-display text-[clamp(2.2rem,8vw,6.5rem)] mt-2 leading-[0.95]">
                 {project.title}
               </h1>
               <p className="font-mono text-xs uppercase tracking-[0.2em] text-ink/60 mt-3">
@@ -213,8 +201,8 @@ export default function ProjectDetail() {
             </div>
           </div>
 
-          {/* Cover shot — desktop only, right under the title; on mobile it already ran under the project number */}
-          <Reveal className="hidden md:block mt-10 md:mt-12">
+          {/* Cover shot — right under the title, on every breakpoint */}
+          <Reveal className="mt-10 md:mt-12">
             <ZoomableShot
               src={galleryImages[0].src}
               alt={galleryImages[0].alt}
