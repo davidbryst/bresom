@@ -77,7 +77,7 @@ export async function action({ request }: ActionFunctionArgs) {
   }
 
   try {
-    await resend.emails.send({
+    const result = await resend.emails.send({
       from: contactConfig.from,
       to: contactConfig.email,
       subject: `${contactConfig.subject} - ${subject}`,
@@ -112,6 +112,18 @@ export async function action({ request }: ActionFunctionArgs) {
         </div>
       `,
     });
+
+    // The SDK resolves normally even when Resend rejects the send (e.g.
+    // unverified domain/recipient) — it does not throw, it reports the
+    // failure via `error`. Ignoring it is how a rejected send was silently
+    // reported as a success.
+    if (result.error) {
+      console.error("Resend a refusé l'envoi:", result.error);
+      return json(
+        { success: false, error: "Erreur lors de l'envoi du message" },
+        { status: 502 }
+      );
+    }
 
     return json({ success: true });
   } catch (error) {
