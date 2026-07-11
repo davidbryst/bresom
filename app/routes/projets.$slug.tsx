@@ -166,7 +166,7 @@ export default function ProjectDetail() {
     <>
       <SmoothAnchors />
       <LiteHeader />
-      <main id="main-content" className="pt-28 md:pt-36 pb-20 md:pb-32">
+      <main id="main-content" className="pt-16 md:pt-28 pb-20 md:pb-32">
         <div className="mx-auto max-w-[1500px] px-5 md:px-10">
           <Link
             to="/#work"
@@ -176,7 +176,7 @@ export default function ProjectDetail() {
           </Link>
 
           {/* Title */}
-          <div className="mt-8 flex flex-col md:flex-row md:items-end md:justify-between gap-6 border-b-2 border-ink pb-8">
+          <div className="sm:mt-8 flex flex-col md:flex-row md:items-end md:justify-between gap-6 border-b-2 border-ink pb-8">
             <div>
               <span className={`lite-display text-3xl md:text-4xl ${accent}`}>
                 {String(index + 1).padStart(2, "0")}
@@ -399,7 +399,7 @@ export default function ProjectDetail() {
               <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-6">
                 {related.map((r) => {
                   const rIndex = projectsData.findIndex(
-                    (p) => p.slug === r.slug
+                    (p) => p.slug === r.slug,
                   );
                   const rAccent = ACCENTS[rIndex % ACCENTS.length];
                   return (
