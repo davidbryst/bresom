@@ -18,7 +18,7 @@ export default function LiteExperience() {
             </h2>
           </div>
           <p className="self-end font-mono text-xs uppercase tracking-[0.16em] text-ink/80 md:text-right md:max-w-[16rem]">
-            Trois maisons, un fil rouge : design + code en bout en bout.
+            Quatre maisons, un fil rouge : design + code en bout en bout.
           </p>
         </div>
 

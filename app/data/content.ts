@@ -1,4 +1,13 @@
-import { Code, Palette, Smartphone, Brain, Paintbrush } from "lucide-react";
+import {
+  Code,
+  Palette,
+  Smartphone,
+  Paintbrush,
+  Server,
+  Database,
+  Bot,
+  Wallet,
+} from "lucide-react";
 
 // Types pour les données
 export interface ExperienceItem {
@@ -35,12 +44,15 @@ export interface Project {
   };
   role: string;
   highlights: string[];
+  /** Badge affiché sur la carte : nature du projet. */
+  status?: "Client" | "Personnel" | "Concept";
 }
 
 export interface SkillItem {
   name: string;
-  level: number;
-  years: number;
+  /** Hérités des anciennes routes CV PDF — plus affichés sur le site. */
+  level?: number;
+  years?: number;
   tags?: string[];
   summary?: string;
 }
@@ -60,7 +72,11 @@ export interface DomainGroup {
 export interface ContactInfo {
   email: string;
   phone: string;
+  /** Numéro international sans espaces ni « + », pour wa.me */
+  whatsapp?: string;
   location: string;
+  linkedin?: string;
+  github?: string;
 }
 
 // Correction de l'interface dosInfo
@@ -68,9 +84,18 @@ export interface dosInfoItem {
   titre: string;
   description: string;
   icon: any;
+  /** Prix d'appel affiché, ex. « À partir de 200 000 FCFA » */
+  price?: string;
+}
+
+export interface ProcessStep {
+  titre: string;
+  description: string;
 }
 
 export interface AboutInfo {
+  /** Accroche du hero (orientée client). */
+  pitch?: string;
   description: string;
   points: string[];
   experience: string;
@@ -99,46 +124,66 @@ export const heroData: HeroInfo = {
 };
 
 export const aboutData: AboutInfo = {
+  pitch:
+    "Je conçois et livre vos applications web et mobiles, de la maquette Figma à la mise en production. Un seul interlocuteur pour le design, le code et le déploiement.",
   description:
-    "Passionné par le design et le développement, j'aide les équipes à concevoir et livrer des produits web et mobiles fiables, performants et élégants. J'aime transformer des idées en interfaces utiles, accessibles et modernes.",
+    "Développeur full-stack et designer UI/UX avec 3+ ans d'expérience. Je conçois et livre des produits web et mobiles fiables, performants et élégants, de la maquette Figma à la mise en production. J'aime transformer des idées en interfaces utiles, accessibles et modernes.",
   points: [
-    "Conception UI/UX et intégration pixel‑perfect.",
-    "Développement front‑end React/Remix/Next et mobile React Native.",
-    "API, bases de données et bonnes pratiques de qualité (tests, accessibilité).",
+    "Design + code : un seul interlocuteur, de la maquette au déploiement.",
+    "Paiement mobile (CinetPay : Orange, MTN, Moov, Wave), géolocalisation et suivi GPS.",
+    "Livraison jusqu'en production : Docker, CI/CD, VPS Linux, Vercel.",
   ],
-  experience: "5+ ans",
-  stack: "TypeScript, React, Remix, Node.js",
+  experience: "3+ ans",
+  stack: "Flutter, React, Next.js, Laravel, Supabase",
   values: "Qualité, simplicité, professionnalisme",
 };
 
 export const contactData: ContactInfo = {
   email: "sh.david.abraham@gmail.com",
-  phone: "+225 01 40 54 41 97 / +225 07 12 41 01 34",
-  location: "Côte d'Ivoire, Abidjan, Cocody, Riviera 2",
+  phone: "+225 01 40 54 41 97",
+  whatsapp: "2250140544197",
+  location: "Abidjan, Côte d'Ivoire",
+  linkedin: "https://www.linkedin.com/in/abraham-david-8831761b8/",
+  github: "https://github.com/davidbryst",
 };
 
-// Correction du type de dosData
+// Offres (section « Offres ») — prix d'appel indicatifs, en FCFA.
 export const dosData: dosInfoItem[] = [
   {
-    titre: "Développement Web",
-    description: "Création de sites performants, modernes et accessibles.",
+    titre: "Site vitrine",
+    description:
+      "Site professionnel rapide et responsive, jusqu'à 5 pages, formulaire de contact, SEO de base et mise en ligne. Livré en 2 à 3 semaines.",
+    price: "À partir de 200 000 FCFA",
     icon: Code,
   },
   {
-    titre: "Développement Mobile",
-    description: "Création d'applications mobiles natives et cross-platform.",
+    titre: "Application web & mobile",
+    description:
+      "Application sur-mesure (Flutter, React, Next.js) : maquettes Figma, back-end, base de données, déploiement. Sur devis après un premier appel.",
+    price: "À partir de 800 000 FCFA",
     icon: Smartphone,
   },
   {
+    titre: "Paiement mobile",
+    description:
+      "Intégration CinetPay sur votre site ou application : Orange Money, MTN, Moov, Wave et carte bancaire, avec suivi des transactions.",
+    price: "À partir de 150 000 FCFA",
+    icon: Wallet,
+  },
+  {
     titre: "Design UI/UX",
-    description: "Conception d'interfaces intuitives et esthétiques.",
+    description:
+      "Maquettes Figma haute-fidélité, design system et prototype cliquable pour valider votre produit avant le développement.",
+    price: "À partir de 150 000 FCFA",
     icon: Paintbrush,
   },
-  // {
-  //   titre: "Travail en équipe",
-  //   description: "Collaboration agile avec les clients et les développeurs.",
-  //   icon: Users,
-  // },
+];
+
+export const processData: ProcessStep[] = [
+  { titre: "Appel", description: "On cadre le besoin, le budget et le délai." },
+  { titre: "Maquette", description: "Vous validez le design avant tout code." },
+  { titre: "Développement", description: "Livraisons régulières, retours intégrés." },
+  { titre: "Mise en ligne", description: "Déploiement, prise en main et suivi." },
 ];
 
 const PROJECT_ROLE = "Développeur Full-Stack & Designer UI/UX";
@@ -227,6 +272,7 @@ export const projectsData: Project[] = [
   {
     title: "DavStore",
     slug: "davstore",
+    status: "Concept",
     category: "Design UI/UX",
     description: "Plate-forme de commerce électronique",
     summary:
@@ -251,6 +297,7 @@ export const projectsData: Project[] = [
   {
     title: "DavHotel",
     slug: "davhotel",
+    status: "Concept",
     category: "Design UI/UX",
     description: "Plate-forme de réservation hôtelière",
     summary:
@@ -294,6 +341,14 @@ export const projectsData: Project[] = [
 
 export const experiencesData: ExperienceItem[] = [
   {
+    company: "SOBRE GOLDEN COMPANY (SGC)",
+    position: "Responsable Technique & Digital",
+    date: "2026 · MISSION",
+    responsibilities: [
+      "Pilotage technique et digital de la marque (immobilier & formation) : site web Laravel, design system et charte graphique, supports visuels.",
+    ],
+  },
+  {
     company: "SCHIBA HOLDING",
     position: "Infographe, Développeur Web & Mobile Full Stack",
     date: "SEPT 2024 - DÉC 2025",
@@ -324,94 +379,90 @@ export const experiencesData: ExperienceItem[] = [
   },
 ];
 
+const items = (...names: string[]): SkillItem[] =>
+  names.map((name) => ({ name }));
+
+// Domaines de compétences — alignés sur le CV (pas de niveaux chiffrés).
 export const skillsData: DomainGroup[] = [
-  {
-    category: "Développement Web",
-    icon: Code,
-    description: "Applications web performantes du front-end au back-end.",
-    buckets: [
-      {
-        title: "Frontend",
-        items: [
-          { name: "Remix", level: 88, years: 2 },
-          { name: "Next.js", level: 90, years: 3 },
-          { name: "Angular", level: 75, years: 2 },
-          { name: "TypeScript", level: 90, years: 3 },
-          { name: "Tailwind CSS", level: 95, years: 3 },
-        ],
-      },
-      {
-        title: "Backend",
-        items: [
-          { name: "Node.js", level: 88, years: 3 },
-          { name: "Laravel", level: 92, years: 4 },
-          { name: "Spring Boot", level: 85, years: 3 },
-          { name: "PostgreSQL", level: 85, years: 3 },
-          { name: "MongoDB", level: 80, years: 2 },
-          { name: "Git", level: 92, years: 5 },
-        ],
-      },
-    ],
-  },
-  {
-    category: "Design",
-    icon: Palette,
-    description: "Interfaces élégantes et expérience utilisateur optimale.",
-    buckets: [
-      {
-        title: "Outils",
-        items: [
-          { name: "Figma", level: 92, years: 3 },
-          { name: "Photoshop", level: 82, years: 4 },
-          { name: "Illustrator", level: 78, years: 3 },
-          { name: "Blender", level: 72, years: 3 },
-          { name: "After Effects", level: 70, years: 2 },
-        ],
-      },
-      {
-        title: "Concepts",
-        items: [
-          { name: "UI/UX Design", level: 90, years: 3 },
-          { name: "Responsive Design", level: 95, years: 3 },
-          { name: "Design System", level: 85, years: 2 },
-          { name: "Color Theory", level: 82, years: 3 },
-          { name: "Accessibilité", level: 78, years: 2 },
-          { name: "Mobile-First", level: 90, years: 3 },
-        ],
-      },
-    ],
-  },
   {
     category: "Mobile",
     icon: Smartphone,
-    description: "Applications mobiles cross-platform iOS et Android.",
+    description: "Applications iOS et Android, cross-platform et natives.",
     buckets: [
       {
         title: "Technologies",
-        items: [
-          { name: "React Native", level: 85, years: 2 },
-          { name: "Expo", level: 88, years: 2 },
-          { name: "Flutter", level: 70, years: 1 },
-          { name: "Android Studio", level: 75, years: 2 },
-          { name: "Xcode", level: 72, years: 1 },
-        ],
+        items: items("Flutter / Dart", "React Native / Expo", "Android natif (Kotlin / Java)"),
       },
     ],
   },
   {
-    category: "Cloud & DevOps",
-    icon: Brain,
-    description: "Services cloud et déploiement continu.",
+    category: "Web",
+    icon: Code,
+    description: "Sites et applications web rapides, accessibles et bien référencés.",
     buckets: [
       {
-        title: "Services",
-        items: [
-          { name: "Supabase", level: 88, years: 2 },
-          { name: "Firebase", level: 85, years: 3 },
-          { name: "AWS", level: 80, years: 2 },
-          { name: "Vercel", level: 88, years: 3 },
-          { name: "Cloudflare", level: 82, years: 2 },
-        ],
+        title: "Front-end",
+        items: items("React", "Next.js", "Remix", "Angular", "TypeScript", "Tailwind CSS", "WordPress / CMS"),
+      },
+    ],
+  },
+  {
+    category: "Back-end & données",
+    icon: Database,
+    description: "API, logique métier et bases de données, y compris en temps réel.",
+    buckets: [
+      {
+        title: "Back-end",
+        items: items("PHP / Laravel", "Node.js (Express, NestJS)", "Java / Spring Boot"),
+      },
+      {
+        title: "Données",
+        items: items("PostgreSQL", "MySQL", "MongoDB", "Supabase", "Firebase", "Redis"),
+      },
+    ],
+  },
+  {
+    category: "DevOps & systèmes",
+    icon: Server,
+    description: "Déploiement, hébergement et sécurité, du VPS au cloud.",
+    buckets: [
+      {
+        title: "Déploiement & cloud",
+        items: items("Docker", "CI/CD", "VPS Linux (Coolify, Nginx)", "AWS / GCP / Azure", "Vercel"),
+      },
+      {
+        title: "Systèmes & sécurité",
+        items: items("Administration Linux", "Windows / Active Directory", "Sécurité applicative"),
+      },
+    ],
+  },
+  {
+    category: "IA & intégrations",
+    icon: Bot,
+    description: "Paiement mobile, géolocalisation et automatisation par l'IA.",
+    buckets: [
+      {
+        title: "Intégrations",
+        items: items("CinetPay (Orange, MTN, Moov, Wave)", "Suivi GPS (Flespi)", "Google Maps"),
+      },
+      {
+        title: "IA & data",
+        items: items("LLM, RAG et agents (Ollama)", "Machine learning", "Scraping et automatisation"),
+      },
+    ],
+  },
+  {
+    category: "Design & méthode",
+    icon: Palette,
+    description: "Du branding au design system, avec une conduite de projet rigoureuse.",
+    buckets: [
+      {
+        title: "Design",
+        items: items("UI/UX et design systems (Figma)", "Branding, logo et print", "3D (Blender)"),
+      },
+      {
+        title: "Méthode & gestion",
+        items: items("Tests unitaires et E2E", "Agile / Scrum", "Cahiers des charges", "Pilotage de projet"),
       },
     ],
   },

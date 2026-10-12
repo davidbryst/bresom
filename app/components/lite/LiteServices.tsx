@@ -1,4 +1,4 @@
-import { dosData } from "~/data/content";
+import { dosData, processData } from "~/data/content";
 import Reveal from "./Reveal";
 
 export default function LiteServices() {
@@ -11,14 +11,14 @@ export default function LiteServices() {
         <div className="flex flex-col -md:flex-row -md:items-end -md:justify-between gap-4 mb-12 md:mb-16">
           <div>
             <span className="font-mono text-xs uppercase tracking-[0.22em] text-ink/80">
-              (03) — Services
+              (03) — Offres
             </span>
             <h2 className="lite-display text-[clamp(1.5rem,7vw,6.6rem)] mt-3">
-              CE QUE JE FAIS
+              MES OFFRES
             </h2>
           </div>
           <p className="self-end font-mono text-xs uppercase tracking-[0.16em] text-ink/80 md:text-right md:max-w-[16rem]">
-            De la maquette au déploiement — un seul interlocuteur.
+            Prix d&apos;appel indicatifs — devis gratuit après un premier appel.
           </p>
         </div>
 
@@ -43,14 +43,48 @@ export default function LiteServices() {
                     <h3 className="font-display font-bold text-2xl md:text-4xl group-hover:text-paper transition-colors duration-500 sm:flex-1">
                       {item.titre}
                     </h3>
-                    <p className="text-ink/65 group-hover:text-paper/80 transition-colors duration-500 max-w-sm md:text-right">
-                      {item.description}
-                    </p>
+                    <div className="max-w-sm md:text-right">
+                      <p className="font-mono text-xs uppercase tracking-[0.14em] text-vermilion">
+                        {item.price}
+                      </p>
+                      <p className="mt-2 text-ink/65 group-hover:text-paper/80 transition-colors duration-500">
+                        {item.description}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </Reveal>
             );
           })}
+        </div>
+
+        {/* Process */}
+        <Reveal>
+          <ol className="mt-12 md:mt-16 grid grid-cols-2 lg:grid-cols-4 gap-px bg-ink/15 border border-ink/35">
+            {processData.map((step, i) => (
+              <li key={step.titre} className="bg-paper p-5 md:p-6">
+                <span className="lite-display text-3xl text-vermilion leading-none">
+                  0{i + 1}
+                </span>
+                <p className="mt-3 font-display font-bold text-lg">
+                  {step.titre}
+                </p>
+                <p className="mt-1 text-sm text-ink/65">{step.description}</p>
+              </li>
+            ))}
+          </ol>
+        </Reveal>
+
+        <div className="mt-8 flex flex-wrap gap-3">
+          <a
+            href="#contact"
+            className="group inline-flex items-center gap-2 bg-ink text-paper font-mono text-sm uppercase tracking-[0.14em] px-7 py-4 hover:bg-vermilion transition-colors"
+          >
+            Demander un devis
+            <span className="transition-transform group-hover:translate-x-0.5">
+              ↗
+            </span>
+          </a>
         </div>
       </div>
     </section>

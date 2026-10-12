@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 const NAV = [
   { label: "Travaux", href: "/#work" },
   { label: "À propos", href: "/#about" },
+  { label: "Offres", href: "/#services" },
   { label: "Expertise", href: "/#skills" },
   { label: "Parcours", href: "/#experience" },
   { label: "Contact", href: "/#contact" },
@@ -70,7 +71,7 @@ export default function LiteHeader() {
               Disponible
             </span>
             <a
-              href="/cv.pdf"
+              href="/cv-david-abraham.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="hidden lg:inline-flex items-center gap-1.5 border border-ink/25 font-mono text-xs uppercase tracking-[0.16em] px-4 py-2.5 text-ink/80 hover:border-ink hover:text-ink transition-colors"
@@ -139,7 +140,7 @@ export default function LiteHeader() {
             Démarrer un projet
           </a>
           <a
-            href="/cv.pdf"
+            href="/cv-david-abraham.pdf"
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setOpen(false)}

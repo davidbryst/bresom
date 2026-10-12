@@ -1,15 +1,15 @@
-import { heroData, aboutData } from "~/data/content";
+import { heroData, aboutData, contactData, projectsData } from "~/data/content";
 
 const MARQUEE = [
-  "REMIX",
-  "TYPESCRIPT",
-  "REACT NATIVE",
+  "FLUTTER",
+  "REACT",
   "NEXT.JS",
-  "FIGMA",
-  "SUPABASE",
-  "NODE.JS",
-  "TAILWIND",
   "LARAVEL",
+  "SUPABASE",
+  "FIGMA",
+  "DOCKER",
+  "TYPESCRIPT",
+  "PAIEMENT MOBILE",
   "UI/UX",
 ];
 
@@ -18,8 +18,11 @@ const STATS = [
     value: aboutData.experience.replace(" ans", ""),
     label: "Années d'expérience",
   },
-  { value: "06", label: "Projets livrés" },
-  { value: "04", label: "Domaines maîtrisés" },
+  {
+    value: String(projectsData.length).padStart(2, "0"),
+    label: "Projets présentés",
+  },
+  { value: "04", label: "Entreprises" },
   { value: "100%", label: "Sur‑mesure" },
 ];
 
@@ -114,7 +117,7 @@ export default function LiteHero() {
               className="lite-rise text-lg md:text-xl leading-relaxed text-ink/80 max-w-xl"
               style={{ animationDelay: "0.5s" }}
             >
-              {aboutData.description}
+              {aboutData.pitch}
             </p>
             <div
               className="lite-rise flex flex-wrap items-center gap-3 mt-8"
@@ -130,10 +133,12 @@ export default function LiteHero() {
                 </span>
               </a>
               <a
-                href="#contact"
+                href={`https://wa.me/${contactData.whatsapp}`}
+                target="_blank"
+                rel="noreferrer noopener"
                 className="group inline-flex items-center gap-2 border-2 border-ink font-mono text-sm uppercase tracking-[0.14em] px-7 py-4 hover:bg-ink hover:text-paper transition-colors"
               >
-                Me contacter
+                WhatsApp
                 <span className="transition-transform group-hover:translate-x-0.5">
                   ↗
                 </span>

@@ -71,6 +71,11 @@ export default function LiteWork() {
                   <h3 className="font-display font-bold text-2xl md:text-3xl leading-tight">
                     {p.title}
                   </h3>
+                  {p.status && (
+                    <span className="shrink-0 font-mono text-[10px] uppercase tracking-[0.16em] bg-ink text-paper px-2.5 py-1">
+                      {p.status}
+                    </span>
+                  )}
                 </div>
                 <p className="mt-2 text-ink/65 text-sm md:text-base">
                   {p.description}

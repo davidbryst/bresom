@@ -3,6 +3,7 @@ import { contactData } from "~/data/content";
 const LINKS = [
   { label: "Travaux", href: "/#work" },
   { label: "À propos", href: "/#about" },
+  { label: "Offres", href: "/#services" },
   { label: "Compétences", href: "/#skills" },
   { label: "Parcours", href: "/#experience" },
   { label: "Contact", href: "/#contact" },

@@ -62,7 +62,7 @@ export async function loader({ params }: LoaderFunctionArgs) {
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
   if (!data) return [{ title: "Projet introuvable | David Abraham" }];
   const { project } = data;
-  const siteUrl = "https://davidabraham.vercel.app";
+  const siteUrl = "https://bresom.vercel.app";
   const url = `${siteUrl}/projets/${project.slug}`;
   const title = `${project.title} — Travaux | David Abraham`;
   const imageUrl = `${siteUrl}${imgPath(project.image)}`;

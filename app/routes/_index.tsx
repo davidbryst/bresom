@@ -13,7 +13,7 @@ import SmoothAnchors from "~/components/lite/SmoothAnchors";
 import { aboutData, contactData } from "~/data/content";
 
 export const meta: MetaFunction = () => {
-  const siteUrl = "https://davidabraham.vercel.app";
+  const siteUrl = "https://bresom.vercel.app";
   const title = "David Abraham — Développeur Full-Stack & Designer UI/UX";
   const description =
     "Portfolio de David Abraham — Développeur Web & Mobile Full-Stack et Designer UI/UX à Abidjan. Sites, applications et systèmes de design sur-mesure.";
@@ -35,6 +35,7 @@ export const meta: MetaFunction = () => {
       addressRegion: "Cocody",
       addressCountry: "CI",
     },
+    sameAs: [contactData.linkedin, contactData.github],
     knowsAbout: [
       "Développement Web",
       "React",
@@ -45,6 +46,9 @@ export const meta: MetaFunction = () => {
       "UI/UX Design",
       "Figma",
       "React Native",
+      "Flutter",
+      "Laravel",
+      "Paiement mobile",
     ],
   };
 

@@ -7,7 +7,10 @@ const DOMAIN = [
   { bar: "bg-cobalt", text: "text-cobalt" },
   { bar: "bg-forest", text: "text-forest" },
   { bar: "bg-amber-500", text: "text-amber-500" },
+  { bar: "bg-vermilion", text: "text-vermilion" },
+  { bar: "bg-cobalt", text: "text-cobalt" },
 ];
+
 
 export default function LiteSkills() {
   return (
@@ -26,7 +29,7 @@ export default function LiteSkills() {
             </h2>
           </div>
           <p className="self-end font-mono text-xs uppercase tracking-[0.16em] text-ink/80 md:text-right md:max-w-[18rem]">
-            Quatre domaines, du pixel au serveur. Niveau & années d'usage.
+            Six domaines, du pixel au serveur.
           </p>
         </div>
 
@@ -67,37 +70,17 @@ export default function LiteSkills() {
                         <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink/45 mb-3">
                           {bucket.title}
                         </p>
-                        <ul className="space-y-3">
+                        <ul className="flex flex-wrap gap-2">
                           {bucket.items.map((item) => (
                             <li
                               key={item.name}
-                              className="group relative overflow-hidden rounded -mx-3 px-3 py-2 transition-transform duration-300 ease-lite hover:-translate-y-1"
+                              className="group relative overflow-hidden border border-ink/20 px-3 py-2 transition-transform duration-300 ease-lite hover:-translate-y-1"
                             >
                               {/* Hover fill — slides up from the bottom, like the Services rows */}
                               <span className="absolute inset-0 bg-ink translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-lite" />
-                              <div className="relative">
-                                <div className="flex items-baseline justify-between gap-3">
-                                  <span className="font-medium text-sm md:text-base transition-colors duration-300 group-hover:text-paper">
-                                    {item.name}
-                                  </span>
-                                  <span className="font-mono text-[10px] text-ink/45 shrink-0 transition-colors duration-300 group-hover:text-paper/60">
-                                    {item.level}% · {item.years} an
-                                    {item.years > 1 ? "s" : ""}
-                                  </span>
-                                </div>
-                                <div
-                                  className={`mt-1.5 h-[3px] w-full  ${color.bar} opacity-30 group-hover:opacity-90 transition-all duration-300 group-hover:h-[6px] group-hover:bg-paper/20`}
-                                >
-                                  <div
-                                    className={`lite-skillbar h-full ${color.bar}`}
-                                    style={
-                                      {
-                                        "--lvl": `${item.level}%`,
-                                      } as React.CSSProperties
-                                    }
-                                  />
-                                </div>
-                              </div>
+                              <span className="relative font-medium text-sm md:text-base transition-colors duration-300 group-hover:text-paper">
+                                {item.name}
+                              </span>
                             </li>
                           ))}
                         </ul>

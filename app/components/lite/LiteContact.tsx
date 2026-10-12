@@ -59,10 +59,17 @@ export default function LiteContact() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
                     <dt className="font-mono text-[10px] uppercase tracking-[0.18em] text-paper/45">
-                      Téléphone
+                      Téléphone · WhatsApp
                     </dt>
                     <dd className="mt-1 text-paper/85 text-sm leading-relaxed">
-                      {contactData.phone}
+                      <a
+                        href={`https://wa.me/${contactData.whatsapp}`}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className="lite-link hover:text-vermilion transition-colors"
+                      >
+                        {contactData.phone}
+                      </a>
                     </dd>
                   </div>
                   <div>
@@ -73,6 +80,23 @@ export default function LiteContact() {
                       {contactData.location}
                     </dd>
                   </div>
+                </div>
+                <div className="flex flex-wrap gap-3 pt-2">
+                  {[
+                    { label: "WhatsApp", href: `https://wa.me/${contactData.whatsapp}` },
+                    { label: "LinkedIn", href: contactData.linkedin },
+                    { label: "GitHub", href: contactData.github },
+                  ].map((l) => (
+                    <a
+                      key={l.label}
+                      href={l.href}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      className="inline-flex items-center gap-2 border border-paper/25 font-mono text-xs uppercase tracking-[0.14em] px-4 py-2.5 hover:bg-paper hover:text-ink transition-colors"
+                    >
+                      {l.label} <span aria-hidden>↗</span>
+                    </a>
+                  ))}
                 </div>
               </dl>
             </Reveal>
