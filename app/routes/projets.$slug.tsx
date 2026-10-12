@@ -11,6 +11,7 @@ import Lightbox from "~/components/lite/Lightbox";
 import LiteFooter from "~/components/lite/LiteFooter";
 import LiteHeader from "~/components/lite/LiteHeader";
 import LiteThemeSwitcher from "~/components/lite/LiteThemeSwitcher";
+import LiteCvFab from "~/components/lite/LiteCvFab";
 import Reveal from "~/components/lite/Reveal";
 import SmoothAnchors from "~/components/lite/SmoothAnchors";
 import { projectsData } from "~/data/content";
@@ -477,6 +478,7 @@ export default function ProjectDetail() {
         </div>
       </main>
       <LiteFooter />
+      <LiteCvFab />
       <LiteThemeSwitcher />
 
       {lightboxIndex !== null && (

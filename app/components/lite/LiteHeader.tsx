@@ -43,7 +43,7 @@ export default function LiteHeader() {
           {/* Wordmark */}
           <a
             href="/#top"
-            className="min-w-0 font-display font-extrabold text-vermilion py-3 sm:p-3 text-sm sm:text-lg tracking-tight leading-none whitespace-nowrap"
+            className="font-display font-extrabold text-vermilion p-3 text-lg tracking-tight leading-none"
           >
             DAVID<span className="text-vermilion">.</span>ABRAHAM
           </a>
@@ -75,7 +75,7 @@ export default function LiteHeader() {
               download="CV-David-Abraham.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 bg-ink text-paper border border-ink font-mono text-xs font-semibold uppercase tracking-[0.16em] px-3 py-2 lg:bg-transparent lg:text-ink/80 lg:border-ink/25 lg:font-normal lg:px-4 lg:py-2.5 hover:bg-vermilion hover:border-vermilion hover:text-paper lg:hover:bg-transparent lg:hover:border-ink lg:hover:text-ink transition-colors"
+              className="hidden lg:inline-flex items-center gap-1.5 border border-ink/25 font-mono text-xs uppercase tracking-[0.16em] px-4 py-2.5 text-ink/80 hover:border-ink hover:text-ink transition-colors"
             >
               CV <span aria-hidden>↓</span>
             </a>
