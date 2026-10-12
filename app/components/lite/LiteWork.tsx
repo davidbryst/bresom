@@ -59,10 +59,7 @@ export default function LiteWork() {
                     alt={`Aperçu du projet ${p.title}`}
                     loading="lazy"
                     decoding="async"
-                    className={`w-full h-full ${
-                      true ? "object-cover object-center" : "object-contain"
-                    } grayscale-[35%] transition-all duration-700 group-hover:grayscale-0 group-hover:scale-[1.04]`}
-                    // className="w-full h-full object-cover object-center grayscale-[35%] transition-all duration-700 group-hover:grayscale-0 group-hover:scale-[1.04]"
+                    className="w-full h-full object-cover object-center grayscale-[35%] transition-all duration-700 group-hover:grayscale-0 group-hover:scale-[1.04]"
                   />
                 </div>
 
