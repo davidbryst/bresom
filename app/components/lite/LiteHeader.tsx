@@ -39,11 +39,11 @@ export default function LiteHeader() {
       }`}
     >
       <div className="mx-auto max-w-[1500px] px-5 md:px-10">
-        <div className="flex items-center justify-between h-16 md:h-20">
+        <div className="flex items-center justify-between gap-3 h-16 md:h-20">
           {/* Wordmark */}
           <a
             href="/#top"
-            className="font-display font-extrabold text-vermilion p-3 text-lg tracking-tight leading-none"
+            className="min-w-0 font-display font-extrabold text-vermilion py-3 sm:p-3 text-sm sm:text-lg tracking-tight leading-none whitespace-nowrap"
           >
             DAVID<span className="text-vermilion">.</span>ABRAHAM
           </a>
@@ -62,7 +62,7 @@ export default function LiteHeader() {
           </nav>
 
           {/* Right: status + CTA (desktop) / toggle (mobile) */}
-          <div className="flex items-center gap-4">
+          <div className="flex shrink-0 items-center gap-3 lg:gap-4">
             <span className="hidden xl:flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-ink/60">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full rounded-full bg-forest opacity-70 animate-ping" />
@@ -75,7 +75,7 @@ export default function LiteHeader() {
               download="CV-David-Abraham.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 border border-ink/25 font-mono text-xs uppercase tracking-[0.16em] px-3 py-2 lg:px-4 lg:py-2.5 text-ink/80 hover:border-ink hover:text-ink transition-colors"
+              className="inline-flex items-center gap-1.5 bg-ink text-paper border border-ink font-mono text-xs font-semibold uppercase tracking-[0.16em] px-3 py-2 lg:bg-transparent lg:text-ink/80 lg:border-ink/25 lg:font-normal lg:px-4 lg:py-2.5 hover:bg-vermilion hover:border-vermilion hover:text-paper lg:hover:bg-transparent lg:hover:border-ink lg:hover:text-ink transition-colors"
             >
               CV <span aria-hidden>↓</span>
             </a>
