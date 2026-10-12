@@ -1,5 +1,6 @@
 import { Link } from "@remix-run/react";
 import { projectsData } from "~/data/content";
+import imageSizes from "~/data/imageSizes.json";
 import Reveal from "./Reveal";
 
 // Project mockups live in /public/projet; content.ts stores them as "/name.webp".
@@ -57,6 +58,8 @@ export default function LiteWork() {
                   <img
                     src={imgPath(p.cardImage ?? p.image)}
                     alt={`Aperçu du projet ${p.title}`}
+                    width={(imageSizes as Record<string, number[]>)[p.cardImage ?? p.image]?.[0]}
+                    height={(imageSizes as Record<string, number[]>)[p.cardImage ?? p.image]?.[1]}
                     loading="lazy"
                     decoding="async"
                     className="w-full h-full object-cover object-center grayscale-[35%] transition-all duration-700 group-hover:grayscale-0 group-hover:scale-[1.04]"

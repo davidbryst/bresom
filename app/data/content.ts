@@ -7,6 +7,7 @@ import {
   Database,
   Bot,
   Wallet,
+  type LucideIcon,
 } from "lucide-react";
 
 // Types pour les données
@@ -15,13 +16,6 @@ export interface ExperienceItem {
   position: string;
   date: string;
   responsibilities: string[];
-}
-
-export interface FormationItem {
-  ecole: string;
-  diplome: string;
-  date: string;
-  desc?: string;
 }
 
 export interface Project {
@@ -50,11 +44,6 @@ export interface Project {
 
 export interface SkillItem {
   name: string;
-  /** Hérités des anciennes routes CV PDF — plus affichés sur le site. */
-  level?: number;
-  years?: number;
-  tags?: string[];
-  summary?: string;
 }
 
 export interface SkillBucket {
@@ -64,7 +53,7 @@ export interface SkillBucket {
 
 export interface DomainGroup {
   category: string;
-  icon: any;
+  icon: LucideIcon;
   description: string;
   buckets: SkillBucket[];
 }
@@ -73,19 +62,18 @@ export interface ContactInfo {
   email: string;
   phone: string;
   /** Numéro international sans espaces ni « + », pour wa.me */
-  whatsapp?: string;
+  whatsapp: string;
   location: string;
-  linkedin?: string;
-  github?: string;
+  linkedin: string;
+  github: string;
 }
 
-// Correction de l'interface dosInfo
 export interface dosInfoItem {
   titre: string;
   description: string;
-  icon: any;
+  icon: LucideIcon;
   /** Prix d'appel affiché, ex. « À partir de 200 000 FCFA » */
-  price?: string;
+  price: string;
 }
 
 export interface ProcessStep {
@@ -95,7 +83,7 @@ export interface ProcessStep {
 
 export interface AboutInfo {
   /** Accroche du hero (orientée client). */
-  pitch?: string;
+  pitch: string;
   description: string;
   points: string[];
   experience: string;

@@ -130,13 +130,13 @@ export default function LiteHeader() {
               className="group flex items-baseline justify-between border-b border-ink/10 py-5"
             >
               <span className="lite-display text-4xl">{item.label}</span>
-              <span className="font-mono text-xs text-ink/40">0{i + 1}</span>
+              <span className="font-mono text-xs text-ink/60">0{i + 1}</span>
             </a>
           ))}
           <a
             href="/#contact"
             onClick={() => setOpen(false)}
-            className="mt-8 bg-vermilion text-white text-center font-mono text-sm uppercase tracking-[0.16em] py-4"
+            className="mt-8 bg-vermilion text-ink text-center font-mono text-sm uppercase tracking-[0.16em] py-4"
           >
             Démarrer un projet
           </a>

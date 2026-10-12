@@ -41,7 +41,7 @@ export default function LiteExperience() {
                   <h3 className="font-display font-extrabold text-2xl md:text-4xl leading-tight">
                     {exp.company}
                   </h3>
-                  <p className="mt-1 text-vermilion font-medium">
+                  <p className="mt-1 text-accent-text font-medium">
                     {exp.position}
                   </p>
                   <ul className="mt-5 space-y-2.5 max-w-3xl">

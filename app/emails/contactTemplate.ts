@@ -9,7 +9,7 @@ export function buildContactEmailHtml({ name, email, message }: ContactEmailPayl
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
-    .replace(/\"/g, "&quot;")
+    .replace(/"/g, "&quot;")
     .replace(/\n/g, "<br/>");
 
   return `

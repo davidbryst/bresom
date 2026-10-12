@@ -45,6 +45,7 @@ export default function handleRequest(
   responseStatusCode: number,
   responseHeaders: Headers,
   remixContext: EntryContext,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- Remix entry signature
   loadContext: AppLoadContext
 ) {
   return isbot(request.headers.get("user-agent") || "")

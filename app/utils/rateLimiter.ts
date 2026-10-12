@@ -18,19 +18,15 @@ const RATE_LIMIT_WINDOW = 60 * 1000; // 1 minute en millisecondes
 const MAX_REQUESTS = 3; // Maximum 3 requêtes par minute
 
 /**
- * Nettoie les entrées expirées (appelé périodiquement)
+ * Nettoie les entrées expirées. Appelé à chaque requête plutôt qu'avec un
+ * setInterval : en serverless (Vercel) l'instance est gelée entre deux
+ * requêtes, un timer n'y tourne pas de façon fiable.
  */
-function cleanupExpiredEntries() {
-  const now = Date.now();
+function cleanupExpiredEntries(now: number) {
   for (const [ip, entry] of rateLimitStore.entries()) {
-    if (now > entry.resetTime) {
-      rateLimitStore.delete(ip);
-    }
+    if (now > entry.resetTime) rateLimitStore.delete(ip);
   }
 }
-
-// Nettoyage toutes les 5 minutes
-setInterval(cleanupExpiredEntries, 5 * 60 * 1000);
 
 /**
  * Extrait l'IP du client à partir de la requête
@@ -62,6 +58,7 @@ export function isRateLimited(request: Request): {
 } {
   const ip = getClientIP(request);
   const now = Date.now();
+  cleanupExpiredEntries(now);
 
   let entry = rateLimitStore.get(ip);
 
@@ -99,10 +96,3 @@ export function isRateLimited(request: Request): {
   };
 }
 
-/**
- * Réinitialise le rate limit pour une IP donnée (utile pour les tests)
- */
-export function resetRateLimit(request: Request): void {
-  const ip = getClientIP(request);
-  rateLimitStore.delete(ip);
-}

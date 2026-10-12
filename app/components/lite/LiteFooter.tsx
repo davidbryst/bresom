@@ -60,7 +60,7 @@ export default function LiteFooter() {
         {/* Bottom bar */}
         <div className="mt-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 font-mono text-[11px] uppercase tracking-[0.14em] text-ink/80">
           <span>© {year} David Abraham — Tous droits réservés</span>
-          <span>Abidjan, Côte d'Ivoire · {year}</span>
+          <span>Abidjan, Côte d&apos;Ivoire · {year}</span>
           <a href="/#top" className="lite-link hover:text-ink">
             Retour en haut ↑
           </a>

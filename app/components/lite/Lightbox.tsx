@@ -57,6 +57,8 @@ export default function Lightbox({
   if (!current) return null;
 
   return (
+    // Backdrop click closes; keyboard users close with Escape (handled above).
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions
     <div
       role="dialog"
       aria-modal="true"
@@ -88,6 +90,8 @@ export default function Lightbox({
         </button>
       )}
 
+      {/* Stops the backdrop's close-on-click; not an interactive control. */}
+      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions */}
       <img
         src={current.src}
         alt={current.alt}

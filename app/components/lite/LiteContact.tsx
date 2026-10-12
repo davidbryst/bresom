@@ -44,7 +44,7 @@ export default function LiteContact() {
             <Reveal delay={140}>
               <dl className="mt-10 space-y-6">
                 <div>
-                  <dt className="font-mono text-[10px] uppercase tracking-[0.18em] text-paper/45">
+                  <dt className="font-mono text-[10px] uppercase tracking-[0.18em] text-paper/60">
                     Email
                   </dt>
                   <dd className="mt-1">
@@ -58,7 +58,7 @@ export default function LiteContact() {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
-                    <dt className="font-mono text-[10px] uppercase tracking-[0.18em] text-paper/45">
+                    <dt className="font-mono text-[10px] uppercase tracking-[0.18em] text-paper/60">
                       Téléphone · WhatsApp
                     </dt>
                     <dd className="mt-1 text-paper/85 text-sm leading-relaxed">
@@ -73,7 +73,7 @@ export default function LiteContact() {
                     </dd>
                   </div>
                   <div>
-                    <dt className="font-mono text-[10px] uppercase tracking-[0.18em] text-paper/45">
+                    <dt className="font-mono text-[10px] uppercase tracking-[0.18em] text-paper/60">
                       Localisation
                     </dt>
                     <dd className="mt-1 text-paper/85 text-sm leading-relaxed">
@@ -129,7 +129,7 @@ export default function LiteContact() {
                       required
                       maxLength={100}
                       placeholder="Votre nom"
-                      className={`${fieldClass} border-paper/25 text-paper placeholder:text-paper/40 focus:border-paper focus:ring-paper`}
+                      className={`${fieldClass} border-paper/25 text-paper placeholder:text-paper/60 focus:border-paper focus:ring-paper`}
                     />
                   </label>
                   <label className="block">
@@ -139,7 +139,7 @@ export default function LiteContact() {
                       type="email"
                       required
                       placeholder="Votre email"
-                      className={`${fieldClass} border-paper/25 text-paper placeholder:text-paper/40 focus:border-paper focus:ring-paper`}
+                      className={`${fieldClass} border-paper/25 text-paper placeholder:text-paper/60 focus:border-paper focus:ring-paper`}
                     />
                   </label>
                 </div>
@@ -151,7 +151,7 @@ export default function LiteContact() {
                     required
                     maxLength={200}
                     placeholder="Sujet"
-                    className={`${fieldClass} border-paper/25 text-paper placeholder:text-paper/40 focus:border-paper focus:ring-paper`}
+                    className={`${fieldClass} border-paper/25 text-paper placeholder:text-paper/60 focus:border-paper focus:ring-paper`}
                   />
                 </label>
                 <label className="block">
@@ -162,18 +162,26 @@ export default function LiteContact() {
                     maxLength={5000}
                     rows={5}
                     placeholder="Parlez‑moi de votre projet…"
-                    className={`${fieldClass} border-paper/25 text-paper placeholder:text-paper/40 focus:border-paper focus:ring-paper resize-none`}
+                    className={`${fieldClass} border-paper/25 text-paper placeholder:text-paper/60 focus:border-paper focus:ring-paper resize-none`}
                   />
                 </label>
 
-                {error && (
-                  <p className="font-mono text-xs text-vermilion">{error}</p>
-                )}
+                {/* Honeypot anti-spam : hors écran, ignoré par les lecteurs d'écran. */}
+                <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
+                  <label>
+                    Site web
+                    <input type="text" name="website" tabIndex={-1} autoComplete="off" />
+                  </label>
+                </div>
+
+                <p role="alert" className="font-mono text-xs text-vermilion empty:hidden">
+                  {error}
+                </p>
 
                 <button
                   type="submit"
                   disabled={sending}
-                  className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-vermilion text-white font-mono text-sm uppercase tracking-[0.16em] px-8 py-4 hover:bg-paper hover:text-ink transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                  className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-vermilion text-ink font-mono text-sm uppercase tracking-[0.16em] px-8 py-4 hover:bg-paper hover:text-ink transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   {sending ? "Envoi…" : "Envoyer le message"}
                   {!sending && (

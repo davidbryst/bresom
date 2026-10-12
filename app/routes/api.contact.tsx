@@ -43,6 +43,12 @@ export async function action({ request }: ActionFunctionArgs) {
 
   const formData = await request.formData();
 
+  // Honeypot : champ invisible pour un humain. Rempli = robot → on répond
+  // « succès » sans rien envoyer, pour ne pas lui indiquer qu'il est bloqué.
+  if (String(formData.get("website") ?? "").trim() !== "") {
+    return json({ success: true });
+  }
+
   // ✅ Sanitization des inputs pour prévenir XSS
   const rawName = formData.get("name") as string;
   const rawEmail = formData.get("email") as string;

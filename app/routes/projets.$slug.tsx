@@ -15,9 +15,15 @@ import LiteCvFab from "~/components/lite/LiteCvFab";
 import Reveal from "~/components/lite/Reveal";
 import SmoothAnchors from "~/components/lite/SmoothAnchors";
 import { projectsData } from "~/data/content";
+import imageSizes from "~/data/imageSizes.json";
 
 // Project mockups live in /public/projet; content.ts stores them as "/name.webp".
 const imgPath = (image: string) => `/projet${image}`;
+// Intrinsic size (from scripts/image-sizes.mjs) so the browser reserves space.
+const imgSize = (image: string) => {
+  const s = (imageSizes as Record<string, number[]>)[image];
+  return s ? { width: s[0], height: s[1] } : {};
+};
 
 // Same cycling accent as the grid on LiteWork, so a card's color carries over to its detail page.
 // Full class strings (not built at runtime) so Tailwind's scanner can see them.
@@ -104,6 +110,8 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 function ZoomableShot({
   src,
   alt,
+  width,
+  height,
   eager = false,
   className = "",
   natural = false,
@@ -111,6 +119,8 @@ function ZoomableShot({
 }: {
   src: string;
   alt: string;
+  width?: number;
+  height?: number;
   eager?: boolean;
   className?: string;
   natural?: boolean;
@@ -127,6 +137,8 @@ function ZoomableShot({
       <img
         src={src}
         alt={alt}
+        width={width}
+        height={height}
         loading={eager ? "eager" : "lazy"}
         decoding="async"
         className={`w-full transition-transform duration-500 group-hover:scale-[1.02] ${
@@ -155,10 +167,12 @@ export default function ProjectDetail() {
     {
       src: imgPath(project.image),
       alt: `Aperçu du projet ${project.title}`,
+      ...imgSize(project.image),
     },
     ...(project.gallery ?? []).map((g) => ({
       src: imgPath(g),
       alt: `Aperçu supplémentaire du projet ${project.title}`,
+      ...imgSize(g),
     })),
   ];
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
@@ -207,6 +221,8 @@ export default function ProjectDetail() {
             <ZoomableShot
               src={galleryImages[0].src}
               alt={galleryImages[0].alt}
+              width={galleryImages[0].width}
+              height={galleryImages[0].height}
               eager
               natural
               onOpen={() => setLightboxIndex(0)}
@@ -240,7 +256,7 @@ export default function ProjectDetail() {
                     download
                     className="group inline-flex items-center gap-2 border-2 border-ink font-mono text-sm uppercase tracking-[0.14em] px-7 py-4 hover:bg-ink hover:text-paper transition-colors"
                   >
-                    Télécharger l'APK
+                    Télécharger l&apos;APK
                     <span className="transition-transform group-hover:translate-y-0.5">
                       ⬇
                     </span>
@@ -282,7 +298,7 @@ export default function ProjectDetail() {
           <div className="mt-12 md:mt-16 grid grid-cols-1 lg:grid-cols-12 gap-10">
             <div className="lg:col-span-5">
               <span className="font-mono text-xs uppercase tracking-[0.22em] text-ink/80">
-                (0{index + 1}) — L'approche
+                (0{index + 1}) — L&apos;approche
               </span>
               <div className="mt-5">
                 {project.highlights.map((h, i) => (
@@ -308,6 +324,8 @@ export default function ProjectDetail() {
                     key={img.src}
                     src={img.src}
                     alt={img.alt}
+                    width={img.width}
+                    height={img.height}
                     onOpen={() => setLightboxIndex(i + 1)}
                     className="h-72 sm:h-80 md:h-96"
                   />
@@ -325,7 +343,7 @@ export default function ProjectDetail() {
                     Application mobile
                   </span>
                   <h3 className="lite-display text-2xl md:text-4xl mt-2">
-                    Télécharger l'app
+                    Télécharger l&apos;app
                   </h3>
                   <p className="mt-2 text-ink/70 text-sm">
                     Fichier APK Android — v{project.apk.version} ·{" "}
@@ -337,7 +355,7 @@ export default function ProjectDetail() {
                   download
                   className={`group inline-flex shrink-0 items-center justify-center gap-2 bg-ink text-paper font-mono text-sm uppercase tracking-[0.14em] px-8 py-4 transition-colors ${hoverBgAccent}`}
                 >
-                  Télécharger l'APK
+                  Télécharger l&apos;APK
                   <span
                     aria-hidden
                     className="transition-transform group-hover:translate-y-0.5"
@@ -346,7 +364,7 @@ export default function ProjectDetail() {
                   </span>
                 </a>
               </div>
-              <p className="mt-6 border-t border-ink/15 pt-6 font-mono text-xs uppercase tracking-wide text-ink/50">
+              <p className="mt-6 border-t border-ink/15 pt-6 font-mono text-xs uppercase tracking-wide text-ink/60">
                 Android uniquement — active « Sources inconnues » dans les
                 paramètres pour installer.
               </p>
@@ -375,7 +393,7 @@ export default function ProjectDetail() {
           {/* Closing CTA */}
           <div className="mt-16 md:mt-24 text-center py-6">
             <p className="font-mono text-xs uppercase tracking-[0.2em] text-ink/60">
-              Envie d'un résultat similaire ?
+              Envie d&apos;un résultat similaire ?
             </p>
             <h2 className="lite-display text-[clamp(2rem,6vw,4rem)] mt-4">
               Discutons de votre projet
@@ -413,6 +431,7 @@ export default function ProjectDetail() {
                         <img
                           src={imgPath(r.cardImage ?? r.image)}
                           alt={`Aperçu du projet ${r.title}`}
+                          {...imgSize(r.cardImage ?? r.image)}
                           loading="lazy"
                           decoding="async"
                           className="h-full w-full object-cover object-center grayscale-[35%] transition-all duration-500 group-hover:grayscale-0 group-hover:scale-[1.03]"
@@ -426,7 +445,7 @@ export default function ProjectDetail() {
                           {String(rIndex + 1).padStart(2, "0")}
                         </span>
                       </div>
-                      <span className="font-mono text-[11px] uppercase tracking-wide text-ink/50">
+                      <span className="font-mono text-[11px] uppercase tracking-wide text-ink/60">
                         {r.category}
                       </span>
                     </Link>
@@ -503,7 +522,7 @@ export function ErrorBoundary() {
       <LiteHeader />
       <main className="pt-40 md:pt-48 pb-32 text-center">
         <div className="mx-auto max-w-[1500px] px-5 md:px-10">
-          <span className="font-mono text-xs uppercase tracking-[0.22em] text-vermilion">
+          <span className="font-mono text-xs uppercase tracking-[0.22em] text-accent-text">
             {notFound ? "Erreur — 404" : "Erreur — 500"}
           </span>
           <h1 className="lite-display text-[clamp(2.5rem,10vw,7rem)] mt-4">

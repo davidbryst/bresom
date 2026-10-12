@@ -48,7 +48,7 @@ export default function LiteHero() {
           {/* Name + roles */}
           <div className="lg:col-span-8">
             <p
-              className="lite-rise font-mono text-sm font-semibold uppercase tracking-[0.22em] text-vermilion mb-5"
+              className="lite-rise font-mono text-sm font-semibold uppercase tracking-[0.22em] text-accent-text mb-5"
               style={{ animationDelay: "0.12s" }}
             >
               {heroData.greeting}

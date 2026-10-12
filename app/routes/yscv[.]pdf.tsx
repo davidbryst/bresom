@@ -1,12 +1,10 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import React from "react";
 import { Document, Page, Text, View, StyleSheet, renderToStream, Image, Font, Svg, Path, Circle } from "@react-pdf/renderer";
 import fs from "node:fs/promises";
 import path from "node:path";
 let fontsRegistered = false;
 let faAvailable = false;
-import { aboutData, contactData, experiencesData, formationsData, heroData, projectsData, skillsData } from "../data/cvContent";
 const cv_data = {
     "nom": "SARA YAPO",
     "titre": "Économiste",
@@ -240,42 +238,6 @@ const styles = StyleSheet.create({
 });
 
 // Lucide-style icons using inline SVG (works in @react-pdf/renderer)
-const LucideUserIcon = () => (
-  <Svg width={12} height={12} viewBox="0 0 24 24">
-    <Path d="M20 21a8 8 0 1 0-16 0" stroke="#ea580c" strokeWidth={2} fill="none" strokeLinecap="round" strokeLinejoin="round" />
-    <Path d="M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8" stroke="#ea580c" strokeWidth={2} fill="none" strokeLinecap="round" strokeLinejoin="round" />
-  </Svg>
-);
-
-const LucideBriefcaseIcon = () => (
-  <Svg width={12} height={12} viewBox="0 0 24 24">
-    <Path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" stroke="#ea580c" strokeWidth={2} fill="none" strokeLinecap="round" strokeLinejoin="round" />
-    <Path d="M8 6H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-4" stroke="#ea580c" strokeWidth={2} fill="none" strokeLinecap="round" strokeLinejoin="round" />
-  </Svg>
-);
-
-const LucideCodeIcon = () => (
-  <Svg width={12} height={12} viewBox="0 0 24 24">
-    <Path d="M16 18l6-6-6-6" stroke="#ea580c" strokeWidth={2} fill="none" strokeLinecap="round" strokeLinejoin="round" />
-    <Path d="M8 6l-6 6 6 6" stroke="#ea580c" strokeWidth={2} fill="none" strokeLinecap="round" strokeLinejoin="round" />
-  </Svg>
-);
-
-const LucideGraduationCapIcon = () => (
-  <Svg width={12} height={12} viewBox="0 0 24 24">
-    <Path d="M22 10v6M2 10l10-5 10 5-10 5z" stroke="#ea580c" strokeWidth={2} fill="none" strokeLinecap="round" strokeLinejoin="round" />
-    <Path d="M6 12v5c3 3 9 3 12 0v-5" stroke="#ea580c" strokeWidth={2} fill="none" strokeLinecap="round" strokeLinejoin="round" />
-  </Svg>
-);
-
-const LucideInfoIcon = () => (
-  <Svg width={12} height={12} viewBox="0 0 24 24">
-    <Circle cx="12" cy="12" r="10" stroke="#ea580c" strokeWidth={2} fill="none" />
-    <Path d="M12 16v-4" stroke="#ea580c" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
-    <Path d="M12 8h.01" stroke="#ea580c" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
-  </Svg>
-);
-
 const LucidePhoneIcon = () => (
   <Svg width={12} height={12} viewBox="0 0 24 24">
     <Path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke="#ea580c" strokeWidth={2} fill="none" strokeLinecap="round" strokeLinejoin="round" />
@@ -296,33 +258,7 @@ const LucideMapPinIcon = () => (
   </Svg>
 );
 
-const LucideStarIcon = () => (
-  <Svg width={12} height={12} viewBox="0 0 24 24">
-    <Path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="#ea580c" strokeWidth={2} fill="none" strokeLinecap="round" strokeLinejoin="round" />
-  </Svg>
-);
-
-const LucideAwardIcon = () => (
-  <Svg width={12} height={12} viewBox="0 0 24 24">
-    <Circle cx="12" cy="8" r="6" stroke="#ea580c" strokeWidth={2} fill="none" />
-    <Path d="M15.477 12.89l1.515 8.526a.5.5 0 0 1-.81.47L12 18l-4.182 3.886a.5.5 0 0 1-.81-.47L8.523 12.89" stroke="#ea580c" strokeWidth={2} fill="none" strokeLinecap="round" strokeLinejoin="round" />
-  </Svg>
-);
-
-const LucideHeartIcon = () => (
-  <Svg width={12} height={12} viewBox="0 0 24 24">
-    <Path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="#ea580c" strokeWidth={2} fill="none" strokeLinecap="round" strokeLinejoin="round" />
-  </Svg>
-);
-
-const LucideArrowRightIcon = () => (
-  <Svg width={12} height={12} viewBox="0 0 24 24">
-    <Path d="M5 12h14" stroke="#ea580c" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
-    <Path d="M12 5l7 7-7 7" stroke="#ea580c" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
-  </Svg>
-);
-
-function CVDocument({ imageUrl, faAvailable }: { imageUrl: string; faAvailable: boolean }) {
+function CVDocument({ imageUrl }: { imageUrl: string; faAvailable: boolean }) {
   return (
     <Document>
       <Page size="A4" style={styles.page}>
@@ -417,7 +353,7 @@ function CVDocument({ imageUrl, faAvailable }: { imageUrl: string; faAvailable: 
             {/* Centres d'intérêt */}
             <View>
               <View style={styles.sectionHeader}>
-                <Text style={styles.sectionTitleWhite }>CENTRES D'INTÉRÊT</Text>
+                <Text style={styles.sectionTitleWhite }>CENTRES D&apos;INTÉRÊT</Text>
               </View>
               <View style={{flexDirection: "row", flexWrap: "wrap", gap: 3, marginHorizontal: 10}}>
                 {cv_data.centres_interet.map((interet, index) => (

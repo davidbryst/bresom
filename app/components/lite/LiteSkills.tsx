@@ -67,7 +67,7 @@ export default function LiteSkills() {
                   <div className="mt-6 space-y-6">
                     {domain.buckets.map((bucket) => (
                       <div key={bucket.title}>
-                        <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink/45 mb-3">
+                        <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink/60 mb-3">
                           {bucket.title}
                         </p>
                         <ul className="flex flex-wrap gap-2">

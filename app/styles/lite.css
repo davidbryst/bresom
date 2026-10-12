@@ -12,9 +12,24 @@
      (see LiteThemeSwitcher). Tailwind's `vermilion` color reads the same var. */
   --accent-rgb: 255 59 18;
   --accent: rgb(var(--accent-rgb));
+  /* Darker accent for small text: >= 4.5:1 on paper with the default
+     vermilion. Fallback = vermilion x 0.78 for browsers without color-mix. */
+  --accent-text: rgb(199 46 14);
   --cobalt: #2b44ff;
   --forest: #0e8a4f;
   --rule: rgba(14, 14, 14, 0.12);
+}
+
+@supports (color: color-mix(in srgb, red 50%, black)) {
+  :root {
+    --accent-text: color-mix(in srgb, rgb(var(--accent-rgb)) 78%, black);
+  }
+}
+
+/* Keyboard focus — in the brand, square, visible on paper and on ink. */
+.lite :focus-visible {
+  outline: 2px solid rgb(var(--accent-rgb));
+  outline-offset: 3px;
 }
 
 /* Text selection picks up the accent — small detail, big personality. */
@@ -122,26 +137,32 @@
 
 /* Scroll reveal (IntersectionObserver toggles .is-visible). */
 .lite-reveal {
-  opacity: 0;
-  transform: translateY(26px);
   transition:
     opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.lite-reveal.is-visible {
-  opacity: 1;
-  transform: none;
+/* Only hide content when scripts can reveal it again: without JS (or before
+   the observer runs on a browser without scripting), sections stay visible. */
+@media (scripting: enabled) {
+  .lite-reveal:not(.is-visible) {
+    opacity: 0;
+    transform: translateY(26px);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .lite-marquee {
+  .lite-marquee,
+  .lite-cycle-swatch,
+  .animate-ping {
     animation: none;
   }
   .lite-rise,
-  .lite-reveal {
+  .lite-reveal,
+  .lite-reveal:not(.is-visible) {
     opacity: 1;
     transform: none;
     animation: none;
+    transition: none;
   }
 }
 

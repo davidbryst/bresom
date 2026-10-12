@@ -25,11 +25,13 @@ export default function LiteAbout() {
               <img
                 src="/profile/face-identiter.webp"
                 alt="David Abraham"
+                width={853}
+                height={1280}
                 loading="lazy"
                 decoding="async"
                 className="w-full aspect-[4/5] object-cover object-top border-2 border-ink"
               />
-              <div className="absolute -bottom-4 -left-4 bg-vermilion text-white px-4 py-3 max-w-[14rem]">
+              <div className="absolute -bottom-4 -left-4 bg-vermilion text-ink px-4 py-3 max-w-[14rem]">
                 <p className="font-mono text-[10px] uppercase tracking-[0.16em] leading-snug">
                   Designer + Développeur — un seul interlocuteur, du concept au
                   déploiement.
@@ -59,7 +61,7 @@ export default function LiteAbout() {
               <ul className="mt-8 space-y-3 max-w-2xl">
                 {aboutData.points.map((point, i) => (
                   <li key={i} className="flex gap-4 items-start">
-                    <span className="font-mono text-xs text-vermilion mt-1.5 shrink-0">
+                    <span className="font-mono text-xs text-accent-text mt-1.5 shrink-0">
                       0{i + 1}
                     </span>
                     <span className="text-ink/80">{point}</span>
@@ -73,7 +75,7 @@ export default function LiteAbout() {
               <dl className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-px bg-ink/15 border border-ink/35">
                 {FACTS.map((f) => (
                   <div key={f.k} className="bg-paper p-5">
-                    <dt className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink/50">
+                    <dt className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink/60">
                       {f.k}
                     </dt>
                     <dd className="mt-2 font-display font-bold text-base leading-snug">

@@ -44,7 +44,7 @@ export default function LiteServices() {
                       {item.titre}
                     </h3>
                     <div className="max-w-sm md:text-right">
-                      <p className="font-mono text-xs uppercase tracking-[0.14em] text-vermilion">
+                      <p className="font-mono text-xs uppercase tracking-[0.14em] text-accent-text">
                         {item.price}
                       </p>
                       <p className="mt-2 text-ink/65 group-hover:text-paper/80 transition-colors duration-500">
