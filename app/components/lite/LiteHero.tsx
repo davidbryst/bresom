@@ -143,6 +143,16 @@ export default function LiteHero() {
                   ↗
                 </span>
               </a>
+              <a
+                href="/cv.pdf"
+                download="CV-David-Abraham.pdf"
+                className="group inline-flex items-center gap-2 border-2 border-ink font-mono text-sm uppercase tracking-[0.14em] px-7 py-4 hover:bg-ink hover:text-paper transition-colors"
+              >
+                Télécharger le CV
+                <span className="transition-transform group-hover:translate-y-0.5">
+                  ↓
+                </span>
+              </a>
             </div>
           </div>
 

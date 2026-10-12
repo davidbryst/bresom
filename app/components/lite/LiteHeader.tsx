@@ -71,10 +71,11 @@ export default function LiteHeader() {
               Disponible
             </span>
             <a
-              href="/cv-david-abraham.pdf"
+              href="/cv.pdf"
+              download="CV-David-Abraham.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden lg:inline-flex items-center gap-1.5 border border-ink/25 font-mono text-xs uppercase tracking-[0.16em] px-4 py-2.5 text-ink/80 hover:border-ink hover:text-ink transition-colors"
+              className="inline-flex items-center gap-1.5 border border-ink/25 font-mono text-xs uppercase tracking-[0.16em] px-3 py-2 lg:px-4 lg:py-2.5 text-ink/80 hover:border-ink hover:text-ink transition-colors"
             >
               CV <span aria-hidden>↓</span>
             </a>
@@ -140,7 +141,8 @@ export default function LiteHeader() {
             Démarrer un projet
           </a>
           <a
-            href="/cv-david-abraham.pdf"
+            href="/cv.pdf"
+              download="CV-David-Abraham.pdf"
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setOpen(false)}
