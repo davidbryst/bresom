@@ -7,6 +7,7 @@ import {
 } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/node";
 
+import Haptics from "~/components/lite/Haptics";
 import "./tailwind.css";
 import "./styles/lite.css";
 
@@ -48,6 +49,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           Aller au contenu principal
         </a>
         {children}
+        <Haptics />
         <ScrollRestoration />
         <Scripts />
       </body>
