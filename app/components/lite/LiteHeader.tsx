@@ -30,7 +30,7 @@ export default function LiteHeader() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-[70] transition-colors duration-300 ${
+      className={`fixed inset-x-0 top-0 z-[80] transition-colors duration-300 ${
         open
           ? "bg-paper border-b border-ink/10"
           : scrolled
